@@ -2,37 +2,25 @@
 # (c)2018 Noniewicz.com
 # upd: 20180503
 
+CANVASES = {
+    'A4': (3507, 2480),
+    'A3': (4960, 3507),
+    'A2': (7015, 4960),
+    'A1': (9933, 7015),
+    'A0': (14043, 9933),
+    'B0': (16700, 11811),
+    '256': (256, 192),
+    '512': (256*2, 192*2),
+    '640': (640, 480),
+    '720': (720, 576),
+    '800': (800, 600),
+    '1024' : (1024, 768),
+    '4000' : (4000, 3000),
+    '8000' : (8000, 6000)
+}
+
 def get_canvas(name):
-    canvas = (0, 0)
-    if name == 'A4':
-        canvas = (3507, 2480)
-    if name == 'A3':
-        canvas = (4960, 3507)
-    if name == 'A2':
-        canvas = (7015, 4960)
-    if name == 'A1':
-        canvas = (9933, 7015)
-    if name == 'A0':
-        canvas = (14043, 9933)
-    if name == 'B0':
-        canvas = (16700, 11811)
-    if name == '256':
-        canvas = (256, 192)
-    if name == '512':
-        canvas = (256*2, 192*2)
-    if name == '640':
-        canvas = (640, 480)
-    if name == '720':
-        canvas = (720, 576)
-    if name == '800':
-        canvas = (800, 600)
-    if name == '1024':
-        canvas = (1024, 768)
-    if name == '4000':
-        canvas = (4000, 3000)
-    if name == '8000':
-        canvas = (8000, 6000)
-    return canvas
+    return CANVASES.get(name, (0,0))
 
 def circle(draw, x, y, r, fill, outline):
     xy = [(x-r, y-r), (x+r, y+r)]
