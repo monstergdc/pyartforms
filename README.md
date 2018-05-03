@@ -28,6 +28,7 @@ Many scripts will generate multiple images for different presets, most will be i
 ![example#1 - mazy1](/examples/mazy1-4960x3507-01-003.png?raw=true "Smears#1 example #1")
 ![example#2 - mazy1](/examples/mazy1-4960x3507-02-003.png?raw=true "Smears#1 example #2")
 ![example#3 - mazy1](/examples/mazy1-4960x3507-06-002.png?raw=true "Smears#1 example #3")
+![example#4 - mazy2](/examples/mazy2-4960x3507-05-004.png?raw=true "Smears#2 example #1")
 
 # GROWING PLANTS:
 
