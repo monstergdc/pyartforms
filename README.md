@@ -2,9 +2,11 @@
 
 My playground for tests in computer-generated art forms (graphics, video, sound). 
 Stuff here may change, may be incomplete or not fully working, may be w/o docs, etc. 
-as it is work and experiments in progress.
+as it is work and experiments in progress. Also no error checking.
 
 However feel free to tinker with it.
+
+Many scripts will generate multiple images for different presets, most will be in A3 print-ready format.
 
 
 # LIFE:
