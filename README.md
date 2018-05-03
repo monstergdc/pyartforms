@@ -28,3 +28,7 @@ Many scripts will generate multiple images for different presets, most will be i
 # GROWING PLANTS:
 
 [Growing plants video example#1](https://www.youtube.com/watch?v=5HrdduqAdVk)
+
+
+
+![example#1](/examples/tree0.png?raw=true "Tree example #1")
