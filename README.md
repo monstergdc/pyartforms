@@ -2,12 +2,17 @@
 
 My playground for tests in computer-generated art forms (graphics, video, sound). 
 Stuff here may change, may be incomplete or not fully working, may be w/o docs, etc. 
-as it is work and experiments in progress. Also no error checking.
+as it is work and experiments in progress. Also no error checking. Tested only under Windows (paths!).
 
-However feel free to tinker with it.
+Feel free to tinker with it.
 
 Many scripts will generate multiple images for different presets, most will be in A3 print-ready format.
 
+Prerequisites include:
+pip install pillow
+and
+pip install opencv-python
+for video
 
 # LIFE:
 script: life1.py
