@@ -9,6 +9,7 @@ Feel free to tinker with it.
 Many scripts will generate multiple images for different presets, most will be in A3 print-ready format.
 
 Prerequisites include:
+
 pip install pillow
 and
 pip install opencv-python
