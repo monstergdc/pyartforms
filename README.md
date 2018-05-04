@@ -50,3 +50,7 @@ script: grow.py
 [Growing plants video example#1](https://www.youtube.com/watch?v=5HrdduqAdVk)
 
 ![example#1](/examples/tree0.png?raw=true "Tree example #1")
+
+# ASCII ART:
+script: asciiart.py
+
