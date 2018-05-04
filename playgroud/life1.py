@@ -1,13 +1,13 @@
 from PIL import Image, ImageDraw, ImageFilter
 import random, math, string, os, sys
 from datetime import datetime as dt
-#from drawtools import get_canvas, circle, box, triangle, gradient, gradient2
+from drawtools import get_canvas
 
 # drawing life in Python
 # (c)2018 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
 # cre: 20180503
-# upd; 2018????
+# upd; 20180504
 
 # TODO:
 # - ?
@@ -88,9 +88,31 @@ def f2d(x, row):
             z = 0
     return z
 
+def f2e(x, row):
+    z = 0
+    if x > 1+1+1 and x < len(row)-1-1-1:
+        suma = row[x-3] + row[x-2] + row[x-1] + row[x] + row[x+1] + row[x+2] + row[x+3]
+        if suma == 0:
+            z = 0
+        if suma == 1:
+            z = 0
+        if suma == 2:
+            z = row[x]
+        if suma == 3:
+            z = 1
+        if suma == 4:
+            z = 1
+        if suma == 5:
+            z = row[x]
+        if suma == 6:
+            z = 0
+        if suma == 7:
+            z = 0
+    return z
+
 
 def life(draw, params):
-    c = math.pi/180
+#    c = math.pi/180
     random.seed()
     row = []
     row[:] = [f1(x) for x in range(params['w'])]
@@ -103,6 +125,8 @@ def life(draw, params):
         myfun = f2c
     if params['f'] == 'f2d':
         myfun = f2d
+    if params['f'] == 'f2e':
+        myfun = f2e
     
     y = 0
     for y in range(params['h']):
@@ -128,40 +152,27 @@ def call_painter(params, png):
 
 # ---
 
-#w = 4960
-#h = 3507
-w = 640
-h = 480
-
+ca = get_canvas('640')
+#ca = get_canvas('800')
 params1 = {
-    'w': w, 'h': h,
+    'w': ca[0], 'h': ca[1],
     'Background': (0, 0, 0),
     'LineColor': (255,255,255),
-    'f': 'f2a',
+    'f': '',
 }
+
+params1['f'] = 'f2a'
 call_painter(params1, 'life-0001.png')
 call_painter(params1, 'life-0002.png')
-params1 = {
-    'w': w, 'h': h,
-    'Background': (0, 0, 0),
-    'LineColor': (255,255,255),
-    'f': 'f2b',
-}
+params1['f'] = 'f2b'
 call_painter(params1, 'life-0003.png')
 call_painter(params1, 'life-0004.png')
-params1 = {
-    'w': w, 'h': h,
-    'Background': (0, 0, 0),
-    'LineColor': (255,255,255),
-    'f': 'f2c',
-}
+params1['f'] = 'f2c'
 call_painter(params1, 'life-0005.png')
 call_painter(params1, 'life-0006.png')
-params1 = {
-    'w': w, 'h': h,
-    'Background': (0, 0, 0),
-    'LineColor': (255,255,255),
-    'f': 'f2d',
-}
+params1['f'] = 'f2d'
 call_painter(params1, 'life-0007.png')
 call_painter(params1, 'life-0008.png')
+params1['f'] = 'f2e'
+call_painter(params1, 'life-0009.png')
+call_painter(params1, 'life-0010.png')
