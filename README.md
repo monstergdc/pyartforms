@@ -43,6 +43,11 @@ script: smears1234.py
 ![example - mazy4](/examples/mazy4-4960x3507-05-003.png?raw=true "Smears#4 example")
 ![example - mazy4](/examples/mazy4-4960x3507-07-003.png?raw=true "Smears#4 example")
 
+# WAVES:
+script: waves.py
+
+![example - waves1](/examples/waves1-4960x3507-03-003.png?raw=true "Waves#1 example")
+
 # GROWING PLANTS:
 script: grow.py
 
