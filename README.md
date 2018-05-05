@@ -1,5 +1,7 @@
 # pyartforms
 
+## Generative art in Python
+
 My playground for tests in computer-generated art forms (graphics, video, sound). 
 Stuff here may change, may be incomplete or not fully working, may be w/o docs, etc. 
 as it is work and experiments in progress. Also no error checking. Tested only under Windows (paths!).
