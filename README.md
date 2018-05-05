@@ -4,7 +4,7 @@ My playground for tests in computer-generated art forms (graphics, video, sound)
 Stuff here may change, may be incomplete or not fully working, may be w/o docs, etc. 
 as it is work and experiments in progress. Also no error checking. Tested only under Windows (paths!).
 
-Feel free to tinker with it.
+Feel free to tinker with it. Get inspired.
 
 Many scripts will generate multiple images for different presets, most will be in A3 print-ready format.
 
@@ -20,7 +20,6 @@ script: life1.py
 
 ![example](/examples/life-0001.png?raw=true "Life example")
 ![example](/examples/life-0003.png?raw=true "Life example")
-![example](/examples/life-0005.png?raw=true "Life example")
 ![example](/examples/life-0007.png?raw=true "Life example")
 
 # LISSAJOUS:
