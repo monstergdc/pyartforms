@@ -49,6 +49,11 @@ script: waves.py
 
 ![example - waves1](/examples/waves1-4960x3507-03-003.png?raw=true "Waves#1 example")
 
+# CITY (LAME):
+script: city-lame.py
+
+![example - city1](/examples/city1-4960x3507-01-001.png?raw=true "City#1 example")
+
 # GROWING PLANTS:
 script: grow.py
 
