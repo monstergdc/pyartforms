@@ -3,19 +3,19 @@
 ## Generative art in Python
 
 My playground for tests in computer-generated art forms (graphics, video, sound). 
+Many scripts will generate multiple images for different presets, most will be in A3 print-ready format.
+Feel free to tinker with it. Get inspired.
+
 Stuff here may change, may be incomplete or not fully working, may be w/o docs, etc. 
 as it is work and experiments in progress. Also no error checking. Tested only under Windows (paths!).
 
-Feel free to tinker with it. Get inspired.
-
-Many scripts will generate multiple images for different presets, most will be in A3 print-ready format.
-
 Prerequisites include:
+- pip install pillow
+- and for video: pip install opencv-python
 
-pip install pillow
-and
-pip install opencv-python
-for video
+
+# SOME GIF-LIKE ANIMATIONS:
+script: anims.py
 
 # LIFE:
 script: life1.py
@@ -40,7 +40,6 @@ script: smears1234.py
 ![example - mazy1](/examples/mazy1-4960x3507-01-003.png?raw=true "Smears#1 example")
 ![example - mazy1](/examples/mazy1-4960x3507-02-003.png?raw=true "Smears#1 example")
 ![example - mazy1](/examples/mazy1-4960x3507-06-002.png?raw=true "Smears#1 example")
-![example - mazy2](/examples/mazy2-4960x3507-05-004.png?raw=true "Smears#2 example")
 ![example - mazy4](/examples/mazy4-4960x3507-01-002.png?raw=true "Smears#4 example")
 ![example - mazy4](/examples/mazy4-4960x3507-05-003.png?raw=true "Smears#4 example")
 ![example - mazy4](/examples/mazy4-4960x3507-07-003.png?raw=true "Smears#4 example")
