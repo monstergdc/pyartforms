@@ -1,9 +1,12 @@
 
 # (c)2018 Noniewicz.com
-# upd: 20180503
+# upd: 20180503, 08
+
+# https://en.wikipedia.org/wiki/Paper_size
 
 CANVASES = {
-    'A4': (3507, 2480),
+    'A5': (2480, 1748),
+    'A4': (3507, 2480),	 # rule is: 29.7/2.54*300 x 21/2.54*300
     'A3': (4960, 3507),
     'A2': (7015, 4960),
     'A1': (9933, 7015),
@@ -15,6 +18,7 @@ CANVASES = {
     '720': (720, 576),
     '800': (800, 600),
     '1024' : (1024, 768),
+    '2000' : (2000, 1500),
     '4000' : (4000, 3000),
     '8000' : (8000, 6000)
 }
@@ -57,3 +61,7 @@ def gradient2(FColorStart, FColorEnd, i, n):
     g1 = int( FColorStart[1]*downc + FColorEnd[1]*upc )
     b1 = int( FColorStart[2]*downc + FColorEnd[2]*upc )
     return (r1, g1, b1)
+
+def script_it(draw, xy, font, size, fill):
+    fnt = ImageFont.truetype(font, size)
+    draw.text(xy, "Noniewicz.art.pl", font=fnt, fill=fill)
