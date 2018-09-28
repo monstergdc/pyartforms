@@ -4,6 +4,7 @@
 # anim#1/anim#2 - recreated from seeing as in some GIFs I've once seen (so concept isn't mine)
 # cre: 20180505
 # upd: 20180506, 12
+# upd: 20180928
 
 # orig GIFs md5:
 # #1: ad2bde22541ac1b05b2c08fd805ebafe *001.gif
