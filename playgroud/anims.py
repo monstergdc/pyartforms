@@ -336,9 +336,8 @@ class Anim5():
 
 # ---
 
-def do_anim1(fcc):
+def do_anim1(fcc, video_name):
     o = Anim1()
-    video_name = 'anim-01-video.avi'
     canvas = (512, 512)
     video = cv2.VideoWriter(video_name, fcc, 25, canvas)
 
@@ -358,9 +357,9 @@ def do_anim1(fcc):
     cv2.destroyAllWindows()
     video.release()
 
-def do_anim2(fcc):
+def do_anim2(fcc, video_name):
     o = Anim2()
-    video_name = 'anim-02-video.avi'
+
     canvas = (512, 512)
     video = cv2.VideoWriter(video_name, fcc, 25, canvas)
 
@@ -375,18 +374,16 @@ def do_anim2(fcc):
     cv2.destroyAllWindows()
     video.release()
 
-def do_anim3(fcc):
+def do_anim3(fcc, video_name, steps):
     o = Anim3()
 
     canvas = (2480, 2480)
     o.init(canvas, 5, 44)
     o.drawframe('steiner_chain-one.png') # one
 
-#    video_name = 'anim-03-video.avi'
 #    canvas = (512, 512)
 #    video = cv2.VideoWriter(video_name, fcc, 25, canvas)
 
-#    steps = 25
 #    o.init(canvas, 5, 4)
 #    for n in range(steps):
 #        o.drawframe(image)
@@ -396,14 +393,12 @@ def do_anim3(fcc):
 #    cv2.destroyAllWindows()
 #    video.release()
 
-def do_anim4(fcc):
+def do_anim4(fcc, video_name, steps):
     o = Anim4()
 
-    video_name = 'anim-04-video.avi'
     canvas = (512, 512)
     video = cv2.VideoWriter(video_name, fcc, 25, canvas)
 
-    steps = 300
     o.init(canvas)
     for n in range(steps):
         o.drawframe(image)
@@ -413,14 +408,12 @@ def do_anim4(fcc):
     cv2.destroyAllWindows()
     video.release()
 
-def do_anim5(fcc):
+def do_anim5(fcc, video_name, steps):
     o = Anim5()
 
-    video_name = 'anim-05-video.avi'
     canvas = (800, 600)
     video = cv2.VideoWriter(video_name, fcc, 25, canvas)
 
-    steps = 300
     o.init(canvas)
     for n in range(steps):
         o.drawframe(image)
@@ -433,15 +426,15 @@ def do_anim5(fcc):
 # ---
 
 def main():
-    #fcc = -1
+    #fcc = -1  # select
     #fcc = cv2.VideoWriter_fourcc(*"XVID")
     fcc = cv2.VideoWriter_fourcc(*"MJPG")
 
-    do_anim1(fcc)
-    do_anim2(fcc)
-##    do_anim3(fcc)
-    do_anim4(fcc)
-    do_anim5(fcc)
+    do_anim1(fcc, video_name = 'anim-01-video.avi')
+    do_anim2(fcc, video_name = 'anim-02-video.avi')
+    do_anim3(fcc, video_name = 'anim-03-video.avi', steps = 25)
+    do_anim4(fcc, video_name = 'anim-04-video.avi', steps = 300)
+    do_anim5(fcc, video_name = 'anim-05-video.avi', steps = 300)
 
 if __name__ == '__main__':
     main()
