@@ -283,6 +283,57 @@ class Anim4():
         im.save(image)
         self.dt += 1
 
+
+class Anim5():
+    state = []
+    colors = []
+    nx = 10
+    ny = 10
+
+    def _init__(self):
+        self.init((0, 0), 0, 0)
+
+    def init(self, canvas):
+        self.dt = 0
+        self.canvas = canvas
+        self.bw = canvas[0]/self.nx
+        self.bh = canvas[1]/self.ny
+        self.angle = 0 # par
+        self.speed = 3 # par
+        self.state = [[random.randint(0, int(100*x/self.nx)) for x in range(self.nx)] for y in range(self.ny)]
+        self.colors = [[(random.randint(96, 255), random.randint(96, 255), 0) for x in range(self.nx)] for y in range(self.ny)]
+
+    def rect(self, draw, x0, y0, w, h, a, fill):
+        x1 = s2*w*math.cos(c*(a-45))
+        y1 = s2*h*math.sin(c*(a-45))
+        x2 = s2*w*math.cos(c*(a+45))
+        y2 = s2*h*math.sin(c*(a+45))
+        x3 = s2*w*math.cos(c*(a+45+90))
+        y3 = s2*h*math.sin(c*(a+45+90))
+        x4 = s2*w*math.cos(c*(a+45+180))
+        y4 = s2*h*math.sin(c*(a+45+180))
+        points = [(x0+x1, y0+y1), (x0+x2, y0+y2), (x0+x3, y0+y3), (x0+x4, y0+y4)]
+        draw.polygon(points, fill=fill, outline=None)
+
+    def drawframe(self, image):
+        for y in range(self.ny):
+            for x in range(self.nx):
+                self.state[y][x] += 1
+                if self.state[y][x] > 100:
+                    self.state[y][x] = 0
+
+        im = Image.new('RGB', self.canvas, (0, 0, 0))
+        draw = ImageDraw.Draw(im)
+        for y in range(self.ny):
+            for x in range(self.nx):
+                position = (x*self.bw+self.bw/2, y*self.bh+self.bh/2)
+                #size = self.state[y][x] / 100 # alt opt
+                size = 0.5 + 0.4 * math.sin(c*self.state[y][x] / 100 * 360 * self.speed)
+                self.rect(draw, position[0], position[1], self.bw*size, self.bh*size, self.angle, self.colors[y][x])
+
+        im.save(image)
+        self.dt += 1
+
 # ---
 
 def do_anim1(fcc):
@@ -362,6 +413,23 @@ def do_anim4(fcc):
     cv2.destroyAllWindows()
     video.release()
 
+def do_anim5(fcc):
+    o = Anim5()
+
+    video_name = 'anim-05-video.avi'
+    canvas = (800, 600)
+    video = cv2.VideoWriter(video_name, fcc, 25, canvas)
+
+    steps = 300
+    o.init(canvas)
+    for n in range(steps):
+        o.drawframe(image)
+        ima = cv2.imread(image)
+        video.write(ima)
+
+    cv2.destroyAllWindows()
+    video.release()
+
 # ---
 
 def main():
@@ -371,8 +439,9 @@ def main():
 
     do_anim1(fcc)
     do_anim2(fcc)
-#    do_anim3(fcc)
+##    do_anim3(fcc)
     do_anim4(fcc)
+    do_anim5(fcc)
 
 if __name__ == '__main__':
     main()
