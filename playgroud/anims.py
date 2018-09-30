@@ -4,7 +4,7 @@
 # anim#1/anim#2 - recreated from seeing as in some GIFs I've once seen (so concept isn't mine)
 # cre: 20180505
 # upd: 20180506, 12
-# upd: 20180928
+# upd: 20180928, 30
 
 # orig GIFs md5:
 # #1: ad2bde22541ac1b05b2c08fd805ebafe *001.gif
@@ -335,6 +335,37 @@ class Anim5():
         im.save(image)
         self.dt += 1
 
+
+class Anim6():
+    def _init__(self):
+        self.init((0, 0))
+
+    def init(self, canvas):
+        self.dt = 0
+        self.canvas = canvas
+
+    def fnc1(self, x, y, dt):
+        return int(abs((x*math.sin(c*x/2)+y*math.cos(c*y/2+dt*2*c))*10))
+
+    def fnc2(self, x, y, dt):
+        return int(abs((x*math.sin(c*x+dt*3*c)+y*math.cos(c*y))*10))
+
+    def fnc3(self, x, y, dt):
+        return int(abs((x*math.sin(c*y/2)+y*math.cos(c*x/2+dt*3*c))*10))
+
+    def drawframe(self, image):
+        im = Image.new('RGB', self.canvas, (0, 0, 0))
+        draw = ImageDraw.Draw(im)
+        for y in range(self.canvas[1]):
+            for x in range(self.canvas[0]):
+                cr = self.fnc1(x, y, self.dt) & 255
+                cg = self.fnc2(x, y, self.dt) & 255
+                cb = self.fnc3(x, y, self.dt) & 255
+                draw.point((x, y), fill=(cr, cg, cb))
+
+        im.save(image)
+        self.dt += 1
+
 # ---
 
 def do_anim1(fcc, video_name):
@@ -424,6 +455,21 @@ def do_anim5(fcc, video_name, steps):
     cv2.destroyAllWindows()
     video.release()
 
+def do_anim6(fcc, video_name, steps):
+    o = Anim6()
+
+    canvas = (240, 120)
+    video = cv2.VideoWriter(video_name, fcc, 25, canvas)
+
+    o.init(canvas)
+    for n in range(steps):
+        o.drawframe(image)
+        ima = cv2.imread(image)
+        video.write(ima)
+
+    cv2.destroyAllWindows()
+    video.release()
+
 # ---
 
 def main():
@@ -436,6 +482,7 @@ def main():
     do_anim3(fcc, video_name = 'anim-03-video.avi', steps = 25)
     do_anim4(fcc, video_name = 'anim-04-video.avi', steps = 300)
     do_anim5(fcc, video_name = 'anim-05-video.avi', steps = 300)
+#    do_anim6(fcc, video_name = 'anim-06-video.avi', steps = 300)    # slow one!
 
 if __name__ == '__main__':
     main()
