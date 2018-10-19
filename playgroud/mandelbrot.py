@@ -1,6 +1,7 @@
 # Mandelbrot fractal example (z'=z^2+c), v1.0, Python
 # (c)2017, 2018 Noniewicz.com, Jakub Noniewicz aka MoNsTeR/GDC
 # cre: 20180505
+# upd: 20181019
 
 from PIL import Image, ImageDraw
 import math
@@ -33,7 +34,7 @@ def generate_mandelbrot(x0, x1, y0, y1, maxiter, w, h, negative, png):
                 pix = 255-round(pv*255)
             else:
                 pix = round(pv*255)
-            draw.point((x, y), fill=pix)
+            draw.point((x, y), fill=int(pix))
     time_elapsed = dt.now() - start_time
     print('done. elapsed time: {}'.format(time_elapsed))
     im.save(png, dpi=(300,300))
