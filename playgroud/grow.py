@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 
 # GROWING PLANTS v3.0 - tree growing algorithm, Python version from old Pascal code
 # loosely based on article in "ENTER" 2/93
@@ -6,6 +8,7 @@
 # (c)2014-2015, 2017, 2018 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20180430
 # upd: 20180501, 02, 03
+# upd: 20181020
 
 # see: https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
 # http://pillow.readthedocs.io/en/5.1.x/reference/ImageFilter.html
@@ -23,7 +26,7 @@ import cv2
 import os, sys
 from datetime import datetime as dt
 from bezier import make_bezier
-from drawtools import circle, box, triangle, gradient, gradient2
+from drawtools import *
 
 
 XPI = math.pi/180

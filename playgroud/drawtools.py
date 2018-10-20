@@ -1,6 +1,11 @@
 
 # (c)2018 Noniewicz.com
 # upd: 20180503, 08
+# upd: 20181020
+
+from datetime import datetime as dt
+import cgi
+
 
 # https://en.wikipedia.org/wiki/Paper_size
 
@@ -25,6 +30,10 @@ CANVASES = {
 
 def get_canvas(name):
     return CANVASES.get(name, (0,0))
+
+def get_canvas(name):
+    wh = CANVASES.get(name, (0,0))
+    return wh[0], wh[1]
 
 def circle(draw, x, y, r, fill, outline):
     xy = [(x-r, y-r), (x+r, y+r)]
@@ -65,3 +74,37 @@ def gradient2(FColorStart, FColorEnd, i, n):
 def script_it(draw, xy, font, size, fill):
     fnt = ImageFont.truetype(font, size)
     draw.text(xy, "Noniewicz.art.pl", font=fnt, fill=fill)
+
+def im2cgi(im, format='PNG'):
+    imgByteArr = io.BytesIO()
+    im.save(imgByteArr, format=format)
+    imgByteArr = imgByteArr.getvalue()
+    if format == 'PNG':
+        ct = 'image/png'
+    if format == 'JPG':
+        ct = 'image/jpg'
+    if format == 'GIF':
+        ct = 'image/gif'
+    sys.stdout.write("Content-Type: "+ct+"\n")
+#todo: fin
+#    sys.stdout.write("Content-Length: " + str(?) + "\n")
+    sys.stdout.write("\n")
+    sys.stdout.flush()
+    sys.stdout.write(imgByteArr)
+    sys.stdout.flush()
+
+def get_cgi_par():
+    form = cgi.FieldStorage()
+    par = {'w': 800, 'h': 600, 'f': 'f2a'}
+    if "w" in form:
+        par['w'] = int(form["w"].value)
+    if "h" in form:
+        par['h'] = int(form["h"].value)
+    if "f" in form:
+        par['f'] = form["f"].value
+    return par
+
+def show_benchmark(start_time):
+    time_elapsed = dt.now() - start_time
+    print('done. elapsed time: {}'.format(time_elapsed))
+    return time_elapsed

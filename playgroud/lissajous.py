@@ -1,16 +1,22 @@
-from PIL import Image, ImageDraw, ImageFilter
-import random, math, string, os, sys
-from datetime import datetime as dt
-#from drawtools import circle, box, triangle, gradient, gradient2
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 
 # drawings Lissajous in Python
 # (c)2018 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
 # cre: 20180503
-# upd; 2018????
+# upd; 20181020
 
 # TODO:
 # - ?
+
+
+from PIL import Image, ImageDraw, ImageFilter
+import random, math, string, os, sys
+from datetime import datetime as dt
+from drawtools import *
+
+
 
 def liss(draw, params):
     c = math.pi/180
@@ -41,9 +47,9 @@ def liss(draw, params):
 
 # ---
 
-def call_painter(params, png):
+def call_painter(params, png_file='lissajous.png', output_mode = 'save'):
     start_time = dt.now()
-    print('drawing...', png)
+    print('drawing...', png_file)
     im = Image.new('RGB', (params['w'], params['h']), params['Background'])
     draw = ImageDraw.Draw(im)
 
@@ -52,14 +58,15 @@ def call_painter(params, png):
         liss(draw, params)
         params['FFi'] = params['FFi'] + 2
 
-    im.save(png, dpi=(300,300))
-    time_elapsed = dt.now() - start_time
-    print('done. elapsed time: {}'.format(time_elapsed))
+    if output_mode == 'save':
+        im.save(png_file, dpi=(300,300))
+        show_benchmark(start_time)
+    else:
+        im2cgi(im)
 
 # ---
 
-w = 4960
-h = 3507
+w, h = get_canvas('A4')
 
 params1 = {
     'w': w, 'h': h,

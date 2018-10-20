@@ -1,7 +1,5 @@
-from PIL import Image, ImageDraw, ImageFilter
-import random, math, string, os, sys
-from datetime import datetime as dt
-from drawtools import get_canvas, circle, box, triangle, gradient, gradient2
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 
 # drawings (astro objects) in Python
 # (c)2018 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
@@ -9,10 +7,18 @@ from drawtools import get_canvas, circle, box, triangle, gradient, gradient2
 # cre: 20180405
 # upd; 20180406, 07
 # upd; 20180502, 03
+# upd: 20181020
 
 # TODO:
 # - misc
 # - big bang, more
+
+
+from PIL import Image, ImageDraw, ImageFilter
+import random, math, string, os, sys
+from datetime import datetime as dt
+from drawtools import get_canvas, circle, box, triangle, gradient, gradient2, im2cgi, show_benchmark
+
 
 
 # blue galaxy
@@ -137,9 +143,9 @@ def paint7(draw, ou, box_or_cir):
 
 # ---
 
-def call_painter(n, box_or_cir, png):
+def call_painter(n, box_or_cir, png_file, output_mode = 'save'):
     start_time = dt.now()
-    print('drawing...', png)
+    print('drawing...', png_file)
     im = Image.new('RGB', canvas, (0, 0, 0))
     draw = ImageDraw.Draw(im)
     random.seed()
@@ -160,16 +166,26 @@ def call_painter(n, box_or_cir, png):
         paint6(draw, ou, box_or_cir)
     if n == 7:
         paint7(draw, ou, box_or_cir)
-    im.save(png, dpi=(300,300))
-    time_elapsed = dt.now() - start_time
-    print('done. elapsed time: {}'.format(time_elapsed))
+
+    if output_mode == 'save':
+        im.save(png_file, dpi=(300,300))
+        show_benchmark(start_time)
+    else:
+        im2cgi(im)
 
 # ---
 
 canvas = get_canvas('A3')
 #canvas = get_canvas('640')
-# note: does not scalle well with canvas size, optimised olny for A3
+# note: does not scalle well with canvas size, so far optimised only for A3
 c = math.pi/180
+
+#tmp CGI
+#p = cgiart.get_cgi_par()
+#n = 0 # 0..7
+#n = int(p["f"])
+#call_painter(n, False, '')
+
 
 call_painter(0, False, 'zz-01-bluegalaxy-cir.png')
 call_painter(0, True, 'zz-01-bluegalaxy-box.png')

@@ -1,8 +1,11 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 
 # paint algorithms (artificial artist) - CITY (yet lame), v1.0, Python version
 # (c)2018 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20180505
 # upd: 20180506
+# upd: 20181020
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -73,7 +76,7 @@ def draw_one_block(draw, params, x0, y0, wn, hn, color):
         rr = random.randint(0, 48)
         draw.line(po, fill=(rr, rr, rr), width=params['pw'])
 
-def city1(params, fn):
+def city1(params, fn, output_mode = 'save'):
     start_time = dt.now()
     w = params['w']
     h = params['h']
@@ -115,9 +118,11 @@ def city1(params, fn):
 
     draw.polygon([(0,h), (0,y0), (w,y0), (w,h)], fill=(60,60,60), outline=None)
 
-    im.save(fn)
-    time_elapsed = dt.now() - start_time
-    print('done. elapsed time: {}'.format(time_elapsed))
+    if output_mode == 'save':
+        im.save(fn)
+        show_benchmark(start_time)
+    else:
+        im2cgi(im)
 
 
 #        circle(draw, po[0][0], po[0][1], random.randint(200, 800), fill=color, outline=None)
@@ -150,9 +155,7 @@ def do_city1(cnt, w, h, odir):
 def main():
     start_time = dt.now()
     cnt = 5
-    ca = get_canvas('A3')
-    w = ca[0]
-    h = ca[1]
+    w, h = get_canvas('A3')
     do_city1(cnt, w, h, '')
 
     #do_city1(1, 16384, 2200, '')

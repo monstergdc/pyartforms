@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 
 # paint algorithms (artificial artist), v1.0, Python version
 # (c)2017-2018 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
@@ -7,6 +9,7 @@
 # #4 poly
 # cre: 20180430
 # upd: 20180501, 02, 03
+# upd: 20181020
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -20,7 +23,7 @@ from PIL import Image, ImageDraw, ImageFilter
 import random, math, string, os, sys
 from bezier import make_bezier
 from datetime import datetime as dt
-from drawtools import get_canvas, circle, box, triangle, gradient, gradient2
+from drawtools import *
 
 
 def mazy1(params, fn):
@@ -79,8 +82,7 @@ def mazy1(params, fn):
         im = im.filter(ImageFilter.SHARPEN)
         im = im.filter(ImageFilter.SHARPEN)
     im.save(fn)
-    time_elapsed = dt.now() - start_time
-    print('mazy done. elapsed time: {}'.format(time_elapsed))
+    show_benchmark(start_time)
 
 
 def mazy2(params, fn):
@@ -130,8 +132,7 @@ def mazy2(params, fn):
         im = im.filter(ImageFilter.SHARPEN)
         im = im.filter(ImageFilter.SHARPEN)
     im.save(fn)
-    time_elapsed = dt.now() - start_time
-    print('mazy2 done. elapsed time: {}'.format(time_elapsed))
+    show_benchmark(start_time)
 
 def mazy3(params, fn):
     start_time = dt.now()
@@ -184,8 +185,7 @@ def mazy3(params, fn):
         im = im.filter(ImageFilter.SHARPEN)
         im = im.filter(ImageFilter.SHARPEN)
     im.save(fn)
-    time_elapsed = dt.now() - start_time
-    print('done. elapsed time: {}'.format(time_elapsed))
+    show_benchmark(start_time)
 
 def mazy4(params, fn):
     start_time = dt.now()
@@ -241,8 +241,7 @@ def mazy4(params, fn):
         draw.polygon(po, fill=color, outline=None)
 
     im.save(fn)
-    time_elapsed = dt.now() - start_time
-    print('done. elapsed time: {}'.format(time_elapsed))
+    show_benchmark(start_time)
 
 # ---
 
@@ -658,9 +657,7 @@ def do_mazy4(cnt, w, h, odir):
 def main():
     start_time = dt.now()
     cnt = 10
-    w = 4960 #A3
-    h = 3507 #A3
-    # use get_canvas
+    w, h = get_canvas('A3')
     odir = '!!!mazy-out\\'
     do_mazy1(cnt, w, h, odir)
     do_mazy2(cnt, w, h, odir)

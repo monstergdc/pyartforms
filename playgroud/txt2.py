@@ -1,3 +1,7 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
 from PIL import Image, ImageDraw, ImageFont
 
 def script_it(draw, xy, font, size, fill):

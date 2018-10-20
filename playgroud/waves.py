@@ -1,9 +1,11 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 
 # paint algorithms (artificial artist), v1.0, Python version
 # #1 waves
 # (c)2018 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20180505
-# upd: 201805??
+# upd: 20181020
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -19,7 +21,7 @@ from datetime import datetime as dt
 from drawtools import *
 
 
-def waves1(params, fn):
+def waves1(params, fn, output_mode = 'save'):
     start_time = dt.now()
     w = params['w']
     h = params['h']
@@ -63,11 +65,13 @@ def waves1(params, fn):
             draw.rectangle(xy, fill=color, outline=None)
             y += 1
 
-    im.save(fn)
-    time_elapsed = dt.now() - start_time
-    print('done. elapsed time: {}'.format(time_elapsed))
+    if output_mode == 'save':
+        im.save(fn)
+        show_benchmark(start_time)
+    else:
+        im2cgi(im)
 
-def waves2(params, fn):
+def waves2(params, fn, output_mode = 'save'):
     start_time = dt.now()
     w = params['w']
     h = params['h']
@@ -116,11 +120,13 @@ def waves2(params, fn):
         draw.line(points1, fill=color, width=random.randint(2, 8))
         draw.line(points2, fill=color, width=random.randint(2, 8))
 
-    im.save(fn)
-    time_elapsed = dt.now() - start_time
-    print('done. elapsed time: {}'.format(time_elapsed))
+    if output_mode == 'save':
+        im.save(fn)
+        show_benchmark(start_time)
+    else:
+        im2cgi(im)
 
-def waves3(params, fn):
+def waves3(params, fn, output_mode = 'save'):
     start_time = dt.now()
     w = params['w']
     h = params['h']
@@ -146,9 +152,11 @@ def waves3(params, fn):
             points.extend((n, y))
         draw.line(points, fill=color, width=8)
 
-    im.save(fn)
-    time_elapsed = dt.now() - start_time
-    print('done. elapsed time: {}'.format(time_elapsed))
+    if output_mode == 'save':
+        im.save(fn)
+        show_benchmark(start_time)
+    else:
+        im2cgi(im)
 
 # ---
 
@@ -249,8 +257,8 @@ def do_waves(cnt, w, h, odir):
 def main():
     start_time = dt.now()
     cnt = 5
-    ca = get_canvas('A3')
-    do_waves(cnt, ca[0], ca[1], '')
+    w, h = get_canvas('A3')
+    do_waves(cnt, w, h, '')
     time_elapsed = dt.now() - start_time
     print('ALL done. elapsed time: {}'.format(time_elapsed))
 

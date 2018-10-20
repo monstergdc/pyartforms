@@ -1,9 +1,5 @@
-from PIL import Image, ImageDraw
-import random, math
-import cv2
-import os
-from drawtools import circle, box, triangle, gradient, gradient2
-
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 
 # ZX Spectrum images drawn in Python
 # (c)2018 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
@@ -11,6 +7,16 @@ from drawtools import circle, box, triangle, gradient, gradient2
 # cre: 20180405
 # upd; 20180406, 07
 # upd; 20180428, 30 -- vid
+# upd: 20181020
+
+
+from PIL import Image, ImageDraw
+import random, math
+import cv2
+import os
+from drawtools import *
+
+
 
 # params
 canvas = (256, 192)

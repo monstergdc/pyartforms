@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 
 # ANIMS v1.0, Python version
 # (c)2018 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
@@ -5,6 +7,7 @@
 # cre: 20180505
 # upd: 20180506, 12
 # upd: 20180928, 30
+# upd: 20181020
 
 # orig GIFs md5:
 # #1: ad2bde22541ac1b05b2c08fd805ebafe *001.gif

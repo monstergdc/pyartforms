@@ -1,9 +1,12 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 
 # ASCII ART v1.0 - image to text, Python version
 # based on Delphi component by Matthias Matting
 # which was based on PHP source code from Boosty's Ascii Artist,
 # (c)2018 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20180504
+# upd: 20181020
 
 import cv2
 

@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 
 # paint algorithms (artificial artist), v1.0, Python version
 # (c)2018 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
@@ -5,6 +7,7 @@
 # cre: 20180805
 # upd: 20180807, 08
 # upd: 20180928, 29
+# upd: 20181019, 20
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -18,7 +21,7 @@ from PIL import Image, ImageDraw, ImageFilter
 import random, math, string, os, sys
 from bezier import make_bezier
 from datetime import datetime as dt
-from drawtools import get_canvas, circle, box, triangle, gradient, gradient2
+from drawtools import *
 
 #zielony
 #fioletowy
@@ -74,19 +77,19 @@ colors_b = [(0x00, 0x00, 0x20),
           ]
 
 
-def mazy5(params, fn):
+def mazy5(params, png_file='smears5.png', output_mode='save'):
     start_time = dt.now()
     w = params['w']
     h = params['h']
     colors = params['colors']
-    print('mazy5...', fn)
+    print('mazy5...', png_file)
     random.seed()
     im = Image.new('RGB', (w, h), params['bg'])
     draw = ImageDraw.Draw(im)
     ts = [t/100.0 for t in range(101)]
     c = math.pi/180
 
-    dg = h*0.037 # grubosc
+    dg = h*0.037 # thickness
     r0 = h/2*0.93 # base radius
     rOut = h*0.76 # outer circle radous
     for i in range(int(8+1)):
@@ -111,24 +114,18 @@ def mazy5(params, fn):
             draw.polygon(points, fill=colors[m%8], outline=None)
             #draw.polygon(points, fill=colors[m%8], outline=(0,0,0)) # opt outlined
 
-    im.save(fn)
-    time_elapsed = dt.now() - start_time
-    print('mazy done. elapsed time: {}'.format(time_elapsed))
+    if output_mode == 'save':
+        im.save(png_file)
+        show_benchmark(start_time)
+    else:
+        im2cgi(im)
 
 # ---
 
 def do_mazy5(cnt, w, h, odir):
-
-    params1 = {
-        'w': w, 'h': h, 'bg': (0, 0, 0), 'colors': colors_b
-    }
-    params2 = {
-        'w': w, 'h': h, 'bg': (0, 0, 0), 'colors': colors_p
-    }
-    params3 = {
-        'w': w, 'h': h, 'bg': (0, 0, 0), 'colors': colors_bw
-    }
-
+    params1 = {'w': w, 'h': h, 'bg': (0, 0, 0), 'colors': colors_b}
+    params2 = {'w': w, 'h': h, 'bg': (0, 0, 0), 'colors': colors_p}
+    params3 = {'w': w, 'h': h, 'bg': (0, 0, 0), 'colors': colors_bw}
     for n in range(cnt):
         mazy5(params1, odir+'mazy5-%dx%d-01-%03d.png' % (w, h, n+1))
         mazy5(params2, odir+'mazy5-%dx%d-02-%03d.png' % (w, h, n+1))
@@ -138,14 +135,12 @@ def do_mazy5(cnt, w, h, odir):
 
 def main():
     start_time = dt.now()
-    cnt = 6
-    w = 1024 #
-    h = 768 #
-    w = 4960 #A3
-    h = 3507 #A3
-    # use get_canvas
+    cnt = 4
+    w, h = get_canvas('A3')
     odir = '!!!mazy-out\\'
     do_mazy5(cnt, w, h, odir)
+    #tmp CGI
+    #do_mazy5(1, w, h, '', output_mode='cgi')
     time_elapsed = dt.now() - start_time
     print('ALL done. elapsed time: {}'.format(time_elapsed))
 

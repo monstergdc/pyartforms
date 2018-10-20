@@ -1,13 +1,18 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
 # Mandelbrot fractal example (z'=z^2+c), v1.0, Python
 # (c)2017, 2018 Noniewicz.com, Jakub Noniewicz aka MoNsTeR/GDC
 # cre: 20180505
-# upd: 20181019
+# upd: 20181019, 20
 
 from PIL import Image, ImageDraw
 import math
 from datetime import datetime as dt
+from drawtools import *
 
-def generate_mandelbrot(x0, x1, y0, y1, maxiter, w, h, negative, png):
+
+def generate_mandelbrot(x0, x1, y0, y1, maxiter, w, h, negative, png_file='mandel.png', output_mode='save'):
     start_time = dt.now()
     print('generating mandel...', w, h, 'iter', maxiter)
     im = Image.new('L', (w, h), (0))
@@ -35,11 +40,16 @@ def generate_mandelbrot(x0, x1, y0, y1, maxiter, w, h, negative, png):
             else:
                 pix = round(pv*255)
             draw.point((x, y), fill=int(pix))
-    time_elapsed = dt.now() - start_time
-    print('done. elapsed time: {}'.format(time_elapsed))
-    im.save(png, dpi=(300,300))
+    if output_mode == 'save':
+        im.save(png_file, dpi=(300,300))
+        show_benchmark(start_time)
+    else:
+        im2cgi(im)
 
-if __name__ == '__main__':
-    generate_mandelbrot(-2.5, 1.0, -1.0, 1.0, 200, 700, 400, False, 'mandel-001.png')
-    generate_mandelbrot(-2.5, 1.0, -1.0, 1.0, 20, 700, 400, False, 'mandel-002.png')
+# ---
 
+#tmp CGI
+#generate_mandelbrot(-2.5, 1.0, -1.0, 1.0, 70, 600, 400, False, '')
+
+generate_mandelbrot(-2.5, 1.0, -1.0, 1.0, 200, 700, 400, False, 'mandel-001.png')
+generate_mandelbrot(-2.5, 1.0, -1.0, 1.0, 20, 700, 400, False, 'mandel-002.png')
