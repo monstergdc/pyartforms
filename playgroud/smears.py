@@ -492,12 +492,12 @@ def do_mazy2(cnt, w, h, odir):
     }
 
     for n in range(cnt):
-	art_painter(params1, odir+'mazy2-%dx%d-01-%03d.png' % (w, h, n+1))
-	art_painter(params2, odir+'mazy2-%dx%d-02-%03d.png' % (w, h, n+1))
-	art_painter(params3, odir+'mazy2-%dx%d-03-%03d.png' % (w, h, n+1))
-	art_painter(params4, odir+'mazy2-%dx%d-04-%03d.png' % (w, h, n+1))
-	art_painter(params5, odir+'mazy2-%dx%d-05-%03d.png' % (w, h, n+1))
-	art_painter(params6, odir+'mazy2-%dx%d-06-%03d.png' % (w, h, n+1))
+        art_painter(params1, odir+'mazy2-%dx%d-01-%03d.png' % (w, h, n+1))
+        art_painter(params2, odir+'mazy2-%dx%d-02-%03d.png' % (w, h, n+1))
+        art_painter(params3, odir+'mazy2-%dx%d-03-%03d.png' % (w, h, n+1))
+        art_painter(params4, odir+'mazy2-%dx%d-04-%03d.png' % (w, h, n+1))
+        art_painter(params5, odir+'mazy2-%dx%d-05-%03d.png' % (w, h, n+1))
+        art_painter(params6, odir+'mazy2-%dx%d-06-%03d.png' % (w, h, n+1))
 
 def do_mazy3(cnt, w, h, odir):
 
@@ -586,12 +586,12 @@ def do_mazy3(cnt, w, h, odir):
     }
 
     for n in range(cnt):
-	art_painter(params1, odir+'mazy3-%dx%d-01-%03d.png' % (w, h, n+1))
-	art_painter(params2, odir+'mazy3-%dx%d-02-%03d.png' % (w, h, n+1))
-	art_painter(params3, odir+'mazy3-%dx%d-03-%03d.png' % (w, h, n+1))
-	art_painter(params4, odir+'mazy3-%dx%d-04-%03d.png' % (w, h, n+1))
-	art_painter(params5, odir+'mazy3-%dx%d-05-%03d.png' % (w, h, n+1))
-	art_painter(params6, odir+'mazy3-%dx%d-06-%03d.png' % (w, h, n+1))
+        art_painter(params1, odir+'mazy3-%dx%d-01-%03d.png' % (w, h, n+1))
+        art_painter(params2, odir+'mazy3-%dx%d-02-%03d.png' % (w, h, n+1))
+        art_painter(params3, odir+'mazy3-%dx%d-03-%03d.png' % (w, h, n+1))
+        art_painter(params4, odir+'mazy3-%dx%d-04-%03d.png' % (w, h, n+1))
+        art_painter(params5, odir+'mazy3-%dx%d-05-%03d.png' % (w, h, n+1))
+        art_painter(params6, odir+'mazy3-%dx%d-06-%03d.png' % (w, h, n+1))
 
 def do_mazy4(cnt, w, h, odir):
 
@@ -680,13 +680,13 @@ def do_mazy4(cnt, w, h, odir):
     }
 
     for n in range(cnt):
-	art_painter(params1, odir+'mazy4-%dx%d-01-%03d.png' % (w, h, n+1))
-	art_painter(params2, odir+'mazy4-%dx%d-02-%03d.png' % (w, h, n+1))
-	art_painter(params3, odir+'mazy4-%dx%d-03-%03d.png' % (w, h, n+1))
-	art_painter(params4, odir+'mazy4-%dx%d-04-%03d.png' % (w, h, n+1))
-	art_painter(params5, odir+'mazy4-%dx%d-05-%03d.png' % (w, h, n+1))
-	art_painter(params6, odir+'mazy4-%dx%d-06-%03d.png' % (w, h, n+1))
-	art_painter(params7, odir+'mazy4-%dx%d-07-%03d.png' % (w, h, n+1))
+        art_painter(params1, odir+'mazy4-%dx%d-01-%03d.png' % (w, h, n+1))
+        art_painter(params2, odir+'mazy4-%dx%d-02-%03d.png' % (w, h, n+1))
+        art_painter(params3, odir+'mazy4-%dx%d-03-%03d.png' % (w, h, n+1))
+        art_painter(params4, odir+'mazy4-%dx%d-04-%03d.png' % (w, h, n+1))
+        art_painter(params5, odir+'mazy4-%dx%d-05-%03d.png' % (w, h, n+1))
+        art_painter(params6, odir+'mazy4-%dx%d-06-%03d.png' % (w, h, n+1))
+        art_painter(params7, odir+'mazy4-%dx%d-07-%03d.png' % (w, h, n+1))
 
 def do_mazy5(cnt, w, h, odir):
     params1 = {'name': 'SMEARS#5', 'call': mazy5, 'w': w, 'h': h, 'Background': (0, 0, 0), 'colors': colors_b, 'outline': None}
@@ -701,25 +701,21 @@ def do_mazy5(cnt, w, h, odir):
 
 # ---
 
-def main():
-    start_time = dt.now()
-    w, h = get_canvas('A3')
-    odir = '!!!mazy-out\\'
-    cnt = 10
-    do_mazy1(cnt, w, h, odir)
-    do_mazy2(cnt, w, h, odir)
-    do_mazy3(cnt, w, h, odir)
-    do_mazy4(cnt, w, h, odir)
-    cnt = 3
-    do_mazy5(cnt, w, h, odir)
-    time_elapsed = dt.now() - start_time
-    print('ALL done. elapsed time: {}'.format(time_elapsed))
+start_time = dt.now()
+w, h = get_canvas('A3')
+odir = '!!!mazy-out\\'
+cnt = 5 # *6 each #1..#3 + *7 for #4 = (5)*6*3+(5)*7 = 125 images, it takes some time, easy over 10 minutes
+do_mazy1(cnt, w, h, odir)
+do_mazy2(cnt, w, h, odir)
+do_mazy3(cnt, w, h, odir)
+do_mazy4(cnt, w, h, odir)
+cnt = 3 # *4 each = 12
+do_mazy5(cnt, w, h, odir)
+time_elapsed = dt.now() - start_time
+print('ALL done. elapsed time: {}'.format(time_elapsed))
 
 
 #tmp CGI
 #params1 = {'name': 'SMEARS#5', 'call': mazy5, 'w': w, 'h': h, 'Background': (0, 0, 0), 'colors': colors_b, 'outline': None}
 #art_painter(params1, '', output_mode='cgi')
 
-
-if __name__ == '__main__':
-    main()

@@ -110,6 +110,7 @@ def art_painter(params, png_file='example.png', output_mode='save'):
     draw = ImageDraw.Draw(im)
     f = params['call']
     f(draw, params)
+    xsmooth(params, im)
     if output_mode == 'save':
         im.save(png_file, dpi=(300,300))
         show_benchmark(start_time)
@@ -143,3 +144,12 @@ def im2arr(image_path):
     a = np.fromiter(iter(im.getdata()), np.uint8) # BW?
     a.resize(im.height, im.width)
     return a
+
+def xsmooth(params, im):
+    if not "blur" in params:
+        return
+    if params['blur'] == True:
+        im = im.filter(ImageFilter.BLUR)
+        im = im.filter(ImageFilter.BLUR)
+        im = im.filter(ImageFilter.SHARPEN)
+        im = im.filter(ImageFilter.SHARPEN)

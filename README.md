@@ -35,7 +35,7 @@ script: astroart.py
 ![example - neutron star](/examples/zz-04-neutronstar-cir.png?raw=true "Astro example - neutron star")
 
 # SMEARS:
-script: smears1234.py
+script: smears.py
 
 ![example - mazy1](/examples/mazy1-4960x3507-01-003.png?raw=true "Smears#1 example")
 ![example - mazy1](/examples/mazy1-4960x3507-02-003.png?raw=true "Smears#1 example")
