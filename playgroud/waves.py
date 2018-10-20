@@ -17,7 +17,6 @@
 from PIL import Image, ImageDraw
 import random, math, string, os, sys
 from bezier import make_bezier
-from datetime import datetime as dt
 from drawtools import *
 
 
@@ -113,10 +112,12 @@ def waves3(draw, params):
     c = math.pi/180
 
     gr = params['gradient']
+    fz = float(params['z'])
     for z in range(params['z']):
         ndx = gr*z/params['z']
         color = gradient(params['c1'], params['c2'], params['c3'], ndx, gr-1)
-        a = z/params['z']
+        #color = (255, 255, 255) # debug!
+        a = float(z)/fz # why bad w/o float on 2.7/linux? and ok on 3.6/win
         dx = h/2 * (1-a)
         if z == 0:
             da = 0
@@ -125,133 +126,10 @@ def waves3(draw, params):
         points = []
         for n in range(w):
             y =  h/2 + dx * math.sin(c*(n*a+da))
-            points.extend((n, y))
+            points.extend((n, int(y)))
         draw.line(points, fill=color, width=8)
 
 def waves_mux(draw, params):
     waves2(draw, params['par1'])
     waves2(draw, params['par2'])
 
-# ---
-
-def do_waves(cnt, w, h, odir):
-    params1 = {
-        'w': w, 'h': h, 'Background': (224, 244, 0),
-        'name': 'WAVES#1', 'call': waves1, 
-        'z': 14,
-        'f0': 1,
-        'horizontal': False,
-        'gradient': 256,
-        'c1': (0,0,255),
-        'c2': (0,255,255),
-        'c3': (255,255,255),
-    }
-    params2 = {
-        'w': w, 'h': h, 'Background': (224, 244, 0),
-        'name': 'WAVES#1', 'call': waves1, 
-        'z': 12,
-        'f0': 1,
-        'horizontal': True,
-        'gradient': 256,
-        'c1': (0,0,0),
-        'c2': (0,255,0),
-        'c3': (255,255,0),
-    }
-    params3 = {
-        'w': w, 'h': h, 'Background': (0, 0, 0),
-        'name': 'WAVES#1', 'call': waves1, 
-        'z': 9,
-        'f0': 1,
-        'horizontal': False,
-        'gradient': 24,
-        'c1': (0,0,0),
-        'c2': (255,0,0),
-        'c3': (255,255,0),
-    }
-    params4 = {
-        'w': w, 'h': h, 'Background': (0, 0, 0),
-        'name': 'WAVES#1', 'call': waves1, 
-        'z': 4,
-        'f0': 0.33,
-        'horizontal': True,
-        'gradient': 256,
-        'c1': (255,0,0),
-        'c2': (0,255,0),
-        'c3': (0,0,255),
-    }
-    params5 = {
-        'w': w, 'h': h, 'Background': (0, 0, 0),
-        'name': 'WAVES#1', 'call': waves1, 
-        'z': 4,
-        'f0': 3.0,
-        'horizontal': True,
-        'gradient': 256,
-        'c1': (255,0,0),
-        'c2': (0,255,0),
-        'c3': (0,0,255),
-    }
-
-    params1a = {
-        'w': w, 'h': h, 'Background': (0, 0, 0),
-        'name': 'WAVES#2', 'call': waves2, 
-        'z': 96,
-        'f0': 1,
-        'horizontal': False,
-        'gradient': 256,
-        'c1': (255,0,0),
-        'c2': (255,255,0),
-        'c3': (255,255,255),
-    }
-    params2a = {
-        'w': w, 'h': h, 'Background': (0, 0, 0),
-        'name': 'WAVES#2', 'call': waves2, 
-        'z': 48,
-        'f0': 1,
-        'horizontal': True,
-        'gradient': 256,
-        'c1': (0,128,0),
-        'c2': (0,255,0),
-        'c3': (0,0,255),
-    }
-
-    params1b = {
-        'w': w, 'h': h, 'Background': (0, 0, 0),
-        'name': 'WAVES#3', 'call': waves3, 
-        'z': 18,
-        'gradient': 64,
-        'c1': (255,255,255),
-        'c2': (255,255,0),
-        'c3': (255,0,0),
-    }
-
-    paramsX = {
-        'w': w, 'h': h, 'Background': (0, 0, 0),
-        'name': 'WAVES#2#MUX', 'call': waves_mux, 
-        'par1': params1a,
-        'par2': params2a,
-    }
-
-    for n in range(cnt):
-        art_painter(params1, odir+'waves1-%dx%d-01-%03d.png' % (w, h, n+1))
-        art_painter(params2, odir+'waves1-%dx%d-02-%03d.png' % (w, h, n+1))
-        art_painter(params3, odir+'waves1-%dx%d-03-%03d.png' % (w, h, n+1))
-        art_painter(params4, odir+'waves1-%dx%d-04-%03d.png' % (w, h, n+1))
-        art_painter(params5, odir+'waves1-%dx%d-05-%03d.png' % (w, h, n+1))
-        art_painter(params1a, odir+'waves2-%dx%d-01-%03d.png' % (w, h, n+1))
-        art_painter(params2a, odir+'waves2-%dx%d-02-%03d.png' % (w, h, n+1))
-        art_painter(params1b, odir+'waves3-%dx%d-01-%03d.png' % (w, h, n+1))
-        art_painter(paramsX, odir+'waves_mux-%dx%d-01-%03d.png' % (w, h, n+1))
-        
-# ---
-
-def main():
-    start_time = dt.now()
-    cnt = 3
-    w, h = get_canvas('A3')
-    do_waves(cnt, w, h, '')
-    time_elapsed = dt.now() - start_time
-    print('ALL done. elapsed time: {}'.format(time_elapsed))
-
-
-if __name__ == '__main__':
-    main()

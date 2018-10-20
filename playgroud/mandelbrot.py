@@ -8,16 +8,19 @@
 
 from PIL import Image, ImageDraw
 import math
-from datetime import datetime as dt
 from drawtools import *
 
 
-def generate_mandelbrot(x0, x1, y0, y1, maxiter, w, h, negative, png_file='mandel.png', output_mode='save'):
-    if output_mode == 'save':
-        start_time = dt.now()
-        print('generating MANDELBROT...', w, h, 'iter', maxiter, png_file)
-    im = Image.new('L', (w, h), (0))
-    draw = ImageDraw.Draw(im)
+def generate_mandelbrot(draw, params):
+    x0 = params['x0']
+    x1 = params['x1']
+    y0 = params['y0']
+    y1 = params['y1']
+    maxiter = params['maxiter']
+    w = params['w']
+    h = params['h']
+    negative = params['negative']
+
     xs0 = abs(x1-x0)/w
     ys0 = abs(y1-y0)/h
     for y in range(h):
@@ -41,16 +44,15 @@ def generate_mandelbrot(x0, x1, y0, y1, maxiter, w, h, negative, png_file='mande
             else:
                 pix = round(pv*255)
             draw.point((x, y), fill=int(pix))
-    if output_mode == 'save':
-        im.save(png_file, dpi=(300,300))
-        show_benchmark(start_time)
-    else:
-        im2cgi(im)
 
-# ---
+def generate_mandelbrot_(draw, x0, x1, y0, y1, maxiter, w, h, negative):
+    params['x0'] = x0
+    params['x1'] = x1
+    params['y0'] = y0
+    params['y1'] = y1
+    params['maxiter'] = maxiter
+    params['w'] = w
+    params['h'] = h
+    params['negative'] = negative
+    generate_mandelbrot(draw, params)
 
-#tmp CGI
-#generate_mandelbrot(-2.5, 1.0, -1.0, 1.0, 70, 600, 400, False, '')
-
-generate_mandelbrot(-2.5, 1.0, -1.0, 1.0, 200, 700, 400, False, 'mandel-001.png')
-generate_mandelbrot(-2.5, 1.0, -1.0, 1.0, 20, 700, 400, False, 'mandel-002.png')

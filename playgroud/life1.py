@@ -209,36 +209,3 @@ def life(draw, params):
         row = rownew
         y += 1
 
-# ---
-
-w, h = get_canvas('640')
-params1 = {'name': 'LIFE', 'call': life, 'w': w, 'h': h, 'Background': (0, 0, 0), 'Color': (255,255,255), 'f': 'f2a'}
-
-# tmp: to call from CGI
-#params1 = get_cgi_par(default=params1)
-#art_painter(params1, '')
-
-
-params1['f'] = 'f2a'
-art_painter(params1, 'life-0001.jpg')
-art_painter(params1, 'life-0001.gif')
-art_painter(params1, 'life-0001.png')
-art_painter(params1, 'life-0002.png')
-params1['f'] = 'f2b'
-art_painter(params1, 'life-0003.png')
-art_painter(params1, 'life-0004.png')
-params1['f'] = 'f2c'
-art_painter(params1, 'life-0005.png')
-art_painter(params1, 'life-0006.png')
-params1['f'] = 'f2d'
-art_painter(params1, 'life-0007.png')
-art_painter(params1, 'life-0008.png')
-params1['f'] = 'f2e'
-art_painter(params1, 'life-0009.png')
-art_painter(params1, 'life-0010.png')
-params1['f'] = 'f2f'
-art_painter(params1, 'life-0011.png')
-art_painter(params1, 'life-0012.png')
-params1['f'] = 'f2g'
-art_painter(params1, 'life-0013.png')
-art_painter(params1, 'life-0014.png')

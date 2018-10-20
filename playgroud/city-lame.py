@@ -25,6 +25,7 @@ from bezier import make_bezier
 from datetime import datetime as dt
 from drawtools import *
 
+
 def draw_one_block(draw, params, x0, y0, wn, hn, color):
 
     # main fill
@@ -125,10 +126,6 @@ def city1(params, fn, output_mode = 'save'):
         im2cgi(im)
 
 
-#        circle(draw, po[0][0], po[0][1], random.randint(200, 800), fill=color, outline=None)
-#        triangle(draw, po, fill=color, outline=None)
-#        draw.polygon(po, fill=color, outline=None)
-
 # ---
 
 def do_city1(cnt, w, h, odir):
@@ -152,17 +149,12 @@ def do_city1(cnt, w, h, odir):
 
 # ---
 
-def main():
-    start_time = dt.now()
-    cnt = 5
-    w, h = get_canvas('A3')
-    do_city1(cnt, w, h, '')
-
-    #do_city1(1, 16384, 2200, '')
+start_time = dt.now()
+cnt = 5
+w, h = get_canvas('A3')
+do_city1(cnt, w, h, '')
+#do_city1(1, 16384, 2200, '')
     
-    time_elapsed = dt.now() - start_time
-    print('ALL done. elapsed time: {}'.format(time_elapsed))
+time_elapsed = dt.now() - start_time
+print('ALL done. elapsed time: {}'.format(time_elapsed))
 
-
-if __name__ == '__main__':
-    main()

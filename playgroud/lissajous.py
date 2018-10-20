@@ -17,7 +17,7 @@ from drawtools import *
 
 
 
-def liss(draw, params):
+def lissajous(draw, params):
     c = math.pi/180
     FF1 = params['FF1']
     FF2 = params['FF2']
@@ -44,56 +44,8 @@ def liss(draw, params):
         draw.line(points, fill=params['LineColor'], width=params['LineWidth'])
         Time = Time + params['dT']
 
-def liss_loop(draw, params):
+def lissajous_loop(draw, params):
     for i in range(10):
-        liss(draw, params)
+        lissajous(draw, params)
         params['FFi'] = params['FFi'] + 2
 
-# ---
-
-w, h = get_canvas('A4')
-
-params1 = {
-    'w': w, 'h': h,
-    'name': 'LISSAJOUS', 'call': liss_loop, 
-    'Background': (0, 0, 0),
-    'LineColor': (255,255,255),
-    'LineWidth': 10,
-    'FF1': 19.0,
-    'FF2': 31.0,
-    'FFi': 0,
-    'dT': 1,
-    'Steps': 2000,
-    'Scale': 0.9,
-}
-art_painter(params1, 'liss-0001.png')
-
-params2 = {
-    'w': w, 'h': h,
-    'name': 'LISSAJOUS', 'call': liss_loop, 
-    'Background': (0, 0, 0),
-    'LineColor': (50,255,50),
-    'LineWidth': 10,
-    'FF1': 3.0,
-    'FF2': 4.0,
-    'FFi': 0,
-    'dT': 1,
-    'Steps': 2000,
-    'Scale': 0.9,
-}
-art_painter(params2, 'liss-0002.png')
-
-params3 = {
-    'w': w, 'h': h,
-    'name': 'LISSAJOUS', 'call': liss_loop, 
-    'Background': (0, 0, 0),
-    'LineColor': (50,255,50),
-    'LineWidth': 10,
-    'FF1': 2.0,
-    'FF2': 3.0,
-    'FFi': 0,
-    'dT': 1,
-    'Steps': 2000,
-    'Scale': 0.9,
-}
-art_painter(params3, 'liss-0003.png')

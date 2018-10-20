@@ -10,14 +10,15 @@
 # upd: 20181020
 
 # TODO:
-# - misc
 # - big bang, more
 
 
 from PIL import Image, ImageDraw, ImageFilter
 import random, math, string, os, sys
-from datetime import datetime as dt
 from drawtools import *
+
+
+c = math.pi/180
 
 
 def draw_tool(draw, params, color, x, y, z):
@@ -142,55 +143,3 @@ def paint7(draw, params):
             z = 110-r*1.3
             draw_tool(draw, params, color, x, y, z)
 
-# ---
-
-c = math.pi/180
-w, h = get_canvas('A3') # note: does not scalle well with canvas size, so far optimised only for A3
-
-params0f = {'name': 'ASTROART', 'call': paint0, 'w': w, 'h': h, 'Background': (0, 0, 0), 'ou': (0,0,0), 'box_or_cir': False}
-params0t = {'name': 'ASTROART', 'call': paint0, 'w': w, 'h': h, 'Background': (0, 0, 0), 'ou': (0,0,0), 'box_or_cir': True}
-params1f = {'name': 'ASTROART', 'call': paint1, 'w': w, 'h': h, 'Background': (0, 0, 0), 'ou': (0,0,0), 'box_or_cir': False}
-params1t = {'name': 'ASTROART', 'call': paint1, 'w': w, 'h': h, 'Background': (0, 0, 0), 'ou': (0,0,0), 'box_or_cir': True}
-params2f = {'name': 'ASTROART', 'call': paint2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'ou': (0,0,0), 'box_or_cir': False}
-params2t = {'name': 'ASTROART', 'call': paint2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'ou': (0,0,0), 'box_or_cir': True}
-params3f = {'name': 'ASTROART', 'call': paint3, 'w': w, 'h': h, 'Background': (0, 0, 0), 'ou': (0,0,0), 'box_or_cir': False}
-params3t = {'name': 'ASTROART', 'call': paint3, 'w': w, 'h': h, 'Background': (0, 0, 0), 'ou': (0,0,0), 'box_or_cir': True}
-params4f = {'name': 'ASTROART', 'call': paint4, 'w': w, 'h': h, 'Background': (0, 0, 0), 'ou': (0,0,0), 'box_or_cir': False}
-params4t = {'name': 'ASTROART', 'call': paint4, 'w': w, 'h': h, 'Background': (0, 0, 0), 'ou': (0,0,0), 'box_or_cir': True}
-params5f = {'name': 'ASTROART', 'call': paint5, 'w': w, 'h': h, 'Background': (0, 0, 0), 'ou': (0,0,0), 'box_or_cir': False}
-params5t = {'name': 'ASTROART', 'call': paint5, 'w': w, 'h': h, 'Background': (0, 0, 0), 'ou': (0,0,0), 'box_or_cir': True}
-params6f = {'name': 'ASTROART', 'call': paint6, 'w': w, 'h': h, 'Background': (0, 0, 0), 'ou': (0,0,0), 'box_or_cir': False}
-params6t = {'name': 'ASTROART', 'call': paint6, 'w': w, 'h': h, 'Background': (0, 0, 0), 'ou': (0,0,0), 'box_or_cir': True}
-params7f = {'name': 'ASTROART', 'call': paint7, 'w': w, 'h': h, 'Background': (0, 0, 0), 'ou': (0,0,0), 'box_or_cir': False}
-params7t = {'name': 'ASTROART', 'call': paint7, 'w': w, 'h': h, 'Background': (0, 0, 0), 'ou': (0,0,0), 'box_or_cir': True}
-
-#tmp CGI
-#p = cgiart.get_cgi_par()
-#n = 0 # 0..7
-#n = int(p["f"])
-#art_painter(...?
-
-
-art_painter(params0f, 'zz-01-bluegalaxy-cir.png')
-art_painter(params0t, 'zz-01-bluegalaxy-box.png')
-
-art_painter(params1f, 'zz-02-ellipticgalaxy-cir.png')
-art_painter(params1t, 'zz-02-ellipticgalaxy-box.png')
-
-art_painter(params2f, 'zz-03-spiralgalaxy-cir.png')
-art_painter(params2t, 'zz-03-spiralgalaxy-box.png')
-
-art_painter(params3f, 'zz-04-neutronstar-cir.png')
-art_painter(params3t, 'zz-04-neutronstar-box.png')
-
-art_painter(params4f, 'zz-05-blackhole-cir.png')
-art_painter(params4t, 'zz-05-blackhole-box.png')
-
-art_painter(params5f, 'zz-06-supernova-cir.png')
-art_painter(params5t, 'zz-06-supernova-box.png')
-
-art_painter(params5f, 'zz-07-nebula-cir.png')
-art_painter(params6t, 'zz-07-nebula-box.png')
-
-art_painter(params7f, 'zz-08-star-cir.png')
-art_painter(params7t, 'zz-08-star-box.png')

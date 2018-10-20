@@ -5,8 +5,9 @@
 # upd: 20180503, 08
 # upd: 20181020
 
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin
 from datetime import datetime as dt
+import random, math, string, os, sys, io
 from array import array
 import numpy as np
 import cgi
@@ -16,7 +17,7 @@ import cgi
 
 CANVASES = {
     'A5': (2480, 1748),
-    'A4': (3507, 2480),	 # rule is: 29.7/2.54*300 x 21/2.54*300
+    'A4': (3507, 2480),	 # rule is: 29.7/2.54*300 x 21/2.54*300 (in*DPI=300)
     'A3': (4960, 3507),
     'A2': (7015, 4960),
     'A1': (9933, 7015),
@@ -51,34 +52,44 @@ def box(draw, x, y, r, fill, outline):
 def triangle(draw, points, fill, outline):
     draw.polygon(points, fill=fill, outline=outline)
 
-def gradient(FColorStart, FColorMid, FColorEnd, i, n):
+def gradient(colorStart, colorMid, colorEnd, i, n):
+    # note: weird, py 2.7 needs these float conversions, on 3.6 it was ok
     n2 = n/2
-    downc = (n2-i)/n2
-    upc = i/n2
-    r1 = int( FColorStart[0]*downc + FColorMid[0]*upc )
-    g1 = int( FColorStart[1]*downc + FColorMid[1]*upc )
-    b1 = int( FColorStart[2]*downc + FColorMid[2]*upc )
-    downc = (n2-i/2)/n2
-    upc = i/2/n2
-    r2 = int( FColorMid[0]*downc + FColorEnd[0]*upc )
-    g2 = int( FColorMid[1]*downc + FColorEnd[1]*upc )
-    b2 = int( FColorMid[2]*downc + FColorEnd[2]*upc )
-    if i < n/2:
+    downc = float(n2-i)/float(n2)
+    upc = float(i)/float(n2)
+    r1 = int( float(colorStart[0])*downc + float(colorMid[0])*upc )
+    g1 = int( float(colorStart[1])*downc + float(colorMid[1])*upc )
+    b1 = int( float(colorStart[2])*downc + float(colorMid[2])*upc )
+    downc = float(n2-i/2)/float(n2)
+    upc = float(i/2)/float(n2)
+    r2 = int( float(colorMid[0])*downc + float(colorEnd[0])*upc )
+    g2 = int( float(colorMid[1])*downc + float(colorEnd[1])*upc )
+    b2 = int( float(colorMid[2])*downc + float(colorEnd[2])*upc )
+    if i < n2:
         return (r1, g1, b1)
     else:
         return (r2, g2, b2)
 
-def gradient2(FColorStart, FColorEnd, i, n):
-    downc = ((n)-i)/(n)
-    upc = i/(n)
-    r1 = int( FColorStart[0]*downc + FColorEnd[0]*upc )
-    g1 = int( FColorStart[1]*downc + FColorEnd[1]*upc )
-    b1 = int( FColorStart[2]*downc + FColorEnd[2]*upc )
+def gradient2(colorStart, colorEnd, i, n):
+    downc = float(n-i)/float(n)
+    upc = float(i)/float(n)
+    r1 = int( float(colorStart[0])*downc + float(colorEnd[0])*upc )
+    g1 = int( float(colorStart[1])*downc + float(colorEnd[1])*upc )
+    b1 = int( float(colorStart[2])*downc + float(colorEnd[2])*upc )
     return (r1, g1, b1)
 
 def script_it(draw, xy, font, size, fill):
     fnt = ImageFont.truetype(font, size)
     draw.text(xy, "Noniewicz.art.pl", font=fnt, fill=fill)
+
+def append_myself():
+    x = PngImagePlugin.PngInfo()
+    #x.add_itxt(key='Title', value='test title', lang='', tkey='', zip=False)
+    #x.add_itxt(key='Description', value='test description', lang='', tkey='', zip=False)
+    #x.add_itxt(key='Author', value='test author', lang='', tkey='E', zip=False)
+    #x.add_itxt(key='Copyright', value='(c)2018 Jakub Noniewicz', lang='', tkey='', zip=False)
+    x.add_itxt(key='Concept', value='pyartforms concept by: Jakub Noniewicz | http://noniewicz.com | http://noniewicz.art.pl', lang='', tkey='', zip=False)
+    return x
 
 def im2cgi(im, format='PNG'):
     ct = ''
@@ -92,7 +103,10 @@ def im2cgi(im, format='PNG'):
         ct = 'image/png'
         format='PNG'
     imgByteArr = io.BytesIO()
-    im.save(imgByteArr, format=format)
+    if format == 'PNG':
+        im.save(imgByteArr, format=format, pnginfo=append_myself())
+    else:
+        im.save(imgByteArr, format=format)
     imgByteArr = imgByteArr.getvalue()
     sys.stdout.write("Content-Type: "+ct+"\n")
 #todo: fin
@@ -102,17 +116,20 @@ def im2cgi(im, format='PNG'):
     sys.stdout.write(imgByteArr)
     sys.stdout.flush()
 
-def art_painter(params, png_file='example.png', output_mode='save'):
+def art_painter(params, png_file='example.png', output_mode='save', bw=False):
     if output_mode == 'save':
         start_time = dt.now()
         print('drawing %s... %s' % (params['name'], png_file))
-    im = Image.new('RGB', (params['w'], params['h']), params['Background'])
+    if bw:
+        im = Image.new('L', (params['w'], params['h']), (0))
+    else:
+        im = Image.new('RGB', (params['w'], params['h']), params['Background'])
     draw = ImageDraw.Draw(im)
     f = params['call']
     f(draw, params)
     xsmooth(params, im)
     if output_mode == 'save':
-        im.save(png_file, dpi=(300,300))
+        im.save(png_file, dpi=(300,300), pnginfo=append_myself())
         show_benchmark(start_time)
     else:
         im2cgi(im, format='PNG')
@@ -120,7 +137,7 @@ def art_painter(params, png_file='example.png', output_mode='save'):
 def get_cgi_par(default=None):
     form = cgi.FieldStorage()
     if default == None:
-        par = {'w': 800, 'h': 600, 'f': ''}
+        par = {'w': 800, 'h': 600, 'f': '', n: 0}
     else:
         par = default
     if "w" in form:
@@ -129,6 +146,8 @@ def get_cgi_par(default=None):
         par['h'] = int(form["h"].value)
     if "f" in form:
         par['f'] = form["f"].value
+    if "n" in form:
+        par['n'] = int(form["n"].value)
     return par
 
 def show_benchmark(start_time):
