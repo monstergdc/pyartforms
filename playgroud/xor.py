@@ -36,9 +36,9 @@ def xor(params, fn):
 
     # ForEveryPixel
     for y in range(h):
+        fy = int(y*yfloatmul)
         for x in range(w):
             fx = int(x*xfloatmul)
-            fy = int(y*yfloatmul)
             va = int((fx^fy) * tfloatmul) & 255
             if params['red'] == True:
                 R = va
