@@ -19,8 +19,7 @@ import random, math, string, os, sys
 from drawtools import *
 
 
-def m5post1():
-    odir = '!!!mazy-out\\'
+def m5post1(odir):
     for n in range(3):
         for m in range(3):
             fn1 = odir+'mazy5-%dx%d-01-%03d.png' % (4960, 3507, n+1) # mazy5-4960x3507-01-001.png
@@ -34,8 +33,7 @@ def m5post1():
                 xx_im = Image.fromarray(a1, mode='L')
                 xx_im.save(odir+'mazy5-post-%03d_%03d.png' % (n+1, m+1))
 
-def m5post2():
-    odir = '!!!mazy-out\\'
+def m5post2(odir):
     for n in range(3):
         for m in range(3):
             fn1 = odir+'mazy5-%dx%d-01-%03d.png' % (4960, 3507, n+1) # mazy5-4960x3507-01-001.png
@@ -51,8 +49,7 @@ def m5post2():
                 out = Image.merge('RGB', bands)
                 out.save(odir+'mazy5-postX-%03d_%03d.png' % (n+1, m+1))
 
-def m5post3():
-    odir = '!!!mazy-out\\'
+def m5post3(odir):
     for n in range(3):
         for m in range(3):
             fn1 = odir+'mazy5-%dx%d-03-%03d.png' % (4960, 3507, n+1) # mazy5-4960x3507-01-001.png
@@ -68,6 +65,7 @@ def m5post3():
                 out = Image.merge('RGB', bands)
                 out.save(odir+'mazy5-postXX-%03d_%03d.png' % (n+1, m+1))
 
-#m5post1()
-m5post2()
-m5post3()
+odir = '!output\\'
+#m5post1(odir)
+m5post2(odir)
+m5post3(odir)
