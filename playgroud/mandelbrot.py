@@ -13,8 +13,9 @@ from drawtools import *
 
 
 def generate_mandelbrot(x0, x1, y0, y1, maxiter, w, h, negative, png_file='mandel.png', output_mode='save'):
-    start_time = dt.now()
-    print('generating mandel...', w, h, 'iter', maxiter)
+    if output_mode == 'save':
+        start_time = dt.now()
+        print('generating MANDELBROT...', w, h, 'iter', maxiter, png_file)
     im = Image.new('L', (w, h), (0))
     draw = ImageDraw.Draw(im)
     xs0 = abs(x1-x0)/w

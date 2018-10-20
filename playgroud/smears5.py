@@ -3,7 +3,7 @@
 
 # paint algorithms (artificial artist), v1.0, Python version
 # (c)2018 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
-# #5 nowe mazy
+# new smears (nowe mazy) #5
 # cre: 20180805
 # upd: 20180807, 08
 # upd: 20180928, 29
@@ -20,28 +20,9 @@
 from PIL import Image, ImageDraw, ImageFilter
 import random, math, string, os, sys
 from bezier import make_bezier
-from datetime import datetime as dt
 from drawtools import *
 
-#zielony
-#fioletowy
-#pomarancz
-#rozowo-fioletowy
-#niebieski
-#ciemny zolty
-#rolty
-#rozowy
 
-# old?
-colors_old = [(0x8A, 0xD3, 0x8C),
-          (0x96, 0x78, 0xD6),
-          (0xE9, 0x8B, 0x7B),
-          (0xD0, 0x76, 0xD0),
-          (0x8C, 0xA8, 0xD0),
-          (0xED, 0xA0, 0x7C),
-          (0xD5, 0xCB, 0x7D),
-          (0xE0, 0x79, 0x9C),
-          ]
 
 # bw x2
 colors_bw = [(0xff, 0xff, 0xff),
@@ -70,22 +51,29 @@ colors_b = [(0x00, 0x00, 0x20),
           (0x00, 0x00, 0x40),
           (0x00, 0x00, 0x60),
           (0x00, 0x00, 0x80),
-          (0x00, 0x00, 0xA),
+          (0x00, 0x00, 0xA0),
           (0x00, 0x00, 0xC0),
           (0x00, 0x00, 0xE0),
           (0x00, 0x00, 0xFF),
           ]
 
+# just yellow
+colors_y = [(0x20, 0x20, 0x00),
+          (0x40, 0x40, 0x00),
+          (0x60, 0x60, 0x00),
+          (0x80, 0x80, 0x00),
+          (0xA0, 0xA0, 0x00),
+          (0xC0, 0xC0, 0x00),
+          (0xE0, 0xE0, 0x00),
+          (0xFF, 0xFF, 0x00),
+          ]
 
-def mazy5(params, png_file='smears5.png', output_mode='save'):
-    start_time = dt.now()
+
+def mazy5(draw, params):
     w = params['w']
     h = params['h']
     colors = params['colors']
-    print('mazy5...', png_file)
     random.seed()
-    im = Image.new('RGB', (w, h), params['bg'])
-    draw = ImageDraw.Draw(im)
     ts = [t/100.0 for t in range(101)]
     c = math.pi/180
 
@@ -111,39 +99,27 @@ def mazy5(params, png_file='smears5.png', output_mode='save'):
                 x = x0 + r * math.cos(angle)
                 y = y0 + r * math.sin(angle)
                 points.extend((x, y))
-            draw.polygon(points, fill=colors[m%8], outline=None)
-            #draw.polygon(points, fill=colors[m%8], outline=(0,0,0)) # opt outlined
-
-    if output_mode == 'save':
-        im.save(png_file)
-        show_benchmark(start_time)
-    else:
-        im2cgi(im)
+            draw.polygon(points, fill=colors[m%8], outline=params['outline'])
 
 # ---
 
 def do_mazy5(cnt, w, h, odir):
-    params1 = {'w': w, 'h': h, 'bg': (0, 0, 0), 'colors': colors_b}
-    params2 = {'w': w, 'h': h, 'bg': (0, 0, 0), 'colors': colors_p}
-    params3 = {'w': w, 'h': h, 'bg': (0, 0, 0), 'colors': colors_bw}
+    params1 = {'name': 'SMEARS#5', 'call': mazy5, 'w': w, 'h': h, 'Background': (0, 0, 0), 'colors': colors_b, 'outline': None}
+    params2 = {'name': 'SMEARS#5', 'call': mazy5, 'w': w, 'h': h, 'Background': (0, 0, 0), 'colors': colors_y, 'outline': None}
+    params3 = {'name': 'SMEARS#5', 'call': mazy5, 'w': w, 'h': h, 'Background': (0, 0, 0), 'colors': colors_p, 'outline': (0, 0, 0)}
+    params4 = {'name': 'SMEARS#5', 'call': mazy5, 'w': w, 'h': h, 'Background': (0, 0, 0), 'colors': colors_bw, 'outline': None}
     for n in range(cnt):
-        mazy5(params1, odir+'mazy5-%dx%d-01-%03d.png' % (w, h, n+1))
-        mazy5(params2, odir+'mazy5-%dx%d-02-%03d.png' % (w, h, n+1))
-        mazy5(params3, odir+'mazy5-%dx%d-03-%03d.png' % (w, h, n+1))
+        art_painter(params1, odir+'mazy5-%dx%d-01-%03d.png' % (w, h, n+1))
+        art_painter(params2, odir+'mazy5-%dx%d-02-%03d.png' % (w, h, n+1))
+        art_painter(params3, odir+'mazy5-%dx%d-03-%03d.png' % (w, h, n+1))
+        art_painter(params4, odir+'mazy5-%dx%d-04-%03d.png' % (w, h, n+1))
         
 # ---
 
-def main():
-    start_time = dt.now()
-    cnt = 4
-    w, h = get_canvas('A3')
-    odir = '!!!mazy-out\\'
-    do_mazy5(cnt, w, h, odir)
-    #tmp CGI
-    #do_mazy5(1, w, h, '', output_mode='cgi')
-    time_elapsed = dt.now() - start_time
-    print('ALL done. elapsed time: {}'.format(time_elapsed))
-
-
-if __name__ == '__main__':
-    main()
+cnt = 3
+w, h = get_canvas('A3')
+odir = '!!!mazy-out\\'
+do_mazy5(cnt, w, h, odir)
+#tmp CGI
+#params1 = {'name': 'SMEARS#5', 'call': mazy5, 'w': w, 'h': h, 'Background': (0, 0, 0), 'colors': colors_b, 'outline': None}
+#art_painter(params1, '', output_mode='cgi')

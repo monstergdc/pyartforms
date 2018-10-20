@@ -1,9 +1,14 @@
 
+# Python art forms
+# some common code/tools
 # (c)2018 Noniewicz.com
 # upd: 20180503, 08
 # upd: 20181020
 
+from PIL import Image, ImageDraw, ImageFilter
 from datetime import datetime as dt
+from array import array
+import numpy as np
 import cgi
 
 
@@ -76,15 +81,19 @@ def script_it(draw, xy, font, size, fill):
     draw.text(xy, "Noniewicz.art.pl", font=fnt, fill=fill)
 
 def im2cgi(im, format='PNG'):
-    imgByteArr = io.BytesIO()
-    im.save(imgByteArr, format=format)
-    imgByteArr = imgByteArr.getvalue()
+    ct = ''
     if format == 'PNG':
         ct = 'image/png'
     if format == 'JPG':
         ct = 'image/jpg'
     if format == 'GIF':
         ct = 'image/gif'
+    if ct == '':
+        ct = 'image/png'
+        format='PNG'
+    imgByteArr = io.BytesIO()
+    im.save(imgByteArr, format=format)
+    imgByteArr = imgByteArr.getvalue()
     sys.stdout.write("Content-Type: "+ct+"\n")
 #todo: fin
 #    sys.stdout.write("Content-Length: " + str(?) + "\n")
@@ -93,9 +102,26 @@ def im2cgi(im, format='PNG'):
     sys.stdout.write(imgByteArr)
     sys.stdout.flush()
 
-def get_cgi_par():
+def art_painter(params, png_file='example.png', output_mode='save'):
+    if output_mode == 'save':
+        start_time = dt.now()
+        print('drawing %s... %s' % (params['name'], png_file))
+    im = Image.new('RGB', (params['w'], params['h']), params['Background'])
+    draw = ImageDraw.Draw(im)
+    f = params['call']
+    f(draw, params)
+    if output_mode == 'save':
+        im.save(png_file, dpi=(300,300))
+        show_benchmark(start_time)
+    else:
+        im2cgi(im, format='PNG')
+
+def get_cgi_par(default=None):
     form = cgi.FieldStorage()
-    par = {'w': 800, 'h': 600, 'f': 'f2a'}
+    if default == None:
+        par = {'w': 800, 'h': 600, 'f': ''}
+    else:
+        par = default
     if "w" in form:
         par['w'] = int(form["w"].value)
     if "h" in form:
@@ -108,3 +134,12 @@ def show_benchmark(start_time):
     time_elapsed = dt.now() - start_time
     print('done. elapsed time: {}'.format(time_elapsed))
     return time_elapsed
+
+# image to array
+def im2arr(image_path):
+    #im = Image.load(image_path)
+    im = Image.open(image_path)
+    im = im.convert('L')
+    a = np.fromiter(iter(im.getdata()), np.uint8) # BW?
+    a.resize(im.height, im.width)
+    return a

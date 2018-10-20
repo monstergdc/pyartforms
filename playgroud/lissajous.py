@@ -13,7 +13,6 @@
 
 from PIL import Image, ImageDraw, ImageFilter
 import random, math, string, os, sys
-from datetime import datetime as dt
 from drawtools import *
 
 
@@ -45,24 +44,10 @@ def liss(draw, params):
         draw.line(points, fill=params['LineColor'], width=params['LineWidth'])
         Time = Time + params['dT']
 
-# ---
-
-def call_painter(params, png_file='lissajous.png', output_mode = 'save'):
-    start_time = dt.now()
-    print('drawing...', png_file)
-    im = Image.new('RGB', (params['w'], params['h']), params['Background'])
-    draw = ImageDraw.Draw(im)
-
-    # note: loop - test only
-    for z in range(10):
+def liss_loop(draw, params):
+    for i in range(10):
         liss(draw, params)
         params['FFi'] = params['FFi'] + 2
-
-    if output_mode == 'save':
-        im.save(png_file, dpi=(300,300))
-        show_benchmark(start_time)
-    else:
-        im2cgi(im)
 
 # ---
 
@@ -70,6 +55,7 @@ w, h = get_canvas('A4')
 
 params1 = {
     'w': w, 'h': h,
+    'name': 'LISSAJOUS', 'call': liss_loop, 
     'Background': (0, 0, 0),
     'LineColor': (255,255,255),
     'LineWidth': 10,
@@ -80,10 +66,11 @@ params1 = {
     'Steps': 2000,
     'Scale': 0.9,
 }
-call_painter(params1, 'liss-0001.png')
+art_painter(params1, 'liss-0001.png')
 
 params2 = {
     'w': w, 'h': h,
+    'name': 'LISSAJOUS', 'call': liss_loop, 
     'Background': (0, 0, 0),
     'LineColor': (50,255,50),
     'LineWidth': 10,
@@ -94,10 +81,11 @@ params2 = {
     'Steps': 2000,
     'Scale': 0.9,
 }
-call_painter(params2, 'liss-0002.png')
+art_painter(params2, 'liss-0002.png')
 
 params3 = {
     'w': w, 'h': h,
+    'name': 'LISSAJOUS', 'call': liss_loop, 
     'Background': (0, 0, 0),
     'LineColor': (50,255,50),
     'LineWidth': 10,
@@ -108,4 +96,4 @@ params3 = {
     'Steps': 2000,
     'Scale': 0.9,
 }
-call_painter(params3, 'liss-0003.png')
+art_painter(params3, 'liss-0003.png')

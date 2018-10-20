@@ -21,15 +21,11 @@ from datetime import datetime as dt
 from drawtools import *
 
 
-def waves1(params, fn, output_mode = 'save'):
-    start_time = dt.now()
+def waves1(draw, params):
     w = params['w']
     h = params['h']
-    print('waves1...', fn)
     random.seed()
     c = math.pi/180
-    im = Image.new('RGB', (w, h), params['bg'])
-    draw = ImageDraw.Draw(im)
 
     if params['horizontal'] == True:
         rn = params['w']
@@ -65,21 +61,11 @@ def waves1(params, fn, output_mode = 'save'):
             draw.rectangle(xy, fill=color, outline=None)
             y += 1
 
-    if output_mode == 'save':
-        im.save(fn)
-        show_benchmark(start_time)
-    else:
-        im2cgi(im)
-
-def waves2(params, fn, output_mode = 'save'):
-    start_time = dt.now()
+def waves2(draw, params):
     w = params['w']
     h = params['h']
-    print('waves2...', fn)
     random.seed()
     c = math.pi/180
-    im = Image.new('RGB', (w, h), params['bg'])
-    draw = ImageDraw.Draw(im)
 
     if params['horizontal'] == True:
         rn = w
@@ -120,21 +106,11 @@ def waves2(params, fn, output_mode = 'save'):
         draw.line(points1, fill=color, width=random.randint(2, 8))
         draw.line(points2, fill=color, width=random.randint(2, 8))
 
-    if output_mode == 'save':
-        im.save(fn)
-        show_benchmark(start_time)
-    else:
-        im2cgi(im)
-
-def waves3(params, fn, output_mode = 'save'):
-    start_time = dt.now()
+def waves3(draw, params):
     w = params['w']
     h = params['h']
-    print('waves3...', fn)
     random.seed()
     c = math.pi/180
-    im = Image.new('RGB', (w, h), params['bg'])
-    draw = ImageDraw.Draw(im)
 
     gr = params['gradient']
     for z in range(params['z']):
@@ -152,17 +128,16 @@ def waves3(params, fn, output_mode = 'save'):
             points.extend((n, y))
         draw.line(points, fill=color, width=8)
 
-    if output_mode == 'save':
-        im.save(fn)
-        show_benchmark(start_time)
-    else:
-        im2cgi(im)
+def waves_mux(draw, params):
+    waves2(draw, params['par1'])
+    waves2(draw, params['par2'])
 
 # ---
 
 def do_waves(cnt, w, h, odir):
     params1 = {
-        'w': w, 'h': h, 'bg': (224, 244, 0),
+        'w': w, 'h': h, 'Background': (224, 244, 0),
+        'name': 'WAVES#1', 'call': waves1, 
         'z': 14,
         'f0': 1,
         'horizontal': False,
@@ -172,7 +147,8 @@ def do_waves(cnt, w, h, odir):
         'c3': (255,255,255),
     }
     params2 = {
-        'w': w, 'h': h, 'bg': (224, 244, 0),
+        'w': w, 'h': h, 'Background': (224, 244, 0),
+        'name': 'WAVES#1', 'call': waves1, 
         'z': 12,
         'f0': 1,
         'horizontal': True,
@@ -182,7 +158,8 @@ def do_waves(cnt, w, h, odir):
         'c3': (255,255,0),
     }
     params3 = {
-        'w': w, 'h': h, 'bg': (0, 0, 0),
+        'w': w, 'h': h, 'Background': (0, 0, 0),
+        'name': 'WAVES#1', 'call': waves1, 
         'z': 9,
         'f0': 1,
         'horizontal': False,
@@ -192,7 +169,8 @@ def do_waves(cnt, w, h, odir):
         'c3': (255,255,0),
     }
     params4 = {
-        'w': w, 'h': h, 'bg': (0, 0, 0),
+        'w': w, 'h': h, 'Background': (0, 0, 0),
+        'name': 'WAVES#1', 'call': waves1, 
         'z': 4,
         'f0': 0.33,
         'horizontal': True,
@@ -202,7 +180,8 @@ def do_waves(cnt, w, h, odir):
         'c3': (0,0,255),
     }
     params5 = {
-        'w': w, 'h': h, 'bg': (0, 0, 0),
+        'w': w, 'h': h, 'Background': (0, 0, 0),
+        'name': 'WAVES#1', 'call': waves1, 
         'z': 4,
         'f0': 3.0,
         'horizontal': True,
@@ -213,7 +192,8 @@ def do_waves(cnt, w, h, odir):
     }
 
     params1a = {
-        'w': w, 'h': h, 'bg': (0, 0, 0),
+        'w': w, 'h': h, 'Background': (0, 0, 0),
+        'name': 'WAVES#2', 'call': waves2, 
         'z': 96,
         'f0': 1,
         'horizontal': False,
@@ -223,7 +203,8 @@ def do_waves(cnt, w, h, odir):
         'c3': (255,255,255),
     }
     params2a = {
-        'w': w, 'h': h, 'bg': (0, 0, 0),
+        'w': w, 'h': h, 'Background': (0, 0, 0),
+        'name': 'WAVES#2', 'call': waves2, 
         'z': 48,
         'f0': 1,
         'horizontal': True,
@@ -234,7 +215,8 @@ def do_waves(cnt, w, h, odir):
     }
 
     params1b = {
-        'w': w, 'h': h, 'bg': (0, 0, 0),
+        'w': w, 'h': h, 'Background': (0, 0, 0),
+        'name': 'WAVES#3', 'call': waves3, 
         'z': 18,
         'gradient': 64,
         'c1': (255,255,255),
@@ -242,21 +224,29 @@ def do_waves(cnt, w, h, odir):
         'c3': (255,0,0),
     }
 
+    paramsX = {
+        'w': w, 'h': h, 'Background': (0, 0, 0),
+        'name': 'WAVES#2#MUX', 'call': waves_mux, 
+        'par1': params1a,
+        'par2': params2a,
+    }
+
     for n in range(cnt):
-        waves1(params1, odir+'waves1-%dx%d-01-%03d.png' % (w, h, n+1))
-        waves1(params2, odir+'waves1-%dx%d-02-%03d.png' % (w, h, n+1))
-        waves1(params3, odir+'waves1-%dx%d-03-%03d.png' % (w, h, n+1))
-        waves1(params4, odir+'waves1-%dx%d-04-%03d.png' % (w, h, n+1))
-        waves1(params5, odir+'waves1-%dx%d-05-%03d.png' % (w, h, n+1))
-        waves2(params1a, odir+'waves2-%dx%d-01-%03d.png' % (w, h, n+1))
-        waves2(params2a, odir+'waves2-%dx%d-02-%03d.png' % (w, h, n+1))
-        waves3(params1b, odir+'waves3-%dx%d-01-%03d.png' % (w, h, n+1))
+        art_painter(params1, odir+'waves1-%dx%d-01-%03d.png' % (w, h, n+1))
+        art_painter(params2, odir+'waves1-%dx%d-02-%03d.png' % (w, h, n+1))
+        art_painter(params3, odir+'waves1-%dx%d-03-%03d.png' % (w, h, n+1))
+        art_painter(params4, odir+'waves1-%dx%d-04-%03d.png' % (w, h, n+1))
+        art_painter(params5, odir+'waves1-%dx%d-05-%03d.png' % (w, h, n+1))
+        art_painter(params1a, odir+'waves2-%dx%d-01-%03d.png' % (w, h, n+1))
+        art_painter(params2a, odir+'waves2-%dx%d-02-%03d.png' % (w, h, n+1))
+        art_painter(params1b, odir+'waves3-%dx%d-01-%03d.png' % (w, h, n+1))
+        art_painter(paramsX, odir+'waves_mux-%dx%d-01-%03d.png' % (w, h, n+1))
         
 # ---
 
 def main():
     start_time = dt.now()
-    cnt = 5
+    cnt = 3
     w, h = get_canvas('A3')
     do_waves(cnt, w, h, '')
     time_elapsed = dt.now() - start_time
