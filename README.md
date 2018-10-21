@@ -13,10 +13,7 @@ Small demo is in: **pyart-demo.py** (not everything yet).
 Web/CGI version in: **pyartw3.py** (also not all yet).
 
 
-Prerequisites include:
-**pip install pillow**
-- and for video:
-**pip install opencv-python**
+Prerequisites include: **pip install pillow** and for video: **pip install opencv-python**, possibly also **pip install cgi**
 
 
 
