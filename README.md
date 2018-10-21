@@ -43,6 +43,7 @@ script: lissajous.py
 script: astroart.py
 
 ![example - neutron star](/examples/zz-04-neutronstar-cir.png?raw=true "Astro example - neutron star")
+![example - supernova](/examples/zz-astro-06-supernova-cir.png?raw=true "Astro example - supernova")
 
 # SMEARS:
 script: smears.py
