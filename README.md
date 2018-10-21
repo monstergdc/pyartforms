@@ -27,8 +27,11 @@ script: life1.py
 ![example](/examples/life-0003.png?raw=true "Life example")
 ![example](/examples/life-0007.png?raw=true "Life example")
 
-# LIFE 2D (alive image eaters):
+# LIFE 2D - IMAGES+ANIMATIONS (alive image eaters):
 script: life2.py
+
+[Life2d video example#1](https://www.youtube.com/watch?v=FofqSbcO2W8)
+[Life2d video example#2](https://www.youtube.com/watch?v=Ce1yVJNs3AM)
 
 ![example](/examples/zz-life2d-001-f2a.png?raw=true "Life example")
 ![example](/examples/zz-life2d-001-f2b.png?raw=true "Life example")
