@@ -9,6 +9,10 @@ Feel free to tinker with it. Get inspired.
 Stuff here may change, may be incomplete or not fully working, may be w/o docs, etc. 
 as it is work and experiments in progress. Also no error checking. Tested only under Windows (paths!).
 
+Small demo is in: pyart-demo.py (not everything yet).
+Web/CGI version in: pyartw3.py (also not all yet).
+
+
 Prerequisites include:
 - pip install pillow
 - and for video: pip install opencv-python

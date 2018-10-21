@@ -7,7 +7,7 @@
 # cre: 20180405
 # upd; 20180406, 07
 # upd; 20180502, 03
-# upd: 20181020
+# upd: 20181020, 21
 
 # TODO:
 # - big bang, more
@@ -17,8 +17,6 @@ from PIL import Image, ImageDraw, ImageFilter
 import random, math, string, os, sys
 from drawtools import *
 
-
-c = math.pi/180
 
 
 def draw_tool(draw, params, color, x, y, z):
@@ -33,6 +31,7 @@ def draw_tool(draw, params, color, x, y, z):
 def paint0(draw, params):
     w = params['w']
     h = params['h']
+    c = math.pi/180
     for r in range(36):
         for n in range(8):
             color = (0, 32+n*24, 32+n*40)
@@ -46,6 +45,7 @@ def paint0(draw, params):
 def paint1(draw, params):
     w = params['w']
     h = params['h']
+    c = math.pi/180
     random.seed()
     for r in range(48):
         for n in range(24):
@@ -64,6 +64,7 @@ def paint1(draw, params):
 def paint2(draw, params):
     w = params['w']
     h = params['h']
+    c = math.pi/180
     for r in range(48):
         for n in range(18):
             color = gradient((255,255,224), (255,255,0), (255,0,0), r, 48)
@@ -77,6 +78,7 @@ def paint2(draw, params):
 def paint3(draw, params):
     w = params['w']
     h = params['h']
+    c = math.pi/180
     for r in range(50):
         for n in range(12):
             if n&1 == 0:
@@ -93,6 +95,7 @@ def paint3(draw, params):
 def paint4(draw, params):
     w = params['w']
     h = params['h']
+    c = math.pi/180
     for r in range(32):
         for n in range(16):
             nn = n%8
@@ -107,6 +110,7 @@ def paint4(draw, params):
 def paint5(draw, params):
     w = params['w']
     h = params['h']
+    c = math.pi/180
     for r in range(48):
         for n in range(8):
             color = gradient((255,255,0), (0,128,255), (255,255,255), n*r, 48*8)
@@ -120,6 +124,7 @@ def paint5(draw, params):
 def paint6(draw, params):
     w = params['w']
     h = params['h']
+    c = math.pi/180
     random.seed()
     for r in range(2048):
         for n in range(24):
@@ -134,6 +139,7 @@ def paint6(draw, params):
 def paint7(draw, params):
     w = params['w']
     h = params['h']
+    c = math.pi/180
     for r in range(40):
         for n in range(8):
             color = gradient((255,255,255), (255,255,0), (255,0,0), r, 40)
