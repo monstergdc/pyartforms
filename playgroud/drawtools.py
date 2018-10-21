@@ -3,7 +3,7 @@
 # some common code/tools
 # (c)2018 Noniewicz.com
 # upd: 20180503, 08
-# upd: 20181020
+# upd: 20181020, 21
 
 from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin
 from datetime import datetime as dt
@@ -138,7 +138,7 @@ def art_painter(params, png_file='example.png', output_mode='save', bw=False):
 def get_cgi_par(default=None):
     form = cgi.FieldStorage()
     if default == None:
-        par = {'w': 800, 'h': 600, 'f': '', n: 0}
+        par = {'w': 800, 'h': 600, 'f': '', 'n': 0}
     else:
         par = default
     if "w" in form:

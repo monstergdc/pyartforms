@@ -81,8 +81,180 @@ if what == "mandelbrot":
     params1 = {'name': 'MANDELBROT', 'call': generate_mandelbrot, 'x0': -2.5, 'x1': 1.0, 'y0': -1.0, 'y1': 1.0, 'maxiter': 80, 'w': 700, 'h': 400, 'negative': False}
     art_painter(params1, '', output_mode='cgi', bw=True)
 
-#if what == "smears":
-    # ?
+if what == "smears1":
+    w, h = get_canvas('A3')
+
+    params1 = {
+        'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': (255, 255, 255),
+        'pw': 5+3,
+        'v': 50-0-20-10,
+        'n': 20*5,
+        'm': 100-50-10,
+        'prefill': True,
+        'blur': True,
+        'r0': 64,
+        'g0': 64,
+        'b0': 64,
+        'r1': 256,
+        'g1': 256,
+        'b1': 256,
+        'mode': 'black',
+        'keep': False,
+    }
+
+    params2 = {
+        'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': (255, 255, 255),
+        'pw': 5+3,
+        'v': 50+25,
+        'n': 20*5,
+        'm': 100-50-10,
+        'prefill': False,
+        'blur': True,
+        'r0': 0,
+        'g0': 0,
+        'b0': 0,
+        'r1': 256,
+        'g1': 0,
+        'b1': 0,
+        'mode': 'red',
+        'keep': False,
+    }
+
+    params3 = {
+        'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': (255, 255, 255),
+        'pw': 5+3,
+        'v': 50-0-20,
+        'n': 20*5,
+        'm': 100-50-10,
+        'prefill': True,
+        'blur': False,
+        'r0': 64,
+        'g0': 64,
+        'b0': 0,
+        'r1': 256,
+        'g1': 256,
+        'b1': 32,
+        'mode': 'red',
+        'keep': False,
+    }
+
+    params4 = {
+        'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': (255, 255, 255),
+        'pw': 5+3,
+        'v': 50-0-20,
+        'n': 20*5,
+        'm': 100-50-10,
+        'prefill': True,
+        'blur': False,
+        'r0': 0,
+        'g0': 64,
+        'b0': 0,
+        'r1': 32,
+        'g1': 256,
+        'b1': 32,
+        'mode': 'red',
+        'keep': False,
+    }
+
+    params5 = {
+        'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': (255, 255, 0),
+        'pw': 5,
+        'v': 200,
+        'n': 50,
+        'm': 25,
+        'prefill': False,
+        'blur': False,
+        'r0': 0,
+        'g0': 0,
+        'b0': 0,
+        'r1': 256,
+        'g1': 256,
+        'b1': 256,
+        'mode': 'red',
+        'keep': True,
+    }
+
+    params6 = {
+        'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': (255, 255, 0),
+        'pw': 5,
+        'v': 120,
+        'n': 48,
+        'm': 12,
+        'prefill': True,
+        'blur': False,
+        'r0': 16,
+        'g0': 64,
+        'b0': 128,
+        'r1': 128,
+        'g1': 256,
+        'b1': 256,
+        'mode': 'red',
+        'keep': True,
+    }
+
+    p0 = get_cgi_par(default=None)
+    params = params1
+    if p0['n'] == 1:
+        params = params1
+    if p0['n'] == 2:
+        params = params2
+    if p0['n'] == 3:
+        params = params3
+    if p0['n'] == 4:
+        params = params4
+    if p0['n'] == 5:
+        params = params5
+    if p0['n'] == 6:
+        params = params6
+    art_painter(params, '', output_mode='cgi')
+
+if what == "smears4":
+    w, h = get_canvas('A3')
+    p0 = get_cgi_par(default=None)
+    params2 = {
+        'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 0),
+        'n': 5,
+        'r0': 0, 'g0': 0, 'b0': 0,
+        'r1': 256, 'g1': 0, 'b1': 0,
+        'mode': 'center',
+    }
+    params4 = {
+        'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 0),
+        'n': 5,
+        'r0': 0, 'g0': 48, 'b0': 0,
+        'r1': 2, 'g1': 256, 'b1': 48,
+        'mode': 'center',
+    }
+    params5 = {
+        'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 0),
+        'n': 4,
+        'r0': 32, 'g0': 64, 'b0': 64,
+        'r1': 64, 'g1': 256, 'b1': 256,
+        'mode': 'center',
+    }
+    params6 = {
+        'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (0, 0, 0),
+        'n': 5,
+        'r0': 32, 'g0': 0, 'b0': 0,
+        'r1': 256, 'g1': 0, 'b1': 0,
+        'mode': '',
+    }
+    params = params2
+    if p0['n'] == 1:
+        params = params4
+    if p0['n'] == 2:
+        params = params5
+    if p0['n'] == 3:
+        params = params6
+    art_painter(params, '', output_mode='cgi')
+
+if what == "smears5":
+    w, h = get_canvas('A3')
+    #params = {'name': 'SMEARS#5', 'call': mazy5, 'w': w, 'h': h, 'Background': (0, 0, 0), 'colors': colors_b, 'outline': None}
+    #params = {'name': 'SMEARS#5', 'call': mazy5, 'w': w, 'h': h, 'Background': (0, 0, 0), 'colors': colors_y, 'outline': None}
+    params = {'name': 'SMEARS#5', 'call': mazy5, 'w': w, 'h': h, 'Background': (0, 0, 0), 'colors': colors_p, 'outline': (0, 0, 0)}
+    #params = {'name': 'SMEARS#5', 'call': mazy5, 'w': w, 'h': h, 'Background': (0, 0, 0), 'colors': colors_bw, 'outline': None}
+    art_painter(params, '', output_mode='cgi')
 
 #if what == "?":
     # ?
