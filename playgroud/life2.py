@@ -90,6 +90,29 @@ def f2b(a, x, y, w, h):
         z = 0
     return z
 
+# this one is quite stable visually
+def f2c(a, x, y, w, h):
+    z = 0
+    suma = a[y][x]
+    if y > 0 and y < h-1-1:
+        if x > 0 and x < w-1-1:
+            suma = a[y-1][x-1] + a[y-1][x] + a[y-1][x+1]
+            + a[y][x-1] + a[y][x] + a[y][x+1]
+            + a[y+1][x-1] + a[y+1][x] + a[y+1][x+1]
+    if suma == 0:
+        z = a[y][x]
+    if suma == 1:
+        z = a[y][x]
+    if suma == 2:
+        z = 0
+    if suma > 2 and suma < 9:
+        z = a[y][x]
+        if random.randint(0, 100) >= 80:
+            z = a[y][x] ^ 1
+    if suma == 9:
+        z = 0
+    return z
+
 def norm_a(a):
     h, w = np.shape(a) # y,x
     for y in range(h):
@@ -111,6 +134,8 @@ def life2d(draw, params):
         myfun = f2a
     if params['f'] == 'f2b':
         myfun = f2b
+    if params['f'] == 'f2c':
+        myfun = f2c
 
     for i in range(params['iter']):
         b = a
@@ -130,7 +155,7 @@ def life2d(draw, params):
 
 def art_painter2(params, png_file):
     start_time = dt.now()
-    print('drawing %s... %s' % (params['name'], png_file))
+    print('drawing %s... %s iter=%d' % (params['name'], png_file, params['iter']))
     if params['reuse'] == False:
         a = im2arr(params['src'])
         a = norm_a(a)
@@ -193,8 +218,10 @@ src = 'test-src4-life2.png'
 # img
 life2_image(src=src, f='f2a')
 life2_image(src=src, f='f2b')
+life2_image(src=src, f='f2c')
 
 # vid
 life2_video(src=src, f='f2a', video_name='life-video-f2a.avi', frames=80)
 life2_video(src=src, f='f2b', video_name='life-video-f2b.avi', frames=45)
+life2_video(src=src, f='f2c', video_name='life-video-f2c.avi', frames=40)
 
