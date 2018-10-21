@@ -28,6 +28,12 @@ script: life1.py
 ![example](/examples/life-0003.png?raw=true "Life example")
 ![example](/examples/life-0007.png?raw=true "Life example")
 
+# LIFE 2D (alive image eaters):
+script: life2.py
+
+![example](/examples/zz-life2d-001-f2a.png?raw=true "Life example")
+![example](/examples/zz-life2d-001-f2b.png?raw=true "Life example")
+
 # LISSAJOUS:
 script: lissajous.py
 

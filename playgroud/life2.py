@@ -6,9 +6,12 @@
 # cre: 20181021
 # upd; 201810??
 
+# note: slow, but interesting, do experiment more!
+
 # TODO:
 # - resize proper
 # - cleanup like the rest
+# - fix weird issues
 # - ?
 
 import cv2
@@ -19,24 +22,23 @@ from drawtools import *
 
 def f2a(a, x, y, w, h):
     z = 0
-    suma = 0
-    if y == 0 or x == 0:
-        suma = 1
-    if y > 1+1 and y < h-1-1:
-        if x > 1+1 and x < w-1-1:
+    suma = a[y][x]
+    if y > 0 and y < h-1-1:
+        if x > 0 and x < w-1-1:
             suma = a[y-1][x-1] + a[y-1][x] + a[y-1][x+1]
             + a[y][x-1] + a[y][x] + a[y][x+1]
-            + a[y+1][x-1] + a[y][x+1] + a[y+1][x+1]
+            + a[y+1][x-1] + a[y+1][x] + a[y+1][x+1]
+#    if suma > 9:
+#        print(x, y, 'ERR: sum too big:', suma, 'at:', x, y)
     if suma == 0:
-        z = 0
-        if random.randint(0, 100) >= 95:
-            z = 1
+#        z = 0
+#        if random.randint(0, 1000) >= 999:
+#            z = 1
+        z = a[y][x]
     if suma == 1:
         z = a[y][x]
-        if random.randint(0, 100) >= 93:
-            z = 0
     if suma == 2:
-        z = a[y][x]
+        z = a[y][x] ^ 1
     if suma == 3:
         z = a[y][x]
     if suma == 4:
@@ -48,17 +50,12 @@ def f2a(a, x, y, w, h):
     if suma == 7:
         z = a[y][x]
     if suma == 8:
-        if random.randint(0, 100) >= 95:
-            z = a[y][x] ^ 1
-        else:
-            z = a[y][x]
+        z = a[y][x] ^ 1
     if suma == 9:
-        if random.randint(0, 100) >= 95:
-            z = a[y][x] ^ 1
-        else:
-            z = a[y][x]
+        z = a[y][x]
     return z
 
+# nice white eater
 def f2b(a, x, y, w, h):
     z = 0
     suma = 0
@@ -66,7 +63,7 @@ def f2b(a, x, y, w, h):
         if x > 1+1 and x < w-1-1:
             suma = a[y-1][x-1] + a[y-1][x] + a[y-1][x+1]
             + a[y][x-1] + a[y][x] + a[y][x+1]
-            + a[y+1][x-1] + a[y][x+1] + a[y+1][x+1]
+            + a[y+1][x-1] + a[y][x+1] + a[y+1][x+1] #even with this error :)
     if suma == 0:
         z = 0
         if random.randint(0, 100) >= 97:
@@ -97,9 +94,11 @@ def norm_a(a):
     h, w = np.shape(a) # y,x
     for y in range(h):
         for x in range(w):
-            if a[y][x] > 40:
+            if a[y][x] > 32:    # remap 0-255 -> 0-1
+                #print('DEBUG: ok', a[y][x], x, y)
                 a[y][x] = 1
             else:
+                #print('DEBUG: ok-0', a[y][x], x, y)
                 a[y][x] = 0
     return a
 
@@ -138,7 +137,7 @@ def art_painter2(params, png_file):
         params['a'] = a
     h, w = np.shape(params['a']) # y,x
     print('shape:', np.shape(params['a']))
-    im = Image.new('RGB', (params['w'], params['h']), (0, 0, 0))
+    im = Image.new('RGB', (params['w'], params['h']), (0, 0, 0))    # RGB for video use
     draw = ImageDraw.Draw(im)
     f = params['call']
     a = f(draw, params)
@@ -148,51 +147,54 @@ def art_painter2(params, png_file):
     return a
 
 
-def life2_static():
+def life2_image(src, f):
     odir = ''
-    params1 = {'name': 'LIFE2', 'call': life2d, 'w': 180, 'h': 150, 'src': 'test-src2-life2.png', 'f': 'f2a', 'iter': 1, 'reuse': False}
-    art_painter2(params1, odir+'zz-life2d-001-f2a.png')
-    params1 = {'name': 'LIFE2', 'call': life2d, 'w': 180, 'h': 150, 'src': 'test-src2-life2.png', 'f': 'f2a', 'iter': 2, 'reuse': False}
-    art_painter2(params1, odir+'zz-life2d-002-f2a.png')
-    params1 = {'name': 'LIFE2', 'call': life2d, 'w': 180, 'h': 150, 'src': 'test-src2-life2.png', 'f': 'f2a', 'iter': 3, 'reuse': False}
-    art_painter2(params1, odir+'zz-life2d-003-f2a.png')
-    params1 = {'name': 'LIFE2', 'call': life2d, 'w': 180, 'h': 150, 'src': 'test-src2-life2.png', 'f': 'f2a', 'iter': 4, 'reuse': False}
-    art_painter2(params1, odir+'zz-life2d-004-f2a.png')
+    params1 = {'name': 'LIFE2', 'call': life2d, 'w': 320, 'h': 240, 'src': src, 'f': f, 'iter': 1, 'reuse': False}
+    art_painter2(params1, odir+'zz-life2d-001-'+f+'.png')
+    params1 = {'name': 'LIFE2', 'call': life2d, 'w': 320, 'h': 240, 'src': src, 'f': f, 'iter': 2, 'reuse': False}
+    art_painter2(params1, odir+'zz-life2d-002-'+f+'.png')
+    params1 = {'name': 'LIFE2', 'call': life2d, 'w': 320, 'h': 240, 'src': src, 'f': f, 'iter': 4, 'reuse': False}
+    art_painter2(params1, odir+'zz-life2d-003-'+f+'.png')
+    params1 = {'name': 'LIFE2', 'call': life2d, 'w': 320, 'h': 240, 'src': src, 'f': f, 'iter': 8, 'reuse': False}
+    art_painter2(params1, odir+'zz-life2d-004-'+f+'.png')
+
+def life2_video(src, f, video_name, frames):
+    image_tmp = 'life-tmp.png'   #tmp img file
+    #fcc = -1
+    #fcc = cv2.VideoWriter_fourcc(*"XVID")
+    fcc = cv2.VideoWriter_fourcc(*"MJPG")
+
+    canvas = (320, 240)
+    video = cv2.VideoWriter(video_name, fcc, 25, canvas)
+    params1 = {'name': 'LIFE2', 'call': life2d, 'w': 320, 'h': 240, 'src': src, 'f': 'f2a', 'iter': 1, 'reuse': True}
+    params1['a'] = norm_a(im2arr(params1['src']))
+
+    im = Image.open(params1['src'])
+    im = im.resize(canvas, resample=0, box=None)
+    im.save(image_tmp, dpi=(300,300))
+    ima = cv2.imread(image_tmp)
+    for f in range(10):
+        video.write(ima)
+
+    for n in range(frames):
+        print('frame', n)
+        params1['a'] = art_painter2(params1, image_tmp)
+        ima = cv2.imread(image_tmp)
+        for f in range(4):
+            video.write(ima)
+    cv2.destroyAllWindows()
+    video.release()
+
 
 # ---
 
-# img
+src = 'test-src4-life2.png'
 
-#life2_static()
+# img
+life2_image(src=src, f='f2a')
+life2_image(src=src, f='f2b')
 
 # vid
+life2_video(src=src, f='f2a', video_name='life-video-f2a.avi', frames=80)
+life2_video(src=src, f='f2b', video_name='life-video-f2b.avi', frames=50)
 
-video_name = 'life-video.avi'
-image_tmp = 'life-tmp.png'   #tmp img file
-#fcc = -1
-#fcc = cv2.VideoWriter_fourcc(*"XVID")
-fcc = cv2.VideoWriter_fourcc(*"MJPG")
-
-#src = 'test-src2-life2.png'
-src = 'test-src3-life2.png'
-
-canvas = (320, 240)
-video = cv2.VideoWriter(video_name, fcc, 25, canvas)
-params1 = {'name': 'LIFE2', 'call': life2d, 'w': 320, 'h': 200, 'src': src, 'f': 'f2a', 'iter': 1, 'reuse': True}
-params1['a'] = norm_a(im2arr(params1['src']))
-
-im = Image.open(params1['src'])
-im = im.resize(canvas, resample=0, box=None)
-im.save(image_tmp, dpi=(300,300))
-ima = cv2.imread(image_tmp)
-for f in range(10):
-    video.write(ima)
-
-for n in range(40):
-    print('frame', n)
-    params1['a'] = art_painter2(params1, image_tmp)
-    ima = cv2.imread(image_tmp)
-    for f in range(5):
-        video.write(ima)
-cv2.destroyAllWindows()
-video.release()
