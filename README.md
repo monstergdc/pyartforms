@@ -9,8 +9,8 @@ Feel free to tinker with it. Get inspired.
 Stuff here may change, may be incomplete or not fully working, may be w/o docs, etc. 
 as it is work and experiments in progress. Also no error checking. Tested only under Windows (paths!).
 
-Small demo is in: pyart-demo.py (not everything yet).
-Web/CGI version in: pyartw3.py (also not all yet).
+Small demo is in: **pyart-demo.py** (not everything yet).
+Web/CGI version in: **pyartw3.py** (also not all yet).
 
 
 Prerequisites include:
@@ -19,7 +19,7 @@ Prerequisites include:
 
 
 # SOME GIF-LIKE ANIMATIONS:
-script: anims.py
+script: anims.py and zxoids-anim.py
 
 # LIFE:
 script: life1.py
@@ -59,6 +59,7 @@ script: smears.py
 script: waves.py
 
 ![example - waves1](/examples/waves1-4960x3507-03-003.png?raw=true "Waves#1 example")
+![example - waves3](/examples/waves3-4960x3507-01-003.png?raw=true "Waves#3 example")
 
 # CITY (LAME):
 script: city-lame.py
