@@ -166,7 +166,7 @@ def life2_video(src, f, video_name, frames):
 
     canvas = (320, 240)
     video = cv2.VideoWriter(video_name, fcc, 25, canvas)
-    params1 = {'name': 'LIFE2', 'call': life2d, 'w': 320, 'h': 240, 'src': src, 'f': 'f2a', 'iter': 1, 'reuse': True}
+    params1 = {'name': 'LIFE2', 'call': life2d, 'w': 320, 'h': 240, 'src': src, 'f': f, 'iter': 1, 'reuse': True}
     params1['a'] = norm_a(im2arr(params1['src']))
 
     im = Image.open(params1['src'])
@@ -196,5 +196,5 @@ life2_image(src=src, f='f2b')
 
 # vid
 life2_video(src=src, f='f2a', video_name='life-video-f2a.avi', frames=80)
-life2_video(src=src, f='f2b', video_name='life-video-f2b.avi', frames=50)
+life2_video(src=src, f='f2b', video_name='life-video-f2b.avi', frames=45)
 
