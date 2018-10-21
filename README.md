@@ -24,7 +24,6 @@ script: anims.py and zxoids-anim.py
 # LIFE:
 script: life1.py
 
-![example](/examples/life-0001.png?raw=true "Life example")
 ![example](/examples/life-0003.png?raw=true "Life example")
 ![example](/examples/life-0007.png?raw=true "Life example")
 
