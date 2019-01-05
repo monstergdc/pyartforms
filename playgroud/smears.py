@@ -2,17 +2,19 @@
 # -*- coding: utf-8 -*-
 
 # paint algorithms (artificial artist) in Python, v1.0
-# (c)2017-2018 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2017-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # #1 okrutne czerwone mazy
 # #2 circles
 # #3 triangles
 # #4 poly
 # #5 new smears
+# #6 ?
 # cre: 20180430
 # upd: 20180501, 02, 03
 # cre: 20180805, 07, 08
 # upd: 20180928, 29
 # upd: 20181019, 20
+# upd: 20190105
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -278,3 +280,38 @@ def mazy5(draw, params):
                 points.extend((x, y))
             draw.polygon(points, fill=colors[m%8], outline=params['outline'])
 
+# concentric circles like drops - interfere milti / blue water
+def mazy6(draw, params):
+    w = params['w']
+    h = params['h']
+    cnt = params['cnt']
+    random.seed()
+    c = math.pi/180
+
+    c_ndx = 0
+    for m in range(cnt):
+        x = random.randint(int(w/2-w/3), int(w/2+w/3))
+        y = random.randint(int(h/2-h/3), int(h/2+h/3))
+        r = random.randint(int(h/25), int(h/6))
+        n_r = random.randint(3, 15)
+        c_ndx = 7
+        for n in range(n_r):
+            nn = n_r - n
+            ro = int(r*(1+nn*nn*0.015))
+            if n & 1:
+                circle(draw, x, y, ro, fill=(0, 0, 0), outline=None)
+            else:
+                if params['mode'] == 'red':
+                    color = (255, 0, 0)
+                if params['mode'] == 'rg':
+                    color = gradient2((255,0,0), (255,255,0), n, n_r)
+                if params['mode'] == 'gb':
+                    color = gradient2((64,255,64), (64,64,255), n, n_r)
+                if params['mode'] == 'black':
+                    color = (255, 255, 255)
+                if params['mode'] == 'blue':
+                    color = colors_b[c_ndx]
+                circle(draw, x, y, ro, fill=color, outline=None)
+            c_ndx = c_ndx - 1
+            if c_ndx < 0:
+                c_ndx = 7
