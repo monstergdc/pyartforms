@@ -14,7 +14,7 @@
 # cre: 20180805, 07, 08
 # upd: 20180928, 29
 # upd: 20181019, 20
-# upd: 20190105
+# upd: 20190105, 06
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -127,37 +127,28 @@ def mazy2(draw, params):
     w = params['w']
     h = params['h']
     random.seed()
-    ts = [t/100.0 for t in range(101)]
     v = params['v']
 
     for n in range(params['n']):
         po = [(random.randint(0, w), random.randint(0, h)),
               (random.randint(0, w), random.randint(0, h))]
-        r = 0
-        g = 0
-        b = 0
-        if params['r1'] > 0:
-            r = random.randint(params['r0'], params['r1'])
-        if params['g1'] > 0:
-            g = random.randint(params['g0'], params['g1'])
-        if params['b1'] > 0:
-            b = random.randint(params['b0'], params['b1'])
-        color = (r, g, b)
 
-        circle(draw, po[0][0], po[0][1], random.randint(200, 800), fill=color, outline=None)
+        color = gradient2(params['c0'], params['c1'], random.randint(0, 100), 100)
+        if random.randint(0, 100) > 33:
+            circle(draw, po[0][0], po[0][1], random.randint(int(h/12), int(h/3)), fill=color, outline=None)
 
-        r0 = random.randint(100, 300)
+        color1 = (random.randint(64, 255),random.randint(64, 255),random.randint(64, 255))
+        color2 = (random.randint(64, 255),random.randint(64, 255),random.randint(64, 255))
+
+        r0 = random.randint(int(h/16), int(h/4))
         for m in range(params['m']):
             po[:] = [(xy[0]+random.randint(0, v)-random.randint(0, v), xy[1]+random.randint(0, v)-random.randint(0, v)) for xy in po]
             if params['mode'] == 'red':
-                color = (255*(m&1), 0, 0)
+                color = gradient2((255,0,0), (255,255,0), m, params['m'])
             if params['mode'] == 'color':
-                color = (random.randint(64, 256), random.randint(64, 256), b ^ random.randint(8, 128))
+                color = gradient2(color1, color2, m, params['m'])
             if params['mode'] == 'black':
-                if m&1 == 0:
-                    rr = 0
-                else:
-                    rr = 255
+                rr = 255 * (m&1)
                 color = (rr, rr, rr)
             circle(draw, po[0][0], po[0][1], r0-m*10, fill=color, outline=None)
 
@@ -253,15 +244,12 @@ def mazy5(draw, params):
     h = params['h']
     colors = params['colors']
     random.seed()
-    ts = [t/100.0 for t in range(101)]
     c = math.pi/180
 
     dg = h*0.037 # thickness
     r0 = h/2*0.93 # base radius
     rOut = h*0.76 # outer circle radous
     for i in range(int(8+1)):
-        #a = params['a']
-        #rv = params['rv']
         a = random.randint(6, 24)
         rv = random.randint(20, 350)
         if i == 0:
