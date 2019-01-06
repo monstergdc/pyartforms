@@ -199,7 +199,7 @@ def do_waves(cnt, w, h, odir):
         
 # --- astro
 
-def astro(cnt, w, h, odir):
+def do_astro(cnt, w, h, odir):
     params0f = {'name': 'ASTROART', 'call': paint0, 'w': w, 'h': h, 'Background': (0, 0, 0), 'ou': (0,0,0), 'box_or_cir': False}
     params0t = {'name': 'ASTROART', 'call': paint0, 'w': w, 'h': h, 'Background': (0, 0, 0), 'ou': (0,0,0), 'box_or_cir': True}
     params1f = {'name': 'ASTROART', 'call': paint1, 'w': w, 'h': h, 'Background': (0, 0, 0), 'ou': (0,0,0), 'box_or_cir': False}
@@ -508,15 +508,15 @@ def do_mazy6(cnt, w, h, odir):
 
 # --- go
 
+#w, h = get_canvas('A2')
 w, h = get_canvas('A3')
 cnt = 4 # *6 each #1..#3 + *7 for #4 = (4)*6*3+(4)*7 = 100 images, it takes some time, easy over 10 minutes
 do_mazy1(cnt, w, h, odir)
 do_mazy2(cnt, w, h, odir)
-do_mazy3(cnt, w, h, odir)
-do_mazy4(cnt, w, h, odir)
+do_mazy3(cnt, w, h, odir) # lame, need fix
+do_mazy4(cnt, w, h, odir) # also a bit lame, only red ok, add blue
 cnt = 3 # *4 each = 12
 do_mazy5(cnt, w, h, odir)
-#w, h = get_canvas('A2')
 cnt = 3
 do_mazy6(cnt, w, h, odir)
 
@@ -532,7 +532,8 @@ do_astro(0, w, h, odir)
 do_mandelbrot(0, 700, 400, odir)
     
 w, h = get_canvas('A3')
-do_waves(3, w, h, odir)
+cnt = 3
+do_waves(cnt, w, h, odir)
 
 time_elapsed = dt.now() - start_time
 print('ALL done. elapsed time: {}'.format(time_elapsed))

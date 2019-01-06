@@ -1,14 +1,14 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# paint algorithms (artificial artist) in Python, v1.0
+# experimental paint algorithms (artificial artist) in Python, v1.0
 # (c)2017-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
-# #1 okrutne czerwone mazy
+# #1 cruel red smears
 # #2 circles
 # #3 triangles
 # #4 poly
-# #5 new smears
-# #6 ?
+# #5 new smears (star flowers)
+# #6 circle ripples
 # cre: 20180430
 # upd: 20180501, 02, 03
 # cre: 20180805, 07, 08
