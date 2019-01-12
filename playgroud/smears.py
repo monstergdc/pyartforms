@@ -9,6 +9,8 @@
 # #4 poly
 # #5 new smears (star flowers)
 # #6 circle ripples
+# #7 grayish rects
+# #8 ?
 # cre: 20180430
 # upd: 20180501, 02, 03
 # cre: 20180805, 07, 08
@@ -303,6 +305,10 @@ def mazy6(draw, params):
             if c_ndx < 0:
                 c_ndx = 7
 
+# for mazy 6+7
+#white yellow red lb1 lb2 blue ltgray gray
+CX = [(255,255,255), (0xEC, 0xD1, 0x27), (0xD1, 0x3B, 0x29), (0x7F, 0xAE, 0xAD), (0x41, 0x8D, 0xB0), (0x29, 0x56, 0x80), (0xB0, 0xB0, 0xB0), (0x90, 0x90, 0x90)]
+
 def mazy7(draw, params):
     w = params['w']
     h = params['h']
@@ -315,38 +321,48 @@ def mazy7(draw, params):
         w1 = 0
         h1 = 0
 
-        # big2small any
-        if params['mode'] == 'dec':
+        if params['mode'] == 'dec': # big2small any
             sc = (m+1)/cnt
             wm = int(w/8) * int(1/sc)
             hm = int(w/8) * int(1/sc)
             w1 = random.randint(int(w/35), wm)
             h1 = random.randint(int(w/35), hm)
 
-        # big2small rect prop
-#        sc = (m+1)/cnt
-#        wm = int(w/7) * int(1/sc)
-#        hm = int(h/7) * int(1/sc)
-#        w1 = random.randint(int(w/35), wm)
-#        h1 = random.randint(int(h/35), hm)
+        if params['mode'] == 'decp': # big2small rect prop
+            sc = (m+1)/cnt
+            wm = int(w/7) * int(1/sc)
+            hm = int(h/7) * int(1/sc)
+            w1 = random.randint(int(w/35), wm)
+            h1 = random.randint(int(h/35), hm)
 
-        # const small sqare
-        if params['mode'] == 'const':
+        if params['mode'] == 'const':   # const small sqare
             w1 = int(h/30)
             h1 = int(h/30)
-
-        #const small rect prop
-#        w1 = int(w/35)
-#        h1 = int(h/35)
 
         color = (0,0,0)
         if params['cmode'] == 'std':
             color = gradient2((255,255,255), (0,0,0), m, cnt)
-        # or inverse
-        if params['cmode'] == 'inv':
+        if params['cmode'] == 'inv':    # or inverse
             color = gradient2((0,0,0), (255,255,255), m, cnt)
-        # or rnd
-        if params['cmode'] == 'rnd':
+        if params['cmode'] == 'rnd':    # or rnd
             ci = random.randint(0, 255)
             color = (ci,ci,ci)
+        if params['cmode'] == 'color':    # color
+            color = CX[random.randint(0, 7)]
         rect(draw, x1, y1, w1, h1, fill=color, outline=None)
+
+def mazy8(draw, params):
+    w = params['w']
+    h = params['h']
+    cnt = params['cnt']
+
+    w1 = int(w/cnt)
+    h1 = int(h/cnt)
+    for y in range(cnt):
+        for x in range(cnt):
+            x1 = x*w1 + int(w1/2)
+            y1 = y*h1 + int(h1/2)
+            ci = random.randint(0, 7)
+            color = CX[ci]
+            rect(draw, x1, y1, w1, h1, fill=color, outline=None)
+
