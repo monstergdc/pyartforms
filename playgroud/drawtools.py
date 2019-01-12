@@ -1,9 +1,10 @@
 
 # Python art forms
 # some common code/tools
-# (c)2018 Noniewicz.com
+# (c)2018-2019 Noniewicz.com
 # upd: 20180503, 08
 # upd: 20181020, 21
+# upd: 20190112
 
 from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin
 from datetime import datetime as dt
@@ -48,6 +49,10 @@ def circle(draw, x, y, r, fill, outline):
 
 def box(draw, x, y, r, fill, outline):
     xy = [(x-r, y-r), (x+r, y+r)]
+    draw.rectangle(xy, fill=fill, outline=outline)
+
+def rect(draw, x, y, w, h, fill, outline):
+    xy = [(int(x-w/2), int(y-h/2)), (int(x+w/2), int(y+h/2))]
     draw.rectangle(xy, fill=fill, outline=outline)
 
 def triangle(draw, points, fill, outline):
