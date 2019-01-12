@@ -14,7 +14,7 @@
 # cre: 20180805, 07, 08
 # upd: 20180928, 29
 # upd: 20181019, 20
-# upd: 20190105, 06
+# upd: 20190105, 06, 12
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -268,7 +268,6 @@ def mazy5(draw, params):
                 points.extend((x, y))
             draw.polygon(points, fill=colors[m%8], outline=params['outline'])
 
-# concentric circles like drops - interfere milti / blue water
 def mazy6(draw, params):
     w = params['w']
     h = params['h']
@@ -303,3 +302,51 @@ def mazy6(draw, params):
             c_ndx = c_ndx - 1
             if c_ndx < 0:
                 c_ndx = 7
+
+def mazy7(draw, params):
+    w = params['w']
+    h = params['h']
+    cnt = params['cnt']
+    random.seed()
+
+    for m in range(cnt):
+        x1 = random.randint(int(w/2-w/3), int(w/2+w/3))
+        y1 = random.randint(int(h/2-h/3), int(h/2+h/3))
+        w1 = 0
+        h1 = 0
+
+        # big2small any
+        if params['mode'] == 'dec':
+            sc = (m+1)/cnt
+            wm = int(w/8) * int(1/sc)
+            hm = int(w/8) * int(1/sc)
+            w1 = random.randint(int(w/35), wm)
+            h1 = random.randint(int(w/35), hm)
+
+        # big2small rect prop
+#        sc = (m+1)/cnt
+#        wm = int(w/7) * int(1/sc)
+#        hm = int(h/7) * int(1/sc)
+#        w1 = random.randint(int(w/35), wm)
+#        h1 = random.randint(int(h/35), hm)
+
+        # const small sqare
+        if params['mode'] == 'const':
+            w1 = int(h/30)
+            h1 = int(h/30)
+
+        #const small rect prop
+#        w1 = int(w/35)
+#        h1 = int(h/35)
+
+        color = (0,0,0)
+        if params['cmode'] == 'std':
+            color = gradient2((255,255,255), (0,0,0), m, cnt)
+        # or inverse
+        if params['cmode'] == 'inv':
+            color = gradient2((0,0,0), (255,255,255), m, cnt)
+        # or rnd
+        if params['cmode'] == 'rnd':
+            ci = random.randint(0, 255)
+            color = (ci,ci,ci)
+        rect(draw, x1, y1, w1, h1, fill=color, outline=None)
