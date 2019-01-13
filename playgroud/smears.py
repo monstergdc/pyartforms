@@ -9,14 +9,14 @@
 # #4 poly
 # #5 new smears (star flowers)
 # #6 circle ripples
-# #7 grayish rects
-# #8 ?
+# #7 grayish rects mess
+# #8 just rectangles
 # cre: 20180430
 # upd: 20180501, 02, 03
 # cre: 20180805, 07, 08
 # upd: 20180928, 29
 # upd: 20181019, 20
-# upd: 20190105, 06, 12
+# upd: 20190105, 06, 12, 13
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -31,6 +31,10 @@ import random, math, string, os, sys
 from bezier import make_bezier
 from drawtools import *
 
+
+# white yellow red lb1 lb2 blue ltgray gray
+colors_happy = [(255,255,255), (0xEC, 0xD1, 0x27), (0xD1, 0x3B, 0x29), (0x7F, 0xAE, 0xAD),
+                (0x41, 0x8D, 0xB0), (0x29, 0x56, 0x80), (0xB0, 0xB0, 0xB0), (0x90, 0x90, 0x90)]
 
 # bw x2
 colors_bw = [(0xff, 0xff, 0xff),
@@ -196,9 +200,10 @@ def mazy3(draw, params):
 def mazy4(draw, params):
     w = params['w']
     h = params['h']
+    cnt = params['n']
     random.seed()
 
-    for n in range(params['n']):
+    for n in range(cnt):
         if params['mode'] == 'center':
             w0 = w/2
             h0 = h/2
@@ -232,13 +237,29 @@ def mazy4(draw, params):
         r = 0
         g = 0
         b = 0
-        if params['r1'] > 0:
-            r = random.randint(params['r0'], params['r1'])
-        if params['g1'] > 0:
-            g = random.randint(params['g0'], params['g1'])
-        if params['b1'] > 0:
-            b = random.randint(params['b0'], params['b1'])
+        if 'r1' in params and 'g1' in params and 'b1' in params: 
+            if params['r1'] > 0:
+                r = random.randint(params['r0'], params['r1'])
+            if params['g1'] > 0:
+                g = random.randint(params['g0'], params['g1'])
+            if params['b1'] > 0:
+                b = random.randint(params['b0'], params['b1'])
         color = (r, g, b)
+
+        if 'color' in params: 
+            if params['color'] == 'red':
+                color = gradient2((0,0,0), (255,0,0), n, cnt)
+            if params['color'] == 'green':
+                color = gradient2((0,56,0), (0,255,48), n, cnt)
+            if params['color'] == 'bg':
+                color = gradient2((32,64,64), (64,255,255), n, cnt)
+            if params['color'] == 'rg':
+                color = gradient2((255,0,0), (255,255,0), n, cnt)
+            if params['color'] == 'bw':
+                color = gradient2((0,0,0), (255,255,255), n, cnt)
+            if params['color'] == 'happy':
+                color = colors_happy[n%8]
+
         draw.polygon(po, fill=color, outline=None)
 
 def mazy5(draw, params):
@@ -277,7 +298,7 @@ def mazy6(draw, params):
     random.seed()
     c = math.pi/180
 
-    c_ndx = 0
+    #c_ndx = 7
     for m in range(cnt):
         x = random.randint(int(w/2-w/3), int(w/2+w/3))
         y = random.randint(int(h/2-h/3), int(h/2+h/3))
@@ -300,14 +321,12 @@ def mazy6(draw, params):
                     color = (255, 255, 255)
                 if params['mode'] == 'blue':
                     color = colors_b[c_ndx]
+                if params['mode'] == 'happy':
+                    color = colors_happy[c_ndx]
                 circle(draw, x, y, ro, fill=color, outline=None)
             c_ndx = c_ndx - 1
             if c_ndx < 0:
                 c_ndx = 7
-
-# for mazy 6+7
-#white yellow red lb1 lb2 blue ltgray gray
-CX = [(255,255,255), (0xEC, 0xD1, 0x27), (0xD1, 0x3B, 0x29), (0x7F, 0xAE, 0xAD), (0x41, 0x8D, 0xB0), (0x29, 0x56, 0x80), (0xB0, 0xB0, 0xB0), (0x90, 0x90, 0x90)]
 
 def mazy7(draw, params):
     w = params['w']
@@ -348,21 +367,22 @@ def mazy7(draw, params):
             ci = random.randint(0, 255)
             color = (ci,ci,ci)
         if params['cmode'] == 'color':    # color
-            color = CX[random.randint(0, 7)]
+            color = colors_happy[random.randint(0, 7)]
         rect(draw, x1, y1, w1, h1, fill=color, outline=None)
 
 def mazy8(draw, params):
     w = params['w']
     h = params['h']
-    cnt = params['cnt']
+    xcnt = params['xcnt']
+    ycnt = params['ycnt']
 
-    w1 = int(w/cnt)
-    h1 = int(h/cnt)
-    for y in range(cnt):
-        for x in range(cnt):
+    w1 = int(w/xcnt)
+    h1 = int(h/ycnt)
+    for y in range(ycnt):
+        for x in range(xcnt):
             x1 = x*w1 + int(w1/2)
             y1 = y*h1 + int(h1/2)
             ci = random.randint(0, 7)
-            color = CX[ci]
+            color = colors_happy[ci]
             rect(draw, x1, y1, w1, h1, fill=color, outline=None)
 
