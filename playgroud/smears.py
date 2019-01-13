@@ -82,6 +82,23 @@ colors_y = [(0x20, 0x20, 0x00),
 
 # ---
 
+def old_colorer(params):
+    r = 0
+    g = 0
+    b = 0
+    if 'r1' in params and 'r0' in params: 
+        if params['r1'] > 0:
+            r = random.randint(params['r0'], params['r1'])
+    if 'g1' in params and 'g0' in params: 
+        if params['g1'] > 0:
+            g = random.randint(params['g0'], params['g1'])
+    if 'b1' in params and 'b0' in params: 
+        if params['b1'] > 0:
+            b = random.randint(params['b0'], params['b1'])
+    return (r, g, b)
+
+# ---
+
 def mazy1(draw, params):
     w = params['w']
     h = params['h']
@@ -94,16 +111,15 @@ def mazy1(draw, params):
               (random.randint(0, w), random.randint(0, h)),
               (random.randint(0, w), random.randint(0, h)),
               (random.randint(0, w), random.randint(0, h))]
-        r = 0
-        g = 0
-        b = 0
-        if params['r1'] > 0:
-            r = random.randint(params['r0'], params['r1'])
-        if params['g1'] > 0:
-            g = random.randint(params['g0'], params['g1'])
-        if params['b1'] > 0:
-            b = random.randint(params['b0'], params['b1'])
-        color = (r, g, b)
+
+        color = old_colorer(params)
+
+        #if params['color'] == 'happy':
+            #color = colors_happy[n%8]
+
+        r = color[0]
+        g = color[1]
+        b = color[2]
 
         if params['prefill'] == True:
             bezier = make_bezier(po)
@@ -161,19 +177,35 @@ def mazy2(draw, params):
 def mazy3(draw, params):
     w = params['w']
     h = params['h']
+    cnt = params['n']
     random.seed()
 
-    pold = [(random.randint(-w, w*2), random.randint(-h, h*2)),
-         (random.randint(-w, w*2), random.randint(-h, h*2)),
-         (random.randint(-w, w*2), random.randint(-h, h*2))]
+    def r(p, d):
+        return int(p/2+random.randint(int(-p/d), int(p/d)))
+    def r3(p):
+        return r(p, 3)
+    def r2(p):
+        return r(p, 2)
 
-    for n in range(params['n']):
-        w0 = random.randint(0, w)
-        h0 = random.randint(0, h)
-        po = [(w0+random.randint(0, 300), h0+random.randint(0, 300)),
-              (w0+random.randint(0, 300), h0+random.randint(0, 300)),
-              (w0+random.randint(0, 300), h0+random.randint(0, 300))]
-        cycle = n % 2
+    pold = [(r2(w), r2(h)), (r2(w), r2(h)), (r2(w), r2(h))]
+    d = 1.3
+    for n in range(cnt):
+        if params['mode'] == 'std':
+            po = [(r3(w), r3(h)), (r3(w), r3(h)), (r3(w), r3(h))]
+            cycle = n % 2
+        if params['mode'] == 'center':
+            po = [(r(w, d), r(h, d)), (r(w, d), r(h, d)), (r(w, d), r(h, d))]
+            cycle = -1
+            d = d + 0.2
+        if params['mode'] == 'xcenter':
+            d = 2.2
+            po = [(int(w/2), int(h/2)), (r(w, d), r(h, d)), (r(w, d), r(h, d))]
+            cycle = -1
+            #d = d + 0.2
+        if params['mode'] == 'rnd':
+            d = 2.2
+            po = [(r(w, d), r(h, d)), (r(w, d), r(h, d)), (r(w, d), r(h, d))]
+            cycle = -1
         if cycle == 0:
             po[0] = pold[0]
             po[1] = pold[1]
@@ -185,16 +217,20 @@ def mazy3(draw, params):
             po[0] = pold[0]
         pold = po
 
-        r = 0
-        g = 0
-        b = 0
-        if params['r1'] > 0:
-            r = random.randint(params['r0'], params['r1'])
-        if params['g1'] > 0:
-            g = random.randint(params['g0'], params['g1'])
-        if params['b1'] > 0:
-            b = random.randint(params['b0'], params['b1'])
-        color = (r, g, b)
+        #color = old_colorer(params)
+
+        if params['color'] == 'red':
+            color = gradient2((0,0,0), (255,0,0), n, cnt)
+        if params['color'] == 'green':
+            color = gradient2((0,56,0), (0,255,48), n, cnt)
+        if params['color'] == 'bg':
+            color = gradient2((32,64,64), (64,255,255), n, cnt)
+        if params['color'] == 'rg':
+            color = gradient2((255,0,0), (255,255,0), n, cnt)
+        if params['color'] == 'bw':
+            color = gradient2((0,0,0), (255,255,255), n, cnt)
+        if params['color'] == 'happy':
+            color = colors_happy[n%8]
 
         triangle(draw, po, fill=color, outline=None)
 
@@ -235,31 +271,18 @@ def mazy4(draw, params):
               (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy))
               ]
 
-        r = 0
-        g = 0
-        b = 0
-        if 'r1' in params and 'g1' in params and 'b1' in params: 
-            if params['r1'] > 0:
-                r = random.randint(params['r0'], params['r1'])
-            if params['g1'] > 0:
-                g = random.randint(params['g0'], params['g1'])
-            if params['b1'] > 0:
-                b = random.randint(params['b0'], params['b1'])
-        color = (r, g, b)
-
-        if 'color' in params: 
-            if params['color'] == 'red':
-                color = gradient2((0,0,0), (255,0,0), n, cnt)
-            if params['color'] == 'green':
-                color = gradient2((0,56,0), (0,255,48), n, cnt)
-            if params['color'] == 'bg':
-                color = gradient2((32,64,64), (64,255,255), n, cnt)
-            if params['color'] == 'rg':
-                color = gradient2((255,0,0), (255,255,0), n, cnt)
-            if params['color'] == 'bw':
-                color = gradient2((0,0,0), (255,255,255), n, cnt)
-            if params['color'] == 'happy':
-                color = colors_happy[n%8]
+        if params['color'] == 'red':
+            color = gradient2((0,0,0), (255,0,0), n, cnt)
+        if params['color'] == 'green':
+            color = gradient2((0,56,0), (0,255,48), n, cnt)
+        if params['color'] == 'bg':
+            color = gradient2((32,64,64), (64,255,255), n, cnt)
+        if params['color'] == 'rg':
+            color = gradient2((255,0,0), (255,255,0), n, cnt)
+        if params['color'] == 'bw':
+            color = gradient2((0,0,0), (255,255,255), n, cnt)
+        if params['color'] == 'happy':
+            color = colors_happy[n%8]
 
         draw.polygon(po, fill=color, outline=None)
 
