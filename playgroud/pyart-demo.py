@@ -407,22 +407,22 @@ def do_mazy2(cnt, w, h, odir):
 
 def do_mazy3(cnt, w, h, odir):
     params1 = {'name': 'SMEARS#3', 'call': mazy3, 'w': w, 'h': h, 'Background': (255, 255, 255),
-        'n': 20, 'm': 0, 'blur': False, 'r0': 16, 'g0': 64, 'b0': 64, 'r1': 256, 'g1': 256, 'b1': 256, 'mode': '',
+        'n': 20, 'blur': False, 'r0': 16, 'g0': 64, 'b0': 64, 'r1': 256, 'g1': 256, 'b1': 256, 'mode': '',
     }
     params2 = {'name': 'SMEARS#3', 'call': mazy3, 'w': w, 'h': h, 'Background': (255, 255, 0),
-        'n': 10, 'm': 0, 'blur': False, 'r0': 0, 'g0': 0, 'b0': 0, 'r1': 256, 'g1': 0, 'b1': 0, 'mode': '',
+        'n': 10, 'blur': False, 'r0': 0, 'g0': 0, 'b0': 0, 'r1': 256, 'g1': 0, 'b1': 0, 'mode': '',
     }
     params3 = {'name': 'SMEARS#3', 'call': mazy3, 'w': w, 'h': h, 'Background': (255, 255, 0),
-        'n': 30, 'm': 0, 'blur': False, 'r0': 64, 'g0': 64, 'b0': 0, 'r1': 256, 'g1': 256, 'b1': 32, 'mode': '',
+        'n': 30, 'blur': False, 'r0': 64, 'g0': 64, 'b0': 0, 'r1': 256, 'g1': 256, 'b1': 32, 'mode': '',
     }
     params4 = {'name': 'SMEARS#3', 'call': mazy3, 'w': w, 'h': h, 'Background': (255, 255, 0),
-        'n': 20, 'm': 0, 'blur': False, 'r0': 0, 'g0': 48, 'b0': 0, 'r1': 2, 'g1': 256, 'b1': 48, 'mode': '',
+        'n': 20, 'blur': False, 'r0': 0, 'g0': 48, 'b0': 0, 'r1': 2, 'g1': 256, 'b1': 48, 'mode': '',
     }
     params5 = {'name': 'SMEARS#3', 'call': mazy3, 'w': w, 'h': h, 'Background': (255, 255, 0),
-        'n': 30, 'm': 0, 'blur': False, 'r0': 32, 'g0': 64, 'b0': 64, 'r1': 64, 'g1': 256, 'b1': 256, 'mode': '',
+        'n': 30, 'blur': False, 'r0': 32, 'g0': 64, 'b0': 64, 'r1': 64, 'g1': 256, 'b1': 256, 'mode': '',
     }
     params6 = {'name': 'SMEARS#3', 'call': mazy3, 'w': w, 'h': h, 'Background': (0, 0, 0),
-        'n': 30, 'm': 0, 'blur': False, 'r0': 32, 'g0': 0, 'b0': 0, 'r1': 256, 'g1': 0, 'b1': 0, 'mode': '',
+        'n': 30, 'blur': False, 'r0': 32, 'g0': 0, 'b0': 0, 'r1': 256, 'g1': 0, 'b1': 0, 'mode': '',
     }
     for n in range(cnt):
         ts = dt.now().strftime('%Y%m%d%H%M%S')
@@ -460,12 +460,14 @@ def do_mazy5(cnt, w, h, odir):
     params2 = {'name': 'SMEARS#5', 'call': mazy5, 'w': w, 'h': h, 'Background': (0, 0, 0), 'colors': colors_y, 'outline': None}
     params3 = {'name': 'SMEARS#5', 'call': mazy5, 'w': w, 'h': h, 'Background': (0, 0, 0), 'colors': colors_p, 'outline': (0, 0, 0)}
     params4 = {'name': 'SMEARS#5', 'call': mazy5, 'w': w, 'h': h, 'Background': (0, 0, 0), 'colors': colors_bw, 'outline': None}
+    params5 = {'name': 'SMEARS#5', 'call': mazy5, 'w': w, 'h': h, 'Background': (0, 0, 0), 'colors': colors_happy, 'outline': None}
     for n in range(cnt):
         ts = dt.now().strftime('%Y%m%d%H%M%S')
         art_painter(params1, odir+'mazy5-%dx%d-01-%03d-%s.png' % (w, h, n+1, ts))
         art_painter(params2, odir+'mazy5-%dx%d-02-%03d-%s.png' % (w, h, n+1, ts))
         art_painter(params3, odir+'mazy5-%dx%d-03-%03d-%s.png' % (w, h, n+1, ts))
         art_painter(params4, odir+'mazy5-%dx%d-04-%03d-%s.png' % (w, h, n+1, ts))
+        art_painter(params5, odir+'mazy5-%dx%d-05-%03d-%s.png' % (w, h, n+1, ts))
 
 def do_mazy6(cnt, w, h, odir):
     params1 = {'name': 'SMEARS#6', 'call': mazy6, 'w': w, 'h': h, 'Background': (0, 0, 0), 'mode': 'red', 'cnt': 18}

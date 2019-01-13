@@ -166,7 +166,7 @@ def mazy3(draw, params):
     pold = [(random.randint(-w, w*2), random.randint(-h, h*2)),
          (random.randint(-w, w*2), random.randint(-h, h*2)),
          (random.randint(-w, w*2), random.randint(-h, h*2))]
-    m = 1000
+
     for n in range(params['n']):
         w0 = random.randint(0, w)
         h0 = random.randint(0, h)
@@ -195,6 +195,7 @@ def mazy3(draw, params):
         if params['b1'] > 0:
             b = random.randint(params['b0'], params['b1'])
         color = (r, g, b)
+
         triangle(draw, po, fill=color, outline=None)
 
 def mazy4(draw, params):
