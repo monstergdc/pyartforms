@@ -3,9 +3,10 @@
 
 # paint algorithms (artificial artist), v1.0, Python version
 # #1 waves
-# (c)2018 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2018-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20180505
 # upd: 20181020
+# upd: 20190118
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -25,13 +26,16 @@ def waves1(draw, params):
     h = params['h']
     random.seed()
     c = math.pi/180
+    div = params['z']*2+4
+    if div == 0:
+        div = 1
 
     if params['horizontal'] == True:
         rn = params['w']
-        dx = params['h']/(params['z']*2+4)
+        dx = params['h']/div
     else:
         rn = params['h']
-        dx = params['w']/(params['z']*2+4)
+        dx = params['w']/div
 
     gr = params['gradient']
     for z in range(params['z']):

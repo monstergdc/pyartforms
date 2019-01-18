@@ -376,15 +376,19 @@ def mazy7(draw, params):
 
         if params['mode'] == 'dec': # big2small any
             sc = (m+1)/cnt
-            wm = int(w/8) * int(1/sc)
-            hm = int(w/8) * int(1/sc)
+            if sc == 0:
+                sc = 1
+            wm = int(w/8 * 1/sc)
+            hm = int(w/8 * 1/sc)
             w1 = random.randint(int(w/35), wm)
             h1 = random.randint(int(w/35), hm)
 
         if params['mode'] == 'decp': # big2small rect prop
             sc = (m+1)/cnt
-            wm = int(w/7) * int(1/sc)
-            hm = int(h/7) * int(1/sc)
+            if sc == 0:
+                sc = 1
+            wm = int(w/7 * 1/sc)
+            hm = int(h/7 * 1/sc)
             w1 = random.randint(int(w/35), wm)
             h1 = random.randint(int(h/35), hm)
 
