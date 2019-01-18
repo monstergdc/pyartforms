@@ -16,7 +16,7 @@
 # cre: 20180805, 07, 08
 # upd: 20180928, 29
 # upd: 20181019, 20
-# upd: 20190105, 06, 12, 13
+# upd: 20190105, 06, 12, 13, 18
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -112,11 +112,15 @@ def mazy1(draw, params):
               (random.randint(0, w), random.randint(0, h)),
               (random.randint(0, w), random.randint(0, h))]
 
-        color = old_colorer(params)
-
-        #if params['color'] == 'happy':
-            #color = colors_happy[n%8]
-
+        if 'color' in params: 
+            if params['color'] == 'happy':
+                color = colors_happy[n%8]
+            if params['color'] == 'rg':
+                color = gradient2((255,255,0), (255,0,0), random.randint(0, 255), 255)
+            if params['color'] == 'psych':
+                color = colors_p[n%8]
+        else:
+            color = old_colorer(params)
         r = color[0]
         g = color[1]
         b = color[2]
@@ -141,9 +145,15 @@ def mazy1(draw, params):
             if params['mode'] == 'black':
                 rr = random.randint(0, 48)
                 color = (rr, rr, rr)
+            if params['mode'] == 'happy':
+                color = colors_happy[n%8]
+            if params['mode'] == 'psych':
+                color = colors_p[n%8]
+                if random.randint(0, 100) > 80: # todo: as opt/par
+                    color = (0,0,0)
             bezier = make_bezier(po)
             points = bezier(ts)
-            draw.line(points, fill=color, width=params['pw'])
+            draw.line(points, fill=color, width=params['penw'])
 
 def mazy2(draw, params):
     w = params['w']

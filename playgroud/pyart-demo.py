@@ -4,7 +4,7 @@
 # paint algorithms (artificial artist) in Python - demo
 # (c)2018-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20181020
-# upd: 20190105, 06, 13
+# upd: 20190105, 06, 13, 18
 
 # TODO:
 # - nice argparse (also per module?)
@@ -218,101 +218,68 @@ def do_mandelbrot(cnt, w, h, odir):
 
 # --- smears
 
-def do_mazy1(cnt, w, h, odir):
-    params1 = {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': (255, 255, 255),
-        'pw': 8,
-        'v': 50-20-10,
-        'n': 20*5,
-        'm': 100-50-10,
-        'prefill': True,
-        'blur': True,
-        'r0': 64,
-        'g0': 64,
-        'b0': 64,
-        'r1': 256,
-        'g1': 256,
-        'b1': 256,
-        'mode': 'black', 'keep': False,
+def do_mazy1(cnt, w
+    bg_white = (255, 255, 255)
+    bg_yellow = (255, 255, 0)
+    params1 = {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False,
+        'r0': 64, 'g0': 64, 'b0': 64,
+        'r1': 256, 'g1': 256, 'b1': 256,
     }
-    params2 = {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': (255, 255, 255),
-        'pw': 8,
-        'v': 50+25,
-        'n': 20*5,
-        'm': 100-50-10,
-        'prefill': False,
-        'blur': True,
-        'r0': 0,
-        'g0': 0,
-        'b0': 0,
-        'r1': 256,
-        'g1': 0,
-        'b1': 0,
-        'mode': 'red', 'keep': False,
+    params1a = {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False, 'color': 'happy',
+        'r0': 64, 'g0': 64, 'b0': 64,
+        'r1': 256, 'g1': 256, 'b1': 256,
     }
-    params3 = {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': (255, 255, 255),
-        'pw': 8,
-        'v': 50-20,
-        'n': 20*5,
-        'm': 100-50-10,
-        'prefill': True,
-        'blur': False,
-        'r0': 64,
-        'g0': 64,
-        'b0': 0,
-        'r1': 256,
-        'g1': 256,
-        'b1': 32,
-        'mode': 'red', 'keep': False,
+    params1b = {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False, 'color': 'rg',
+        'r0': 64, 'g0': 64, 'b0': 64,
+        'r1': 256, 'g1': 256, 'b1': 256,
     }
-    params4 = {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': (255, 255, 255),
-        'pw': 8,
-        'v': 50-20,
-        'n': 20*5,
-        'm': 100-50-10,
-        'prefill': True,
-        'blur': False,
-        'r0': 0,
-        'g0': 64,
-        'b0': 0,
-        'r1': 32,
-        'g1': 256,
-        'b1': 32,
-        'mode': 'red', 'keep': False,
+    params1c = {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False, 'color': 'psych',
+        'r0': 64, 'g0': 64, 'b0': 64,
+        'r1': 256, 'g1': 256, 'b1': 256,
     }
-    params5 = {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': (255, 255, 0),
-        'pw': 5,
-        'v': 200,
-        'n': 50,
-        'm': 25,
-        'prefill': False,
-        'blur': False,
-        'r0': 0,
-        'g0': 0,
-        'b0': 0,
-        'r1': 256,
-        'g1': 256,
-        'b1': 256,
-        'mode': 'red', 'keep': True,
+    params2 = {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': True, 'mode': 'red', 'keep': False,
+        'r0': 0, 'g0': 0, 'b0': 0,
+        'r1': 256, 'g1': 0, 'b1': 0,
     }
-    params6 = {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': (255, 255, 0),
-        'pw': 5,
-        'v': 120,
-        'n': 48,
-        'm': 12,
-        'prefill': True,
-        'blur': False,
-        'r0': 16,
-        'g0': 64,
-        'b0': 128,
-        'r1': 128,
-        'g1': 256,
-        'b1': 256,
-        'mode': 'red', 'keep': True,
+    params2a = {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': True, 'mode': 'happy', 'keep': False,
+        'r0': 0, 'g0': 0, 'b0': 0,
+        'r1': 256, 'g1': 0, 'b1': 0,
+    }
+    params2b = {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': True, 'mode': 'psych', 'keep': False,
+        'r0': 0, 'g0': 0, 'b0': 0,
+        'r1': 256, 'g1': 0, 'b1': 0,
+    }
+    params3 = {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        'penw': 8, 'v': 30, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'red', 'keep': False,
+        'r0': 64, 'g0': 64, 'b0': 0,
+        'r1': 256, 'g1': 256, 'b1': 32,
+    }
+    params4 = {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        'penw': 8, 'v': 30, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'red', 'keep': False,
+        'r0': 0, 'g0': 64, 'b0': 0,
+        'r1': 32, 'g1': 256, 'b1': 32,
+    }
+    params5 = {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_yellow,
+        'penw': 5, 'v': 200, 'n': 50, 'm': 25, 'prefill': False, 'blur': False, 'mode': 'red', 'keep': True,
+        'r0': 0, 'g0': 0, 'b0': 0,
+        'r1': 256, 'g1': 256, 'b1': 256,
+    }
+    params6 = {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_yellow,
+        'penw': 5, 'v': 120, 'n': 48, 'm': 12, 'prefill': True, 'blur': False, 'mode': 'red', 'keep': True,
+        'r0': 16, 'g0': 64, 'b0': 128,
+        'r1': 128, 'g1': 256, 'b1': 256,
     }
     for n in range(cnt):
         ts = dt.now().strftime('%Y%m%d%H%M%S')
         m = 1
-        for p in [params1, params2, params3, params4, params5, params6]:
+        for p in [params1, params1a, params1b, params1c, params2, params2a, params2b, params3, params4, params5, params6]:
             art_painter(p, odir+'mazy1-%dx%d-%02d-%03d-%s.png' % (w, h, m, n+1, ts))
             m = m + 1
 
