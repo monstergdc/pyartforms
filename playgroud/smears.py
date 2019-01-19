@@ -12,6 +12,7 @@
 # #7 grayish rects mess
 # #8 just rectangles
 # #9 rays from center
+# #10 long beziers
 # cre: 20180430
 # upd: 20180501, 02, 03
 # cre: 20180805, 07, 08
@@ -489,3 +490,42 @@ def mazy9(draw, params):
             else:
                 color = colors_p[n%8]
         triangle(draw, po, fill=color, outline=None)
+
+
+def mazy10(draw, params):
+    w = params['w']
+    h = params['h']
+    cnt = params['n']
+    mode = params['mode']
+    random.seed()
+    np = 1800 #par
+    ts = [t/float(np) for t in range(np+1)]
+    sc = float(h) / 3507
+    wx = int(float(params['penw']) * sc)
+    if wx <= 0:
+        wx = 1
+
+    def rwh():
+        if params['open'] == True:
+            return (random.randint(-w, w*2), random.randint(-h, h*2))
+        else:
+            return (random.randint(0, w), random.randint(0, h))
+
+    for n in range(cnt):
+        po = [rwh()]
+        for x in range(params['complexity']):
+            po.extend([rwh()])
+        if params['color'] == 'happy':
+            color = colors_happy[n%8]
+        if params['color'] == 'rg':
+            color = gradient2((255,255,0), (255,0,0), random.randint(0, 255), 255)
+        if params['color'] == 'red':
+            ci = random.randint(0, 255)
+            color = gradient2((0,0,0), (255,0,0), ci, 255)
+
+        bezier = make_bezier(po)
+        points = bezier(ts)
+        if params['mode'] == 'line':
+            draw.line(points, fill=color, width=wx)
+        if params['mode'] == 'fill':
+            draw.polygon(points, fill=color, outline=None)
