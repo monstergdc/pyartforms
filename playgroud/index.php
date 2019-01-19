@@ -15,11 +15,12 @@ function sub_group($name, $id)
 	$cnt[6]  = 5;
 	$cnt[7]  = 22;
 	$cnt[8]  = 3;
-	$cnt[9]  = 7; //life
-	$cnt[10] = 3; //lissajous
-	$cnt[11] = 16; //astro
-	$cnt[12] = 9; //waves
-	$cnt[13] = 2; //mandelbrot
+	$cnt[9]  = 24*2-6;
+	$cnt[10]  = 7; //life
+	$cnt[11] = 3; //lissajous
+	$cnt[12] = 16; //astro
+	$cnt[13] = 9; //waves
+	$cnt[14] = 2; //mandelbrot
 
 	$cgi = 'pyartw3.py';
 	$n = $cnt[$id];
@@ -37,13 +38,15 @@ sub_group("smears2", 2);
 sub_group("smears4", 4);
 sub_group("smears5", 5);
 sub_group("smears6", 6);
-sub_group("smears7", 7);	//fix
+sub_group("smears7", 7);
 sub_group("smears8", 8);
-sub_group("life", 9);
-sub_group("lissajous", 10);
-sub_group("astro", 11);
-sub_group("waves", 12);	//fix
-sub_group("mandelbrot", 13);
+sub_group("smears9", 9);
+
+sub_group("life", 10);
+sub_group("lissajous", 11);
+sub_group("astro", 12);
+sub_group("waves", 13);
+sub_group("mandelbrot", 14);
 ?>
 
 </body>

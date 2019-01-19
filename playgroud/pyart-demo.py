@@ -105,6 +105,8 @@ def do_mazy(cnt, w, h, odir, name):
         p = predef_mazy7(w, h)
     if name == 'mazy8':
         p = predef_mazy8(w, h)
+    if name == 'mazy9':
+        p = predef_mazy9(w, h)
 
     for n in range(cnt):
         tx = dt.now().strftime('%Y%m%d%H%M%S')
@@ -123,11 +125,13 @@ do_mazy(cnt, w, h, odir, 'mazy1')
 do_mazy(cnt, w, h, odir, 'mazy2') # fix: does not scale down well
 do_mazy3(cnt, w, h, odir) # lame, need fix
 do_mazy(cnt, w, h, odir, 'mazy4') # also a bit lame, only red ok, add blue
-cnt=3
+cnt = 3
 do_mazy(cnt, w, h, odir, 'mazy5')
 do_mazy(cnt, w, h, odir, 'mazy6')
 do_mazy(cnt, w, h, odir, 'mazy7')
 do_mazy(cnt, w, h, odir, 'mazy8')
+cnt = 2
+do_mazy(cnt, w, h, odir, 'mazy9')
 cnt = 3
 do_waves(cnt, w, h, odir) # fix: does not scale down well
 

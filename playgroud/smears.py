@@ -346,7 +346,7 @@ def mazy6(draw, params):
     h = params['h']
     cnt = params['cnt']
     random.seed()
-    c = math.pi/180
+    #c = math.pi/180
 
     #c_ndx = 7
     for m in range(cnt):
@@ -440,3 +440,51 @@ def mazy8(draw, params):
             color = colors_happy[ci]
             rect(draw, x1, y1, w1, h1, fill=color, outline=None)
 
+def mazy9(draw, params):
+    w = params['w']
+    h = params['h']
+    cnt = params['n']
+    random.seed()
+    c = math.pi/180
+    if 'v' in params: 
+        v = params['v']
+    else:
+        v = 0
+    if 'rndc' in params: 
+        rndc = params['rndc']
+    else:
+        rndc = False
+
+    po = [(int(w/2), int(h/2)), (0, 0), (0, 0)]
+    da = float(360)/cnt
+    r = w
+    for n in range(cnt):
+        if v > 0:
+            v1 = random.randint(int(-v), int(v))
+            v2 = random.randint(int(-v), int(v))
+            po[0] = (int(w/2)+v1, int(h/2)+v2)
+        x = w/2 + r * math.cos(c*da*n)
+        y = h/2 + r * math.sin(c*da*n)
+        po[1] = (x, y)
+        x = w/2 + r * math.cos(c*da*(n+1))
+        y = h/2 + r * math.sin(c*da*(n+1))
+        po[2] = (x, y)
+
+        ci = random.randint(0, 255)
+        if params['color'] == 'red':
+            color = gradient2((0,0,0), (255,0,0), ci, 255)
+        if params['color'] == 'rg':
+            color = gradient2((255,0,0), (255,255,0), ci, 255)
+        if params['color'] == 'bw':
+            color = gradient2((0,0,0), (255,255,255), ci, 255)
+        if params['color'] == 'happy':
+            if rndc == True:
+                color = colors_happy[random.randint(0, 7)]
+            else:
+                color = colors_happy[n%8]
+        if params['color'] == 'psych':
+            if rndc == True:
+                color = colors_p[random.randint(0, 7)]
+            else:
+                color = colors_p[n%8]
+        triangle(draw, po, fill=color, outline=None)
