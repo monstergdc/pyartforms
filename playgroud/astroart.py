@@ -14,6 +14,7 @@
 # - big bang, more
 
 
+
 from PIL import Image, ImageDraw, ImageFilter
 import random, math, string, os, sys
 from drawtools import *
@@ -24,19 +25,18 @@ def draw_tool(draw, params, color, x, y, z):
     box_or_cir = params['box_or_cir']
     ou = params['ou']
     if box_or_cir == False:
-        circle(draw, x, y, int(z), fill=color, outline=ou)
+        circle(draw, int(x), int(y), int(z), fill=color, outline=ou)
     else:
-        box(draw, x, y, int(z), fill=color, outline=ou)
+        box(draw, int(x), int(y), int(z), fill=color, outline=ou)
 
 # blue galaxy
 def paint0(draw, params):
     w = params['w']
     h = params['h']
     c = math.pi/180
-    s = h/3507
+    s = float(h)/3507 # 'A3': (4960, 3507), float = =fix for py 2.7
     for r in range(36):
         for n in range(8):
-            # 'A3': (4960, 3507)
             color = (0, 32+n*24, 32+n*40)
             da = 360/8*c
             x = w/2+(60+r*60)*s*math.cos(n*da+r*36*c)
@@ -49,7 +49,7 @@ def paint1(draw, params):
     w = params['w']
     h = params['h']
     c = math.pi/180
-    s = h/3507
+    s = float(h)/3507
     random.seed()
     for r in range(48):
         for n in range(24):
@@ -69,7 +69,7 @@ def paint2(draw, params):
     w = params['w']
     h = params['h']
     c = math.pi/180
-    s = h/3507
+    s = float(h)/3507
     for r in range(48):
         for n in range(18):
             color = gradient((255,255,224), (255,255,0), (255,0,0), r, 48)
@@ -84,7 +84,7 @@ def paint3(draw, params):
     w = params['w']
     h = params['h']
     c = math.pi/180
-    s = h/3507
+    s = float(h)/3507
     for r in range(50):
         for n in range(12):
             if n&1 == 0:
@@ -102,7 +102,7 @@ def paint4(draw, params):
     w = params['w']
     h = params['h']
     c = math.pi/180
-    s = h/3507
+    s = float(h)/3507
     for r in range(32):
         for n in range(16):
             nn = n%8
@@ -118,7 +118,7 @@ def paint5(draw, params):
     w = params['w']
     h = params['h']
     c = math.pi/180
-    s = h/3507
+    s = float(h)/3507
     for r in range(48):
         for n in range(8):
             color = gradient((255,255,0), (0,128,255), (255,255,255), n*r, 48*8)
@@ -133,7 +133,7 @@ def paint6(draw, params):
     w = params['w']
     h = params['h']
     c = math.pi/180
-    s = h/3507
+    s = float(h)/3507
     random.seed()
     for r in range(2048):
         for n in range(24):
@@ -149,7 +149,7 @@ def paint7(draw, params):
     w = params['w']
     h = params['h']
     c = math.pi/180
-    s = h/3507
+    s = float(h)/3507
     for r in range(40):
         for n in range(8):
             color = gradient((255,255,255), (255,255,0), (255,0,0), r, 40)
