@@ -11,6 +11,7 @@
 # #6 circle ripples
 # #7 grayish rects mess
 # #8 just rectangles
+# #9 rays from center
 # cre: 20180430
 # upd: 20180501, 02, 03
 # cre: 20180805, 07, 08
