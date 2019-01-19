@@ -4,7 +4,7 @@
 # paint algorithms (artificial artist) in Python - demo
 # (c)2018-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20181020
-# upd: 20190105, 06, 13, 18
+# upd: 20190105, 06, 13, 18, 19
 
 # TODO:
 # - nice argparse (also per module?)
@@ -58,7 +58,7 @@ def do_waves(cnt, w, h, odir):
     p = predef_waves(w, h)
     for n in range(cnt):
         for i in range(len(p)):
-            art_painter(p[i], odir+'waves-%dx%d-%02d-%03d.png' % (w, h, m, i+1))
+            art_painter(p[i], odir+'waves-%dx%d-%02d-%03d.png' % (w, h, i+1, n))
         
 # --- astro
 
@@ -67,7 +67,7 @@ def do_astro(cnt, w, h, odir):
     #cnt?
     # 2x (cir, box) bluegalaxy ellipticgalaxy spiralgalaxy neutronstar blackhole supernova nebula star
     for i in range(len(p)):
-        art_painter(p[i], odir+'astro-%03d.png' % (i+1))
+        art_painter(p[i], odir+'astro-%dx%d-%03d.png' % (w, h, i+1))
 
 # --- mandelbrot
 
@@ -113,11 +113,14 @@ def do_mazy(cnt, w, h, odir, name):
 
 # --- go
 
+#w, h = get_canvas('A1')
 #w, h = get_canvas('A2')
 w, h = get_canvas('A3')
+#w, h = get_canvas('A4')
+
 cnt = 4 # *6 each #1..#3 + *7 for #4 = (4)*6*3+(4)*7 = 100 images, it takes some time, easy over 10 minutes
 do_mazy(cnt, w, h, odir, 'mazy1') # fix: does not scale well
-do_mazy(cnt, w, h, odir, 'mazy2') # fix: does not scale well
+do_mazy(cnt, w, h, odir, 'mazy2') # fix: does not scale down well
 do_mazy3(cnt, w, h, odir) # lame, need fix
 do_mazy(cnt, w, h, odir, 'mazy4') # also a bit lame, only red ok, add blue
 cnt=3
@@ -126,7 +129,7 @@ do_mazy(cnt, w, h, odir, 'mazy6')
 do_mazy(cnt, w, h, odir, 'mazy7')
 do_mazy(cnt, w, h, odir, 'mazy8')
 cnt = 3
-do_waves(cnt, w, h, odir)
+do_waves(cnt, w, h, odir) # fix: does not scale down well
 
 w, h = get_canvas('800')
 do_life(0, w, h, odir)
@@ -134,7 +137,7 @@ do_life(0, w, h, odir)
 w, h = get_canvas('A4') # fix: does not scale well
 do_lissajous(0, w, h, odir)
 
-w, h = get_canvas('A3') # fix: does not scale well with canvas size, so far optimised only for A3
+w, h = get_canvas('A3')
 do_astro(0, w, h, odir)
 
 do_mandelbrot(0, 700, 400, odir)

@@ -4,7 +4,7 @@
 # (c)2018-2019 Noniewicz.com
 # upd: 20180503, 08
 # upd: 20181020, 21
-# upd: 20190112
+# upd: 20190112, 19
 
 from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin
 from datetime import datetime as dt
@@ -133,7 +133,7 @@ def art_painter(params, png_file='example.png', output_mode='save', bw=False):
     draw = ImageDraw.Draw(im)
     f = params['call']
     f(draw, params)
-    xsmooth(params, im)
+    im = xsmooth(params, im)
     if output_mode == 'save':
         im.save(png_file, dpi=(300,300), pnginfo=append_myself())
         show_benchmark(start_time)
@@ -171,10 +171,10 @@ def im2arr(image_path):
     return a
 
 def xsmooth(params, im):
-    if not "blur" in params:
-        return
-    if params['blur'] == True:
-        im = im.filter(ImageFilter.BLUR)
-        im = im.filter(ImageFilter.BLUR)
-        im = im.filter(ImageFilter.SHARPEN)
-        im = im.filter(ImageFilter.SHARPEN)
+    if "blur" in params:
+        if params['blur'] == True:
+            im = im.filter(ImageFilter.BLUR)
+            im = im.filter(ImageFilter.BLUR)
+            im = im.filter(ImageFilter.SHARPEN)
+            im = im.filter(ImageFilter.SHARPEN)
+    return im

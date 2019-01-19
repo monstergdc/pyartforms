@@ -194,17 +194,13 @@ def predef_mazy2(w, h):
     return [
         {'name': 'SMEARS#2', 'call': mazy2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'v': 20, 'n': 100, 'm': 40, 'blur': True,
         'c0': (64, 64, 64), 'c1': (255, 255, 255), 'mode': 'black'},
-        {'name': 'SMEARS#2', 'call': mazy2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'v': 50+25+(50), 'n': 100, 'm': 60, 'blur': True,
+        {'name': 'SMEARS#2', 'call': mazy2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'v': 90, 'n': 90, 'm': 50, 'blur': True,
         'c0': (0, 0, 0), 'c1': (255, 0, 0), 'mode': 'red'},
-        {'name': 'SMEARS#2', 'call': mazy2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'v': 30, 'n': 100, 'm': 40, 'blur': False,
-        'c0': (64, 64, 0), 'c1': (255, 255, 32), 'mode': 'red'},
-        {'name': 'SMEARS#2', 'call': mazy2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'v': 30, 'n': 80, 'm': 50, 'blur': False,
-        'c0': (0, 64, 0), 'c1': (32, 255, 48), 'mode': 'red'},
-        {'name': 'SMEARS#2', 'call': mazy2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'v': 50, 'n': 30, 'm': 25, 'blur': True,
+        {'name': 'SMEARS#2', 'call': mazy2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'v': 50, 'n': 50, 'm': 25, 'blur': True,
         'c0': (32, 64, 64), 'c1': (64, 255, 255), 'mode': 'color'},
-        {'name': 'SMEARS#2', 'call': mazy2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'v': 22, 'n': 30, 'm': 40, 'blur': False,
+        {'name': 'SMEARS#2', 'call': mazy2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'v': 22, 'n': 40, 'm': 35, 'blur': False,
         'c0': (32, 0, 0), 'c1': (255, 0, 0), 'mode': 'black'},
-        {'name': 'SMEARS#2', 'call': mazy2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'v': 22, 'n': 30, 'm': 40, 'blur': True,
+        {'name': 'SMEARS#2', 'call': mazy2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'v': 22, 'n': 40, 'm': 35, 'blur': True,
         'c0': (32, 0, 0), 'c1': (255, 0, 0), 'mode': 'black'}
     ]
 
