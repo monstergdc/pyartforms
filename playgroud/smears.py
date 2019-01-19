@@ -105,6 +105,10 @@ def mazy1(draw, params):
     random.seed()
     ts = [t/100.0 for t in range(101)]
     v = params['v']
+    sc = float(h) / 3507
+    wx = int(float(params['penw']) * sc)
+    if wx <= 0:
+        wx = 1
 
     for n in range(params['n']):
         po = [(random.randint(0, w), random.randint(0, h)),
@@ -134,7 +138,8 @@ def mazy1(draw, params):
             if params['keep'] == True:
                 po0 = po[0]
                 po3 = po[3]
-            po[:] = [(xy[0]+random.randint(0, v)-random.randint(0, v), xy[1]+random.randint(0, v)-random.randint(0, v)) for xy in po]
+            vsc = int(v*sc)
+            po[:] = [(xy[0]+random.randint(0, vsc)-random.randint(0, vsc), xy[1]+random.randint(0, vsc)-random.randint(0, vsc)) for xy in po]
             if params['keep'] == True:
                 po[0] = po0
                 po[3] = po3
@@ -153,7 +158,7 @@ def mazy1(draw, params):
                     color = (0,0,0)
             bezier = make_bezier(po)
             points = bezier(ts)
-            draw.line(points, fill=color, width=params['penw'])
+            draw.line(points, fill=color, width=wx)
 
 def mazy2(draw, params):
     w = params['w']

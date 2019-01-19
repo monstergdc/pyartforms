@@ -119,7 +119,7 @@ w, h = get_canvas('A3')
 #w, h = get_canvas('A4')
 
 cnt = 4 # *6 each #1..#3 + *7 for #4 = (4)*6*3+(4)*7 = 100 images, it takes some time, easy over 10 minutes
-do_mazy(cnt, w, h, odir, 'mazy1') # fix: does not scale well
+do_mazy(cnt, w, h, odir, 'mazy1')
 do_mazy(cnt, w, h, odir, 'mazy2') # fix: does not scale down well
 do_mazy3(cnt, w, h, odir) # lame, need fix
 do_mazy(cnt, w, h, odir, 'mazy4') # also a bit lame, only red ok, add blue
