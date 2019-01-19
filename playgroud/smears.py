@@ -313,7 +313,9 @@ def mazy5(draw, params):
 
     dg = h*0.037 # thickness
     r0 = h/2*0.93 # base radius
-    rOut = h*0.76 # outer circle radous
+    rOut = float(h)*0.77 # outer circle radous
+    sc = float(h)/2480
+    step = 10
     for i in range(int(8+1)):
         a = random.randint(6, 24)
         rv = random.randint(20, 350)
@@ -321,13 +323,14 @@ def mazy5(draw, params):
             x0 = w/2
             y0 = h/2
         else:
-            x0 = w/2 + rOut * math.cos(c*(i-1)*360/8)
-            y0 = h/2 + rOut * math.sin(c*(i-1)*360/8)
+            axy = c*(i-1)*360/8
+            x0 = w/2 + rOut * math.cos(axy)
+            y0 = h/2 + rOut * math.sin(axy)
         for m in range(16):
             points = []
-            for n in range(int(360*10)):
-                angle = c*n/10
-                r = r0 - m*dg + rv * math.sin(angle*a)
+            for n in range(int(360*step)):
+                angle = c*float(n)/float(step)
+                r = r0 + sc * (rv * math.sin(angle*a)) - m*dg
                 x = x0 + r * math.cos(angle)
                 y = y0 + r * math.sin(angle)
                 points.extend((x, y))

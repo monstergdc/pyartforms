@@ -124,7 +124,7 @@ do_mazy(cnt, w, h, odir, 'mazy2') # fix: does not scale down well
 do_mazy3(cnt, w, h, odir) # lame, need fix
 do_mazy(cnt, w, h, odir, 'mazy4') # also a bit lame, only red ok, add blue
 cnt=3
-do_mazy(cnt, w, h, odir, 'mazy5') # fix: does not scale well
+do_mazy(cnt, w, h, odir, 'mazy5')
 do_mazy(cnt, w, h, odir, 'mazy6')
 do_mazy(cnt, w, h, odir, 'mazy7')
 do_mazy(cnt, w, h, odir, 'mazy8')
@@ -134,7 +134,7 @@ do_waves(cnt, w, h, odir) # fix: does not scale down well
 w, h = get_canvas('800')
 do_life(0, w, h, odir)
 
-w, h = get_canvas('A4') # fix: does not scale well
+w, h = get_canvas('A4') # fix: does not scale down well (line width)
 do_lissajous(0, w, h, odir)
 
 w, h = get_canvas('A3')
