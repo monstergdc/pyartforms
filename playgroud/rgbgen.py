@@ -5,7 +5,8 @@
 # based on my old FilterMeister plugins
 # (c)2018 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20181020
-# upd: 20181021
+# upd: 20181021, 22
+# upd: 20181110
 
 # TODO:
 # - ?
@@ -16,6 +17,16 @@ from bezier import make_bezier
 from datetime import datetime as dt
 from drawtools import *
 
+# ZX colors
+C_0 = 192
+C_1 = 252
+ZXC0 = [(0,0,0), (0,0,C_0), (C_0,0,0), (C_0,0,C_0), (0,C_0,0), (0,C_0,C_0), (C_0,C_0,0), (C_0,C_0,C_0)]
+ZXC1 = [(0,0,0), (0,0,C_1), (C_1,0,0), (C_1,0,C_1), (0,C_1,0), (0,C_1,C_1), (C_1,C_1,0), (C_1,C_1,C_1)]
+ZXCX = [ZXC0[0], ZXC1[0], ZXC0[1], ZXC1[1], ZXC0[2], ZXC1[2], ZXC0[3], ZXC1[3],
+        ZXC0[4], ZXC1[4], ZXC0[5], ZXC1[5], ZXC0[6], ZXC1[6], ZXC0[7], ZXC1[7]
+        ]
+
+# ---
 
 def rgbgen1(params, fn):
     start_time = dt.now()
@@ -260,12 +271,137 @@ def rgbgdc12(params, fn):
     im.save(fn)
     show_benchmark(start_time)
 
+def rgbxxx(params, fn):
+    start_time = dt.now()
+    random.seed()
+    c = math.pi/180
+    w = params['w']
+    h = params['h']
+    print('rgbxxx...', fn)
+    random.seed()
+    im = Image.new('RGB', (w, h), params['Background'])
+    draw = ImageDraw.Draw(im)
+
+    if params['box'] > 1:
+        pix = params['box']
+        h1 = int(h/pix)
+        w1 = int(w/pix)
+    else:
+        pix = 1
+        h1 = h
+        w1 = w
+    print(w,h,'->',w1,h1,'*',pix)
+
+    # ForEveryPixel
+    # size dependent! :(
+    for y1 in range(h1):
+        y = (y1+1) * pix
+        for x1 in range(w1):
+            x = x1 * pix
+            if params['mode'] == 0:    # kind of color grid
+                r = (x-y)
+                g = (x+y)
+                b = (x)
+            if params['mode'] == 1:    # kind of color ?
+                r = (x-y)*(x+y)/800
+                g = (x+y)*(y)/800
+                b = 0
+            if params['mode'] == 2:    # kind of interference
+                r = 0
+                #g = (math.sqrt((x-w)*(x-w)+(y-h)*(y-h))) + (math.sqrt((x-w1)*(x-w1)+(y-h1)*(y-h1)))
+                g = (math.sqrt((x-w)*(x-w)+(y-h)*(y-h))) * (math.sqrt((x-w1)*(x-w1)+(y-h1)*(y-h1)))
+                b = 0
+            if params['mode'] == 3:   # cool red
+                r = abs( math.sqrt((x-w)*(x-w)+(y-h)*(y-h)) * (y*math.cos(x/100*c)) * (x*math.sin(y/100*c)) ) / 5000
+                g = 0
+                b = 0
+            if params['mode'] == 4:    # so-so
+                sq = math.sqrt((x-w)*(x-w)+(y-h)*(y-h))
+                r = abs( sq * (x*math.sin(x/300*c)) ) / 5
+                g = abs( sq * (y*math.sin(y/300*c)) ) / 5
+                b = abs( sq * (x*math.sin(y/300*c)) ) / 5
+
+            fill = (int(r)&255, int(g)&255, int(b)&255)
+
+            if params['box'] > 0:
+                box(draw, x=int(pix/2+x1*pix), y=int(pix/2+y1*pix), r=pix/2, fill=fill, outline=None)
+            else:
+                draw.point((x, y), fill=fill)
+
+    # https://pillow.readthedocs.io/en/5.1.x/reference/ImageFilter.html
+    if params['filter'] == True:
+        im = im.filter(ImageFilter.FIND_EDGES)
+        im = im.filter(ImageFilter.Kernel(size=(3, 3), kernel=[1,1,1,1,1,1,1,1,1], scale=None, offset=0))
+        im = im.filter(ImageFilter.Kernel(size=(3, 3), kernel=[1,1,1,1,1,1,1,1,1], scale=None, offset=0))
+        im = im.filter(ImageFilter.Kernel(size=(3, 3), kernel=[1,1,1,1,1,1,1,1,1], scale=None, offset=0))
+    im.save(fn)
+    show_benchmark(start_time)
+
+def rgbzx(params, fn):
+    start_time = dt.now()
+    random.seed()
+    c = math.pi/180
+    w = params['w']
+    h = params['h']
+    print('rgbzx...', fn)
+    random.seed()
+    im = Image.new('RGB', (w, h), (0,0,0))
+    draw = ImageDraw.Draw(im)
+
+    # ForEveryPixel
+    c = -1
+    z = int(192/16) # == 12
+    for y in range(h):
+        if y%z == 0:
+            c += 1
+        fill1 = ZXCX[c%16]
+        fill2 = ZXCX[(c+1)%16]
+        fill3 = ZXCX[0]
+        l1 = y % z
+        for x in range(w):
+            if l1 < 6:
+                draw.point((x, y), fill=fill1)
+            else:
+                if ((y & 1 == 0) and (x & 1 == 1)) or ((y & 1 == 1) and (x & 1 == 0)):
+                    draw.point((x, y), fill=fill1)
+                else:
+                    draw.point((x, y), fill=fill2)
+
+    im.save(fn)
+    show_benchmark(start_time)
+
 # ---
 
 start_time = dt.now()
+odir = '!output1\\'
+
+w, h = 256, 192
+params1 = {'w': w, 'h': h}
+rgbzx(params1, odir+'rgbzx-%dx%d-01-001.png' % (w, h))
+#exit()    #tmp
+
+w, h = 512, 512
+params1 = {'w': w, 'h': h, 'Background': (0, 0, 0), 'mode': 1, 'box': 0, 'filter': False}
+rgbxxx(params1, odir+'rgbxxx-%dx%d-01-001.png' % (w, h))
+w, h = 2048, 2048
+params1 = {'w': w, 'h': h, 'Background': (0, 0, 0), 'mode': 1, 'box': 0, 'filter': False}
+rgbxxx(params1, odir+'rgbxxx-%dx%d-01-001.png' % (w, h))
+
+w, h = get_canvas('1024')
+
+params1 = {'w': w, 'h': h, 'Background': (0, 0, 0), 'mode': 0, 'box': 0, 'filter': False}
+rgbxxx(params1, odir+'rgbxxx-%dx%d-00-001.png' % (w, h))
+params1 = {'w': w, 'h': h, 'Background': (0, 0, 0), 'mode': 1, 'box': 0, 'filter': False}
+rgbxxx(params1, odir+'rgbxxx-%dx%d-01-001.png' % (w, h))
+params1 = {'w': w, 'h': h, 'Background': (0, 0, 0), 'mode': 2, 'box': 0, 'filter': False}
+rgbxxx(params1, odir+'rgbxxx-%dx%d-02-001.png' % (w, h))
+params1 = {'w': w, 'h': h, 'Background': (0, 0, 0), 'mode': 3, 'box': 0, 'filter': False}
+rgbxxx(params1, odir+'rgbxxx-%dx%d-03-001.png' % (w, h))
+params1 = {'w': w, 'h': h, 'Background': (0, 0, 0), 'mode': 4, 'box': 0, 'filter': False}
+rgbxxx(params1, odir+'rgbxxx-%dx%d-04-001.png' % (w, h))
+#exit()    #tmp
 
 w, h = get_canvas('800')
-odir = '!output\\'
 
 params1 = {'w': w, 'h': h, 'Background': (0, 0, 0)}
 rgbgen1(params1, odir+'rgbgen-%dx%d-01-002.png' % (w, h))

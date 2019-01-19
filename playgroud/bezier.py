@@ -1,5 +1,5 @@
 
-# https://stackoverflow.com/questions/246525/how-can-i-draw-a-bezier-curve-using-pythons-pil?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+# https://stackoverflow.com/questions/246525/how-can-i-draw-a-bezier-curve-using-pythons-pil
 
 def make_bezier(xys):
     # xys should be a sequence of 2-tuples (Bezier control points)
