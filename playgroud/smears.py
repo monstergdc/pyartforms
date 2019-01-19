@@ -506,8 +506,9 @@ def mazy10(draw, params):
         wx = 1
 
     def rwh():
+        ex = 1
         if params['open'] == True:
-            return (random.randint(-w, w*2), random.randint(-h, h*2))
+            return (random.randint(-w*ex, w*(ex+1)), random.randint(-h*ex, h*(ex+1)))
         else:
             return (random.randint(0, w), random.randint(0, h))
 
