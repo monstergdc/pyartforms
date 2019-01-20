@@ -288,18 +288,22 @@ def predef_mazy9(w, h):
         v = float(h)/8
         return [
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 16, 'Background': (0,0,0), 'color': 'happy', 'v': 0, 'rndc': True},
+            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'happy', 'v': 0, 'rndc': True},
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'happy', 'v': 0, 'rndc': True},
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 128, 'Background': (0,0,0), 'color': 'happy', 'v': 0, 'rndc': True},
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 16, 'Background': (0,0,0), 'color': 'psych', 'v': 0, 'rndc': True},
+            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'psych', 'v': 0, 'rndc': True},
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'psych', 'v': 0, 'rndc': True},
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 128, 'Background': (0,0,0), 'color': 'psych', 'v': 0, 'rndc': True},
 
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 8, 'Background': (0,0,0), 'color': 'happy', 'v': 0},
 
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 16, 'Background': (0,0,0), 'color': 'happy', 'v': 0},
+            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'happy', 'v': 0},
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 64, 'Background': (0,0,0), 'color': 'happy', 'v': 0},
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 128, 'Background': (0,0,0), 'color': 'happy', 'v': 0},
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 16, 'Background': (0,0,0), 'color': 'psych', 'v': 0},
+            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'psych', 'v': 0},
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 64, 'Background': (0,0,0), 'color': 'psych', 'v': 0},
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 128, 'Background': (0,0,0), 'color': 'psych', 'v': 0},
            
