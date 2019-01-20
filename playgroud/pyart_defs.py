@@ -294,7 +294,7 @@ def predef_mazy9(w, h):
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'psych', 'v': 0, 'rndc': True},
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 128, 'Background': (0,0,0), 'color': 'psych', 'v': 0, 'rndc': True},
 
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 4, 'Background': (0,0,0), 'color': 'happy', 'v': 0},
+            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 8, 'Background': (0,0,0), 'color': 'happy', 'v': 0},
 
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 16, 'Background': (0,0,0), 'color': 'happy', 'v': 0},
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 64, 'Background': (0,0,0), 'color': 'happy', 'v': 0},
@@ -336,6 +336,21 @@ def predef_mazy9(w, h):
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'bw', 'v': v},
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'bw', 'v': v},
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': (0,0,0), 'color': 'bw', 'v': v},
+        ]
+
+def predef_mazy10(w, h):
+        bk = (0x84, 0x8B, 0x9B)
+        return [
+            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 30, 'penw': 8, 'color': 'happy', 'mode': 'line', 'complexity': 70, 'open': False},
+            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'rg', 'mode': 'line', 'complexity': 70, 'open': False},
+            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'red', 'mode': 'line', 'complexity': 70, 'open': False},
+
+            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 30, 'penw': 8, 'color': 'happy', 'mode': 'line', 'complexity': 70, 'open': True},
+            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'rg', 'mode': 'line', 'complexity': 70, 'open': True},
+            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'red', 'mode': 'line', 'complexity': 70, 'open': True},
+
+            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': (255,255,255), 'n': 6, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': False},
+            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': (255,255,255), 'n': 6, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': True},
         ]
 
 
