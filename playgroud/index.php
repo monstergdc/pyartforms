@@ -1,4 +1,5 @@
-﻿<html>
+﻿<!DOCTYPE HTML>
+<html>
 <head>
 <title>pyartforms (c)2019 Noniewicz.art.pl</title>
 </head>
@@ -15,12 +16,14 @@ function sub_group($name, $id)
 	$cnt[6]  = 5;
 	$cnt[7]  = 22;
 	$cnt[8]  = 3;
-	$cnt[9]  = 24*2-6;
-	$cnt[10]  = 7; //life
-	$cnt[11] = 3; //lissajous
-	$cnt[12] = 16; //astro
-	$cnt[13] = 9; //waves
-	$cnt[14] = 2; //mandelbrot
+	$cnt[9]  = 8+8+9+6+6+9+6+6;
+	$cnt[10]  = 8;
+
+	$cnt[11]  = 7; //life
+	$cnt[12] = 3; //lissajous
+	$cnt[13] = 16; //astro
+	$cnt[14] = 9; //waves
+	$cnt[15] = 2; //mandelbrot
 
 	$cgi = 'pyartw3.py';
 	$n = $cnt[$id];
@@ -34,19 +37,20 @@ function sub_group($name, $id)
 
 sub_group("smears1", 1);
 sub_group("smears2", 2);
-//3?
+//sub_group("smears3", 3);
 sub_group("smears4", 4);
 sub_group("smears5", 5);
 sub_group("smears6", 6);
 sub_group("smears7", 7);
 sub_group("smears8", 8);
 sub_group("smears9", 9);
+sub_group("smears10", 10);
 
-sub_group("life", 10);
-sub_group("lissajous", 11);
-sub_group("astro", 12);
-sub_group("waves", 13);
-sub_group("mandelbrot", 14);
+sub_group("life", 11);
+sub_group("lissajous", 12);
+sub_group("astro", 13);
+sub_group("waves", 14);
+sub_group("mandelbrot", 15);
 ?>
 
 </body>

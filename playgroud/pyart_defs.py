@@ -286,6 +286,8 @@ def predef_mazy8(w, h):
 
 def predef_mazy9(w, h):
         v = float(h)/8
+        v2 = float(h)/2
+        v3 = float(h)/32
         return [
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 16, 'Background': (0,0,0), 'color': 'happy', 'v': 0, 'rndc': True},
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'happy', 'v': 0, 'rndc': True},
@@ -295,8 +297,6 @@ def predef_mazy9(w, h):
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'psych', 'v': 0, 'rndc': True},
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'psych', 'v': 0, 'rndc': True},
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 128, 'Background': (0,0,0), 'color': 'psych', 'v': 0, 'rndc': True},
-
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 8, 'Background': (0,0,0), 'color': 'happy', 'v': 0},
 
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 16, 'Background': (0,0,0), 'color': 'happy', 'v': 0},
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'happy', 'v': 0},
@@ -340,6 +340,20 @@ def predef_mazy9(w, h):
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'bw', 'v': v},
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'bw', 'v': v},
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': (0,0,0), 'color': 'bw', 'v': v},
+
+            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'happy', 'v': v2, 'rndc': True},
+            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'happy', 'v': v2, 'rndc': True},
+            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': (0,0,0), 'color': 'happy', 'v': v2, 'rndc': True},
+            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'psych', 'v': v2, 'rndc': True},
+            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'psych', 'v': v2, 'rndc': True},
+            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': (0,0,0), 'color': 'psych', 'v': v2, 'rndc': True},
+
+            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'happy', 'v': v3, 'rndc': True},
+            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'happy', 'v': v3, 'rndc': True},
+            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': (0,0,0), 'color': 'happy', 'v': v3, 'rndc': True},
+            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'psych', 'v': v3, 'rndc': True},
+            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'psych', 'v': v3, 'rndc': True},
+            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': (0,0,0), 'color': 'psych', 'v': v3, 'rndc': True},
         ]
 
 def predef_mazy10(w, h):
