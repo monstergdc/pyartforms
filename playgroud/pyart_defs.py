@@ -286,7 +286,7 @@ def predef_mazy8(w, h):
 
 def predef_mazy9(w, h):
         v = float(h)/8
-        return = [
+        return [
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 16, 'Background': (0,0,0), 'color': 'happy', 'v': 0, 'rndc': True},
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'happy', 'v': 0, 'rndc': True},
             {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 128, 'Background': (0,0,0), 'color': 'happy', 'v': 0, 'rndc': True},
