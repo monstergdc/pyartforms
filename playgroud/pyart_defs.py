@@ -4,7 +4,7 @@
 # paint algorithms (artificial artist) in Python - demo
 # (c)2018-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20181020
-# upd: 20190105, 06, 13, 18
+# upd: 20190105, 06, 13, 18, 21
 
 # predefined forms
 
@@ -140,6 +140,9 @@ def predef_mandelbrot(w, h):
 
 # --- smears
 
+# note: use this for aplha (but call must handle alpha value too)
+# , 'alpha': True
+
 def predef_mazy1(w, h):
     bg_white = (255, 255, 255)
     bg_yellow = (255, 255, 0)
@@ -148,10 +151,22 @@ def predef_mazy1(w, h):
         'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False,
         'r0': 64, 'g0': 64, 'b0': 64,
         'r1': 256, 'g1': 256, 'b1': 256},
+
+#        {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+#        'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False,
+#        'r0': 64, 'g0': 64, 'b0': 64,
+#        'r1': 256, 'g1': 256, 'b1': 256, 'alpha': True},
+
         {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
         'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False, 'color': 'happy',
         'r0': 64, 'g0': 64, 'b0': 64,
         'r1': 256, 'g1': 256, 'b1': 256},
+
+#        {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+#        'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False, 'color': 'happy',
+#        'r0': 64, 'g0': 64, 'b0': 64,
+#        'r1': 256, 'g1': 256, 'b1': 256, 'alpha': True},
+
         {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
         'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False, 'color': 'rg',
         'r0': 64, 'g0': 64, 'b0': 64,
