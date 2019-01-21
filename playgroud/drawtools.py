@@ -4,7 +4,7 @@
 # (c)2018-2019 Noniewicz.com
 # upd: 20180503, 08
 # upd: 20181020, 21
-# upd: 20190112, 19
+# upd: 20190112, 19, 21
 
 from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin
 from datetime import datetime as dt
@@ -18,12 +18,19 @@ import cgi
 
 CANVASES = {
     'A5': (2480, 1748),
-    'A4': (3507, 2480),	 # rule is: 29.7/2.54*300 x 21/2.54*300 (in*DPI=300)
+    'A4': (3507, 2480),	 # for cm rule is: 29.7/2.54*300 x 21/2.54*300 (in*DPI=300)
     'A3': (4960, 3507),
     'A2': (7015, 4960),
     'A1': (9933, 7015),
     'A0': (14043, 9933),
+    #'B5': (?, ?),
+    #'B4': (?, ?),
+    #'B3': (5905, ?),
+    'B2': (8350, 5905),
+    'B1': (11811, 8350),
     'B0': (16700, 11811),
+    '4A0': (28086, 19866),
+    '2A0': (19866, 14043),
     '256': (256, 192),
     '320': (320, 200),
     '512': (256*2, 192*2),
@@ -130,7 +137,15 @@ def art_painter(params, png_file='example.png', output_mode='save', bw=False):
         im = Image.new('L', (params['w'], params['h']), (0))
     else:
         im = Image.new('RGB', (params['w'], params['h']), params['Background'])
-    draw = ImageDraw.Draw(im)
+
+    if "alpha" in params:
+        if params['alpha'] == True:
+            draw = ImageDraw.Draw(im, 'RGBA')
+        else:
+            draw = ImageDraw.Draw(im)
+    else:
+        draw = ImageDraw.Draw(im)
+    
     f = params['call']
     f(draw, params)
     im = xsmooth(params, im)
@@ -178,3 +193,4 @@ def xsmooth(params, im):
             im = im.filter(ImageFilter.SHARPEN)
             im = im.filter(ImageFilter.SHARPEN)
     return im
+
