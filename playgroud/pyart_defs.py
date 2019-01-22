@@ -296,7 +296,8 @@ def predef_mazy8(w, h):
     return [
         {'name': 'SMEARS#8', 'call': mazy8, 'w': w, 'h': h, 'Background': bk, 'mode': '', 'xcnt': 5, 'ycnt': 5},
         {'name': 'SMEARS#8', 'call': mazy8, 'w': w, 'h': h, 'Background': bk, 'mode': '', 'xcnt': 5, 'ycnt': 10},
-        {'name': 'SMEARS#8', 'call': mazy8, 'w': w, 'h': h, 'Background': bk, 'mode': '', 'xcnt': 5, 'ycnt': 3}
+        {'name': 'SMEARS#8', 'call': mazy8, 'w': w, 'h': h, 'Background': bk, 'mode': '', 'xcnt': 5, 'ycnt': 3},
+        {'name': 'SMEARS#8', 'call': mazy8, 'w': w, 'h': h, 'Background': bk, 'mode': '', 'xcnt': 15, 'ycnt': 5}
     ]
 
 def predef_mazy9(w, h):
