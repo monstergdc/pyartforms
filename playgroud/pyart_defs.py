@@ -4,7 +4,7 @@
 # paint algorithms (artificial artist) in Python - demo
 # (c)2018-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20181020
-# upd: 20190105, 06, 13, 18, 21
+# upd: 20190105, 06, 13, 18, 21, 22
 
 # predefined forms
 
@@ -385,6 +385,14 @@ def predef_mazy10(w, h):
 
             {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': (255,255,255), 'n': 6, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': False},
             {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': (255,255,255), 'n': 6, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': True},
+        ]
+
+def predef_mazy11(w, h):
+        bk = (0,0,0)
+        return [
+            {'name': 'SMEARS#11', 'call': mazy11, 'w': w, 'h': h, 'Background': bk, 'n': 8},
+            {'name': 'SMEARS#11', 'call': mazy11, 'w': w, 'h': h, 'Background': bk, 'n': 16},
+            {'name': 'SMEARS#11', 'call': mazy11, 'w': w, 'h': h, 'Background': bk, 'n': 64}
         ]
 
 

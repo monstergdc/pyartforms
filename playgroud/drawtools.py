@@ -4,7 +4,7 @@
 # (c)2018-2019 Noniewicz.com
 # upd: 20180503, 08
 # upd: 20181020, 21
-# upd: 20190112, 19, 21
+# upd: 20190112, 19, 21, 22
 
 from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin
 from datetime import datetime as dt
@@ -83,12 +83,6 @@ def gradient(colorStart, colorMid, colorEnd, i, n):
         g2 = int( float(colorMid[1])*downc + float(colorEnd[1])*upc )
         b2 = int( float(colorMid[2])*downc + float(colorEnd[2])*upc )
         return (r2, g2, b2)
-
-#        downc := ((w/2)-i)/(w/2);
-#        upc := i/(w/2);
-#        r1 := round( (FColorStart and 255)*downc + (FColorMid and 255)*upc );
-#        r1 := round( (FColorMid and 255)*downc + (FColorEnd and 255)*upc );
-
 
 def gradient2(colorStart, colorEnd, i, n):
     downc = float(n-i)/float(n)
