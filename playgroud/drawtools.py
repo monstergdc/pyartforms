@@ -67,21 +67,28 @@ def triangle(draw, points, fill, outline):
 
 def gradient(colorStart, colorMid, colorEnd, i, n):
     # note: weird, py 2.7 needs these float conversions, on 3.6 it was ok
-    n2 = n/2
-    downc = float(n2-i)/float(n2)
-    upc = float(i)/float(n2)
-    r1 = int( float(colorStart[0])*downc + float(colorMid[0])*upc )
-    g1 = int( float(colorStart[1])*downc + float(colorMid[1])*upc )
-    b1 = int( float(colorStart[2])*downc + float(colorMid[2])*upc )
-    downc = float(n2-i/2)/float(n2)
-    upc = float(i/2)/float(n2)
-    r2 = int( float(colorMid[0])*downc + float(colorEnd[0])*upc )
-    g2 = int( float(colorMid[1])*downc + float(colorEnd[1])*upc )
-    b2 = int( float(colorMid[2])*downc + float(colorEnd[2])*upc )
-    if i < n2:
+    n2 = float(n/2)
+    if i < n/2:
+        downc = float(n2-i)/n2
+        upc = float(i)/n2
+        r1 = int( float(colorStart[0])*downc + float(colorMid[0])*upc )
+        g1 = int( float(colorStart[1])*downc + float(colorMid[1])*upc )
+        b1 = int( float(colorStart[2])*downc + float(colorMid[2])*upc )
         return (r1, g1, b1)
     else:
+        i2 = float(i - n2)
+        downc = float(n2-i2)/n2
+        upc = float(i2)/n2
+        r2 = int( float(colorMid[0])*downc + float(colorEnd[0])*upc )
+        g2 = int( float(colorMid[1])*downc + float(colorEnd[1])*upc )
+        b2 = int( float(colorMid[2])*downc + float(colorEnd[2])*upc )
         return (r2, g2, b2)
+
+#        downc := ((w/2)-i)/(w/2);
+#        upc := i/(w/2);
+#        r1 := round( (FColorStart and 255)*downc + (FColorMid and 255)*upc );
+#        r1 := round( (FColorMid and 255)*downc + (FColorEnd and 255)*upc );
+
 
 def gradient2(colorStart, colorEnd, i, n):
     downc = float(n-i)/float(n)
