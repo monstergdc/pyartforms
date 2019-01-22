@@ -10,15 +10,20 @@
 # #5 new smears (star flowers)
 # #6 circle ripples
 # #7 grayish rects mess
-# #8 just rectangles
+# #8 just rectangles, may flux
 # #9 rays from center
 # #10 long beziers
+# #11 horizontal gradients with suprizes
+# #12 
+# #13 
+# #14 
+# #15 
 # cre: 20180430
 # upd: 20180501, 02, 03
 # cre: 20180805, 07, 08
 # upd: 20180928, 29
 # upd: 20181019, 20
-# upd: 20190105, 06, 12, 13, 18, 19
+# upd: 20190105, 06, 12, 13, 18, 19, 21, 22
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -99,6 +104,9 @@ def old_colorer(params):
             b = random.randint(params['b0'], params['b1'])
     return (r, g, b)
 
+def add_alpha(color, alpha):
+    return (color[0], color[1], color[2], alpha)
+
 # ---
 
 def mazy1(draw, params):
@@ -127,6 +135,9 @@ def mazy1(draw, params):
                 color = colors_p[n%8]
         else:
             color = old_colorer(params)
+        # test
+        #color = add_alpha(color, 60)
+        #
         r = color[0]
         g = color[1]
         b = color[2]
@@ -158,6 +169,9 @@ def mazy1(draw, params):
                 color = colors_p[n%8]
                 if random.randint(0, 100) > 80: # todo: as opt/par
                     color = (0,0,0)
+            # test
+            #color = add_alpha(color, 50)
+            #
             bezier = make_bezier(po)
             points = bezier(ts)
             draw.line(points, fill=color, width=wx)
@@ -257,6 +271,9 @@ def mazy3(draw, params):
         if params['color'] == 'happy':
             color = colors_happy[n%8]
 
+        # test
+        #color = add_alpha(color, 70)
+        #
         triangle(draw, po, fill=color, outline=None)
 
 def mazy4(draw, params):
@@ -309,6 +326,9 @@ def mazy4(draw, params):
         if params['color'] == 'happy':
             color = colors_happy[n%8]
 
+        # test
+        #color = add_alpha(color, 100)
+        #
         draw.polygon(po, fill=color, outline=None)
 
 def mazy5(draw, params):
@@ -341,14 +361,18 @@ def mazy5(draw, params):
                 x = x0 + r * math.cos(angle)
                 y = y0 + r * math.sin(angle)
                 points.extend((x, y))
-            draw.polygon(points, fill=colors[m%8], outline=params['outline'])
+
+            color = colors[m%8]
+            # test
+            #color = add_alpha(color, 100) # not really?
+            #
+            draw.polygon(points, fill=color, outline=params['outline'])
 
 def mazy6(draw, params):
     w = params['w']
     h = params['h']
     cnt = params['cnt']
     random.seed()
-    #c = math.pi/180
 
     #c_ndx = 7
     for m in range(cnt):
@@ -361,7 +385,11 @@ def mazy6(draw, params):
             nn = n_r - n
             ro = int(r*(1+nn*nn*0.015))
             if n & 1:
-                circle(draw, x, y, ro, fill=(0, 0, 0), outline=None)
+                c = (0, 0, 0)
+                # test
+                #c = (0, 0, 0, 100)
+                #
+                circle(draw, x, y, ro, fill=c, outline=None)
             else:
                 if params['mode'] == 'red':
                     color = (255, 0, 0)
@@ -375,6 +403,9 @@ def mazy6(draw, params):
                     color = colors_b[c_ndx]
                 if params['mode'] == 'happy':
                     color = colors_happy[c_ndx]
+                # test
+                #color = add_alpha(color, 100) # not really?
+                #
                 circle(draw, x, y, ro, fill=color, outline=None)
             c_ndx = c_ndx - 1
             if c_ndx < 0:
@@ -424,6 +455,9 @@ def mazy7(draw, params):
             color = (ci,ci,ci)
         if params['cmode'] == 'color':    # color
             color = colors_happy[random.randint(0, 7)]
+        # test
+        #color = add_alpha(color, 100)
+        #
         rect(draw, x1, y1, w1, h1, fill=color, outline=None)
 
 def mazy8(draw, params):
@@ -431,6 +465,7 @@ def mazy8(draw, params):
     h = params['h']
     xcnt = params['xcnt']
     ycnt = params['ycnt']
+#    v = 20 #par
 
     w1 = int(w/xcnt)
     h1 = int(h/ycnt)
@@ -440,7 +475,20 @@ def mazy8(draw, params):
             y1 = y*h1 + int(h1/2)
             ci = random.randint(0, 7)
             color = colors_happy[ci]
-            rect(draw, x1, y1, w1, h1, fill=color, outline=None)
+            # test
+#            if random.randint(0, 100) > 50: #par
+#                ar = random.randint(80, 200) #par
+#                color = add_alpha(color, ar)
+#            if random.randint(0, 100) > 80: #par
+#                vx = float(x1)*(random.randint(0, v)-random.randint(0, v))/100.0
+#                vy = float(y1)*(random.randint(0, v)-random.randint(0, v))/100.0
+#                vw = float(w)*(random.randint(0, v)-random.randint(0, v))/100.0
+#                vh = float(h)*(random.randint(0, v)-random.randint(0, v))/100.0
+#            else:
+#                vx = vy = vw = vh = 0
+            vx = vy = vw = vh = 0
+            #
+            rect(draw, x1+vx, y1+vy, w1+vw, h1+vh, fill=color, outline=None)
 
 def mazy9(draw, params):
     w = params['w']
@@ -489,6 +537,9 @@ def mazy9(draw, params):
                 color = colors_p[random.randint(0, 7)]
             else:
                 color = colors_p[n%8]
+        #test
+        #color = (color[0], color[1], color[2], 100)
+        #
         triangle(draw, po, fill=color, outline=None)
 
 
@@ -524,9 +575,47 @@ def mazy10(draw, params):
             ci = random.randint(0, 255)
             color = gradient2((0,0,0), (255,0,0), ci, 255)
 
+        # test
+        #color = add_alpha(color, 100)
+        #
+
         bezier = make_bezier(po)
         points = bezier(ts)
         if params['mode'] == 'line':
             draw.line(points, fill=color, width=wx)
         if params['mode'] == 'fill':
             draw.polygon(points, fill=color, outline=None)
+
+def mazy11(draw, params):
+    w = params['w']
+    h = params['h']
+    cnt = params['n']
+    random.seed()
+    dy = h/cnt
+    steps = 512 #const, max rational limit
+    dx = w/steps
+    for n in range(cnt):
+        n1 = random.randint(0, 7)
+        #n2 = random.randint(0, 7)
+        n2 = n%8
+        n3 = random.randint(0, 7)
+        color1 = colors_happy[n1]
+        color2 = colors_happy[n2]
+        color3 = colors_happy[n3]
+        for step in range(steps):
+            color = gradient(color1, color2, color3, step, steps)
+            rect(draw, int(step*dx+dx/2), int(n*dy+dy/2), int(dx), int(dy), fill=color, outline=None)
+
+# future fun
+
+def mazy12(draw, params):
+    return 0
+
+def mazy13(draw, params):
+    return 0
+
+def mazy14(draw, params):
+    return 0
+
+def mazy15(draw, params):
+    return 0

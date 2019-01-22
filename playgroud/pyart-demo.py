@@ -4,7 +4,7 @@
 # paint algorithms (artificial artist) in Python - demo
 # (c)2018-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20181020
-# upd: 20190105, 06, 13, 18, 19
+# upd: 20190105, 06, 13, 18, 19, 22
 
 # TODO:
 # - nice argparse (also per module?)
@@ -107,6 +107,10 @@ def do_mazy(cnt, w, h, odir, name):
         p = predef_mazy8(w, h)
     if name == 'mazy9':
         p = predef_mazy9(w, h)
+    if name == 'mazy10':
+        p = predef_mazy10(w, h)
+    if name == 'mazy11':
+        p = predef_mazy11(w, h)
 
     for n in range(cnt):
         tx = dt.now().strftime('%Y%m%d%H%M%S')
@@ -132,6 +136,9 @@ do_mazy(cnt, w, h, odir, 'mazy7')
 do_mazy(cnt, w, h, odir, 'mazy8')
 cnt = 2
 do_mazy(cnt, w, h, odir, 'mazy9')
+cnt = 3
+do_mazy(cnt, w, h, odir, 'mazy10')
+do_mazy(cnt, w, h, odir, 'mazy11')
 cnt = 3
 do_waves(cnt, w, h, odir) # fix: does not scale down well
 
