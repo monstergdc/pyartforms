@@ -5,6 +5,7 @@
 # (c)2018-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20181020
 # upd: 20190105, 06, 13, 18, 19, 22
+# upd: 20190302
 
 # TODO:
 # - nice argparse (also per module?)
@@ -119,27 +120,24 @@ def do_mazy(cnt, w, h, odir, name):
 
 # --- go
 
-#w, h = get_canvas('A1')
+#w, h = get_canvas('A0')
+#w, h = get_canvas('A1') # for self use this
 #w, h = get_canvas('A2')
-w, h = get_canvas('A3')
+w, h = get_canvas('A3') # for demo use this, not too big, not too small
 #w, h = get_canvas('A4')
 
-cnt = 4 # *6 each #1..#3 + *7 for #4 = (4)*6*3+(4)*7 = 100 images, it takes some time, easy over 10 minutes
+cnt = 3 # note: it takes some time
 do_mazy(cnt, w, h, odir, 'mazy1')
 do_mazy(cnt, w, h, odir, 'mazy2') # fix: does not scale down well
 do_mazy3(cnt, w, h, odir) # lame, need fix
 do_mazy(cnt, w, h, odir, 'mazy4') # also a bit lame, only red ok, add blue
-cnt = 3
 do_mazy(cnt, w, h, odir, 'mazy5')
 do_mazy(cnt, w, h, odir, 'mazy6')
 do_mazy(cnt, w, h, odir, 'mazy7')
 do_mazy(cnt, w, h, odir, 'mazy8')
-cnt = 2
 do_mazy(cnt, w, h, odir, 'mazy9')
-cnt = 3
 do_mazy(cnt, w, h, odir, 'mazy10')
 do_mazy(cnt, w, h, odir, 'mazy11')
-cnt = 3
 do_waves(cnt, w, h, odir) # fix: does not scale down well
 
 w, h = get_canvas('800')

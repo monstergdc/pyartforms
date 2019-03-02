@@ -609,6 +609,7 @@ def mazy11(draw, params):
 # future fun
 
 def mazy12(draw, params):
+    #TODO: like 11 only more freq + diagonals + symetric opt
     return 0
 
 def mazy13(draw, params):
