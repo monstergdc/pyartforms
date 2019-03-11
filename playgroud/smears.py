@@ -330,6 +330,8 @@ def mazy4(draw, params):
             color = gradient2((0,0,0), (255,255,255), n, cnt)
         if params['color'] == 'happy':
             color = colors_happy[n%8]
+        if params['cmode'] == 'wryb':
+            color = colors_fwd[n%8]
 
         if 'addalpha' in params:
             color = add_alpha(color, params['addalpha'])
@@ -410,9 +412,6 @@ def mazy6(draw, params):
                 if params['mode'] == 'happy':
                     color = colors_happy[c_ndx]
 
-                if 'addalpha' in params:
-                    color = add_alpha(color, params['addalpha'])
-
                 circle(draw, x, y, ro, fill=color, outline=None)
             c_ndx = c_ndx - 1
             if c_ndx < 0:
@@ -462,6 +461,8 @@ def mazy7(draw, params):
             color = (ci,ci,ci)
         if params['cmode'] == 'color':    # color
             color = colors_happy[random.randint(0, 7)]
+        if params['cmode'] == 'wryb':
+            color = colors_fwd[random.randint(0, 7)]
 
         if 'addalpha' in params:
             color = add_alpha(color, params['addalpha'])
