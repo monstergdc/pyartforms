@@ -5,6 +5,7 @@
 # upd: 20180503, 08
 # upd: 20181020, 21
 # upd: 20190112, 19, 21, 22
+# upd: 20190311
 
 from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin
 from datetime import datetime as dt
@@ -17,6 +18,7 @@ import cgi
 # https://en.wikipedia.org/wiki/Paper_size
 
 CANVASES = {
+    'A6': (1748, 1240), # note: almost like 10x15 cm photo
     'A5': (2480, 1748),
     'A4': (3507, 2480),	 # for cm rule is: 29.7/2.54*300 x 21/2.54*300 (in*DPI=300)
     'A3': (4960, 3507),
