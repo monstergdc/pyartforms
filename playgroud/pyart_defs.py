@@ -5,6 +5,7 @@
 # (c)2018-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20181020
 # upd: 20190105, 06, 13, 18, 21, 22
+# upd: 20190311
 
 # predefined forms
 
@@ -162,11 +163,18 @@ def predef_mazy1(w, h):
         'r0': 64, 'g0': 64, 'b0': 64,
         'r1': 256, 'g1': 256, 'b1': 256},
 
+        {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False, 'color': 'wryb',
+        'r0': 64, 'g0': 64, 'b0': 64,
+        'r1': 256, 'g1': 256, 'b1': 256},
+
 #        {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
 #        'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False, 'color': 'happy',
 #        'r0': 64, 'g0': 64, 'b0': 64,
 #        'r1': 256, 'g1': 256, 'b1': 256, 'alpha': True},
 
+#addalpha=60
+        
         {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
         'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False, 'color': 'rg',
         'r0': 64, 'g0': 64, 'b0': 64,
@@ -181,6 +189,10 @@ def predef_mazy1(w, h):
         'r1': 256, 'g1': 0, 'b1': 0},
         {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
         'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': True, 'mode': 'happy', 'keep': False,
+        'r0': 0, 'g0': 0, 'b0': 0,
+        'r1': 256, 'g1': 0, 'b1': 0},
+        {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': True, 'mode': 'wryb', 'keep': False,
         'r0': 0, 'g0': 0, 'b0': 0,
         'r1': 256, 'g1': 0, 'b1': 0},
         {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
@@ -207,15 +219,13 @@ def predef_mazy1(w, h):
 
 def predef_mazy2(w, h):
     return [
-        {'name': 'SMEARS#2', 'call': mazy2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'v': 20, 'n': 100, 'm': 40, 'blur': True,
+        {'name': 'SMEARS#2', 'call': mazy2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'v': 20, 'n': 100, 'm': 40, 'blur': False,
         'c0': (64, 64, 64), 'c1': (255, 255, 255), 'mode': 'black'},
-        {'name': 'SMEARS#2', 'call': mazy2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'v': 90, 'n': 90, 'm': 50, 'blur': True,
+        {'name': 'SMEARS#2', 'call': mazy2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'v': 90, 'n': 90, 'm': 50, 'blur': False,
         'c0': (0, 0, 0), 'c1': (255, 0, 0), 'mode': 'red'},
-        {'name': 'SMEARS#2', 'call': mazy2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'v': 50, 'n': 50, 'm': 25, 'blur': True,
+        {'name': 'SMEARS#2', 'call': mazy2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'v': 50, 'n': 50, 'm': 25, 'blur': False,
         'c0': (32, 64, 64), 'c1': (64, 255, 255), 'mode': 'color'},
         {'name': 'SMEARS#2', 'call': mazy2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'v': 22, 'n': 40, 'm': 35, 'blur': False,
-        'c0': (32, 0, 0), 'c1': (255, 0, 0), 'mode': 'black'},
-        {'name': 'SMEARS#2', 'call': mazy2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'v': 22, 'n': 40, 'm': 35, 'blur': True,
         'c0': (32, 0, 0), 'c1': (255, 0, 0), 'mode': 'black'}
     ]
 
@@ -373,18 +383,35 @@ def predef_mazy9(w, h):
         ]
 
 def predef_mazy10(w, h):
+        bg_white = (255, 255, 255)
         bk = (0x84, 0x8B, 0x9B)
         return [
             {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 30, 'penw': 8, 'color': 'happy', 'mode': 'line', 'complexity': 70, 'open': False},
             {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'rg', 'mode': 'line', 'complexity': 70, 'open': False},
             {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'red', 'mode': 'line', 'complexity': 70, 'open': False},
+            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'wryb', 'mode': 'line', 'complexity': 70, 'open': False},
 
             {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 30, 'penw': 8, 'color': 'happy', 'mode': 'line', 'complexity': 70, 'open': True},
             {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'rg', 'mode': 'line', 'complexity': 70, 'open': True},
             {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'red', 'mode': 'line', 'complexity': 70, 'open': True},
+            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'wryb', 'mode': 'line', 'complexity': 70, 'open': True},
 
-            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': (255,255,255), 'n': 6, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': False},
-            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': (255,255,255), 'n': 6, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': True},
+            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 30, 'penw': 8, 'color': 'happy', 'mode': 'line', 'complexity': 70, 'open': True, 'addalpha': 90},
+            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'rg', 'mode': 'line', 'complexity': 70, 'open': True, 'addalpha': 90},
+            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'red', 'mode': 'line', 'complexity': 70, 'open': True, 'addalpha': 90},
+            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'wryb', 'mode': 'line', 'complexity': 70, 'open': True, 'addalpha': 90},
+# more wryb
+            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 6, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': False},
+            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 6, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': True},
+
+            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 6, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': False, 'addalpha': 80},
+            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 6, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': True, 'addalpha': 80},
+
+            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': False},
+            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': True},
+
+            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': False, 'addalpha': 80},
+            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': True, 'addalpha': 80},
         ]
 
 def predef_mazy11(w, h):

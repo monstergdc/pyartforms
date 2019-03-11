@@ -5,7 +5,7 @@
 # (c)2018-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20181020
 # upd: 20190105, 06, 13, 18, 19, 22
-# upd: 20190302
+# upd: 20190302, 03
 
 # TODO:
 # - nice argparse (also per module?)
@@ -90,23 +90,23 @@ def do_mazy3(cnt, w, h, odir):
                 art_painter(p[i], odir+'mazy3-%dx%d-%02d-%03d-%s-%s.png' % (w, h, i+1, n+1, mode, ts))
 
 def do_mazy(cnt, w, h, odir, name):
-    if name == 'mazy1':
+    if name == 'mazy01':
         p = predef_mazy1(w, h)
-    if name == 'mazy2':
+    if name == 'mazy02':
         p = predef_mazy2(w, h)
-    #if name == 'mazy3':
+    #if name == 'mazy03':
         #?
-    if name == 'mazy4':
+    if name == 'mazy04':
         p = predef_mazy4(w, h)
-    if name == 'mazy5':
+    if name == 'mazy05':
         p = predef_mazy5(w, h)
-    if name == 'mazy6':
+    if name == 'mazy06':
         p = predef_mazy6(w, h)
-    if name == 'mazy7':
+    if name == 'mazy07':
         p = predef_mazy7(w, h)
-    if name == 'mazy8':
+    if name == 'mazy08':
         p = predef_mazy8(w, h)
-    if name == 'mazy9':
+    if name == 'mazy09':
         p = predef_mazy9(w, h)
     if name == 'mazy10':
         p = predef_mazy10(w, h)
@@ -127,17 +127,18 @@ w, h = get_canvas('A3') # for demo use this, not too big, not too small
 #w, h = get_canvas('A4')
 
 cnt = 3 # note: it takes some time
-do_mazy(cnt, w, h, odir, 'mazy1')
-do_mazy(cnt, w, h, odir, 'mazy2') # fix: does not scale down well
+do_mazy(cnt, w, h, odir, 'mazy01')
+do_mazy(cnt, w, h, odir, 'mazy02') # fix: does not scale down well
 do_mazy3(cnt, w, h, odir) # lame, need fix
-do_mazy(cnt, w, h, odir, 'mazy4') # also a bit lame, only red ok, add blue
-do_mazy(cnt, w, h, odir, 'mazy5')
-do_mazy(cnt, w, h, odir, 'mazy6')
-do_mazy(cnt, w, h, odir, 'mazy7')
-do_mazy(cnt, w, h, odir, 'mazy8')
-do_mazy(cnt, w, h, odir, 'mazy9')
+do_mazy(cnt, w, h, odir, 'mazy04') # also a bit lame, only red ok, add blue
+do_mazy(cnt, w, h, odir, 'mazy05')
+do_mazy(cnt, w, h, odir, 'mazy06')
+do_mazy(cnt, w, h, odir, 'mazy07')
+do_mazy(cnt, w, h, odir, 'mazy08')
+do_mazy(cnt, w, h, odir, 'mazy09')
 do_mazy(cnt, w, h, odir, 'mazy10')
 do_mazy(cnt, w, h, odir, 'mazy11')
+
 do_waves(cnt, w, h, odir) # fix: does not scale down well
 
 w, h = get_canvas('800')

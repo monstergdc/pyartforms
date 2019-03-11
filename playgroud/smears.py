@@ -17,13 +17,15 @@
 # #12 
 # #13 
 # #14 
-# #15 
+# #15
+# #16 
 # cre: 20180430
 # upd: 20180501, 02, 03
 # cre: 20180805, 07, 08
 # upd: 20180928, 29
 # upd: 20181019, 20
 # upd: 20190105, 06, 12, 13, 18, 19, 21, 22
+# upd: 20190306, 11
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -43,37 +45,35 @@ from drawtools import *
 colors_happy = [(255,255,255), (0xEC, 0xD1, 0x27), (0xD1, 0x3B, 0x29), (0x7F, 0xAE, 0xAD),
                 (0x41, 0x8D, 0xB0), (0x29, 0x56, 0x80), (0xB0, 0xB0, 0xB0), (0x90, 0x90, 0x90)]
 
+# white yellow red blue x2
+colors_fwd = [(255,255,255), (0xEC, 0xD1, 0x27), (0xD1, 0x3B, 0x29), (0x20, 0x50, 0xA0),
+              (255,255,255), (0xEC, 0xD1, 0x27), (0xD1, 0x3B, 0x29), (0x20, 0x50, 0xA0)]
+
 # bw x2
-colors_bw = [(0xff, 0xff, 0xff),
-          (0xc0, 0xc0, 0xc0),
-          (0xff, 0xff, 0xff),
-          (0xc0, 0xc0, 0xc0),
-          (0xff, 0xff, 0xff),
-          (0xc0, 0xc0, 0xc0),
-          (0xff, 0xff, 0xff),
-          (0xc0, 0xc0, 0xc0),
+colors_bw = [(0xff, 0xff, 0xff), (0xc0, 0xc0, 0xc0), (0xff, 0xff, 0xff), (0xc0, 0xc0, 0xc0),
+          (0xff, 0xff, 0xff), (0xc0, 0xc0, 0xc0), (0xff, 0xff, 0xff), (0xc0, 0xc0, 0xc0),
           ]
 
 # pastel psychedelic
-colors_p = [(0x78, 0xE6, 0x7B),   #78E67B
-          (0x8F, 0x60, 0xEE),   #8F60EE
-          (0xFE, 0x7B, 0x65),   #FF7B65
-          (0xE7, 0x5F, 0xE5),   #E75FE5
-          (0x7B, 0xA4, 0xE0),   #7BA4E0
-          (0xFF, 0x9C, 0x6B),   #FF9C6B
-          (0xEB, 0xDD, 0x67),   #EBDD67
-          (0xFA, 0x60, 0x93),   #FA6093
+colors_p = [(0x78, 0xE6, 0x7B),
+          (0x8F, 0x60, 0xEE),
+          (0xFE, 0x7B, 0x65),
+          (0xE7, 0x5F, 0xE5),
+          (0x7B, 0xA4, 0xE0),
+          (0xFF, 0x9C, 0x6B),
+          (0xEB, 0xDD, 0x67),
+          (0xFA, 0x60, 0x93),
           ]
 
-# magic blue
-colors_b = [(0x00, 0x00, 0x20),
-          (0x00, 0x00, 0x40),
-          (0x00, 0x00, 0x60),
-          (0x00, 0x00, 0x80),
-          (0x00, 0x00, 0xA0),
-          (0x00, 0x00, 0xC0),
-          (0x00, 0x00, 0xE0),
-          (0x00, 0x00, 0xFF),
+# magic blue with little green (better for print?)
+colors_b = [(0x00, 0x10, 0x20),
+          (0x00, 0x20, 0x40),
+          (0x00, 0x30, 0x60),
+          (0x00, 0x40, 0x80),
+          (0x00, 0x50, 0xA0),
+          (0x00, 0x60, 0xC0),
+          (0x00, 0x70, 0xE0),
+          (0x00, 0x80, 0xFF),
           ]
 
 # just yellow
@@ -104,6 +104,9 @@ def old_colorer(params):
             b = random.randint(params['b0'], params['b1'])
     return (r, g, b)
 
+#def new_colorer(mode):
+#    return 0
+
 def add_alpha(color, alpha):
     return (color[0], color[1], color[2], alpha)
 
@@ -115,7 +118,7 @@ def mazy1(draw, params):
     random.seed()
     ts = [t/100.0 for t in range(101)]
     v = params['v']
-    sc = float(h) / 3507
+    sc = float(h) / 3507 # lame par!
     wx = int(float(params['penw']) * sc)
     if wx <= 0:
         wx = 1
@@ -126,18 +129,19 @@ def mazy1(draw, params):
               (random.randint(0, w), random.randint(0, h)),
               (random.randint(0, w), random.randint(0, h))]
 
-        if 'color' in params: 
+        if 'color' in params:
             if params['color'] == 'happy':
                 color = colors_happy[n%8]
+            if params['color'] == 'wryb':
+                color = colors_fwd[n%8]
             if params['color'] == 'rg':
                 color = gradient2((255,255,0), (255,0,0), random.randint(0, 255), 255)
             if params['color'] == 'psych':
                 color = colors_p[n%8]
         else:
             color = old_colorer(params)
-        # test
-        #color = add_alpha(color, 60)
-        #
+        if 'addalpha' in params:
+            color = add_alpha(color, params['addalpha'])
         r = color[0]
         g = color[1]
         b = color[2]
@@ -165,13 +169,14 @@ def mazy1(draw, params):
                 color = (rr, rr, rr)
             if params['mode'] == 'happy':
                 color = colors_happy[n%8]
+            if params['mode'] == 'wryb':
+                color = colors_fwd[n%8]
             if params['mode'] == 'psych':
                 color = colors_p[n%8]
                 if random.randint(0, 100) > 80: # todo: as opt/par
                     color = (0,0,0)
-            # test
-            #color = add_alpha(color, 50)
-            #
+            if 'addalpha' in params:
+                color = add_alpha(color, params['addalpha'])
             bezier = make_bezier(po)
             points = bezier(ts)
             draw.line(points, fill=color, width=wx)
@@ -271,9 +276,9 @@ def mazy3(draw, params):
         if params['color'] == 'happy':
             color = colors_happy[n%8]
 
-        # test
-        #color = add_alpha(color, 70)
-        #
+        if 'addalpha' in params:
+            color = add_alpha(color, params['addalpha'])
+
         triangle(draw, po, fill=color, outline=None)
 
 def mazy4(draw, params):
@@ -326,9 +331,9 @@ def mazy4(draw, params):
         if params['color'] == 'happy':
             color = colors_happy[n%8]
 
-        # test
-        #color = add_alpha(color, 100)
-        #
+        if 'addalpha' in params:
+            color = add_alpha(color, params['addalpha'])
+
         draw.polygon(po, fill=color, outline=None)
 
 def mazy5(draw, params):
@@ -363,9 +368,10 @@ def mazy5(draw, params):
                 points.extend((x, y))
 
             color = colors[m%8]
-            # test
-            #color = add_alpha(color, 100) # not really?
-            #
+
+            if 'addalpha' in params:
+                color = add_alpha(color, params['addalpha'])
+
             draw.polygon(points, fill=color, outline=params['outline'])
 
 def mazy6(draw, params):
@@ -403,9 +409,10 @@ def mazy6(draw, params):
                     color = colors_b[c_ndx]
                 if params['mode'] == 'happy':
                     color = colors_happy[c_ndx]
-                # test
-                #color = add_alpha(color, 100) # not really?
-                #
+
+                if 'addalpha' in params:
+                    color = add_alpha(color, params['addalpha'])
+
                 circle(draw, x, y, ro, fill=color, outline=None)
             c_ndx = c_ndx - 1
             if c_ndx < 0:
@@ -455,9 +462,10 @@ def mazy7(draw, params):
             color = (ci,ci,ci)
         if params['cmode'] == 'color':    # color
             color = colors_happy[random.randint(0, 7)]
-        # test
-        #color = add_alpha(color, 100)
-        #
+
+        if 'addalpha' in params:
+            color = add_alpha(color, params['addalpha'])
+
         rect(draw, x1, y1, w1, h1, fill=color, outline=None)
 
 def mazy8(draw, params):
@@ -572,12 +580,12 @@ def mazy10(draw, params):
         if params['color'] == 'rg':
             color = gradient2((255,255,0), (255,0,0), random.randint(0, 255), 255)
         if params['color'] == 'red':
-            ci = random.randint(0, 255)
-            color = gradient2((0,0,0), (255,0,0), ci, 255)
+            color = gradient2((0,0,0), (255,0,0), random.randint(0, 255), 255)
+        if params['color'] == 'wryb':
+            color = colors_fwd[n%8]
 
-        # test
-        #color = add_alpha(color, 100)
-        #
+        if 'addalpha' in params:
+            color = add_alpha(color, params['addalpha'])
 
         bezier = make_bezier(po)
         points = bezier(ts)
@@ -619,4 +627,7 @@ def mazy14(draw, params):
     return 0
 
 def mazy15(draw, params):
+    return 0
+
+def mazy16(draw, params):
     return 0
