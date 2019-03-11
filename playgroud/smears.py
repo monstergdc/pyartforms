@@ -330,7 +330,7 @@ def mazy4(draw, params):
             color = gradient2((0,0,0), (255,255,255), n, cnt)
         if params['color'] == 'happy':
             color = colors_happy[n%8]
-        if params['cmode'] == 'wryb':
+        if params['color'] == 'wryb':
             color = colors_fwd[n%8]
 
         if 'addalpha' in params:
