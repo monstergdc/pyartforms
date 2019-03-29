@@ -6,6 +6,8 @@
 
 # color definitions
 
+import random
+
 
 # white yellow red lb1 lb2 blue ltgray gray
 colors_happy = [(255,255,255), (0xEC, 0xD1, 0x27), (0xD1, 0x3B, 0x29), (0x7F, 0xAE, 0xAD),
