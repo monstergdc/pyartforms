@@ -7,7 +7,7 @@
 # upd: 20190112, 19, 21, 22
 # upd: 20190311, 29
 
-from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin
+from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin, ImageFont
 from datetime import datetime as dt
 import random, math, string, os, sys, io
 from array import array
@@ -98,12 +98,24 @@ def script_it(draw, xy, font, size, fill):
     fnt = ImageFont.truetype(font, size)
     draw.text(xy, "Noniewicz.art.pl", font=fnt, fill=fill)
 
+def add_myself(draw, w, h, bg):
+    # note: my srv specific
+    txt = "Noniewicz.art.pl"
+    fnt = ImageFont.truetype(font='./timesbi.ttf', size=14)
+    twh = fnt.getsize(txt)
+    bgx = (bg[0]^255, bg[1]^255, bg[2]^255)
+    draw.text((w-twh[0]-2, h-twh[1]-2), txt, font=fnt, fill=bgx)
+
 def append_myself(title):
     x = PngImagePlugin.PngInfo()
-    x.add_itxt(key='Title', value=title, lang='', tkey='', zip=False)
-    x.add_itxt(key='Description', value='generated in pyartforms', lang='', tkey='', zip=False)
-    x.add_itxt(key='Author', value='Jakub Noniewicz', lang='', tkey='E', zip=False)
-    x.add_itxt(key='Copyright', value='(c) Jakub Noniewicz', lang='', tkey='', zip=False)
+    #x.add_itxt(key='Title', value=title, lang='', tkey='', zip=False)
+    #x.add_itxt(key='Description', value='generated in pyartforms', lang='', tkey='', zip=False)
+    #x.add_itxt(key='Author', value='Jakub Noniewicz', lang='', tkey='', zip=False)
+    #x.add_itxt(key='Copyright', value='(c) Jakub Noniewicz', lang='', tkey='', zip=False)
+    x.add_text(key='Title', value=title, zip=False)
+    x.add_text(key='Description', value='generated in pyartforms', zip=False)
+    x.add_text(key='Author', value='Jakub Noniewicz', zip=False)
+    x.add_text(key='Copyright', value='(c) Jakub Noniewicz', zip=False)
     x.add_itxt(key='Concept', value='pyartforms concept by: Jakub Noniewicz | http://noniewicz.com | http://noniewicz.art.pl', lang='', tkey='', zip=False)
     return x
 
@@ -148,14 +160,16 @@ def art_painter(params, png_file='example.png', output_mode='save', bw=False):
             draw = ImageDraw.Draw(im)
     else:
         draw = ImageDraw.Draw(im)
-    
+
     f = params['call']
     f(draw, params)
     im = xsmooth(params, im)
     if output_mode == 'save':
-        im.save(png_file, dpi=(300,300), pnginfo=append_myself())
+        #add_myself(draw, params['w'], params['h'], params['Background'])
+        im.save(png_file, dpi=(300,300), pnginfo=append_myself('pyartforms'))
         show_benchmark(start_time)
     else:
+        add_myself(draw, params['w'], params['h'], params['Background'])
         im2cgi(im, format='PNG')
 
 def get_cgi_par(default=None):
