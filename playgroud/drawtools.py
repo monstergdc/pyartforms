@@ -104,7 +104,11 @@ def add_myself(draw, w, h, bg):
     fnt = ImageFont.truetype(font='./timesbi.ttf', size=14)
     twh = fnt.getsize(txt)
     bgx = (bg[0]^255&0xF0, bg[1]^255&0xF0, bg[2]^255&0xF0)
-    draw.text((w-twh[0]-2, h-twh[1]-2), txt, font=fnt, fill=bgx)
+    bgx1 = (bgx[0]^0x80, bgx[1]^0x80, bgx[2]^0x80)
+    x = w-twh[0]-2
+    y = h-twh[1]-2
+    draw.text((x+1, y+1), txt, font=fnt, fill=bgx1)
+    draw.text((x, y), txt, font=fnt, fill=bgx)
 
 def append_myself(title):
     x = PngImagePlugin.PngInfo()
