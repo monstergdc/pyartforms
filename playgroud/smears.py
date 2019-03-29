@@ -535,7 +535,7 @@ def mazy11(draw, params):
     if dy*cnt < h:  # lame fix for small images
         cnt += 3
     steps = 512 #const, max rational limit
-    if steps < w:
+    if steps > w:
         steps = w
     dx = int(w/steps)
     for n in range(cnt):
