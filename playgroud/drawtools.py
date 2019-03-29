@@ -5,7 +5,7 @@
 # upd: 20180503, 08
 # upd: 20181020, 21
 # upd: 20190112, 19, 21, 22
-# upd: 20190311
+# upd: 20190311, 29
 
 from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin
 from datetime import datetime as dt
@@ -98,12 +98,12 @@ def script_it(draw, xy, font, size, fill):
     fnt = ImageFont.truetype(font, size)
     draw.text(xy, "Noniewicz.art.pl", font=fnt, fill=fill)
 
-def append_myself():
+def append_myself(title):
     x = PngImagePlugin.PngInfo()
-    #x.add_itxt(key='Title', value='test title', lang='', tkey='', zip=False)
-    #x.add_itxt(key='Description', value='test description', lang='', tkey='', zip=False)
-    #x.add_itxt(key='Author', value='test author', lang='', tkey='E', zip=False)
-    #x.add_itxt(key='Copyright', value='(c)2018 Jakub Noniewicz', lang='', tkey='', zip=False)
+    x.add_itxt(key='Title', value=title, lang='', tkey='', zip=False)
+    x.add_itxt(key='Description', value='generated in pyartforms', lang='', tkey='', zip=False)
+    x.add_itxt(key='Author', value='Jakub Noniewicz', lang='', tkey='E', zip=False)
+    x.add_itxt(key='Copyright', value='(c) Jakub Noniewicz', lang='', tkey='', zip=False)
     x.add_itxt(key='Concept', value='pyartforms concept by: Jakub Noniewicz | http://noniewicz.com | http://noniewicz.art.pl', lang='', tkey='', zip=False)
     return x
 
@@ -120,7 +120,7 @@ def im2cgi(im, format='PNG'):
         format='PNG'
     imgByteArr = io.BytesIO()
     if format == 'PNG':
-        im.save(imgByteArr, format=format, pnginfo=append_myself())
+        im.save(imgByteArr, format=format, pnginfo=append_myself('pyartforms'))
     else:
         im.save(imgByteArr, format=format)
     imgByteArr = imgByteArr.getvalue()

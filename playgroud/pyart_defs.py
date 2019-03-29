@@ -9,6 +9,11 @@
 
 # predefined forms
 
+# TODO:
+# - add alpha ver for: 1 / 2 ~60 ?
+# - opt off blur for lowres #1
+# -
+
 from drawtools import get_canvas, art_painter
 from life1 import life
 from lissajous import lissajous, lissajous_loop
@@ -244,6 +249,11 @@ def predef_mazy3(w, h):
 def predef_mazy4(w, h):
     return [
         {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 255), 'n': 5, 'mode': 'center', 'color': 'happy'},
+        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 255), 'n': 5, 'mode': 'center', 'color': 'wryb'},
+
+        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 255), 'n': 5, 'mode': 'center', 'color': 'happy', 'addalpha': 50},
+        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 255), 'n': 5, 'mode': 'center', 'color': 'wryb', 'addalpha': 50},
+
         {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 0), 'n': 5, 'mode': 'center', 'color': 'red'},
         {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 0), 'n': 5, 'mode': 'center', 'color': 'rg'},
         {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 0), 'n': 5, 'mode': 'center', 'color': 'green'},
@@ -253,9 +263,6 @@ def predef_mazy4(w, h):
         {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (0, 0, 0), 'n': 8, 'mode': 'center', 'color': 'bw'},
         {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (192, 192, 192), 'n': 11, 'mode': 'center', 'color': 'happy'},
         {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (192, 192, 192), 'n': 11, 'mode': 'center', 'color': 'wryb'},
-
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (192, 192, 192), 'n': 11, 'mode': 'center', 'color': 'happy', 'addalpha': 70},
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (192, 192, 192), 'n': 11, 'mode': 'center', 'color': 'wryb', 'addalpha': 70},
     ]
 
 def predef_mazy5(w, h):
