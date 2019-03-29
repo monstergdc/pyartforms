@@ -99,11 +99,11 @@ def script_it(draw, xy, font, size, fill):
     draw.text(xy, "Noniewicz.art.pl", font=fnt, fill=fill)
 
 def add_myself(draw, w, h, bg):
-    # note: my srv specific
+    # note: needs local font on server
     txt = "Noniewicz.art.pl"
     fnt = ImageFont.truetype(font='./timesbi.ttf', size=14)
     twh = fnt.getsize(txt)
-    bgx = (bg[0]^255, bg[1]^255, bg[2]^255)
+    bgx = (bg[0]^255&0xF0, bg[1]^255&0xF0, bg[2]^255&0xF0)
     draw.text((w-twh[0]-2, h-twh[1]-2), txt, font=fnt, fill=bgx)
 
 def append_myself(title):
