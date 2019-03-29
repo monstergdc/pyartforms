@@ -531,9 +531,13 @@ def mazy11(draw, params):
     h = params['h']
     cnt = params['n']
     random.seed()
-    dy = h/cnt
+    dy = int(h/cnt)
+    if dy*cnt < h:  # lame fix for small images
+        cnt += 3
     steps = 512 #const, max rational limit
-    dx = w/steps
+    if steps < w:
+        steps = w
+    dx = int(w/steps)
     for n in range(cnt):
         n1 = random.randint(0, 7)
         #n2 = random.randint(0, 7)
