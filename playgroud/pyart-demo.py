@@ -5,7 +5,7 @@
 # (c)2018-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20181020
 # upd: 20190105, 06, 13, 18, 19, 22
-# upd: 20190302, 03
+# upd: 20190302, 03, 30
 
 # TODO:
 # - nice argparse (also per module?)
@@ -80,22 +80,13 @@ def do_mandelbrot(cnt, w, h, odir):
 
 # --- smears
 
-def do_mazy3(cnt, w, h, odir):
-    p = predef_mazy3(w, h)
-    for n in range(cnt):
-        ts = dt.now().strftime('%Y%m%d%H%M%S')
-        for i in range(len(p)):
-            for mode in ['std', 'center', 'xcenter', 'rnd']:
-                p[i]['mode'] = mode
-                art_painter(p[i], odir+'mazy3-%dx%d-%02d-%03d-%s-%s.png' % (w, h, i+1, n+1, mode, ts))
-
 def do_mazy(cnt, w, h, odir, name):
     if name == 'mazy01':
         p = predef_mazy1(w, h)
     if name == 'mazy02':
         p = predef_mazy2(w, h)
-    #if name == 'mazy03':
-        #?
+    if name == 'mazy03':
+        p = predef_mazy3(w, h)
     if name == 'mazy04':
         p = predef_mazy4(w, h)
     if name == 'mazy05':
@@ -129,7 +120,7 @@ w, h = get_canvas('A3') # for demo use this, not too big, not too small
 cnt = 3 # note: it takes some time
 do_mazy(cnt, w, h, odir, 'mazy01')
 do_mazy(cnt, w, h, odir, 'mazy02') # fix: does not scale down well
-do_mazy3(cnt, w, h, odir) # lame, need fix
+do_mazy(cnt, w, h, odir, 'mazy03')
 do_mazy(cnt, w, h, odir, 'mazy04') # also a bit lame, only red ok, add blue
 do_mazy(cnt, w, h, odir, 'mazy05')
 do_mazy(cnt, w, h, odir, 'mazy06')

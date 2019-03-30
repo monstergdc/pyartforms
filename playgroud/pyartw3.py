@@ -7,7 +7,7 @@
 # cre: 20181019
 # upd; 20181020, 21
 # upd; 20190118, 19
-# upd; 20190329
+# upd; 20190329, 30
 
 # TODO:
 # - ?
@@ -47,6 +47,8 @@ if what == "smears1":
     p = predef_mazy1(w, h)
 if what == "smears2":
     p = predef_mazy2(w, h)
+if what == "smears3":
+    p = predef_mazy3(w, h)
 if what == "smears4":
     p = predef_mazy4(w, h)
 if what == "smears5":

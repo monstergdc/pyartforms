@@ -163,22 +163,19 @@ def mazy3(draw, params):
         return r(p, 2)
 
     pold = [(r2(w), r2(h)), (r2(w), r2(h)), (r2(w), r2(h))]
-    d = 1.3
+    #d = 1.3 # par?
+    d = 0.5
     for n in range(cnt):
-        if params['mode'] == 'std':
-            po = [(r3(w), r3(h)), (r3(w), r3(h)), (r3(w), r3(h))]
-            cycle = n % 2
         if params['mode'] == 'center':
             po = [(r(w, d), r(h, d)), (r(w, d), r(h, d)), (r(w, d), r(h, d))]
             cycle = -1
-            d = d + 0.2
+            d = d + 0.06 # par
         if params['mode'] == 'xcenter':
-            d = 2.2
+            d = 2.2 # par
             po = [(int(w/2), int(h/2)), (r(w, d), r(h, d)), (r(w, d), r(h, d))]
             cycle = -1
-            #d = d + 0.2
         if params['mode'] == 'rnd':
-            d = 2.2
+            d = 2.2 # par
             po = [(r(w, d), r(h, d)), (r(w, d), r(h, d)), (r(w, d), r(h, d))]
             cycle = -1
         if cycle == 0:
@@ -192,7 +189,6 @@ def mazy3(draw, params):
             po[0] = pold[0]
         pold = po
 
-        #color = old_colorer(params)
         color = new_colorer(params['color'], n, cnt)
         if 'addalpha' in params:
             color = add_alpha(color, params['addalpha'])
@@ -517,7 +513,7 @@ def mazy11(draw, params):
     steps = 512 #const, max rational limit
     if steps > w:
         steps = w
-    dx = int(w/steps)
+    dx = (w/steps) # int ???
     for n in range(cnt):
         n1 = random.randint(0, 7)
         #n2 = random.randint(0, 7)

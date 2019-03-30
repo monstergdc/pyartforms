@@ -5,7 +5,7 @@
 # (c)2018-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20181020
 # upd: 20190105, 06, 13, 18, 21, 22
-# upd: 20190311
+# upd: 20190311, 30
 
 # predefined forms
 
@@ -14,6 +14,7 @@
 # - opt off blur for lowres #1
 # -
 
+import copy
 from drawtools import get_canvas, art_painter
 from life1 import life
 from lissajous import lissajous, lissajous_loop
@@ -24,29 +25,35 @@ from smears import *
 from pyart_defs import *
 
 
+bg_black = (0, 0, 0)
+bg_gray = (192, 192, 192)
+bg_white = (255, 255, 255)
+bg_yellow = (255, 255, 0)
+bg_orange = (255, 128, 0)
+
+
 # --- life
 
 def predef_life(w, h):
     return [
-        {'name': 'LIFE', 'call': life, 'w': w, 'h': h, 'Background': (0, 0, 0), 'Color': (255,255,255), 'f': 'f2a'},
-        {'name': 'LIFE', 'call': life, 'w': w, 'h': h, 'Background': (0, 0, 0), 'Color': (255,255,255), 'f': 'f2b'},
-        {'name': 'LIFE', 'call': life, 'w': w, 'h': h, 'Background': (0, 0, 0), 'Color': (255,255,255), 'f': 'f2c'},
-        {'name': 'LIFE', 'call': life, 'w': w, 'h': h, 'Background': (0, 0, 0), 'Color': (255,255,255), 'f': 'f2d'},
-        {'name': 'LIFE', 'call': life, 'w': w, 'h': h, 'Background': (0, 0, 0), 'Color': (255,255,255), 'f': 'f2e'},
-        {'name': 'LIFE', 'call': life, 'w': w, 'h': h, 'Background': (0, 0, 0), 'Color': (255,255,255), 'f': 'f2f'},
-        {'name': 'LIFE', 'call': life, 'w': w, 'h': h, 'Background': (0, 0, 0), 'Color': (255,255,255), 'f': 'f2g'}
+        {'name': 'LIFE', 'call': life, 'w': w, 'h': h, 'Background': bg_black, 'Color': (255,255,255), 'f': 'f2a'},
+        {'name': 'LIFE', 'call': life, 'w': w, 'h': h, 'Background': bg_black, 'Color': (255,255,255), 'f': 'f2b'},
+        {'name': 'LIFE', 'call': life, 'w': w, 'h': h, 'Background': bg_black, 'Color': (255,255,255), 'f': 'f2c'},
+        {'name': 'LIFE', 'call': life, 'w': w, 'h': h, 'Background': bg_black, 'Color': (255,255,255), 'f': 'f2d'},
+        {'name': 'LIFE', 'call': life, 'w': w, 'h': h, 'Background': bg_black, 'Color': (255,255,255), 'f': 'f2e'},
+        {'name': 'LIFE', 'call': life, 'w': w, 'h': h, 'Background': bg_black, 'Color': (255,255,255), 'f': 'f2f'},
+        {'name': 'LIFE', 'call': life, 'w': w, 'h': h, 'Background': bg_black, 'Color': (255,255,255), 'f': 'f2g'}
     ]
 
 # --- lissajous
 
 def predef_lissajous(w, h):
-    bg = (0, 0, 0)
     return [
-        {'w': w, 'h': h, 'name': 'LISSAJOUS', 'call': lissajous_loop, 'Background': bg, 'LineColor': (255,255,255), 'LineWidth': 10,
+        {'w': w, 'h': h, 'name': 'LISSAJOUS', 'call': lissajous_loop, 'Background': bg_black, 'LineColor': (255,255,255), 'LineWidth': 10,
         'FF1': 19.0, 'FF2': 31.0, 'FFi': 0, 'dT': 1, 'Steps': 2000, 'Scale': 0.9},
-        {'w': w, 'h': h, 'name': 'LISSAJOUS', 'call': lissajous_loop, 'Background': bg, 'LineColor': (50,255,50), 'LineWidth': 10,
+        {'w': w, 'h': h, 'name': 'LISSAJOUS', 'call': lissajous_loop, 'Background': bg_black, 'LineColor': (50,255,50), 'LineWidth': 10,
         'FF1': 3.0, 'FF2': 4.0, 'FFi': 0, 'dT': 1, 'Steps': 2000, 'Scale': 0.9},
-        {'w': w, 'h': h, 'name': 'LISSAJOUS', 'call': lissajous_loop, 'Background': bg, 'LineColor': (50,255,50), 'LineWidth': 10,
+        {'w': w, 'h': h, 'name': 'LISSAJOUS', 'call': lissajous_loop, 'Background': bg_black, 'LineColor': (50,255,50), 'LineWidth': 10,
         'FF1': 2.0, 'FF2': 3.0, 'FFi': 0, 'dT': 1, 'Steps': 2000, 'Scale': 0.9}
     ]
    
@@ -68,48 +75,48 @@ def predef_waves(w, h):
         'c2': (0,255,0),
         'c3': (255,255,0),
         },
-        {'name': 'WAVES#1', 'call': waves1, 'w': w, 'h': h, 'Background': (0, 0, 0),
+        {'name': 'WAVES#1', 'call': waves1, 'w': w, 'h': h, 'Background': bg_black,
         'z': 9, 'f0': 1, 'horizontal': False,
         'gradient': 24,
         'c1': (0,0,0),
         'c2': (255,0,0),
         'c3': (255,255,0),
         },
-        {'name': 'WAVES#1', 'call': waves1, 'w': w, 'h': h, 'Background': (0, 0, 0),
+        {'name': 'WAVES#1', 'call': waves1, 'w': w, 'h': h, 'Background': bg_black,
         'z': 4, 'f0': 0.33, 'horizontal': True,
         'gradient': 256,
         'c1': (255,0,0),
         'c2': (0,255,0),
         'c3': (0,0,255),
         },
-        {'name': 'WAVES#1', 'call': waves1, 'w': w, 'h': h, 'Background': (0, 0, 0),
+        {'name': 'WAVES#1', 'call': waves1, 'w': w, 'h': h, 'Background': bg_black,
         'z': 4, 'f0': 3.0, 'horizontal': True,
         'gradient': 256,
         'c1': (255,0,0),
         'c2': (0,255,0),
         'c3': (0,0,255),
         },
-        {'name': 'WAVES#2', 'call': waves2, 'w': w, 'h': h, 'Background': (0, 0, 0),
+        {'name': 'WAVES#2', 'call': waves2, 'w': w, 'h': h, 'Background': bg_black,
         'z': 96, 'f0': 1, 'horizontal': False,
         'gradient': 256,
         'c1': (255,0,0),
         'c2': (255,255,0),
         'c3': (255,255,255),
         },
-        {'name': 'WAVES#2', 'call': waves2, 'w': w, 'h': h, 'Background': (0, 0, 0),
+        {'name': 'WAVES#2', 'call': waves2, 'w': w, 'h': h, 'Background': bg_black,
         'z': 48, 'f0': 1, 'horizontal': True,
         'gradient': 256,
         'c1': (0,128,0),
         'c2': (0,255,0),
         'c3': (0,0,255),
         },
-        {'name': 'WAVES#3', 'call': waves3, 'w': w, 'h': h, 'Background': (0, 0, 0),
+        {'name': 'WAVES#3', 'call': waves3, 'w': w, 'h': h, 'Background': bg_black,
         'z': 18, 'gradient': 64,
         'c1': (255,255,255),
         'c2': (255,255,0),
         'c3': (255,0,0),
         }
-#        {'name': 'WAVES#2#MUX', 'call': waves_mux, 'w': w, 'h': h, 'Background': (0, 0, 0),
+#        {'name': 'WAVES#2#MUX', 'call': waves_mux, 'w': w, 'h': h, 'Background': bg_black,
 #        'par1': params1a, 'par2': params2a,
 #        }
     ]
@@ -146,327 +153,364 @@ def predef_mandelbrot(w, h):
 
 # --- smears
 
-# note: use this for aplha (but call must handle alpha value too)
-# , 'alpha': True
+# note: use this for aplha (but call must handle alpha value too): 'alpha': True
 
 def predef_mazy1(w, h):
-    bg_white = (255, 255, 255)
-    bg_yellow = (255, 255, 0)
+    n = 'SMEARS#1'
     return [
-        {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
         'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False,
         'r0': 64, 'g0': 64, 'b0': 64,
         'r1': 256, 'g1': 256, 'b1': 256},
 
-#        {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+#        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
 #        'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False,
 #        'r0': 64, 'g0': 64, 'b0': 64,
 #        'r1': 256, 'g1': 256, 'b1': 256, 'alpha': True},
 
-        {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
         'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False, 'color': 'happy',
         'r0': 64, 'g0': 64, 'b0': 64,
         'r1': 256, 'g1': 256, 'b1': 256},
 
-        {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
         'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False, 'color': 'wryb',
         'r0': 64, 'g0': 64, 'b0': 64,
         'r1': 256, 'g1': 256, 'b1': 256},
 
-#        {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+#        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
 #        'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False, 'color': 'happy',
 #        'r0': 64, 'g0': 64, 'b0': 64,
 #        'r1': 256, 'g1': 256, 'b1': 256, 'alpha': True},
 
 #addalpha=60
         
-        {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
         'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False, 'color': 'rg',
         'r0': 64, 'g0': 64, 'b0': 64,
         'r1': 256, 'g1': 256, 'b1': 256},
-        {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
         'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False, 'color': 'psych',
         'r0': 64, 'g0': 64, 'b0': 64,
         'r1': 256, 'g1': 256, 'b1': 256},
-        {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
         'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': True, 'mode': 'red', 'keep': False,
         'r0': 0, 'g0': 0, 'b0': 0,
         'r1': 256, 'g1': 0, 'b1': 0},
-        {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
         'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': True, 'mode': 'happy', 'keep': False,
         'r0': 0, 'g0': 0, 'b0': 0,
         'r1': 256, 'g1': 0, 'b1': 0},
-        {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
         'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': True, 'mode': 'wryb', 'keep': False,
         'r0': 0, 'g0': 0, 'b0': 0,
         'r1': 256, 'g1': 0, 'b1': 0},
-        {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
         'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': True, 'mode': 'psych', 'keep': False,
         'r0': 0, 'g0': 0, 'b0': 0,
         'r1': 256, 'g1': 0, 'b1': 0},
-        {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
         'penw': 8, 'v': 30, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'red', 'keep': False,
         'r0': 64, 'g0': 64, 'b0': 0,
         'r1': 256, 'g1': 256, 'b1': 32},
-        {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
         'penw': 8, 'v': 30, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'red', 'keep': False,
         'r0': 0, 'g0': 64, 'b0': 0,
         'r1': 32, 'g1': 256, 'b1': 32},
-        {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_yellow,
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_yellow,
         'penw': 5, 'v': 200, 'n': 50, 'm': 25, 'prefill': False, 'blur': False, 'mode': 'red', 'keep': True,
         'r0': 0, 'g0': 0, 'b0': 0,
         'r1': 256, 'g1': 256, 'b1': 256},
-        {'name': 'SMEARS#1', 'call': mazy1, 'w': w, 'h': h, 'Background': bg_yellow,
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_yellow,
         'penw': 5, 'v': 120, 'n': 48, 'm': 12, 'prefill': True, 'blur': False, 'mode': 'red', 'keep': True,
         'r0': 16, 'g0': 64, 'b0': 128,
         'r1': 128, 'g1': 256, 'b1': 256}
     ]
 
 def predef_mazy2(w, h):
+    n = 'SMEARS#2'
     return [
-        {'name': 'SMEARS#2', 'call': mazy2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'v': 20, 'n': 100, 'm': 40, 'blur': False,
+        {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'v': 20, 'n': 100, 'm': 40,
         'c0': (64, 64, 64), 'c1': (255, 255, 255), 'mode': 'black'},
-        {'name': 'SMEARS#2', 'call': mazy2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'v': 90, 'n': 90, 'm': 50, 'blur': False,
+        {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'v': 90, 'n': 90, 'm': 50,
         'c0': (0, 0, 0), 'c1': (255, 0, 0), 'mode': 'red'},
-        {'name': 'SMEARS#2', 'call': mazy2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'v': 50, 'n': 50, 'm': 25, 'blur': False,
+        {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'v': 50, 'n': 50, 'm': 25,
         'c0': (32, 64, 64), 'c1': (64, 255, 255), 'mode': 'color'},
-        {'name': 'SMEARS#2', 'call': mazy2, 'w': w, 'h': h, 'Background': (0, 0, 0), 'v': 22, 'n': 40, 'm': 35, 'blur': False,
+        {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'v': 22, 'n': 40, 'm': 35,
         'c0': (32, 0, 0), 'c1': (255, 0, 0), 'mode': 'black'}
     ]
 
 def predef_mazy3(w, h):
-    bg_black = (0, 0, 0)
-    bg_white = (255, 255, 255)
-    bg_yellow = (255, 255, 0)
-    return [
-        {'name': 'SMEARS#3', 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 20, 'color': 'happy'},
-        {'name': 'SMEARS#3', 'call': mazy3, 'w': w, 'h': h, 'Background': bg_yellow, 'n': 25+5, 'color': 'red'},
-        {'name': 'SMEARS#3', 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 30, 'color': 'rg'},
-        {'name': 'SMEARS#3', 'call': mazy3, 'w': w, 'h': h, 'Background': bg_yellow, 'n': 20, 'color': 'green'},
-        {'name': 'SMEARS#3', 'call': mazy3, 'w': w, 'h': h, 'Background': bg_yellow, 'n': 30+20, 'color': 'bg'},
-        {'name': 'SMEARS#3', 'call': mazy3, 'w': w, 'h': h, 'Background': bg_black, 'n': 20, 'color': 'red'},
-        {'name': 'SMEARS#3', 'call': mazy3, 'w': w, 'h': h, 'Background': bg_black, 'n': 20, 'color': 'bw'},
-        {'name': 'SMEARS#3', 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 20, 'color': 'wryb'},
-        {'name': 'SMEARS#3', 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 20, 'color': 'avatar'},
-        {'name': 'SMEARS#3', 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 20, 'color': 'psych'},
+    n = 'SMEARS#3'
+    a = [
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 20, 'color': 'happy'},
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 20, 'color': 'wryb'},
+
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 80, 'color': 'happy'},
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 80, 'color': 'wryb'},
+
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_yellow, 'n': 30, 'color': 'red'},
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_yellow, 'n': 80, 'color': 'red'},
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_black, 'n': 30, 'color': 'red'},
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_black, 'n': 80, 'color': 'red'},
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_black, 'n': 20, 'color': 'bw'},
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 30, 'color': 'rg'},
+
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_orange, 'n': 80, 'color': 'bwx'},
+
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 90, 'color': 'happy', 'addalpha': 50},
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 90, 'color': 'wryb', 'addalpha': 50},
+
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_yellow, 'n': 90, 'color': 'red', 'addalpha': 50},
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_black, 'n': 90, 'color': 'red', 'addalpha': 50},
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_black, 'n': 90, 'color': 'bw', 'addalpha': 50},
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 90, 'color': 'rg', 'addalpha': 50},
+
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_orange, 'n': 80, 'color': 'bwx', 'addalpha': 50},
     ]
+    a1 = copy.deepcopy(a)
+    a2 = copy.deepcopy(a)
+    a3 = copy.deepcopy(a)
+    for i in range(len(a)):
+        a1[i]['mode'] = 'center'
+        a1[i]['name'] = n+'center'
+        a2[i]['mode'] = 'xcenter'
+        a2[i]['name'] = n+'xcenter'
+        a3[i]['mode'] = 'rnd'
+        a3[i]['name'] = n+'rnd'
+    return np.concatenate((a1, a2, a3), axis=0)
 
 def predef_mazy4(w, h):
+    n = 'SMEARS#4'
     return [
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 255), 'n': 5, 'mode': 'center', 'color': 'happy'},
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 255), 'n': 5, 'mode': 'center', 'color': 'wryb'},
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 255), 'n': 4, 'mode': 'center', 'color': 'bgo'},
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 255), 'n': 8, 'mode': 'center', 'color': 'avatar'},
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 255), 'n': 8, 'mode': 'center', 'color': 'psych'},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 5, 'mode': 'center', 'color': 'happy'},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 5, 'mode': 'center', 'color': 'wryb'},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 4, 'mode': 'center', 'color': 'bgo'},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 8, 'mode': 'center', 'color': 'avatar'},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 8, 'mode': 'center', 'color': 'psych'},
 
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 255), 'n': 5, 'mode': 'center', 'color': 'happy', 'addalpha': 50},
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 255), 'n': 5, 'mode': 'center', 'color': 'wryb', 'addalpha': 50},
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 255), 'n': 4, 'mode': 'center', 'color': 'bgo', 'addalpha': 50},
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 255), 'n': 8, 'mode': 'center', 'color': 'avatar', 'addalpha': 50},
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 255), 'n': 8, 'mode': 'center', 'color': 'psych', 'addalpha': 50},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 5, 'mode': 'center', 'color': 'happy', 'addalpha': 90},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 5, 'mode': 'center', 'color': 'wryb', 'addalpha': 90},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 4, 'mode': 'center', 'color': 'bgo', 'addalpha': 90},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 8, 'mode': 'center', 'color': 'avatar', 'addalpha': 90},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 8, 'mode': 'center', 'color': 'psych', 'addalpha': 90},
 
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 255), 'n': 20, 'mode': '', 'color': 'happy', 'addalpha': 50},
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 255), 'n': 20, 'mode': '', 'color': 'wryb', 'addalpha': 50},
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 255), 'n': 20, 'mode': '', 'color': 'bgo', 'addalpha': 50},
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 255), 'n': 20, 'mode': '', 'color': 'avatar', 'addalpha': 50},
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 255), 'n': 20, 'mode': '', 'color': 'psych', 'addalpha': 50},
-        
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 0), 'n': 5, 'mode': 'center', 'color': 'red'},
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 0), 'n': 5, 'mode': 'center', 'color': 'rg'},
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 0), 'n': 5, 'mode': 'center', 'color': 'green'},
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (255, 255, 0), 'n': 4, 'mode': 'center', 'color': 'bg'},
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (0, 0, 0), 'n': 5, 'mode': '', 'color': 'red'},
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (128, 0, 0), 'n': 20, 'mode': '', 'color': 'red'}, # ?
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (0, 0, 0), 'n': 3, 'mode': 'center', 'color': 'red'},
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (0, 0, 0), 'n': 8, 'mode': 'center', 'color': 'bw'},
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (192, 192, 192), 'n': 11, 'mode': 'center', 'color': 'happy'},
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (192, 192, 192), 'n': 11, 'mode': 'center', 'color': 'wryb'},
-        {'name': 'SMEARS#4', 'call': mazy4, 'w': w, 'h': h, 'Background': (0, 0, 0), 'n': 11, 'mode': 'center', 'color': 'psych'},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 20, 'mode': '', 'color': 'happy', 'addalpha': 50},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 20, 'mode': '', 'color': 'wryb', 'addalpha': 50},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 20, 'mode': '', 'color': 'bgo', 'addalpha': 50},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 20, 'mode': '', 'color': 'avatar', 'addalpha': 50},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 20, 'mode': '', 'color': 'psych', 'addalpha': 50},
+
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_yellow, 'n': 5, 'mode': 'center', 'color': 'red'},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_yellow, 'n': 5, 'mode': 'center', 'color': 'rg'},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_yellow, 'n': 5, 'mode': 'center', 'color': 'green'},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_yellow, 'n': 4, 'mode': 'center', 'color': 'bg'},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_black, 'n': 5, 'mode': '', 'color': 'red'},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': (128, 0, 0), 'n': 20, 'mode': '', 'color': 'red'}, # ?
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_black, 'n': 3, 'mode': 'center', 'color': 'red'},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_black, 'n': 8, 'mode': 'center', 'color': 'bw'},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_gray, 'n': 11, 'mode': 'center', 'color': 'happy'},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_gray, 'n': 11, 'mode': 'center', 'color': 'wryb'},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_black, 'n': 11, 'mode': 'center', 'color': 'psych'},
     ]
 
 def predef_mazy5(w, h):
-    bk = (0, 0, 0)
+    n = 'SMEARS#5'
     return [
-        {'name': 'SMEARS#5', 'call': mazy5, 'w': w, 'h': h, 'Background': bk, 'colors': colors_b, 'outline': None},
-        {'name': 'SMEARS#5', 'call': mazy5, 'w': w, 'h': h, 'Background': bk, 'colors': colors_y, 'outline': None},
-        {'name': 'SMEARS#5', 'call': mazy5, 'w': w, 'h': h, 'Background': bk, 'colors': colors_p, 'outline': (0, 0, 0)},
-        {'name': 'SMEARS#5', 'call': mazy5, 'w': w, 'h': h, 'Background': bk, 'colors': colors_bw, 'outline': None},
-        {'name': 'SMEARS#5', 'call': mazy5, 'w': w, 'h': h, 'Background': bk, 'colors': colors_happy, 'outline': None}
+        {'name': n, 'call': mazy5, 'w': w, 'h': h, 'Background': bg_black, 'colors': colors_b, 'outline': None},
+        {'name': n, 'call': mazy5, 'w': w, 'h': h, 'Background': bg_black, 'colors': colors_y, 'outline': None},
+        {'name': n, 'call': mazy5, 'w': w, 'h': h, 'Background': bg_black, 'colors': colors_p, 'outline': (0, 0, 0)},
+        {'name': n, 'call': mazy5, 'w': w, 'h': h, 'Background': bg_black, 'colors': colors_bw, 'outline': None},
+        {'name': n, 'call': mazy5, 'w': w, 'h': h, 'Background': bg_black, 'colors': colors_happy, 'outline': None}
     ]
 
 def predef_mazy6(w, h):
-    bk = (0, 0, 0)
+    n = 'SMEARS#6'
     return [
-        {'name': 'SMEARS#6', 'call': mazy6, 'w': w, 'h': h, 'Background': bk, 'mode': 'red', 'cnt': 18},
-        {'name': 'SMEARS#6', 'call': mazy6, 'w': w, 'h': h, 'Background': bk, 'mode': 'blue', 'cnt': 18},
-        {'name': 'SMEARS#6', 'call': mazy6, 'w': w, 'h': h, 'Background': bk, 'mode': 'black', 'cnt': 18},
-        {'name': 'SMEARS#6', 'call': mazy6, 'w': w, 'h': h, 'Background': bk, 'mode': 'rg', 'cnt': 18},
-        {'name': 'SMEARS#6', 'call': mazy6, 'w': w, 'h': h, 'Background': bk, 'mode': 'gb', 'cnt': 18}
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'red', 'cnt': 18},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'blue', 'cnt': 18},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'black', 'cnt': 18},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'rg', 'cnt': 18},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'gb', 'cnt': 18}
     ]
 
 def predef_mazy7(w, h):
+    n = 'SMEARS#7'
     bk = (0x84, 0x8B, 0x9B)
     return [
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 500,  'cmode': 'rnd', 'mode': 'const'},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 2000, 'cmode': 'rnd', 'mode': 'const'},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 200,  'cmode': 'std', 'mode': 'decp'},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 100,  'cmode': 'std', 'mode': 'decp'},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 50,   'cmode': 'std', 'mode': 'decp'},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 10,   'cmode': 'std', 'mode': 'decp'},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 200,  'cmode': 'std', 'mode': 'dec'},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 100,  'cmode': 'std', 'mode': 'dec'},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 50,   'cmode': 'std', 'mode': 'dec'},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 10,   'cmode': 'std', 'mode': 'dec'},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 200,  'cmode': 'inv', 'mode': 'dec'},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 100,  'cmode': 'inv', 'mode': 'dec'},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 50,   'cmode': 'inv', 'mode': 'dec'},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 10,   'cmode': 'inv', 'mode': 'dec'},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 200,  'cmode': 'rnd', 'mode': 'dec'},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 100,  'cmode': 'rnd', 'mode': 'dec'},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 50,   'cmode': 'rnd', 'mode': 'dec'},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 10,   'cmode': 'rnd', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 500,  'cmode': 'rnd', 'mode': 'const'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 2000, 'cmode': 'rnd', 'mode': 'const'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 200,  'cmode': 'std', 'mode': 'decp'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 100,  'cmode': 'std', 'mode': 'decp'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 50,   'cmode': 'std', 'mode': 'decp'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 10,   'cmode': 'std', 'mode': 'decp'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 200,  'cmode': 'std', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 100,  'cmode': 'std', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 50,   'cmode': 'std', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 10,   'cmode': 'std', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 200,  'cmode': 'inv', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 100,  'cmode': 'inv', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 50,   'cmode': 'inv', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 10,   'cmode': 'inv', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 200,  'cmode': 'rnd', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 100,  'cmode': 'rnd', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 50,   'cmode': 'rnd', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 10,   'cmode': 'rnd', 'mode': 'dec'},
 
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 200,  'cmode': 'color', 'mode': 'dec'},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 100,  'cmode': 'color', 'mode': 'dec'},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 50,   'cmode': 'color', 'mode': 'dec'},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 10,   'cmode': 'color', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 200,  'cmode': 'color', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 100,  'cmode': 'color', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 50,   'cmode': 'color', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 10,   'cmode': 'color', 'mode': 'dec'},
 
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 200,  'cmode': 'color', 'mode': 'dec', 'addalpha': 99},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 100,  'cmode': 'color', 'mode': 'dec', 'addalpha': 99},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 50,   'cmode': 'color', 'mode': 'dec', 'addalpha': 99},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 10,   'cmode': 'color', 'mode': 'dec', 'addalpha': 99},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 200,  'cmode': 'color', 'mode': 'dec', 'addalpha': 99},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 100,  'cmode': 'color', 'mode': 'dec', 'addalpha': 99},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 50,   'cmode': 'color', 'mode': 'dec', 'addalpha': 99},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 10,   'cmode': 'color', 'mode': 'dec', 'addalpha': 99},
 
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 200,  'cmode': 'wryb', 'mode': 'dec'},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 100,  'cmode': 'wryb', 'mode': 'dec'},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 50,   'cmode': 'wryb', 'mode': 'dec'},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 10,   'cmode': 'wryb', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 200,  'cmode': 'wryb', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 100,  'cmode': 'wryb', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 50,   'cmode': 'wryb', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 10,   'cmode': 'wryb', 'mode': 'dec'},
 
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 200,  'cmode': 'wryb', 'mode': 'dec', 'addalpha': 99},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 100,  'cmode': 'wryb', 'mode': 'dec', 'addalpha': 99},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 50,   'cmode': 'wryb', 'mode': 'dec', 'addalpha': 99},
-        {'name': 'SMEARS#7', 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 10,   'cmode': 'wryb', 'mode': 'dec', 'addalpha': 99},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 200,  'cmode': 'wryb', 'mode': 'dec', 'addalpha': 99},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 100,  'cmode': 'wryb', 'mode': 'dec', 'addalpha': 99},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 50,   'cmode': 'wryb', 'mode': 'dec', 'addalpha': 99},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 10,   'cmode': 'wryb', 'mode': 'dec', 'addalpha': 99},
     ]
 
 def predef_mazy8(w, h):
-    bk = (255, 255, 255)
+    n = 'SMEARS#8'
     return [
-        {'name': 'SMEARS#8', 'call': mazy8, 'w': w, 'h': h, 'Background': bk, 'mode': '', 'xcnt': 5, 'ycnt': 5},
-        {'name': 'SMEARS#8', 'call': mazy8, 'w': w, 'h': h, 'Background': bk, 'mode': '', 'xcnt': 5, 'ycnt': 10},
-        {'name': 'SMEARS#8', 'call': mazy8, 'w': w, 'h': h, 'Background': bk, 'mode': '', 'xcnt': 5, 'ycnt': 3},
-        {'name': 'SMEARS#8', 'call': mazy8, 'w': w, 'h': h, 'Background': bk, 'mode': '', 'xcnt': 15, 'ycnt': 5}
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 5, 'ycnt': 5},
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 5, 'ycnt': 10},
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 5, 'ycnt': 3},
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 15, 'ycnt': 5}
     ]
 
 def predef_mazy9(w, h):
-        v = float(h)/8
-        v2 = float(h)/2
-        v3 = float(h)/32
-        return [
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 16, 'Background': (0,0,0), 'color': 'happy', 'v': 0, 'rndc': True},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'happy', 'v': 0, 'rndc': True},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'happy', 'v': 0, 'rndc': True},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 128, 'Background': (0,0,0), 'color': 'happy', 'v': 0, 'rndc': True},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 16, 'Background': (0,0,0), 'color': 'psych', 'v': 0, 'rndc': True},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'psych', 'v': 0, 'rndc': True},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'psych', 'v': 0, 'rndc': True},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 128, 'Background': (0,0,0), 'color': 'psych', 'v': 0, 'rndc': True},
+    n = 'SMEARS#9'
+    v = float(h)/8
+    v2 = float(h)/2
+    v3 = float(h)/32
+    return [
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 16, 'Background': bg_black, 'color': 'happy', 'v': 0, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': bg_black, 'color': 'happy', 'v': 0, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': bg_black, 'color': 'happy', 'v': 0, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 128, 'Background': bg_black, 'color': 'happy', 'v': 0, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 16, 'Background': bg_black, 'color': 'psych', 'v': 0, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': bg_black, 'color': 'psych', 'v': 0, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': bg_black, 'color': 'psych', 'v': 0, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 128, 'Background': bg_black, 'color': 'psych', 'v': 0, 'rndc': True},
 
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 16, 'Background': (0,0,0), 'color': 'happy', 'v': 0},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'happy', 'v': 0},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 64, 'Background': (0,0,0), 'color': 'happy', 'v': 0},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 128, 'Background': (0,0,0), 'color': 'happy', 'v': 0},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 16, 'Background': (0,0,0), 'color': 'psych', 'v': 0},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'psych', 'v': 0},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 64, 'Background': (0,0,0), 'color': 'psych', 'v': 0},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 128, 'Background': (0,0,0), 'color': 'psych', 'v': 0},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 16, 'Background': bg_black, 'color': 'happy', 'v': 0},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': bg_black, 'color': 'happy', 'v': 0},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 64, 'Background': bg_black, 'color': 'happy', 'v': 0},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 128, 'Background': bg_black, 'color': 'happy', 'v': 0},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 16, 'Background': bg_black, 'color': 'psych', 'v': 0},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': bg_black, 'color': 'psych', 'v': 0},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 64, 'Background': bg_black, 'color': 'psych', 'v': 0},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 128, 'Background': bg_black, 'color': 'psych', 'v': 0},
            
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 16, 'Background': (0,0,0), 'color': 'red', 'v': 0},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 64, 'Background': (0,0,0), 'color': 'red', 'v': 0},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 128, 'Background': (0,0,0), 'color': 'red', 'v': 0},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 16, 'Background': (0,0,0), 'color': 'rg', 'v': 0},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 64, 'Background': (0,0,0), 'color': 'rg', 'v': 0},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 128, 'Background': (0,0,0), 'color': 'rg', 'v': 0},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 16, 'Background': (0,0,0), 'color': 'bw', 'v': 0},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 64, 'Background': (0,0,0), 'color': 'bw', 'v': 0},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 128, 'Background': (0,0,0), 'color': 'bw', 'v': 0},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 16, 'Background': bg_black, 'color': 'red', 'v': 0},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 64, 'Background': bg_black, 'color': 'red', 'v': 0},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 128, 'Background': bg_black, 'color': 'red', 'v': 0},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 16, 'Background': bg_black, 'color': 'rg', 'v': 0},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 64, 'Background': bg_black, 'color': 'rg', 'v': 0},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 128, 'Background': bg_black, 'color': 'rg', 'v': 0},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 16, 'Background': bg_black, 'color': 'bw', 'v': 0},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 64, 'Background': bg_black, 'color': 'bw', 'v': 0},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 128, 'Background': bg_black, 'color': 'bw', 'v': 0},
 
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'happy', 'v': v, 'rndc': True},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'happy', 'v': v, 'rndc': True},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': (0,0,0), 'color': 'happy', 'v': v, 'rndc': True},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'psych', 'v': v, 'rndc': True},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'psych', 'v': v, 'rndc': True},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': (0,0,0), 'color': 'psych', 'v': v, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': bg_black, 'color': 'happy', 'v': v, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': bg_black, 'color': 'happy', 'v': v, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': bg_black, 'color': 'happy', 'v': v, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': bg_black, 'color': 'psych', 'v': v, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': bg_black, 'color': 'psych', 'v': v, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': bg_black, 'color': 'psych', 'v': v, 'rndc': True},
 
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'happy', 'v': v},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'happy', 'v': v},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': (0,0,0), 'color': 'happy', 'v': v},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'psych', 'v': v},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'psych', 'v': v},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': (0,0,0), 'color': 'psych', 'v': v},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': bg_black, 'color': 'happy', 'v': v},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': bg_black, 'color': 'happy', 'v': v},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': bg_black, 'color': 'happy', 'v': v},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': bg_black, 'color': 'psych', 'v': v},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': bg_black, 'color': 'psych', 'v': v},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': bg_black, 'color': 'psych', 'v': v},
 
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'red', 'v': v},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'red', 'v': v},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': (0,0,0), 'color': 'red', 'v': v},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'rg', 'v': v},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'rg', 'v': v},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': (0,0,0), 'color': 'rg', 'v': v},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'bw', 'v': v},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'bw', 'v': v},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': (0,0,0), 'color': 'bw', 'v': v},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': bg_black, 'color': 'red', 'v': v},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': bg_black, 'color': 'red', 'v': v},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': bg_black, 'color': 'red', 'v': v},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': bg_black, 'color': 'rg', 'v': v},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': bg_black, 'color': 'rg', 'v': v},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': bg_black, 'color': 'rg', 'v': v},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': bg_black, 'color': 'bw', 'v': v},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': bg_black, 'color': 'bw', 'v': v},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': bg_black, 'color': 'bw', 'v': v},
 
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'happy', 'v': v2, 'rndc': True},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'happy', 'v': v2, 'rndc': True},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': (0,0,0), 'color': 'happy', 'v': v2, 'rndc': True},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'psych', 'v': v2, 'rndc': True},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'psych', 'v': v2, 'rndc': True},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': (0,0,0), 'color': 'psych', 'v': v2, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': bg_black, 'color': 'happy', 'v': v2, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': bg_black, 'color': 'happy', 'v': v2, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': bg_black, 'color': 'happy', 'v': v2, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': bg_black, 'color': 'psych', 'v': v2, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': bg_black, 'color': 'psych', 'v': v2, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': bg_black, 'color': 'psych', 'v': v2, 'rndc': True},
 
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'happy', 'v': v3, 'rndc': True},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'happy', 'v': v3, 'rndc': True},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': (0,0,0), 'color': 'happy', 'v': v3, 'rndc': True},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': (0,0,0), 'color': 'psych', 'v': v3, 'rndc': True},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': (0,0,0), 'color': 'psych', 'v': v3, 'rndc': True},
-            {'name': 'SMEARS#9', 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': (0,0,0), 'color': 'psych', 'v': v3, 'rndc': True},
-        ]
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': bg_black, 'color': 'happy', 'v': v3, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': bg_black, 'color': 'happy', 'v': v3, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': bg_black, 'color': 'happy', 'v': v3, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': bg_black, 'color': 'psych', 'v': v3, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': bg_black, 'color': 'psych', 'v': v3, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': bg_black, 'color': 'psych', 'v': v3, 'rndc': True},
+    ]
 
 def predef_mazy10(w, h):
-        bg_white = (255, 255, 255)
-        bk = (0x84, 0x8B, 0x9B)
-        return [
-            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 30, 'penw': 8, 'color': 'happy', 'mode': 'line', 'complexity': 70, 'open': False},
-            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'rg', 'mode': 'line', 'complexity': 70, 'open': False},
-            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'red', 'mode': 'line', 'complexity': 70, 'open': False},
-            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'wryb', 'mode': 'line', 'complexity': 70, 'open': False},
+    n = 'SMEARS#10'
+    bk = (0x84, 0x8B, 0x9B)
+    return [
+            {'name': n, 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 30, 'penw': 8, 'color': 'happy', 'mode': 'line', 'complexity': 70, 'open': False},
+            {'name': n, 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'rg', 'mode': 'line', 'complexity': 70, 'open': False},
+            {'name': n, 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'red', 'mode': 'line', 'complexity': 70, 'open': False},
+            {'name': n, 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'wryb', 'mode': 'line', 'complexity': 70, 'open': False},
 
-            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 30, 'penw': 8, 'color': 'happy', 'mode': 'line', 'complexity': 70, 'open': True},
-            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'rg', 'mode': 'line', 'complexity': 70, 'open': True},
-            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'red', 'mode': 'line', 'complexity': 70, 'open': True},
-            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'wryb', 'mode': 'line', 'complexity': 70, 'open': True},
+            {'name': n, 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 30, 'penw': 8, 'color': 'happy', 'mode': 'line', 'complexity': 70, 'open': True},
+            {'name': n, 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'rg', 'mode': 'line', 'complexity': 70, 'open': True},
+            {'name': n, 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'red', 'mode': 'line', 'complexity': 70, 'open': True},
+            {'name': n, 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'wryb', 'mode': 'line', 'complexity': 70, 'open': True},
 
-            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 30, 'penw': 8, 'color': 'happy', 'mode': 'line', 'complexity': 70, 'open': True, 'addalpha': 90},
-            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'rg', 'mode': 'line', 'complexity': 70, 'open': True, 'addalpha': 90},
-            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'red', 'mode': 'line', 'complexity': 70, 'open': True, 'addalpha': 90},
-            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'wryb', 'mode': 'line', 'complexity': 70, 'open': True, 'addalpha': 90},
+            {'name': n, 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 30, 'penw': 8, 'color': 'happy', 'mode': 'line', 'complexity': 70, 'open': True, 'addalpha': 90},
+            {'name': n, 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'rg', 'mode': 'line', 'complexity': 70, 'open': True, 'addalpha': 90},
+            {'name': n, 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'red', 'mode': 'line', 'complexity': 70, 'open': True, 'addalpha': 90},
+            {'name': n, 'call': mazy10, 'w': w, 'h': h, 'Background': bk, 'n': 40, 'penw': 8, 'color': 'wryb', 'mode': 'line', 'complexity': 70, 'open': True, 'addalpha': 90},
 # TODO: more wryb
-            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 6, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': False},
-            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 6, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': True},
+            {'name': n, 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 6, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': False},
+            {'name': n, 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 6, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': True},
 
-            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 6, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': False, 'addalpha': 80},
-            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 6, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': True, 'addalpha': 80},
+            {'name': n, 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 6, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': False, 'addalpha': 80},
+            {'name': n, 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 6, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': True, 'addalpha': 80},
 
-            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': False},
-            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': True},
+            {'name': n, 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': False},
+            {'name': n, 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': True},
 
-            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': False, 'addalpha': 80},
-            {'name': 'SMEARS#10', 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': True, 'addalpha': 80},
-        ]
+            {'name': n, 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': False, 'addalpha': 80},
+            {'name': n, 'call': mazy10, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': True, 'addalpha': 80},
+    ]
 
 def predef_mazy11(w, h):
-        bk = (0,0,0)
-        return [
-            {'name': 'SMEARS#11', 'call': mazy11, 'w': w, 'h': h, 'Background': bk, 'n': 8},
-            {'name': 'SMEARS#11', 'call': mazy11, 'w': w, 'h': h, 'Background': bk, 'n': 16},
-            {'name': 'SMEARS#11', 'call': mazy11, 'w': w, 'h': h, 'Background': bk, 'n': 64}
-        ]
+    n = 'SMEARS#11'
+    return [
+        {'name': n, 'call': mazy11, 'w': w, 'h': h, 'Background': bg_black, 'n': 8},
+        {'name': n, 'call': mazy11, 'w': w, 'h': h, 'Background': bg_black, 'n': 16},
+        {'name': n, 'call': mazy11, 'w': w, 'h': h, 'Background': bg_black, 'n': 64}
+    ]
 
+def enum_defs():
+    print('1:', len(predef_mazy1(0, 0)))
+    print('2:', len(predef_mazy2(0, 0)))
+    print('3:', len(predef_mazy3(0, 0)))
+    print('4:', len(predef_mazy4(0, 0)))
+    print('5:', len(predef_mazy5(0, 0)))
+    print('6:', len(predef_mazy6(0, 0)))
+    print('7:', len(predef_mazy7(0, 0)))
+    print('8:', len(predef_mazy8(0, 0)))
+    print('9:', len(predef_mazy9(0, 0)))
+    print('10:', len(predef_mazy10(0, 0)))
+    print('11:', len(predef_mazy11(0, 0)))
 
 # EOF
