@@ -273,11 +273,11 @@ def predef_mazy3(w, h):
     a3 = copy.deepcopy(a)
     for i in range(len(a)):
         a1[i]['mode'] = 'center'
-        a1[i]['name'] = n+'center'
+        a1[i]['name'] = n+'-center'
         a2[i]['mode'] = 'xcenter'
-        a2[i]['name'] = n+'xcenter'
+        a2[i]['name'] = n+'-xcenter'
         a3[i]['mode'] = 'rnd'
-        a3[i]['name'] = n+'rnd'
+        a3[i]['name'] = n+'-rnd'
     return np.concatenate((a1, a2, a3), axis=0)
 
 def predef_mazy4(w, h):

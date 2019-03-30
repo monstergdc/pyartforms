@@ -8,7 +8,7 @@
 <?php
 function sub_group($name, $id)
 {
-	$cnt[1]  = 13;
+	$cnt[1]  = 13;	//smears
 	$cnt[2]  = 4;
 	$cnt[3]  = 54;
 	$cnt[4]  = 26;
@@ -28,14 +28,24 @@ function sub_group($name, $id)
 
 	$cgi = 'pyartw3.py';
 	$n = $cnt[$id];
-	echo "<h2>" . $name . " :: n=&nbsp;\n";
+	echo '<tr><td><div style="background-color: #404040; margin-top: 15px; margin-bottom: 15px;">';
+	echo '<h2>' . $name . " :: n=(1..." . $n . "):</h2>\n";
+	$ex = "";
+	if ($id == 3)
+	{
+		$ex = "-rnd";
+	}
 	for($i=1;$i<=$n;$i++)
 	{
-		echo '<a target="_blank" href="' . $cgi . '?what=' . $name . '&n=' . $i . '&canvas=800">' .$i . '</a>&nbsp;' . "\n";
+		$img = 'minis/SMEARS%23' . $id . '-256x192-' . str_pad($i, 2, '0', STR_PAD_LEFT) . '.png';
+		echo '<a target="_blank" href="' . $cgi . '?what=' . $name . '&n=' . $i . '&canvas=800">';
+		echo '<img style="width: 256px; float: left; position: absoulte; margin: 2px;" src="' . $img . '" title="'. $img .' - ' . $i . '">';
+		echo "</a>\n";
 	}
-	echo "\n</h2>\n<hr>\n";
+	echo "</div></td></tr>\n";
 }
 
+echo "<table>";
 sub_group("smears1", 1);
 sub_group("smears2", 2);
 sub_group("smears3", 3);
@@ -47,12 +57,13 @@ sub_group("smears8", 8);
 sub_group("smears9", 9);
 sub_group("smears10", 10);
 sub_group("smears11", 11);
-
+//---
 sub_group("life", 101);
 sub_group("lissajous", 102);
 sub_group("astro", 103);
 sub_group("waves", 104);
 sub_group("mandelbrot", 105);
+echo "</table>";
 ?>
 
 </body>
