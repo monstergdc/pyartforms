@@ -510,19 +510,25 @@ def predef_mazy11(w, h):
 def predef_mazy12(w, h):
     n = 'SMEARS#12'
     return [
-        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'color': (255, 255, 255), 'o': 'box', 'v': False},
-        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 48, 'color': (255, 255, 255), 'o': 'box', 'v': False},
-        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 96, 'color': (255, 255, 255), 'o': 'box', 'v': False},
-        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'color': (255, 255, 255), 'o': 'cir', 'v': False},
-        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 48, 'color': (255, 255, 255), 'o': 'cir', 'v': False},
-        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 96, 'color': (255, 255, 255), 'o': 'cir', 'v': False},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'color': None, 'o': 'box', 'v': False},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 48, 'color': None, 'o': 'box', 'v': False},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 96, 'color': None, 'o': 'box', 'v': False},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'color': None, 'o': 'cir', 'v': False},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 48, 'color': None, 'o': 'cir', 'v': False},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 96, 'color': None, 'o': 'cir', 'v': False},
 
-        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'color': (255, 255, 255), 'o': 'box', 'v': True},
-        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 48, 'color': (255, 255, 255), 'o': 'box', 'v': True},
-        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 96, 'color': (255, 255, 255), 'o': 'box', 'v': True},
-        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'color': (255, 255, 255), 'o': 'cir', 'v': True},
-        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 48, 'color': (255, 255, 255), 'o': 'cir', 'v': True},
-        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 96, 'color': (255, 255, 255), 'o': 'cir', 'v': True},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 48, 'color': 'happy', 'o': 'box', 'v': False},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 48, 'color': 'happy', 'o': 'cir', 'v': False},
+
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'color': None, 'o': 'box', 'v': True},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 48, 'color': None, 'o': 'box', 'v': True},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 96, 'color': None, 'o': 'box', 'v': True},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'color': None, 'o': 'cir', 'v': True},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 48, 'color': None, 'o': 'cir', 'v': True},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 96, 'color': None, 'o': 'cir', 'v': True},
+
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 48, 'color': 'happy', 'o': 'box', 'v': True},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 48, 'color': 'happy', 'o': 'cir', 'v': True},
     ]
 
 def predef_mazy13(w, h):
@@ -530,9 +536,13 @@ def predef_mazy13(w, h):
     return [
         {'name': n, 'call': mazy13, 'w': w, 'h': h, 'Background': bg_black, 'n': 64, 'color': (255, 255, 255)},
         {'name': n, 'call': mazy13, 'w': w, 'h': h, 'Background': bg_black, 'n': 128, 'color': (255, 255, 255)},
-        {'name': n, 'call': mazy13, 'w': w, 'h': h, 'Background': bg_white, 'n': 64, 'color': (255, 255, 255)},
-        {'name': n, 'call': mazy13, 'w': w, 'h': h, 'Background': bg_white, 'n': 128, 'color': (255, 255, 255)},
+        {'name': n, 'call': mazy13, 'w': w, 'h': h, 'Background': bg_white, 'n': 64, 'color': (224, 0, 0)},
+        {'name': n, 'call': mazy13, 'w': w, 'h': h, 'Background': bg_white, 'n': 128, 'color': (224, 0, 0)},
     ]
+
+#def predef_mazy14(w, h):
+#def predef_mazy15(w, h):
+#def predef_mazy16(w, h):
 
 def enum_defs():
     print('1:', len(predef_mazy1(0, 0)))

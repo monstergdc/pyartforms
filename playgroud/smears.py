@@ -14,8 +14,8 @@
 # #9 rays from center
 # #10 long beziers
 # #11 horizontal gradients with suprizes
-# #12 
-# #13 
+# #12 opart-like boxes/circles
+# #13 single big poly
 # #14 
 # #15
 # #16 
@@ -525,7 +525,7 @@ def mazy12(draw, params):
     c = math.pi/180
     w0 = w/2
     h0 = h/2
-    # todo: color non-opart
+    color = params['color']
     r = int(h/2/2)
     for i in range(cnt):
         a = c*i/cnt*360
@@ -536,15 +536,21 @@ def mazy12(draw, params):
         else:
             va = 0
         if i&1 == 0:
+            co = (0,0,0)
+            if color != None:
+                co = new_colorer(color, random.randint(0, 7), 0)
             if o == 'box':
-                rect(draw, x, y, r+va, r+va, fill=(0,0,0), outline=None)
+                rect(draw, x, y, r+va, r+va, fill=co, outline=None)
             if o == 'cir':
-                circle(draw, x, y, r+va, fill=(0,0,0), outline=None)
+                circle(draw, x, y, r+va, fill=co, outline=None)
         else:
+            co = (255,255,255)
+            if color != None:
+                co = new_colorer(color, random.randint(0, 7), 0)
             if o == 'box':
-                rect(draw, x, y, r+va, r+va, fill=(255,255,255), outline=(0,0,0))
+                rect(draw, x, y, r+va, r+va, fill=co, outline=(0,0,0))
             if o == 'cir':
-                circle(draw, x, y, r+va, fill=(255,255,255), outline=(0,0,0))
+                circle(draw, x, y, r+va, fill=co, outline=(0,0,0))
 
 def mazy13(draw, params):
     w = params['w']

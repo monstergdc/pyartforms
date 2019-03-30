@@ -19,7 +19,7 @@ function sub_group($name, $id)
 	$cnt[9]  = 58;
 	$cnt[10]  = 20;
 	$cnt[11]  = 3;
-	$cnt[12]  = 12;
+	$cnt[12]  = 16;
 	$cnt[13]  = 4;
 
 //	$cnt[101]  = 7; //life
