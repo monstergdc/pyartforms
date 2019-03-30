@@ -5,9 +5,7 @@
 
 # repixelize
 
-# IDEA
-#- src pixels as big filled circles
-# == Image.getpixel(xy)
+# IDEA: src pixels as big filled circles/boxes, possible rnd size variation, src img rescale
 
 
 import random, math, string, os, sys
@@ -39,11 +37,16 @@ def repix(params):
             xy = (x, y)
             c = src.getpixel(xy)
             if params['rnd'] == True:
-                coef = random.randint(30, 130) / 100 # test par
-            if random.randint(0, 100) > 50:
+                coef = random.randint(30, 130) / 100 # par
+            if params['mode'] == 0:
                 rect(d, x*dx, y*dy, int(dx/2*coef), int(dy/2*coef), fill=c, outline=None)
-            else:
+            if params['mode'] == 1:
                 circle(d, x*dx, y*dy, int(dy/2*coef), fill=c, outline=None)
+            if params['mode'] == 2:
+                if random.randint(0, 100) > 50:
+                    rect(d, x*dx, y*dy, int(dx/2*coef), int(dy/2*coef), fill=c, outline=None)
+                else:
+                    circle(d, x*dx, y*dy, int(dy/2*coef), fill=c, outline=None)
     return img
 
 def do_repix(infile, outfile):
@@ -51,7 +54,7 @@ def do_repix(infile, outfile):
     w, h = get_canvas('A3')
     #w, h = get_canvas('A2')
     #w, h = get_canvas('A1')
-    params = {'w': w, 'h': h, 'infile': infile, 'coef': 0.8, 'scale': 0.25, 'rnd': True}
+    params = {'w': w, 'h': h, 'infile': infile, 'coef': 0.8, 'scale': 0.25, 'rnd': True, 'mode': 0}
     img = repix(params)
     img.save(outfile)
     
