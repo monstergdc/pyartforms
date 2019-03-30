@@ -20,11 +20,11 @@ function sub_group($name, $id)
 	$cnt[10]  = 20;
 	$cnt[11]  = 3;
 
-	$cnt[101]  = 7; //life
-	$cnt[102] = 3; //lissajous
+//	$cnt[101]  = 7; //life
+//	$cnt[102] = 3; //lissajous
 	$cnt[103] = 16; //astro
 	$cnt[104] = 9; //waves
-	$cnt[105] = 2; //mandelbrot
+//	$cnt[105] = 2; //mandelbrot
 
 	$cgi = 'pyartw3.py';
 	$n = $cnt[$id];
@@ -58,11 +58,11 @@ sub_group("smears9", 9);
 sub_group("smears10", 10);
 sub_group("smears11", 11);
 //---
-sub_group("life", 101);
-sub_group("lissajous", 102);
+//sub_group("life", 101);
+//sub_group("lissajous", 102);
 sub_group("astro", 103);
 sub_group("waves", 104);
-sub_group("mandelbrot", 105);
+//sub_group("mandelbrot", 105);
 echo "</table>";
 ?>
 
