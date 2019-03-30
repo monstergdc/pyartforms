@@ -25,7 +25,7 @@
 # upd: 20180928, 29
 # upd: 20181019, 20
 # upd: 20190105, 06, 12, 13, 18, 19, 21, 22
-# upd: 20190306, 11, 29
+# upd: 20190306, 11, 29, 30
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -193,20 +193,7 @@ def mazy3(draw, params):
         pold = po
 
         #color = old_colorer(params)
-
-        if params['color'] == 'red':
-            color = gradient2((0,0,0), (255,0,0), n, cnt)
-        if params['color'] == 'green':
-            color = gradient2((0,56,0), (0,255,48), n, cnt)
-        if params['color'] == 'bg':
-            color = gradient2((32,64,64), (64,255,255), n, cnt)
-        if params['color'] == 'rg':
-            color = gradient2((255,0,0), (255,255,0), n, cnt)
-        if params['color'] == 'bw':
-            color = gradient2((0,0,0), (255,255,255), n, cnt)
-        if params['color'] == 'happy':
-            color = colors_happy[n%8]
-
+        color = new_colorer(params['color'], n, cnt)
         if 'addalpha' in params:
             color = add_alpha(color, params['addalpha'])
 
@@ -216,8 +203,17 @@ def mazy4(draw, params):
     w = params['w']
     h = params['h']
     cnt = params['n']
+    # todo: par
+    sc = 2.05 # orig
+    #sc = 1.0
+    #sc = 3.0
+    #sc = 0.7
     random.seed()
 
+    if sc == 0:
+        sc = 1
+    sx = int(w/sc)
+    sy = int(h/sc)
     for n in range(cnt):
         if params['mode'] == 'center':
             w0 = w/2
@@ -225,8 +221,6 @@ def mazy4(draw, params):
         else:
             w0 = random.randint(0, w)
             h0 = random.randint(0, h)
-        sx = int(w/2.05)
-        sy = int(h/2.05)
         po = [(w0+random.randint(-sx, sx), h0+random.randint(-sy, sy)),
               (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy)),
               (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy)),
@@ -249,21 +243,7 @@ def mazy4(draw, params):
               (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy))
               ]
 
-        if params['color'] == 'red':
-            color = gradient2((0,0,0), (255,0,0), n, cnt)
-        if params['color'] == 'green':
-            color = gradient2((0,56,0), (0,255,48), n, cnt)
-        if params['color'] == 'bg':
-            color = gradient2((32,64,64), (64,255,255), n, cnt)
-        if params['color'] == 'rg':
-            color = gradient2((255,0,0), (255,255,0), n, cnt)
-        if params['color'] == 'bw':
-            color = gradient2((0,0,0), (255,255,255), n, cnt)
-        if params['color'] == 'happy':
-            color = colors_happy[n%8]
-        if params['color'] == 'wryb':
-            color = colors_fwd[n%8]
-
+        color = new_colorer(params['color'], n, cnt)
         if 'addalpha' in params:
             color = add_alpha(color, params['addalpha'])
 
