@@ -507,6 +507,33 @@ def predef_mazy11(w, h):
         {'name': n, 'call': mazy11, 'w': w, 'h': h, 'Background': bg_black, 'n': 64}
     ]
 
+def predef_mazy12(w, h):
+    n = 'SMEARS#12'
+    return [
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'color': (255, 255, 255), 'o': 'box', 'v': False},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 48, 'color': (255, 255, 255), 'o': 'box', 'v': False},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 96, 'color': (255, 255, 255), 'o': 'box', 'v': False},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'color': (255, 255, 255), 'o': 'cir', 'v': False},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 48, 'color': (255, 255, 255), 'o': 'cir', 'v': False},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 96, 'color': (255, 255, 255), 'o': 'cir', 'v': False},
+
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'color': (255, 255, 255), 'o': 'box', 'v': True},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 48, 'color': (255, 255, 255), 'o': 'box', 'v': True},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 96, 'color': (255, 255, 255), 'o': 'box', 'v': True},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'color': (255, 255, 255), 'o': 'cir', 'v': True},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 48, 'color': (255, 255, 255), 'o': 'cir', 'v': True},
+        {'name': n, 'call': mazy12, 'w': w, 'h': h, 'Background': bg_white, 'n': 96, 'color': (255, 255, 255), 'o': 'cir', 'v': True},
+    ]
+
+def predef_mazy13(w, h):
+    n = 'SMEARS#13'
+    return [
+        {'name': n, 'call': mazy13, 'w': w, 'h': h, 'Background': bg_black, 'n': 64, 'color': (255, 255, 255)},
+        {'name': n, 'call': mazy13, 'w': w, 'h': h, 'Background': bg_black, 'n': 128, 'color': (255, 255, 255)},
+        {'name': n, 'call': mazy13, 'w': w, 'h': h, 'Background': bg_white, 'n': 64, 'color': (255, 255, 255)},
+        {'name': n, 'call': mazy13, 'w': w, 'h': h, 'Background': bg_white, 'n': 128, 'color': (255, 255, 255)},
+    ]
+
 def enum_defs():
     print('1:', len(predef_mazy1(0, 0)))
     print('2:', len(predef_mazy2(0, 0)))
@@ -519,5 +546,10 @@ def enum_defs():
     print('9:', len(predef_mazy9(0, 0)))
     print('10:', len(predef_mazy10(0, 0)))
     print('11:', len(predef_mazy11(0, 0)))
+    print('12:', len(predef_mazy12(0, 0)))
+    print('13:', len(predef_mazy13(0, 0)))
+    #print('14:', len(predef_mazy14(0, 0)))
+    #print('15:', len(predef_mazy15(0, 0)))
+    #print('16:', len(predef_mazy16(0, 0)))
 
 # EOF

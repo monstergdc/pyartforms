@@ -133,7 +133,7 @@ def mazy2(draw, params):
         for m in range(cntm):
             po[:] = [(xy[0]+random.randint(0, v)-random.randint(0, v), xy[1]+random.randint(0, v)-random.randint(0, v)) for xy in po]
             color = new_colorer(params['color'], m, cntm)
-            circle(draw, po[0][0], po[0][1], r0*(1-m*de), fill=color, outline=None)
+            circle(draw, po[0][0], po[0][1], int(r0*(1-m*de)), fill=color, outline=None)
 
 def mazy3(draw, params):
     w = params['w']
@@ -490,7 +490,8 @@ def mazy10(draw, params):
         if params['mode'] == 'fill':
             draw.polygon(points, fill=color, outline=None)
 
-# TODO: canvas 800 or 2000 - fix width
+# TODO: canvas 800 or 2000 - fix width - issue only on srv?!
+# TODO: also like 11 only more freq + diagonals + symetric opt?
 def mazy11(draw, params):
     w = params['w']
     h = params['h']
@@ -502,10 +503,9 @@ def mazy11(draw, params):
     steps = 512 #const, max rational limit
     if steps > w:
         steps = w
-    dx = (w/steps) # int ???
+    dx = w/steps
     for n in range(cnt):
         n1 = random.randint(0, 7)
-        #n2 = random.randint(0, 7)
         n2 = n%8
         n3 = random.randint(0, 7)
         color1 = colors_happy[n1]
@@ -515,20 +515,76 @@ def mazy11(draw, params):
             color = gradient(color1, color2, color3, step, steps)
             rect(draw, int(step*dx+dx/2), int(n*dy+dy/2), int(dx), int(dy), fill=color, outline=None)
 
-# future fun
-
 def mazy12(draw, params):
-    #TODO: like 11 only more freq + diagonals + symetric opt
-    return 0
+    w = params['w']
+    h = params['h']
+    cnt = params['n']
+    o = params['o']
+    v = params['v']
+    random.seed()
+    c = math.pi/180
+    w0 = w/2
+    h0 = h/2
+    # todo: color non-opart
+    r = int(h/2/2)
+    for i in range(cnt):
+        a = c*i/cnt*360
+        x = int(w0+r*math.cos(a))
+        y = int(h0+r*math.sin(a))
+        if v:
+            va = random.randint(int(-h0/5), int(h0/5)) # par
+        else:
+            va = 0
+        if i&1 == 0:
+            if o == 'box':
+                rect(draw, x, y, r+va, r+va, fill=(0,0,0), outline=None)
+            if o == 'cir':
+                circle(draw, x, y, r+va, fill=(0,0,0), outline=None)
+        else:
+            if o == 'box':
+                rect(draw, x, y, r+va, r+va, fill=(255,255,255), outline=(0,0,0))
+            if o == 'cir':
+                circle(draw, x, y, r+va, fill=(255,255,255), outline=(0,0,0))
 
 def mazy13(draw, params):
-    return 0
+    w = params['w']
+    h = params['h']
+    cnt = params['n']
+    random.seed()
+
+    w0 = w/2
+    h0 = h/2
+    sc = 1.0
+    sx = int(w/sc)
+    sy = int(h/sc)
+    po = []
+    for n in range(cnt):
+        newp = (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy))
+        po.append(newp)
+    color = params['color']
+    draw.polygon(po, fill=color, outline=None)
+
+# future fun
 
 def mazy14(draw, params):
+    w = params['w']
+    h = params['h']
+    cnt = params['cnt']
+    random.seed()
+    # ...
     return 0
 
 def mazy15(draw, params):
+    w = params['w']
+    h = params['h']
+    cnt = params['cnt']
+    # ...
     return 0
 
 def mazy16(draw, params):
+    w = params['w']
+    h = params['h']
+    cnt = params['cnt']
+    random.seed()
+    # ...
     return 0

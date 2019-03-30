@@ -65,6 +65,10 @@ if what == "smears10":
     p = predef_mazy10(w, h)
 if what == "smears11":
     p = predef_mazy11(w, h)
+if what == "smears12":
+    p = predef_mazy12(w, h)
+if what == "smears13":
+    p = predef_mazy13(w, h)
 if what == "life":
     p = predef_life(w, h)
 if what == "lissajous":
