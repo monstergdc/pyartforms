@@ -12,8 +12,8 @@ function sub_group($name, $id)
 	$cnt[2]  = 4;
 	$cnt[3]  = 54;
 	$cnt[4]  = 26;
-	$cnt[5]  = 5;
-	$cnt[6]  = 5;
+	$cnt[5]  = 6;
+	$cnt[6]  = 9;
 	$cnt[7]  = 34;
 	$cnt[8]  = 4;
 	$cnt[9]  = 58;
@@ -39,7 +39,7 @@ function sub_group($name, $id)
 	{
 		$img = 'minis/SMEARS%23' . $id . '-256x192-' . str_pad($i, 2, '0', STR_PAD_LEFT) . '.png';
 		echo '<a target="_blank" href="' . $cgi . '?what=' . $name . '&n=' . $i . '&canvas=800">';
-		echo '<img style="width: 256px; float: left; position: absoulte; margin: 2px;" src="' . $img . '" title="'. $img .' - ' . $i . '">';
+		echo '<img style="width: 256px; float: left; position: absoulte; margin: 2px;" src="' . $img . '" title="n='. $i . '">';
 		echo "</a>\n";
 	}
 	echo "</div></td></tr>\n";

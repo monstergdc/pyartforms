@@ -287,6 +287,7 @@ def mazy6(draw, params):
     w = params['w']
     h = params['h']
     cnt = params['cnt']
+    useblack = params['useblack']
     random.seed()
 
     #c_ndx = 7
@@ -299,11 +300,8 @@ def mazy6(draw, params):
         for n in range(n_r):
             nn = n_r - n
             ro = int(r*(1+nn*nn*0.015))
-            if n & 1:
+            if n & 1 and useblack == True:
                 c = (0, 0, 0)
-                # test
-                #c = (0, 0, 0, 100)
-                #
                 circle(draw, x, y, ro, fill=c, outline=None)
             else:
                 if params['mode'] == 'red':
@@ -318,6 +316,10 @@ def mazy6(draw, params):
                     color = colors_b[c_ndx]
                 if params['mode'] == 'happy':
                     color = colors_happy[c_ndx]
+                if params['mode'] == 'bwx':
+                    color = colors_bwx[c_ndx]
+                if params['mode'] == 'psych':
+                    color = colors_p[c_ndx]
 
                 circle(draw, x, y, ro, fill=color, outline=None)
             c_ndx = c_ndx - 1

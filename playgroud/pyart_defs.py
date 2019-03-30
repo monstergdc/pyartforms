@@ -320,18 +320,24 @@ def predef_mazy5(w, h):
         {'name': n, 'call': mazy5, 'w': w, 'h': h, 'Background': bg_black, 'colors': colors_b, 'outline': None},
         {'name': n, 'call': mazy5, 'w': w, 'h': h, 'Background': bg_black, 'colors': colors_y, 'outline': None},
         {'name': n, 'call': mazy5, 'w': w, 'h': h, 'Background': bg_black, 'colors': colors_p, 'outline': (0, 0, 0)},
-        {'name': n, 'call': mazy5, 'w': w, 'h': h, 'Background': bg_black, 'colors': colors_bw, 'outline': None},
-        {'name': n, 'call': mazy5, 'w': w, 'h': h, 'Background': bg_black, 'colors': colors_happy, 'outline': None}
+        {'name': n, 'call': mazy5, 'w': w, 'h': h, 'Background': bg_black, 'colors': colors_bw0, 'outline': None},
+        {'name': n, 'call': mazy5, 'w': w, 'h': h, 'Background': bg_black, 'colors': colors_bwx, 'outline': None},
+        {'name': n, 'call': mazy5, 'w': w, 'h': h, 'Background': bg_black, 'colors': colors_happy, 'outline': None},
     ]
 
 def predef_mazy6(w, h):
     n = 'SMEARS#6'
     return [
-        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'red', 'cnt': 18},
-        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'blue', 'cnt': 18},
-        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'black', 'cnt': 18},
-        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'rg', 'cnt': 18},
-        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'gb', 'cnt': 18}
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'red', 'cnt': 18, 'useblack': True},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'blue', 'cnt': 18, 'useblack': True},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'black', 'cnt': 18, 'useblack': True},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'rg', 'cnt': 18, 'useblack': True},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'gb', 'cnt': 18, 'useblack': True},
+
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'happy', 'cnt': 18, 'useblack': True},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'happy', 'cnt': 18+12, 'useblack': False},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'bwx', 'cnt': 18+12, 'useblack': False},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'psych', 'cnt': 18+12, 'useblack': False},
     ]
 
 def predef_mazy7(w, h):
