@@ -18,14 +18,13 @@ from color_defs import *
 # TODO:
 # - xy scale sync issue
 # - rnd dots not always circle
-# - rnd dot size
 # - pixel groupping
 
 def repix(params):
     w = params['w']
     h = params['h']
     src = params['src']
-    src = src.resize((src.width/2, src.height/2), resample=PIL.Image.BICUBIC, box=None) # opt
+    src = src.resize((int(src.width/2), int(src.height/2)), resample=Image.BICUBIC, box=None) # opt
     img = params['img']
     #coef = params['coef'] # dot radius coefficient %
     srcw = src.width
@@ -38,7 +37,7 @@ def repix(params):
         for y in range(srch):
             xy = (x, y)
             c = src.getpixel(xy)
-            coef = random.randint(30, 130) / 100 # test
+            coef = random.randint(30, 130) / 100 # test par
             circle(d, x*dx, y*dy, int(dy/2*coef), fill=c, outline=None)
 
 def do_repix(infile, outfile):
