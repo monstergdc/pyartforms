@@ -32,11 +32,6 @@ function sub_group($name, $id)
 	$n = $cnt[$id];
 	echo '<tr><td><div style="background-color: #404040; margin-top: 15px; margin-bottom: 15px;">';
 	echo '<h2>' . $name . " :: n=(1..." . $n . "):</h2>\n";
-	$ex = "";
-	if ($id == 3)
-	{
-		$ex = "-rnd";
-	}
 	for($i=1;$i<=$n;$i++)
 	{
 		if ($id < 100) $img = 'minis/SMEARS%23' . $id . '-256x192-' . str_pad($i, 2, '0', STR_PAD_LEFT) . '.png';
