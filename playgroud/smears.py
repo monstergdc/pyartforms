@@ -117,36 +117,22 @@ def mazy2(draw, params):
     h = params['h']
     cnt = params['n']
     cntm = params['m']
-    v = params['v']
+    v = int(h/50)
     random.seed()
-    if cntm == 0:
+    if cntm <= 0:
         cntm = 1
 
     for n in range(cnt):
-        po = [(random.randint(0, w), random.randint(0, h)),
-              (random.randint(0, w), random.randint(0, h))]
-        r1 = random.randint(int(h/9), int(h/3))
-
-        if params['mode'] == 'color':
-            color = colors_happy[n%8]
-        else:
-            color = gradient2(params['c0'], params['c1'], random.randint(0, 100), 100)
-        if random.randint(0, 100) > 50:
-            circle(draw, po[0][0], po[0][1], r1, fill=color, outline=None)
-
-        r0 = random.randint(int(h/13), r1)
+        r1 = random.randint(int(h*0.15), int(h*0.4))
+        po = [(random.randint(-r1, w+r1), random.randint(-r1, h+r1)),
+            (random.randint(-r1, w+r1), random.randint(-r1, h+r1))]
+        r0 = random.randint(int(r1*0.7), int(r1*0.99))
         if r0 < cntm:
             r0 = cntm
         de = 1/cntm
         for m in range(cntm):
             po[:] = [(xy[0]+random.randint(0, v)-random.randint(0, v), xy[1]+random.randint(0, v)-random.randint(0, v)) for xy in po]
-            if params['mode'] == 'red':
-                color = gradient2((255,0,0), (255,255,0), m, params['m'])
-            if params['mode'] == 'color':
-                color = colors_happy[(n+m)%8]
-            if params['mode'] == 'black':
-                rr = 255 * (m&1)
-                color = (rr, rr, rr)
+            color = new_colorer(params['color'], m, cntm)
             circle(draw, po[0][0], po[0][1], r0*(1-m*de), fill=color, outline=None)
 
 def mazy3(draw, params):
@@ -504,6 +490,7 @@ def mazy10(draw, params):
         if params['mode'] == 'fill':
             draw.polygon(points, fill=color, outline=None)
 
+# TODO: canvas 800 or 2000 - fix width
 def mazy11(draw, params):
     w = params['w']
     h = params['h']

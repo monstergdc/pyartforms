@@ -119,7 +119,7 @@ w, h = get_canvas('A3') # for demo use this, not too big, not too small
 
 cnt = 3 # note: it takes some time
 do_mazy(cnt, w, h, odir, 'mazy01')
-do_mazy(cnt, w, h, odir, 'mazy02') # fix: does not scale down well
+do_mazy(cnt, w, h, odir, 'mazy02')
 do_mazy(cnt, w, h, odir, 'mazy03')
 do_mazy(cnt, w, h, odir, 'mazy04') # also a bit lame, only red ok, add blue
 do_mazy(cnt, w, h, odir, 'mazy05')

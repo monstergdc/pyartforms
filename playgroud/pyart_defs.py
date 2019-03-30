@@ -230,14 +230,15 @@ def predef_mazy1(w, h):
 def predef_mazy2(w, h):
     n = 'SMEARS#2'
     return [
-        {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'v': 20, 'n': 100, 'm': 40,
-        'c0': (64, 64, 64), 'c1': (255, 255, 255), 'mode': 'black'},
-        {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'v': 90, 'n': 90, 'm': 50,
-        'c0': (0, 0, 0), 'c1': (255, 0, 0), 'mode': 'red'},
-        {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'v': 50, 'n': 50, 'm': 25,
-        'c0': (32, 64, 64), 'c1': (64, 255, 255), 'mode': 'color'},
-        {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'v': 22, 'n': 40, 'm': 35,
-        'c0': (32, 0, 0), 'c1': (255, 0, 0), 'mode': 'black'}
+        {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'n': 100, 'm': 40, 'color': 'bw0'},
+        {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'n': 10, 'm': 300, 'color': 'bw0'},  # ?
+        {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'n': 100, 'm': 40, 'color': 'bwx'},
+        {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'n': 100, 'm': 40, 'color': 'bw'},
+        {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'n': 100, 'm': 90, 'color': 'red'},
+        {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'n': 100, 'm': 30, 'color': 'happy'},
+        {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'n': 100, 'm': 30, 'color': 'wryb'},
+        {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'n': 100, 'm': 30, 'color': 'psych'},
+        {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'n': 100, 'm': 30, 'color': 'bgo'},
     ]
 
 def predef_mazy3(w, h):
