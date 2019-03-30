@@ -7,6 +7,7 @@
 # color definitions
 
 import random
+from drawtools import *
 
 
 # white yellow red lb1 lb2 blue ltgray gray
@@ -22,6 +23,17 @@ colors_fwd = [(255,255,255), (0xEC, 0xD1, 0x27), (0xD1, 0x3B, 0x29), (0x20, 0x50
 
 colors_fwd_nw6 = [(0xEC, 0xD1, 0x27), (0xD1, 0x3B, 0x29), (0x20, 0x50, 0xA0),
               (0xEC, 0xD1, 0x27), (0xD1, 0x3B, 0x29), (0x20, 0x50, 0xA0)]
+
+# black gray*2 orange x2
+colors_bgo = [(0x0, 0x0, 0x0), (0xc0, 0xc0, 0xc0), (0x80, 0x80, 0x80), (0xfa, 0x60, 0x00),
+          (0x0, 0x0, 0x0), (0xc0, 0xc0, 0xc0), (0x80, 0x80, 0x80), (0xfa, 0x60, 0x00),
+          ]
+
+# avatar (3 blue, 3 green, 2 magenta)
+colors_avatar = [(0x0, 0x0, 0xff), (0x40, 0x40, 0xff), (0x00, 0xff, 0xff),
+                 (0x00, 0xe0, 0xb0), (0x40, 0xff, 0x40), (0x00, 0xc0, 0x00),
+                 (0xff, 0x80, 0xff), (0xc0, 0x00, 0xc0),
+          ]
 
 # bw x2
 colors_bw = [(0xff, 0xff, 0xff), (0xc0, 0xc0, 0xc0), (0xff, 0xff, 0xff), (0xc0, 0xc0, 0xc0),
@@ -78,8 +90,29 @@ def old_colorer(params):
             b = random.randint(params['b0'], params['b1'])
     return (r, g, b)
 
-#def new_colorer(mode):
-#    return 0
+def new_colorer(mode, n, cnt):
+    color = (0, 0, 0)
+    if mode == 'red':
+        color = gradient2((0,0,0), (255,0,0), n, cnt)
+    if mode == 'green':
+        color = gradient2((0,56,0), (0,255,48), n, cnt)
+    if mode == 'bg':
+        color = gradient2((32,64,64), (64,255,255), n, cnt)
+    if mode == 'rg':
+        color = gradient2((255,0,0), (255,255,0), n, cnt)
+    if mode == 'bw':
+        color = gradient2((0,0,0), (255,255,255), n, cnt)
+    if mode == 'happy':
+        color = colors_happy[n%8]
+    if mode == 'wryb':
+        color = colors_fwd[n%8]
+    if mode == 'bgo':
+        color = colors_bgo[n%8]
+    if mode == 'avatar':
+        color = colors_avatar[n%8]
+    if mode == 'psych':
+        color = colors_p[n%8]
+    return color
 
 def add_alpha(color, alpha):
     return (color[0], color[1], color[2], alpha)
