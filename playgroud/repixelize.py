@@ -13,11 +13,10 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps
 from drawtools import *
 from color_defs import *
 
-# TODO:
-# - xy scale sync issue
-# - rnd dots not always circle - or only rect too
+# TODO: xy scale sync issue
 
 def repix(params):
+    c = math.pi/180
     w = params['w']
     h = params['h']
     src = Image.open(params['infile'])
@@ -35,18 +34,48 @@ def repix(params):
     for x in range(srcw):
         for y in range(srch):
             xy = (x, y)
-            c = src.getpixel(xy)
+            cin = src.getpixel(xy)
             if params['rnd'] == True:
-                coef = random.randint(30, 130) / 100 # par
+                coef = random.randint(params['rmin'], params['rmax']) / 100
             if params['mode'] == 0:
-                rect(d, x*dx, y*dy, int(dx/2*coef), int(dy/2*coef), fill=c, outline=None)
+                rect(d, x*dx, y*dy, int(dx/2*coef), int(dy/2*coef), fill=cin, outline=None)
             if params['mode'] == 1:
-                circle(d, x*dx, y*dy, int(dy/2*coef), fill=c, outline=None)
+                circle(d, x*dx, y*dy, int(dy/2*coef), fill=cin, outline=None)
             if params['mode'] == 2:
+                po = []
+                r = int(dy/2*coef)
+                for i in range(12):
+                    rfx = random.randint(-10, 10)
+                    rfy = random.randint(-10, 10)
+                    a = c*i/12*360
+                    x1 = int(x*dx+(r+rfx)*math.cos(a))
+                    y1 = int(y*dy+(r+rfy)*math.sin(a))
+                    po.append((x1, y1))
+                d.polygon(po, fill=cin, outline=None)
+            if params['mode'] == 3:
                 if random.randint(0, 100) > 50:
-                    rect(d, x*dx, y*dy, int(dx/2*coef), int(dy/2*coef), fill=c, outline=None)
+                    rect(d, x*dx, y*dy, int(dx/2*coef), int(dy/2*coef), fill=cin, outline=None)
                 else:
-                    circle(d, x*dx, y*dy, int(dy/2*coef), fill=c, outline=None)
+                    circle(d, x*dx, y*dy, int(dy/2*coef), fill=cin, outline=None)
+            if params['mode'] == 4:
+                if random.randint(0, 100) > 50:
+                    rect(d, x*dx, y*dy, int(dx/2*coef), int(dy/2*coef), fill=cin, outline=None)
+                else:
+                    if random.randint(0, 100) > 50:
+                        circle(d, x*dx, y*dy, int(dy/2*coef), fill=cin, outline=None)
+                    else:
+                        po = []
+                        r = int(dy/2*coef)
+                        for i in range(12):
+                            rfx = random.randint(-10, 10)
+                            rfy = random.randint(-10, 10)
+                            a = c*i/12*360
+                            x1 = int(x*dx+(r+rfx)*math.cos(a))
+                            y1 = int(y*dy+(r+rfy)*math.sin(a))
+                            po.append((x1, y1))
+                        d.polygon(po, fill=cin, outline=None)
+
+
     return img
 
 def do_repix(infile, outfile):
@@ -54,7 +83,7 @@ def do_repix(infile, outfile):
     w, h = get_canvas('A3')
     #w, h = get_canvas('A2')
     #w, h = get_canvas('A1')
-    params = {'w': w, 'h': h, 'infile': infile, 'coef': 0.8, 'scale': 0.25, 'rnd': True, 'mode': 0}
+    params = {'w': w, 'h': h, 'infile': infile, 'coef': 0.8, 'scale': 0.5, 'rnd': True, 'mode': 2, 'rmin': 50, 'rmax': 500} # high rmax may be cool, eg 500
     img = repix(params)
     img.save(outfile)
     
@@ -67,3 +96,4 @@ do_repix('repixel-in\\fromopenshot1zzz2-x.png', 'repixel04-x.png')
 do_repix('repixel-in\\PIC_2548-cp-min.JPG', 'repixel05-x.png')
 do_repix('repixel-in\\test1.png', 'repixel06-x.png')
 do_repix('repixel-in\\grych.png', 'repixel07-x.png')
+do_repix('repixel-in\\grych2.png', 'repixel08-x.png')
