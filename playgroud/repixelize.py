@@ -83,7 +83,7 @@ def do_repix(infile, outfile):
     w, h = get_canvas('A3')
     #w, h = get_canvas('A2')
     #w, h = get_canvas('A1')
-    params = {'w': w, 'h': h, 'infile': infile, 'coef': 0.8, 'scale': 0.5, 'rnd': True, 'mode': 2, 'rmin': 50, 'rmax': 500} # high rmax may be cool, eg 500
+    params = {'w': w, 'h': h, 'infile': infile, 'coef': 0.8, 'scale': 0.5, 'rnd': True, 'mode': 2, 'rmin': 50, 'rmax': 250} # high rmax may be cool, eg 500
     img = repix(params)
     img.save(outfile)
     
