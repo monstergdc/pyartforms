@@ -47,10 +47,14 @@ def repix(params):
             if params['mode'] == 2:
                 po = []
                 r = int(dy/2*coef)
-                for i in range(12):
-                    rfx = random.randint(-10, 10)
-                    rfy = random.randint(-10, 10)
-                    a = c*i/12*360
+                #nn = 12 # par
+                nn = 64 # par
+                for i in range(nn):
+                    #rfx = random.randint(-10, 10) # par
+                    #rfy = random.randint(-10, 10) # par
+                    rfx = random.randint(-40, 40) # par
+                    rfy = random.randint(-40, 40) # par
+                    a = c*i/nn*360
                     x1 = int(x*dx+(r+rfx)*math.cos(a))
                     y1 = int(y*dy+(r+rfy)*math.sin(a))
                     po.append((x1, y1))
@@ -87,7 +91,8 @@ def repix(params):
 #w, h = get_canvas('A2')
 w, h = get_canvas('A1')
 
-#params = {'w': w, 'h': h, 'infile': '', 'outfile': '', 'coef': 0.8, 'scale': 0.5, 'rnd': True, 'mode': 2, 'rmin': 50, 'rmax': 250} # high rmax may be cool, eg 500
+#params = {'w': w, 'h': h, 'infile': '', 'outfile': '', 'coef': 0.8, 'scale': 0.5, 'rnd': True, 'mode': 2, 'rmin': 50, 'rmax': 250}
+# note: high rmax may be cool, eg 500
 
 #repix('repixel-in\\00base1x-gdc.png', 'repixel01-x.png')
 #repix('repixel-in\\gdc-zx-20181109-3a-x1-x.png', 'repixel02-x.png')
@@ -107,7 +112,7 @@ repix(params)
 params = {'w': w, 'h': h, 'infile': 'repixel-in\\Zuza-popr2.jpg', 'outfile': 'repixel10-x-Zuza3.png', 'bk': (255, 255, 255), 'coef': 0.95, 'scale': 0.05, 'rnd': True, 'mode': 2, 'rmin': 90, 'rmax': 140}
 repix(params)
 
-params = {'w': w, 'h': h, 'infile': '', 'outfile': '', 'bk': (0, 0, 0), 'coef': 0.9, 'scale': 0.15, 'rnd': True, 'mode': 2, 'rmin': 70, 'rmax': 130}
+params = {'w': w, 'h': h, 'infile': '', 'outfile': '', 'bk': (0, 0, 0), 'coef': 0.9, 'scale': 0.1, 'rnd': True, 'mode': 2, 'rmin': 5, 'rmax': 110}
 
 params['infile'] = 'repixel-in\\r1.png'
 params['outfile'] = 'repixel10-x-r1.png'
