@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # 20190330
-# 20190401, 02, 03
+# 20190401, 02, 03, 15
 
 # repixelize
 # IDEA: src pixels as big filled circles/boxes/rnd-shapes, possible rnd size variation, src img rescale
@@ -113,10 +113,6 @@ params = {'w': w, 'h': h, 'infile': 'repixel-in\\Zuza-popr2.jpg', 'outfile': 're
 repix(params)
 
 params = {'w': w, 'h': h, 'infile': '', 'outfile': '', 'bk': (0, 0, 0), 'coef': 0.9, 'scale': 0.1, 'rnd': True, 'mode': 2, 'rmin': 5, 'rmax': 110}
-
-params['infile'] = 'repixel-in\\r1.png'
-params['outfile'] = 'repixel10-x-r1.png'
-repix(params)
 
 params['infile'] = 'repixel-in\\m1.png'
 params['outfile'] = 'repixel10-x-m1.png'

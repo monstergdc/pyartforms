@@ -51,6 +51,7 @@ from color_defs import *
 def mazy1(draw, params):
     w = params['w']
     h = params['h']
+    cnt = params['n']
     random.seed()
     ts = [t/100.0 for t in range(101)]
     v = params['v']
@@ -59,7 +60,7 @@ def mazy1(draw, params):
     if wx <= 0:
         wx = 1
 
-    for n in range(params['n']):
+    for n in range(cnt):
         po = [(random.randint(0, w), random.randint(0, h)),
               (random.randint(0, w), random.randint(0, h)),
               (random.randint(0, w), random.randint(0, h)),
@@ -96,20 +97,21 @@ def mazy1(draw, params):
             if params['keep'] == True:
                 po[0] = po0
                 po[3] = po3
+            old = False
             if params['mode'] == 'red':
                 color = (r ^ random.randint(0, 48), 0, 0)
+                old = True
             if params['mode'] == 'color':
                 color = (r ^ random.randint(0, 48), g ^ random.randint(0, 48), b ^ random.randint(0, 48))
+                old = True
             if params['mode'] == 'black':
                 rr = random.randint(0, 48)
                 color = (rr, rr, rr)
-            if params['mode'] == 'happy':
-                color = colors_happy[n%8]
-            if params['mode'] == 'wryb':
-                color = colors_fwd[n%8]
-            if params['mode'] == 'psych':
-                color = colors_p[n%8]
-                if random.randint(0, 100) > 80: # todo: as opt/par
+                old = True
+            if old == False:
+                color = new_colorer(params['mode'], n, cnt)
+            if 'addblack' in params: # todo: (re)use
+                if params['addblack'] == True and random.randint(0, 100) > 80:
                     color = (0,0,0)
             if 'addalpha' in params:
                 color = add_alpha(color, params['addalpha'])
@@ -128,7 +130,7 @@ def mazy2(draw, params):
         cntm = 1
 
     for n in range(cnt):
-        r1 = random.randint(int(h*0.15), int(h*0.4))
+        r1 = random.randint(int(h*0.15), int(h*0.45))
         po = [(random.randint(-r1, w+r1), random.randint(-r1, h+r1)),
             (random.randint(-r1, w+r1), random.randint(-r1, h+r1))]
         r0 = random.randint(int(r1*0.7), int(r1*0.99))
