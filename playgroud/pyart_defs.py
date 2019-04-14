@@ -6,7 +6,7 @@
 # cre: 20181020
 # upd: 20190105, 06, 13, 18, 21, 22
 # upd: 20190311, 30
-# upd: 20190414
+# upd: 20190414, 15
 
 # predefined forms
 
@@ -364,6 +364,9 @@ def predef_mazy6(w, h):
         {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'happy', 'cnt': 18+12, 'useblack': False},
         {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'bwx', 'cnt': 18+12, 'useblack': False},
         {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'psych', 'cnt': 18+12, 'useblack': False},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'BeachTowels', 'cnt': 18+12, 'useblack': False},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'MoonlightBytes6', 'cnt': 18+12, 'useblack': False},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'RainbowDash', 'cnt': 18+12, 'useblack': False},
     ]
 
 def predef_mazy7(w, h):
@@ -408,6 +411,22 @@ def predef_mazy7(w, h):
         {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 100,  'cmode': 'wryb', 'mode': 'dec', 'addalpha': 99},
         {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 50,   'cmode': 'wryb', 'mode': 'dec', 'addalpha': 99},
         {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 10,   'cmode': 'wryb', 'mode': 'dec', 'addalpha': 99},
+
+        # new tmp
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 200,  'cmode': 'BeachTowels', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 100,  'cmode': 'BeachTowels', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 50,   'cmode': 'BeachTowels', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 10,   'cmode': 'BeachTowels', 'mode': 'dec'},
+
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 200,  'cmode': 'MoonlightBytes6', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 100,  'cmode': 'MoonlightBytes6', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 50,   'cmode': 'MoonlightBytes6', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 10,   'cmode': 'MoonlightBytes6', 'mode': 'dec'},
+
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 200,  'cmode': 'RainbowDash', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 100,  'cmode': 'RainbowDash', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 50,   'cmode': 'RainbowDash', 'mode': 'dec'},
+        {'name': n, 'call': mazy7, 'w': w, 'h': h, 'Background': bk, 'cnt': 10,   'cmode': 'RainbowDash', 'mode': 'dec'},
     ]
 
 def predef_mazy8(w, h):
@@ -483,6 +502,9 @@ def predef_mazy9(w, h):
         {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': bg_black, 'color': 'psych', 'v': v2, 'rndc': True},
         {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': bg_black, 'color': 'psych', 'v': v2, 'rndc': True},
         {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': bg_black, 'color': 'psych', 'v': v2, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': bg_black, 'color': 'BeachTowels', 'v': v2, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': bg_black, 'color': 'BeachTowels', 'v': v2, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': bg_black, 'color': 'BeachTowels', 'v': v2, 'rndc': True},
 
         {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': bg_black, 'color': 'happy', 'v': v3, 'rndc': True},
         {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': bg_black, 'color': 'happy', 'v': v3, 'rndc': True},
@@ -490,6 +512,9 @@ def predef_mazy9(w, h):
         {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': bg_black, 'color': 'psych', 'v': v3, 'rndc': True},
         {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': bg_black, 'color': 'psych', 'v': v3, 'rndc': True},
         {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': bg_black, 'color': 'psych', 'v': v3, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 20, 'Background': bg_black, 'color': 'BeachTowels', 'v': v3, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 60, 'Background': bg_black, 'color': 'BeachTowels', 'v': v3, 'rndc': True},
+        {'name': n, 'call': mazy9, 'w': w, 'h': h, 'n': 120, 'Background': bg_black, 'color': 'BeachTowels', 'v': v3, 'rndc': True},
     ]
 
 def predef_mazy10(w, h):

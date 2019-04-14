@@ -302,13 +302,19 @@ def mazy6(draw, params):
                 if params['mode'] == 'black':
                     color = (255, 255, 255)
                 if params['mode'] == 'blue':
-                    color = colors_b[c_ndx]
+                    color = colors_b[c_ndx%len(colors_b)]
                 if params['mode'] == 'happy':
-                    color = colors_happy[c_ndx]
+                    color = colors_happy[c_ndx%len(colors_happy)]
                 if params['mode'] == 'bwx':
-                    color = colors_bwx[c_ndx]
+                    color = colors_bwx[c_ndx%len(colors_bwx)]
                 if params['mode'] == 'psych':
-                    color = colors_p[c_ndx]
+                    color = colors_p[c_ndx%len(colors_p)]
+                if params['mode'] == 'BeachTowels':
+                    color = colors_BeachTowels[c_ndx%len(colors_BeachTowels)]
+                if params['mode'] == 'MoonlightBytes6':
+                    color = colors_MoonlightBytes6[c_ndx%len(colors_MoonlightBytes6)]
+                if params['mode'] == 'RainbowDash':
+                    color = colors_RainbowDash[c_ndx%len(colors_RainbowDash)]
                 # todo: new colorer proper
 
                 circle(draw, x, y, ro, fill=color, outline=None)
@@ -359,9 +365,15 @@ def mazy7(draw, params):
             ci = random.randint(0, 255)
             color = (ci,ci,ci)
         if params['cmode'] == 'color':    # color
-            color = colors_happy[random.randint(0, 7)]
+            color = colors_happy[random.randint(0, len(colors_happy)-1)]
         if params['cmode'] == 'wryb':
-            color = colors_fwd[random.randint(0, 7)]
+            color = colors_fwd[random.randint(0, len(colors_fwd)-1)]
+        if params['cmode'] == 'BeachTowels':
+            color = colors_BeachTowels[random.randint(0, len(colors_BeachTowels)-1)]
+        if params['cmode'] == 'MoonlightBytes6':
+            color = colors_MoonlightBytes6[random.randint(0, len(colors_MoonlightBytes6)-1)]
+        if params['cmode'] == 'RainbowDash':
+            color = colors_RainbowDash[random.randint(0, len(colors_RainbowDash)-1)]
         # todo: new colorer proper
 
         if 'addalpha' in params:
@@ -384,6 +396,7 @@ def mazy8(draw, params):
             y1 = y*h1 + int(h1/2)
             ci = random.randint(0, 7)
             color = colors_happy[ci]
+            # todo: new colorer proper
             # test
 #            if random.randint(0, 100) > 50: #par
 #                ar = random.randint(80, 200) #par
@@ -446,6 +459,11 @@ def mazy9(draw, params):
                 color = colors_p[random.randint(0, 7)]
             else:
                 color = colors_p[n%8]
+        if params['color'] == 'BeachTowels':
+            if rndc == True:
+                color = colors_BeachTowels[random.randint(0, len(colors_BeachTowels)-1)]
+            else:
+                color = colors_BeachTowels[n%len(colors_BeachTowels)]
         # todo: new colorer proper
         #test
         #color = (color[0], color[1], color[2], 100)
@@ -478,13 +496,13 @@ def mazy10(draw, params):
         for x in range(params['complexity']):
             po.extend([rwh()])
         if params['color'] == 'happy':
-            color = colors_happy[n%8]
+            color = colors_happy[n%len(colors_happy)]
         if params['color'] == 'rg':
             color = gradient2((255,255,0), (255,0,0), random.randint(0, 255), 255)
         if params['color'] == 'red':
             color = gradient2((0,0,0), (255,0,0), random.randint(0, 255), 255)
         if params['color'] == 'wryb':
-            color = colors_fwd[n%8]
+            color = colors_fwd[n%len(colors_fwd)]
         # todo: new colorer proper
 
         if 'addalpha' in params:
