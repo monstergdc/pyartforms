@@ -640,34 +640,49 @@ def mazy15(draw, params):
             co = params['Background']
         else:
             co = params['color']
-        circle(draw1, int(w/2), int(h/2), r, fill=co, outline=None)
+        if params['style'] == 'circle':
+            circle(draw1, int(w/2), int(h/2), r, fill=co, outline=None)
+        else:
+            xywh = [(int(w/2-r/2), int(h/2-r/2)), (int(w/2+r/2), int(h/2+r/2))]
+            draw1.rectangle(xywh, fill=co, outline=None)
 
-# note: possible: const(rnd/not), random, linear, cyclic * x/y/both
+# todo: also move 1st circles | freq (var) for circle opt
 
     # de-centered circles #2
-    #xs = int(w/50) # par
-    #xs = 1 # par
-    xs = int(w/5) # par -- zajebiste dla n=16
-    ys = 0 # par
-    xs = 0 # par
+    ys2 = 0
+    xs2 = 0
+    if 'xs2' in params:
+        xs2 = params['xs2']
+    if 'ys2' in params:
+        ys2 = params['ys2']
     for n in range(cnt):
         r = int(sc*(cnt-n))
         if n&1 == 0:
             co = params['Background']
         else:
             co = params['color']
-        #xs = random.randint(int(-w/5), int(w/5)) # par/opt
-        #ys = random.randint(int(-w/5), int(w/5)) # par/opt
-        #xs = random.randint(-20, 20) # par/opt
-        #ys = random.randint(-20, 20) # par/opt
-        #xs = 0
-        #xs = xs + 40
-        #ys = ys + 4
-        #xs = 10*math.cos(c*n/cnt*360)
-        #ys = 10*math.sin(c*n/cnt*360)
-        xs = w/10*math.cos(c*n/cnt*360)
-        ys = w/10*math.sin(c*n/cnt*360)
-        circle(draw2, int(w/2+xs), int(h/2+ys), r, fill=co, outline=None)
+        if 'mode' in params:
+            if params['mode'] == 'rnd':
+                if 'xs2v' in params:
+                    xs2 = random.randint(-params['xs2v'], params['xs2v'])
+                if 'ys2v' in params:
+                    ys2 = random.randint(-params['ys2v'], params['ys2v'])
+            if params['mode'] == 'linear':
+                if 'xs2v' in params:
+                    xs2 = xs2 + params['xs2v']
+                if 'ys2v' in params:
+                    ys2 = ys2 + params['ys2v']
+            if params['mode'] == 'circle':
+                a0 = c*n/cnt*360
+                if 'xs2v' in params:
+                    xs2 = params['ys2v']*math.cos(a0)
+                if 'ys2v' in params:
+                    ys2 = params['ys2v']*math.sin(a0)
+        if params['style'] == 'circle':
+            circle(draw2, int(w/2+xs2), int(h/2+ys2), r, fill=co, outline=None)
+        else:
+            xywh = [(int(w/2+xs2-r/2), int(h/2+ys2-r/2)), (int(w/2+xs2+r/2), int(h/2+ys2+r/2))]
+            draw1.rectangle(xywh, fill=co, outline=None)
 
     imout = ImageChops.difference(im1, im2)
     params['im'].paste(imout, (0, 0))
