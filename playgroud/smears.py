@@ -67,14 +67,10 @@ def mazy1(draw, params):
               (random.randint(0, w), random.randint(0, h))]
 
         if 'color' in params:
-            if params['color'] == 'happy':
-                color = colors_happy[n%8]
-            if params['color'] == 'wryb':
-                color = colors_fwd[n%8]
             if params['color'] == 'rg':
                 color = gradient2((255,255,0), (255,0,0), random.randint(0, 255), 255)
-            if params['color'] == 'psych':
-                color = colors_p[n%8]
+            else:
+                color = new_colorer(params['color'], n, cnt)
         else:
             color = old_colorer(params)
         if 'addalpha' in params:
@@ -269,7 +265,7 @@ def mazy5(draw, params):
                 y = y0 + r * math.sin(angle)
                 points.extend((x, y))
 
-            color = colors[m%8]
+            color = colors[m%len(colors)]   # TODO: fix: not new not old
 
             if 'addalpha' in params:
                 color = add_alpha(color, params['addalpha'])
@@ -313,6 +309,7 @@ def mazy6(draw, params):
                     color = colors_bwx[c_ndx]
                 if params['mode'] == 'psych':
                     color = colors_p[c_ndx]
+                # todo: new colorer proper
 
                 circle(draw, x, y, ro, fill=color, outline=None)
             c_ndx = c_ndx - 1
@@ -365,6 +362,7 @@ def mazy7(draw, params):
             color = colors_happy[random.randint(0, 7)]
         if params['cmode'] == 'wryb':
             color = colors_fwd[random.randint(0, 7)]
+        # todo: new colorer proper
 
         if 'addalpha' in params:
             color = add_alpha(color, params['addalpha'])
@@ -448,6 +446,7 @@ def mazy9(draw, params):
                 color = colors_p[random.randint(0, 7)]
             else:
                 color = colors_p[n%8]
+        # todo: new colorer proper
         #test
         #color = (color[0], color[1], color[2], 100)
         #
@@ -486,6 +485,7 @@ def mazy10(draw, params):
             color = gradient2((0,0,0), (255,0,0), random.randint(0, 255), 255)
         if params['color'] == 'wryb':
             color = colors_fwd[n%8]
+        # todo: new colorer proper
 
         if 'addalpha' in params:
             color = add_alpha(color, params['addalpha'])
@@ -518,6 +518,7 @@ def mazy11(draw, params):
         color1 = colors_happy[n1]
         color2 = colors_happy[n2]
         color3 = colors_happy[n3]
+        # todo: new colorer proper
         for step in range(steps):
             color = gradient(color1, color2, color3, step, steps)
             rect(draw, int(step*dx+dx/2), int(n*dy+dy/2), int(dx), int(dy), fill=color, outline=None)

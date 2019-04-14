@@ -70,19 +70,19 @@ def old_colorer(params):
 def new_colorer(mode, n, cnt):
     if mode == 'red':
         color = gradient2((0,0,0), (255,0,0), n, cnt)
-        return
+        return color
     if mode == 'green':
         color = gradient2((0,56,0), (0,255,48), n, cnt)
-        return
+        return color
     if mode == 'bg':
         color = gradient2((32,64,64), (64,255,255), n, cnt)
-        return
+        return color
     if mode == 'rg':
         color = gradient2((255,0,0), (255,255,0), n, cnt)
-        return
+        return color
     if mode == 'bw':
         color = gradient2((0,0,0), (255,255,255), n, cnt)
-        return
+        return color
     if mode == 'happy':
         ca = colors_happy
     if mode == 'wryb':
