@@ -48,7 +48,7 @@ f = [
     'PAC-FONT.TTF',
     'MaszynaAEG.ttf',
     'MAILBOMB.TTF',
-    'tahoma.ttf',
+    'tahoma.ttf', # Tahoma (PL)
     'zxspectr.ttf',
     'zxspectr1.ttf',
     'WESTWOOD.TTF',
@@ -56,7 +56,6 @@ f = [
     'STHLMGRA.TTF', # Sthlm graffiti
     'SKINCK_.TTF', # SkinnyCapKick
     'SHOPLIFT.TTF', # Shoplifters unite
-    'SR.TTF', # Shamen Remix
     'SCRIBAN.TTF', # Scriba LET
     'RUBSTAMP.TTF', # Rubber Stamp LET
     'PLASTICB.TTF', # Plastic Bag
@@ -138,10 +137,13 @@ def txt_rnd(draw, params):
         y = random.randint(int(-h*0.3), h)
         n = random.randint(0, 7)
         if cmode == 0:
-            c = (colors_happy[n][0], colors_happy[n][1], colors_happy[n][2], 128)   # wtf nie dziala
+            c = (colors_happy[n][0], colors_happy[n][1], colors_happy[n][2])
         else:
-            c0 = int(255-255*i/cnt)
-            c = (c0, c0, c0)
+            if cmode == 1:
+                c = (colors_p[n][0], colors_p[n][1], colors_p[n][2])
+            else:
+                c0 = int(255-255*i/cnt)
+                c = (c0, c0, c0)
         if mode == 0:
             z = random.randint(36, 640)
         else:
@@ -264,15 +266,16 @@ a2 = sentence2.split()
 cnt = 1
 
 p = [
-#    {'name': 'txt-grych-mailbomb', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (0,0,0), 'txt': txt_grych, 'font': 'MAILBOMB.TTF', 'cnt': 240, 'mode': 1, 'cmode': 0},
-    {'name': 'txt-non-mailbomb', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (0,0,0), 'txt': txt_non, 'font': 'MAILBOMB.TTF', 'cnt': 240, 'mode': 1, 'cmode': 0},
-    {'name': 'txt-non-mailbomb', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (0,0,0), 'txt': txt_non, 'font': 'MAILBOMB.TTF', 'cnt': 200, 'mode': 1, 'cmode': 1},
-    {'name': 'txt-non-mailbomb', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (0,0,0), 'txt': txt_non, 'font': 'MAILBOMB.TTF', 'cnt': 18, 'mode': 1, 'cmode': 1, 'size': 600, 'dsize': 32},
-    {'name': 'txt-non-f4', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (0,0,0), 'txt': txt_non, 'font': f[4], 'cnt': 18, 'mode': 1, 'cmode': 1, 'size': 600, 'dsize': 32},
-    {'name': 'txt-konst-mailbomb', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (0,0,0), 'txt': txt_kon, 'font': 'MAILBOMB.TTF', 'cnt': 240, 'mode': 1, 'cmode': 0},
-    {'name': 'txt-konst-RUBSTAMP', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (0,0,0), 'txt': txt_kon, 'font': 'RUBSTAMP.TTF', 'cnt': 240, 'mode': 1, 'cmode': 0},
-    {'name': 'txt-konst-KUBA_REC', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (0,0,0), 'txt': txt_kon, 'font': 'KUBA_REC.TTF', 'cnt': 240, 'mode': 1, 'cmode': 0},
-    {'name': 'txt-konst-Kobajashi', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (0,0,0), 'txt': txt_kon, 'font': 'Kobajashi.ttf', 'cnt': 240, 'mode': 1, 'cmode': 0},
+    {'name': 'txt-non-mailbomb', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (255,255,255), 'txt': txt_non, 'font': 'MAILBOMB.TTF', 'cnt': 240, 'mode': 1, 'cmode': 0},
+    {'name': 'txt-non-mailbomb', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (255,255,255), 'txt': txt_non, 'font': 'MAILBOMB.TTF', 'cnt': 200, 'mode': 1, 'cmode': 1},
+    {'name': 'txt-non-mailbomb', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (255,255,255), 'txt': txt_non, 'font': 'MAILBOMB.TTF', 'cnt': 200, 'mode': 1, 'cmode': -1},
+    {'name': 'txt-non-mailbomb', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (255,255,255), 'txt': txt_non, 'font': 'MAILBOMB.TTF', 'cnt': 18, 'mode': 1, 'cmode': -1, 'size': 600, 'dsize': 32},
+    {'name': 'txt-non-f4', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (255,255,255), 'txt': txt_non, 'font': f[4], 'cnt': 18, 'mode': 1, 'cmode': -1, 'size': 600, 'dsize': 32},
+    {'name': 'txt-konst-mailbomb', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (255,255,255), 'txt': txt_kon, 'font': 'MAILBOMB.TTF', 'cnt': 240, 'mode': 1, 'cmode': 0},
+    {'name': 'txt-konst-RUBSTAMP', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (255,255,255), 'txt': txt_kon, 'font': 'RUBSTAMP.TTF', 'cnt': 240, 'mode': 1, 'cmode': 0},
+    {'name': 'txt-konst-KUBA_REC', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (255,255,255), 'txt': txt_kon, 'font': 'KUBA_REC.TTF', 'cnt': 240, 'mode': 1, 'cmode': 0},
+    {'name': 'txt-konst-Kobajashi', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (255,255,255), 'txt': txt_kon, 'font': 'Kobajashi.ttf', 'cnt': 240, 'mode': 1, 'cmode': 0},
+    {'name': 'txt-konst-MaszynaAEG', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (255,255,255), 'txt': txt_kon, 'font': 'MaszynaAEG.ttf', 'cnt': 240, 'mode': 1, 'cmode': 0},
     ]
 
 for n in range(cnt):
@@ -283,10 +286,12 @@ for n in range(cnt):
 p = [
     {'name': 'litwo-KUBA_REC', 'call': txt_go, 'w': w, 'h': h, 'Background': (255,255,255), 'a': a1, 'cmode': 1, 'sizemin': 300, 'sizemax': 700, 'font': 'KUBA_REC.TTF', 'cspace': 0.3, 'rspace': 0.35, 'x0': 150},
     {'name': 'litwo-Kobajashi', 'call': txt_go, 'w': w, 'h': h, 'Background': (255,255,255), 'a': a1, 'cmode': 1, 'sizemin': 112, 'sizemax': 360, 'font': 'Kobajashi.ttf', 'cspace': 0.5, 'rspace': 0.9, 'x0': 15},
-    {'name': 'litwo-SR', 'call': txt_go, 'w': w, 'h': h, 'Background': (255,255,255), 'a': a1, 'cmode': 1, 'sizemin': 112, 'sizemax': 360, 'font': 'SR.TTF', 'cspace': 0.5, 'rspace': 0.9, 'x0': 15},
+    {'name': 'litwo-SHOPLIFT', 'call': txt_go, 'w': w, 'h': h, 'Background': (255,255,255), 'a': a1, 'cmode': 1, 'sizemin': 112, 'sizemax': 360, 'font': 'SHOPLIFT.TTF', 'cspace': 0.5, 'rspace': 0.9, 'x0': 15},
+    
     {'name': 'wieszcz1-KUBA_REC', 'call': txt_go, 'w': w, 'h': h, 'Background': (255,255,255), 'a': a2, 'cmode': 1, 'sizemin': 300, 'sizemax': 700, 'font': 'KUBA_REC.TTF', 'cspace': 0.3, 'rspace': 0.35, 'x0': 150},
     {'name': 'wieszcz1-Kobajashi', 'call': txt_go, 'w': w, 'h': h, 'Background': (255,255,255), 'a': a2, 'cmode': 1, 'sizemin': 112, 'sizemax': 360, 'font': 'Kobajashi.ttf', 'cspace': 0.5, 'rspace': 0.9, 'x0': 15},
-    {'name': 'wieszcz1-SR', 'call': txt_go, 'w': w, 'h': h, 'Background': (255,255,255), 'a': a2, 'cmode': 1, 'sizemin': 112, 'sizemax': 360, 'font': 'SR.TTF', 'cspace': 0.5, 'rspace': 0.9, 'x0': 15},
+    {'name': 'wieszcz1-tahoma', 'call': txt_go, 'w': w, 'h': h, 'Background': (255,255,255), 'a': a2, 'cmode': 1, 'sizemin': 112, 'sizemax': 360, 'font': 'tahoma.ttf', 'cspace': 0.5, 'rspace': 0.9, 'x0': 15},
+    {'name': 'wieszcz1-MaszynaAEG', 'call': txt_go, 'w': w, 'h': h, 'Background': (255,255,255), 'a': a2, 'cmode': 1, 'sizemin': 112, 'sizemax': 360, 'font': 'MaszynaAEG.ttf', 'cspace': 0.5, 'rspace': 0.9, 'x0': 15},
     ]
 
 for n in range(cnt):
