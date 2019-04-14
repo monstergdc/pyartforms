@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # 20190328, 29
-# 20190401, 02
+# 20190401, 02, 14
 
 # this one needs also ?
 
@@ -23,23 +23,23 @@ from drawtools import *
 from color_defs import *
 
 
-#Commodore 64 Pixelized: AB ab Ąą
-#Commodore 64 Rounded: AB ab Ąą
-#CooperBlack-WP EE: AB ab Ąą
-#Coronet: AB ab Ąą
-#Diager: AB ab Ąą
-#Dirty Dung Solid: AB ab Ąą
-#Dirty Dung: AB ab Ąą
-#Earth People: AB ab Ąą
-#Elementarz: AB ab Ąą
-#EnglishTowne-Normal: AB ab Ąą
-#EngrvrsOldEng Bd BT: AB ab Ąą
-#Eppy Evans Round Light: AB ab Ąą
-#FiveFingerDiscount: AB ab Ąą
-#Franklin Gothic Heavy: AB ab Ąą
-#Freefrm721 Blk L2: AB ab Ąą
-#Georgia Pogrubiona kursywa: AB ab Ąą
-#Georgia Pogrubiony: AB ab Ąą
+#Commodore 64 Pixelized
+#Commodore 64 Rounded
+#CooperBlack-WP EE
+#Coronet
+#Diager
+#Dirty Dung Solid
+#Dirty Dung
+#Earth People
+#Elementarz
+#EnglishTowne-Normal
+#EngrvrsOldEng Bd BT
+#Eppy Evans Round Light
+#FiveFingerDiscount
+#Franklin Gothic Heavy
+#Freefrm721 Blk L2
+#Georgia Pogrubiona kursywa
+#Georgia Pogrubiony
 
 f = [
     'VITAMIN.TTF',
@@ -73,7 +73,7 @@ f = [
     'impact.ttf', # Impact
     ]
 
-sentence = \
+sentence1 = \
     "Litwo, Ojczyzno moja! ty jesteś jak zdrowie; \
     Ile cię trzeba cenić, ten tylko się dowie, \
     Kto cię stracił. Dziś piękność twą w całej ozdobie \
@@ -176,7 +176,7 @@ def txt_down(params):
         y += int(twh[1]*0.9) # note overflow
         size -= dsize
 
-def txt_go(params):
+def txt_go(draw, params):
     w = params['w']
     h = params['h']
     a = params['a']
@@ -188,7 +188,6 @@ def txt_go(params):
     f = params['font']
     x0 = params['x0']
     random.seed()
-    d = ImageDraw.Draw(img)
     y = 0 # init
     x = 0 # init
     twh_old = (0, 0)
@@ -211,7 +210,7 @@ def txt_go(params):
             if cmode == 2:
                 n = random.randint(0, 5)
                 c = (colors_fwd_nw6[n][0], colors_fwd_nw6[n][1], colors_fwd_nw6[n][2])
-            d.text((x, y), txt, font=fnt, fill=c)
+            draw.text((x, y), txt, font=fnt, fill=c)
             x += twh[0] + 1
         twh_old = twh
 
@@ -242,10 +241,7 @@ def txt_circle(params):
 #w, h = get_canvas('A4')
 w, h = get_canvas('A3')
 #w, h = get_canvas('A2')
-
-#a = sentence.split()
-a = sentence2.split()
-
+#w, h = get_canvas('A1')
 
 start_time = dt.now()
 root = '!output-txt'
@@ -253,38 +249,50 @@ if not os.path.exists(root):
     os.makedirs(root)
 odir = root+'\\'
 
-#img = Image.new('RGBA', (w, h), color = (255, 255, 255, 0))
-#params = {'w': w, 'h': h, 'a': a, 'cmode': 1, 'sizemin': 300, 'sizemax': 700, 'font': 'KUBA_REC.TTF', 'cspace': 0.3, 'rspace': 0.35, 'x0': 150}
-#txt_go(params)   
-#img.save('smears-text-wieszcz-kuba.png')
-
-#img = Image.new('RGBA', (w, h), color = (255, 255, 255, 0))
-#params = {'w': w, 'h': h, 'a': a, 'cmode': 1, 'sizemin': 112, 'sizemax': 360, 'font': 'Kobajashi.ttf', 'cspace': 0.5, 'rspace': 0.9, 'x0': 15}
-#txt_go(params)   
-#img.save('smears-text-wieszcz-Kobajashi.png')
-
 txt_M = "MONSTER"
 txt_m = "monster"
 txt_Mo = "MoNsTeR"
 txt_gdc = "GDC"
 txt_grych = "GRYCH"
 txt_non = "Noniewicz.art.pl"
-txt_cn = '屁股' # dupa CN
+txt_cn = '屁股' # dupa in CN, use NSimSun font
+txt_kon = "KONSTYTUCJA"
+
+a1 = sentence1.split()
+a2 = sentence2.split()
+
+cnt = 1
 
 p = [
-    {'name': 'grych-mailbomb', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (0,0,0), 'txt': txt_grych, 'font': 'MAILBOMB.TTF', 'cnt': 240, 'mode': 1, 'cmode': 0},
-    {'name': 'non-mailbomb', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (0,0,0), 'txt': txt_non, 'font': 'MAILBOMB.TTF', 'cnt': 240, 'mode': 1, 'cmode': 0},
-    {'name': 'non-mailbomb', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (0,0,0), 'txt': txt_non, 'font': 'MAILBOMB.TTF', 'cnt': 200, 'mode': 1, 'cmode': 1},
-    {'name': 'non-mailbomb', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (0,0,0), 'txt': txt_non, 'font': 'MAILBOMB.TTF', 'cnt': 18, 'mode': 1, 'cmode': 1, 'size': 600, 'dsize': 32},
-    {'name': 'non-f4', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (0,0,0), 'txt': txt_non, 'font': f[4], 'cnt': 18, 'mode': 1, 'cmode': 1, 'size': 600, 'dsize': 32},
+#    {'name': 'txt-grych-mailbomb', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (0,0,0), 'txt': txt_grych, 'font': 'MAILBOMB.TTF', 'cnt': 240, 'mode': 1, 'cmode': 0},
+    {'name': 'txt-non-mailbomb', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (0,0,0), 'txt': txt_non, 'font': 'MAILBOMB.TTF', 'cnt': 240, 'mode': 1, 'cmode': 0},
+    {'name': 'txt-non-mailbomb', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (0,0,0), 'txt': txt_non, 'font': 'MAILBOMB.TTF', 'cnt': 200, 'mode': 1, 'cmode': 1},
+    {'name': 'txt-non-mailbomb', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (0,0,0), 'txt': txt_non, 'font': 'MAILBOMB.TTF', 'cnt': 18, 'mode': 1, 'cmode': 1, 'size': 600, 'dsize': 32},
+    {'name': 'txt-non-f4', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (0,0,0), 'txt': txt_non, 'font': f[4], 'cnt': 18, 'mode': 1, 'cmode': 1, 'size': 600, 'dsize': 32},
+    {'name': 'txt-konst-mailbomb', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (0,0,0), 'txt': txt_kon, 'font': 'MAILBOMB.TTF', 'cnt': 240, 'mode': 1, 'cmode': 0},
+    {'name': 'txt-konst-RUBSTAMP', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (0,0,0), 'txt': txt_kon, 'font': 'RUBSTAMP.TTF', 'cnt': 240, 'mode': 1, 'cmode': 0},
+    {'name': 'txt-konst-KUBA_REC', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (0,0,0), 'txt': txt_kon, 'font': 'KUBA_REC.TTF', 'cnt': 240, 'mode': 1, 'cmode': 0},
+    {'name': 'txt-konst-Kobajashi', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (0,0,0), 'txt': txt_kon, 'font': 'Kobajashi.ttf', 'cnt': 240, 'mode': 1, 'cmode': 0},
     ]
 
-cnt = 2
 for n in range(cnt):
     tx = dt.now().strftime('%Y%m%d%H%M%S')
     for i in range(len(p)):
         art_painter(p[i], odir+'%s-%dx%d-%02d-%03d-%s.png' % (p[i]['name'], w, h, i+1, n+1, tx))
 
+p = [
+    {'name': 'litwo-KUBA_REC', 'call': txt_go, 'w': w, 'h': h, 'Background': (255,255,255), 'a': a1, 'cmode': 1, 'sizemin': 300, 'sizemax': 700, 'font': 'KUBA_REC.TTF', 'cspace': 0.3, 'rspace': 0.35, 'x0': 150},
+    {'name': 'litwo-Kobajashi', 'call': txt_go, 'w': w, 'h': h, 'Background': (255,255,255), 'a': a1, 'cmode': 1, 'sizemin': 112, 'sizemax': 360, 'font': 'Kobajashi.ttf', 'cspace': 0.5, 'rspace': 0.9, 'x0': 15},
+    {'name': 'litwo-SR', 'call': txt_go, 'w': w, 'h': h, 'Background': (255,255,255), 'a': a1, 'cmode': 1, 'sizemin': 112, 'sizemax': 360, 'font': 'SR.TTF', 'cspace': 0.5, 'rspace': 0.9, 'x0': 15},
+    {'name': 'wieszcz1-KUBA_REC', 'call': txt_go, 'w': w, 'h': h, 'Background': (255,255,255), 'a': a2, 'cmode': 1, 'sizemin': 300, 'sizemax': 700, 'font': 'KUBA_REC.TTF', 'cspace': 0.3, 'rspace': 0.35, 'x0': 150},
+    {'name': 'wieszcz1-Kobajashi', 'call': txt_go, 'w': w, 'h': h, 'Background': (255,255,255), 'a': a2, 'cmode': 1, 'sizemin': 112, 'sizemax': 360, 'font': 'Kobajashi.ttf', 'cspace': 0.5, 'rspace': 0.9, 'x0': 15},
+    {'name': 'wieszcz1-SR', 'call': txt_go, 'w': w, 'h': h, 'Background': (255,255,255), 'a': a2, 'cmode': 1, 'sizemin': 112, 'sizemax': 360, 'font': 'SR.TTF', 'cspace': 0.5, 'rspace': 0.9, 'x0': 15},
+    ]
+
+for n in range(cnt):
+    tx = dt.now().strftime('%Y%m%d%H%M%S')
+    for i in range(len(p)):
+        art_painter(p[i], odir+'%s-%dx%d-%02d-%03d-%s.png' % (p[i]['name'], w, h, i+1, n+1, tx))
 
 time_elapsed = dt.now() - start_time
 print('ALL done. elapsed time: {}'.format(time_elapsed))
