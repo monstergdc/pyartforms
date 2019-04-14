@@ -24,6 +24,7 @@ from astroart import *
 from mandelbrot import generate_mandelbrot
 from smears import *
 from pyart_defs import *
+from color_defs import *
 
 
 bg_black = (0, 0, 0)
@@ -552,19 +553,16 @@ def predef_mazy14(w, h):
 
 def predef_mazy15(w, h):
     n = 'SMEARS#15'
-    a = [
-        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 16, 'color': bg_black, 'style': 'circle'},
-        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 32, 'color': bg_black, 'style': 'circle'},
-        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 64, 'color': bg_black, 'style': 'circle'},
-        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 128, 'color': bg_black, 'style': 'circle'},
-        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 256, 'color': bg_black, 'style': 'circle'},
+    a = [# note: color seems lame ... but try with other tran yet
+        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 16, 'color': bg_black, 'style': 'circle', 'tran': 'difference'},
+        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 32, 'color': bg_black, 'style': 'circle', 'tran': 'difference'},
+        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 64, 'color': bg_black, 'style': 'circle', 'tran': 'difference'},
+        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 128, 'color': bg_black, 'style': 'circle', 'tran': 'difference'},
 
-        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': (32, 224, 0), 'n': 16, 'color': (224, 32, 0), 'style': 'circle'},  # test with colors
-        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': (32, 224, 0), 'n': 16, 'color': (224, 32, 0), 'style': 'rect'},  # test with colors
-
-        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 16, 'color': bg_black, 'style': 'rect'},
-        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 64, 'color': bg_black, 'style': 'rect'},
-        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 256, 'color': bg_black, 'style': 'rect'},
+        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 16, 'color': bg_black, 'style': 'rect', 'tran': 'difference'},
+        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 32, 'color': bg_black, 'style': 'rect', 'tran': 'difference'},
+        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 64, 'color': bg_black, 'style': 'rect', 'tran': 'difference'},
+        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 128, 'color': bg_black, 'style': 'rect', 'tran': 'difference'},
     ]
     a1 = copy.deepcopy(a)
     a2 = copy.deepcopy(a)
@@ -582,38 +580,94 @@ def predef_mazy15(w, h):
     a14 = copy.deepcopy(a)
     for i in range(len(a)):
         a1[i]['xs2'] = int(w/5) # cool for n=16
+        a1[i]['ys2'] = int(w/100)
         a2[i]['xs2'] = int(w/50)
+        a2[i]['ys2'] = int(w/100)
         a3[i]['xs2'] = int(w/100)
+        a3[i]['ys2'] = int(w/100)
         a4[i]['mode'] = 'rnd'
         a4[i]['xs2v'] = int(w/5)
+        a4[i]['ys2v'] = int(w/5)
         a5[i]['mode'] = 'rnd'
         a5[i]['xs2v'] = 20
+        a5[i]['ys2v'] = 20
         a6[i]['mode'] = 'rnd'
         a6[i]['xs2v'] = int(w/50)
-        a7[i]['mode'] = 'linear'    #fix no const
-        a7[i]['xs2v'] = 40
-        a7[i]['ys2v'] = 4
+        a6[i]['ys2v'] = int(w/50)
+        a7[i]['mode'] = 'linear'
+        a7[i]['xs2v'] = int(w/5)
+        a7[i]['ys2v'] = 1
         a8[i]['mode'] = 'linear'
         a8[i]['xs2v'] = int(w/5)
+        a8[i]['ys2v'] = int(w/5)
         a9[i]['mode'] = 'linear'
         a9[i]['xs2v'] = int(w/25)
+        a9[i]['ys2v'] = 1
         a10[i]['mode'] = 'linear'
         a10[i]['xs2v'] = int(w/50)
+        a10[i]['ys2v'] = 1
         a11[i]['mode'] = 'circle'
         a11[i]['xs2v'] = int(w/50)
         a11[i]['ys2v'] = int(w/50)
         a12[i]['mode'] = 'circle'
-        a12[i]['xs2v'] = int(w/10)
-        a12[i]['ys2v'] = int(w/10)
+        a12[i]['xs2v'] = int(w/25)
+        a12[i]['ys2v'] = int(w/25)
         a13[i]['mode'] = 'circle'
-        a13[i]['xs2v'] = int(w/5)
-        a13[i]['ys2v'] = int(w/5)
+        a13[i]['xs2v'] = int(w/10)
+        a13[i]['ys2v'] = int(w/10)
         a14[i]['mode'] = 'circle'
-        a14[i]['xs2v'] = int(w/10)
-        a14[i]['ys2v'] = int(w/11)
-    return np.concatenate((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14), axis=0)
+        a14[i]['xs2v'] = int(w/5)
+        a14[i]['ys2v'] = int(w/5)
+    a = np.concatenate((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14), axis=0)
+    a1 = copy.deepcopy(a)
+    a2 = copy.deepcopy(a)
+    a3 = copy.deepcopy(a)
+    for i in range(len(a)):
+        #note: unused now: 'darker' 'lighter' 'multiply'
+        a1[i]['tran'] = 'difference' #note: dflt
+        a2[i]['tran'] = 'blend'
+        a3[i]['tran'] = 'subtract'
+    return np.concatenate((a1, a2, a3), axis=0)
 
-#def predef_mazy16(w, h):
+def predef_mazy16(w, h):
+    n = 'SMEARS#16'
+    a = [
+        {'name': n, 'call': mazy16, 'w': w, 'h': h, 'Background': bg_white, 'n': 12, 'color': bg_black, 'rcoef': 1.0, 'acoef': 1.0, 'rscale': 1.0},
+        {'name': n, 'call': mazy16, 'w': w, 'h': h, 'Background': bg_white, 'n': 24, 'color': bg_black, 'rcoef': 1.0, 'acoef': 1.0, 'rscale': 1.0},
+        {'name': n, 'call': mazy16, 'w': w, 'h': h, 'Background': bg_white, 'n': 48, 'color': bg_black, 'rcoef': 1.0, 'acoef': 1.0, 'rscale': 1.0},
+        {'name': n, 'call': mazy16, 'w': w, 'h': h, 'Background': bg_white, 'n': 96, 'color': bg_black, 'rcoef': 1.0, 'acoef': 1.0, 'rscale': 1.0},
+    ]
+    a1 = copy.deepcopy(a)
+    a2 = copy.deepcopy(a)
+    a3 = copy.deepcopy(a)
+    for i in range(len(a)):
+        a1[i]['rcoef'] = 1.0 #note: dflt
+        a2[i]['rcoef'] = 1.1
+        a3[i]['rcoef'] = 1.5
+    a = np.concatenate((a1, a2, a3), axis=0)
+    a1 = copy.deepcopy(a)
+    a2 = copy.deepcopy(a)
+    a3 = copy.deepcopy(a)
+    for i in range(len(a)):
+        a1[i]['acoef'] = 1.0 #note: dflt
+        a2[i]['acoef'] = 1.5
+        a3[i]['acoef'] = 2.0
+    a = np.concatenate((a1, a2, a3), axis=0)
+    a1 = copy.deepcopy(a)
+    a2 = copy.deepcopy(a)
+    a3 = copy.deepcopy(a)
+    for i in range(len(a)):
+        a1[i]['rscale'] = 1.0 #note: dflt
+        a2[i]['rscale'] = 0.33
+        a3[i]['rscale'] = 1.5
+    a = np.concatenate((a1, a2, a3), axis=0)
+    return a
+
+#def predef_mazy17(w, h):
+#def predef_mazy18(w, h):
+#def predef_mazy19(w, h):
+#def predef_mazy20(w, h):
+
 
 def enum_defs():
     print('1:', len(predef_mazy1(0, 0)))
@@ -631,6 +685,10 @@ def enum_defs():
     print('13:', len(predef_mazy13(0, 0)))
     print('14:', len(predef_mazy14(0, 0)))
     print('15:', len(predef_mazy15(0, 0)))
-    #print('16:', len(predef_mazy16(0, 0)))
+    print('16:', len(predef_mazy16(0, 0)))
+    #print('17:', len(predef_mazy17(0, 0)))
+    #print('18:', len(predef_mazy18(0, 0)))
+    #print('19:', len(predef_mazy19(0, 0)))
+    #print('20:', len(predef_mazy20(0, 0)))
 
 # EOF

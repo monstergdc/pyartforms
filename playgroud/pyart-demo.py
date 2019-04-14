@@ -6,6 +6,7 @@
 # cre: 20181020
 # upd: 20190105, 06, 13, 18, 19, 22
 # upd: 20190302, 03, 30
+# upd: 20190414
 
 # TODO:
 # - nice argparse (also per module?)
@@ -107,6 +108,12 @@ def do_mazy(cnt, w, h, odir, name):
         p = predef_mazy12(w, h)
     if name == 'mazy13':
         p = predef_mazy13(w, h)
+    if name == 'mazy14':
+        p = predef_mazy14(w, h)
+    if name == 'mazy15':
+        p = predef_mazy15(w, h)
+    if name == 'mazy16':
+        p = predef_mazy16(w, h)
 
     for n in range(cnt):
         tx = dt.now().strftime('%Y%m%d%H%M%S')
@@ -120,6 +127,8 @@ def do_mazy(cnt, w, h, odir, name):
 #w, h = get_canvas('A2')
 w, h = get_canvas('A3') # for demo use this, not too big, not too small
 #w, h = get_canvas('A4')
+#w, h = get_canvas('A5')
+#w, h = get_canvas('A6')
 
 cnt = 3 # note: it takes some time
 do_mazy(cnt, w, h, odir, 'mazy01')
@@ -135,6 +144,9 @@ do_mazy(cnt, w, h, odir, 'mazy10')
 do_mazy(cnt, w, h, odir, 'mazy11')
 do_mazy(cnt, w, h, odir, 'mazy12')
 do_mazy(cnt, w, h, odir, 'mazy13')
+do_mazy(cnt, w, h, odir, 'mazy14')
+do_mazy(cnt, w, h, odir, 'mazy15')
+do_mazy(cnt, w, h, odir, 'mazy16')
 
 do_waves(cnt, w, h, odir) # fix: does not scale down well
 

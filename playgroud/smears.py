@@ -18,9 +18,11 @@
 # #13 single big poly
 # #14 ?
 # #15 ?
-# #16 
+# #16 opart-like circles
 # #17
-# #18 
+# #18
+# #19
+# #20 
 # cre: 20180430
 # upd: 20180501, 02, 03
 # cre: 20180805, 07, 08
@@ -598,7 +600,8 @@ def mazy14(draw, params):
             co = params['color']
         circle(draw1, int(w/2), int(h/2), r, fill=co, outline=None)
 
-    # spirals from center - rework, it's bad!
+    # spirals from center
+    # TODO: rework, it's bad!
     spirals_cnt = cnt
     spiral_steps = 112 #par
     if w > h:
@@ -684,22 +687,54 @@ def mazy15(draw, params):
             xywh = [(int(w/2+xs2-r/2), int(h/2+ys2-r/2)), (int(w/2+xs2+r/2), int(h/2+ys2+r/2))]
             draw2.rectangle(xywh, fill=co, outline=None)
 
-    imout = ImageChops.difference(im1, im2) # opt
-    #PIL.ImageChops.blend(image1, image2, alpha)
-    #PIL.ImageChops.darker(image1, image2)
-    #PIL.ImageChops.lighter(image1, image2)
-    #PIL.ImageChops.multiply(image1, image2)
-    #PIL.ImageChops.subtract(image1, image2, scale=1.0, offset=0)
+    if params['tran'] == 'difference':
+        imout = ImageChops.difference(im1, im2)
+    if params['tran'] == 'blend':
+        imout = ImageChops.blend(im1, im2, alpha=0.5) # par? orig alpha=0.5
+    if params['tran'] == 'darker':
+        imout = ImageChops.darker(im1, im2)
+    if params['tran'] == 'lighter':
+        imout = ImageChops.lighter(im1, im2)
+    if params['tran'] == 'multiply':
+        imout = ImageChops.multiply(im1, im2)
+    if params['tran'] == 'subtract':
+        imout = ImageChops.subtract(im1, im2, scale=0.75, offset=0) # par? orig scale=1.0
     params['im'].paste(imout, (0, 0))
-
-# future fun
+    im1 = Image.new('RGB', (1, 1), (0,0,0)) # that is probably lame way to free memory
+    im2 = Image.new('RGB', (1, 1), (0,0,0))
+    imout = Image.new('RGB', (1, 1), (0,0,0))
+    draw1 = ImageDraw.Draw(im1) # does it free mem?
+    draw2 = ImageDraw.Draw(im2) # does it free mem?
 
 def mazy16(draw, params):
     w = params['w']
     h = params['h']
     cnt = params['n']
-    # ...
-    return 0
+    random.seed()
+    c = math.pi/180
+    if w > h:
+        sc = w/2
+    else:
+        sc = h/2
+    rcoef = params['rcoef']
+    acoef = params['acoef']
+    rscale = params['rscale']
+
+    for n in range(cnt):
+        r = int(sc * (cnt-n)/cnt*rcoef)
+        if n&1 == 0:
+            co = params['Background']
+            ou = params['color']
+        else:
+            co = params['color']
+            ou = params['Background']
+        #ou = None
+        a0 = c*n/cnt*360 * acoef
+        xs2 = rscale*sc/2*math.cos(a0)
+        ys2 = rscale*sc/2*math.sin(a0)
+        circle(draw, int(w/2+xs2), int(h/2+ys2), r, fill=co, outline=ou)
+
+# future fun
 
 def mazy17(draw, params):
     w = params['w']
@@ -710,6 +745,22 @@ def mazy17(draw, params):
     return 0
 
 def mazy18(draw, params):
+    w = params['w']
+    h = params['h']
+    cnt = params['n']
+    random.seed()
+    # ...
+    return 0
+
+def mazy19(draw, params):
+    w = params['w']
+    h = params['h']
+    cnt = params['n']
+    random.seed()
+    # ...
+    return 0
+
+def mazy20(draw, params):
     w = params['w']
     h = params['h']
     cnt = params['n']

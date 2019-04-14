@@ -178,6 +178,8 @@ def art_painter(params, png_file='example.png', output_mode='save', bw=False):
         #add_myself(draw, params['w'], params['h'], params['Background'])
         im.save(png_file, dpi=(300,300), pnginfo=append_myself('pyartforms'))
         show_benchmark(start_time)
+        im = Image.new('L', (1, 1), (0)) # ???
+        draw = ImageDraw.Draw(im) # ???
     else:
         add_myself(draw, params['w'], params['h'], params['Background'])
         im2cgi(im, format='PNG')
