@@ -6,6 +6,7 @@
 # upd: 20181020, 21
 # upd: 20190112, 19, 21, 22
 # upd: 20190311, 29
+# upd: 20190414
 
 from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin, ImageFont
 from datetime import datetime as dt
@@ -169,6 +170,7 @@ def art_painter(params, png_file='example.png', output_mode='save', bw=False):
     else:
         draw = ImageDraw.Draw(im)
 
+    params['im'] = im  # pass the Image object too
     f = params['call']
     f(draw, params)
     im = xsmooth(params, im)
