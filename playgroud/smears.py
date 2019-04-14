@@ -16,9 +16,11 @@
 # #11 horizontal gradients with suprizes
 # #12 opart-like boxes/circles
 # #13 single big poly
-# #14 
-# #15
+# #14 ?
+# #15 ?
 # #16 
+# #17
+# #18 
 # cre: 20180430
 # upd: 20180501, 02, 03
 # cre: 20180805, 07, 08
@@ -26,6 +28,7 @@
 # upd: 20181019, 20
 # upd: 20190105, 06, 12, 13, 18, 19, 21, 22
 # upd: 20190306, 11, 29, 30
+# upd: 20190414
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -35,7 +38,7 @@
 # - ?
 
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageChops
 import random, math, string, os, sys
 from bezier import make_bezier
 from drawtools import *
@@ -570,27 +573,126 @@ def mazy13(draw, params):
     color = params['color']
     draw.polygon(po, fill=color, outline=None)
 
-# future fun
-
 def mazy14(draw, params):
     w = params['w']
     h = params['h']
-    cnt = params['cnt']
+    cnt = params['n']
     random.seed()
-    # ...
-    return 0
+    c = math.pi/180
+    if w > h:
+        sc = w/2*1.5/cnt
+    else:
+        sc = h/2*1.5/cnt
+
+    im1 = Image.new('RGB', (params['w'], params['h']), params['Background'])
+    im2 = Image.new('RGB', (params['w'], params['h']), params['color']) # note: 2nd image is reversed
+    draw1 = ImageDraw.Draw(im1)
+    draw2 = ImageDraw.Draw(im2)
+
+    # centered circles
+    for n in range(cnt):
+        r = int(sc*(cnt-n))
+        if n&1 == 0:
+            co = params['Background']
+        else:
+            co = params['color']
+        circle(draw1, int(w/2), int(h/2), r, fill=co, outline=None)
+
+    # spirals from center - rework, it's bad!
+    spirals_cnt = cnt
+    spiral_steps = 112 #par
+    if w > h:
+        spiral_width = int(w/2*1.5/spirals_cnt)
+    else:
+        spiral_width = int(h/2*1.5/spirals_cnt)
+    for n in range(spirals_cnt):
+        for m in range(spiral_steps):
+            r = m * spiral_width * 1 #par
+            a = (c*m*360/spiral_steps)*4 + (c*n*360/spirals_cnt) #par
+            newp = (int(w/2)+r*math.cos(a), int(h/2)+r*math.sin(a))
+            if m == 0:
+                oldp = newp
+            draw2.line([(oldp[0], oldp[1]), (newp[0], newp[1])], fill=params['Background'], width=spiral_width)
+            oldp = newp
+    imout = ImageChops.difference(im1, im2)
+    params['im'].paste(imout, (0, 0))
 
 def mazy15(draw, params):
     w = params['w']
     h = params['h']
-    cnt = params['cnt']
-    # ...
-    return 0
+    cnt = params['n']
+    random.seed()
+    c = math.pi/180
+    if w > h:
+        sc = w/2*1.5/cnt  # note: off-screen to fill all
+    else:
+        sc = h/2*1.5/cnt
+
+    im1 = Image.new('RGB', (params['w'], params['h']), params['Background'])
+    im2 = Image.new('RGB', (params['w'], params['h']), params['color']) # note: 2nd image is reversed in 'polarity' for better difference effect
+    draw1 = ImageDraw.Draw(im1)
+    draw2 = ImageDraw.Draw(im2)
+
+    # centered circles #1
+    for n in range(cnt):
+        r = int(sc*(cnt-n))
+        if n&1 == 0:
+            co = params['Background']
+        else:
+            co = params['color']
+        circle(draw1, int(w/2), int(h/2), r, fill=co, outline=None)
+
+# note: possible: const(rnd/not), random, linear, cyclic * x/y/both
+
+    # de-centered circles #2
+    #xs = int(w/50) # par
+    #xs = 1 # par
+    xs = int(w/5) # par -- zajebiste dla n=16
+    ys = 0 # par
+    xs = 0 # par
+    for n in range(cnt):
+        r = int(sc*(cnt-n))
+        if n&1 == 0:
+            co = params['Background']
+        else:
+            co = params['color']
+        #xs = random.randint(int(-w/5), int(w/5)) # par/opt
+        #ys = random.randint(int(-w/5), int(w/5)) # par/opt
+        #xs = random.randint(-20, 20) # par/opt
+        #ys = random.randint(-20, 20) # par/opt
+        #xs = 0
+        #xs = xs + 40
+        #ys = ys + 4
+        #xs = 10*math.cos(c*n/cnt*360)
+        #ys = 10*math.sin(c*n/cnt*360)
+        xs = w/10*math.cos(c*n/cnt*360)
+        ys = w/10*math.sin(c*n/cnt*360)
+        circle(draw2, int(w/2+xs), int(h/2+ys), r, fill=co, outline=None)
+
+    imout = ImageChops.difference(im1, im2)
+    params['im'].paste(imout, (0, 0))
+
+# future fun
 
 def mazy16(draw, params):
     w = params['w']
     h = params['h']
-    cnt = params['cnt']
+    cnt = params['n']
+    # ...
+    return 0
+
+def mazy17(draw, params):
+    w = params['w']
+    h = params['h']
+    cnt = params['n']
+    random.seed()
+    # ...
+    return 0
+
+def mazy18(draw, params):
+    w = params['w']
+    h = params['h']
+    cnt = params['n']
     random.seed()
     # ...
     return 0
