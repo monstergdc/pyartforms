@@ -559,7 +559,8 @@ def predef_mazy15(w, h):
         {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 128, 'color': bg_black, 'style': 'circle'},
         {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 256, 'color': bg_black, 'style': 'circle'},
 
-        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': (32, 224, 244), 'n': 16, 'color': (224, 32, 32), 'style': 'circle'},  # test with colors
+        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': (32, 224, 0), 'n': 16, 'color': (224, 32, 0), 'style': 'circle'},  # test with colors
+        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': (32, 224, 0), 'n': 16, 'color': (224, 32, 0), 'style': 'rect'},  # test with colors
 
         {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 16, 'color': bg_black, 'style': 'rect'},
         {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 64, 'color': bg_black, 'style': 'rect'},
@@ -589,7 +590,7 @@ def predef_mazy15(w, h):
         a5[i]['xs2v'] = 20
         a6[i]['mode'] = 'rnd'
         a6[i]['xs2v'] = int(w/50)
-        a7[i]['mode'] = 'linear'
+        a7[i]['mode'] = 'linear'    #fix no const
         a7[i]['xs2v'] = 40
         a7[i]['ys2v'] = 4
         a8[i]['mode'] = 'linear'
@@ -608,8 +609,8 @@ def predef_mazy15(w, h):
         a13[i]['xs2v'] = int(w/5)
         a13[i]['ys2v'] = int(w/5)
         a14[i]['mode'] = 'circle'
-        a14[i]['xs2v'] = int(w/5)
-        a14[i]['ys2v'] = 0
+        a14[i]['xs2v'] = int(w/10)
+        a14[i]['ys2v'] = int(w/11)
     return np.concatenate((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14), axis=0)
 
 #def predef_mazy16(w, h):

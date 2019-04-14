@@ -682,9 +682,14 @@ def mazy15(draw, params):
             circle(draw2, int(w/2+xs2), int(h/2+ys2), r, fill=co, outline=None)
         else:
             xywh = [(int(w/2+xs2-r/2), int(h/2+ys2-r/2)), (int(w/2+xs2+r/2), int(h/2+ys2+r/2))]
-            draw1.rectangle(xywh, fill=co, outline=None)
+            draw2.rectangle(xywh, fill=co, outline=None)
 
-    imout = ImageChops.difference(im1, im2)
+    imout = ImageChops.difference(im1, im2) # opt
+    #PIL.ImageChops.blend(image1, image2, alpha)
+    #PIL.ImageChops.darker(image1, image2)
+    #PIL.ImageChops.lighter(image1, image2)
+    #PIL.ImageChops.multiply(image1, image2)
+    #PIL.ImageChops.subtract(image1, image2, scale=1.0, offset=0)
     params['im'].paste(imout, (0, 0))
 
 # future fun
