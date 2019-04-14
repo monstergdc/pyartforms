@@ -21,6 +21,9 @@ function sub_group($name, $id)
 	$cnt[11]  = 3;
 	$cnt[12]  = 16;
 	$cnt[13]  = 4;
+	$cnt[14]  = 4;
+	$cnt[15]  = 336;
+	$cnt[16]  = 144;
 
 //	$cnt[101]  = 7; //life
 //	$cnt[102] = 3; //lissajous
@@ -58,6 +61,9 @@ sub_group("smears10", 10);
 sub_group("smears11", 11);
 sub_group("smears12", 12);
 sub_group("smears13", 13);
+sub_group("smears14", 14);
+sub_group("smears15", 15);
+sub_group("smears16", 16);
 //---
 //sub_group("life", 101);
 //sub_group("lissajous", 102);

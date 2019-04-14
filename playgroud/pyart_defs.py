@@ -656,11 +656,13 @@ def predef_mazy16(w, h):
     a1 = copy.deepcopy(a)
     a2 = copy.deepcopy(a)
     a3 = copy.deepcopy(a)
+    a4 = copy.deepcopy(a)
     for i in range(len(a)):
         a1[i]['rscale'] = 1.0 #note: dflt
         a2[i]['rscale'] = 0.33
         a3[i]['rscale'] = 1.5
-    a = np.concatenate((a1, a2, a3), axis=0)
+        a4[i]['rscale'] = 2.0
+    a = np.concatenate((a1, a2, a3, a4), axis=0)
     return a
 
 #def predef_mazy17(w, h):

@@ -8,6 +8,7 @@
 # upd; 20181020, 21
 # upd; 20190118, 19
 # upd; 20190329, 30
+# upd; 20190414
 
 # TODO:
 # - ?
@@ -69,6 +70,12 @@ if what == "smears12":
     p = predef_mazy12(w, h)
 if what == "smears13":
     p = predef_mazy13(w, h)
+if what == "smears14":
+    p = predef_mazy14(w, h)
+if what == "smears15":
+    p = predef_mazy15(w, h)
+if what == "smears16":
+    p = predef_mazy16(w, h)
 if what == "life":
     p = predef_life(w, h)
 if what == "lissajous":
