@@ -30,7 +30,7 @@
 # upd: 20181019, 20
 # upd: 20190105, 06, 12, 13, 18, 19, 21, 22
 # upd: 20190306, 11, 29, 30
-# upd: 20190414
+# upd: 20190414, 15
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -283,40 +283,22 @@ def mazy6(draw, params):
     for m in range(cnt):
         x = random.randint(int(w/2-w/3), int(w/2+w/3))
         y = random.randint(int(h/2-h/3), int(h/2+h/3))
-        r = random.randint(int(h/25), int(h/6))
-        n_r = random.randint(3, 15)
+        r = random.randint(int(h/25), int(h/7))
+        n_r = random.randint(3, 16)
         c_ndx = 7
         for n in range(n_r):
             nn = n_r - n
-            ro = int(r*(1+nn*nn*0.015))
+            ro = int(r*(1+nn*nn*0.015)) # todo: par, and more other par
             if n & 1 and useblack == True:
                 c = (0, 0, 0)
                 circle(draw, x, y, ro, fill=c, outline=None)
             else:
-                if params['mode'] == 'red':
-                    color = (255, 0, 0)
-                if params['mode'] == 'rg':
-                    color = gradient2((255,0,0), (255,255,0), n, n_r)
-                if params['mode'] == 'gb':
-                    color = gradient2((64,255,64), (64,64,255), n, n_r)
-                if params['mode'] == 'black':
-                    color = (255, 255, 255)
-                if params['mode'] == 'blue':
-                    color = colors_b[c_ndx%len(colors_b)]
-                if params['mode'] == 'happy':
-                    color = colors_happy[c_ndx%len(colors_happy)]
-                if params['mode'] == 'bwx':
-                    color = colors_bwx[c_ndx%len(colors_bwx)]
-                if params['mode'] == 'psych':
-                    color = colors_p[c_ndx%len(colors_p)]
-                if params['mode'] == 'BeachTowels':
-                    color = colors_BeachTowels[c_ndx%len(colors_BeachTowels)]
-                if params['mode'] == 'MoonlightBytes6':
-                    color = colors_MoonlightBytes6[c_ndx%len(colors_MoonlightBytes6)]
-                if params['mode'] == 'RainbowDash':
-                    color = colors_RainbowDash[c_ndx%len(colors_RainbowDash)]
-                # todo: new colorer proper
-
+                color = new_colorer(params['mode'], n, n_r)
+                try:
+                    color
+                except NameError:
+                    print('ERROR: undef color mode, using black', params['mode'])
+                    color = (0,0,0)
                 circle(draw, x, y, ro, fill=color, outline=None)
             c_ndx = c_ndx - 1
             if c_ndx < 0:

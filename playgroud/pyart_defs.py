@@ -355,18 +355,25 @@ def predef_mazy5(w, h):
 def predef_mazy6(w, h):
     n = 'SMEARS#6'
     return [
-        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'red', 'cnt': 18, 'useblack': True},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'red_const', 'cnt': 18, 'useblack': True},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'blue_const', 'cnt': 18, 'useblack': True},
         {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'blue', 'cnt': 18, 'useblack': True},
-        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'black', 'cnt': 18, 'useblack': True},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'blueMap', 'cnt': 18, 'useblack': True},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'white_const', 'cnt': 18, 'useblack': True},
         {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'rg', 'cnt': 18, 'useblack': True},
         {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'gb', 'cnt': 18, 'useblack': True},
         {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'happy', 'cnt': 18, 'useblack': True},
+
         {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'happy', 'cnt': 18+12, 'useblack': False},
         {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'bwx', 'cnt': 18+12, 'useblack': False},
         {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'psych', 'cnt': 18+12, 'useblack': False},
-        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'BeachTowels', 'cnt': 18+12, 'useblack': False},
-        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'MoonlightBytes6', 'cnt': 18+12, 'useblack': False},
-        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_black, 'mode': 'RainbowDash', 'cnt': 18+12, 'useblack': False},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_white, 'mode': 'BeachTowels', 'cnt': 18+12, 'useblack': False},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_white, 'mode': 'MoonlightBytes6', 'cnt': 18+12, 'useblack': False},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_white, 'mode': 'RainbowDash', 'cnt': 18+12, 'useblack': False},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_white, 'mode': 'Google', 'cnt': 18+12, 'useblack': False},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_white, 'mode': 'MetroUI', 'cnt': 18+12, 'useblack': False},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_white, 'mode': 'ProgramCat', 'cnt': 18+12, 'useblack': False},
+        {'name': n, 'call': mazy6, 'w': w, 'h': h, 'Background': bg_white, 'mode': 'SkinTones', 'cnt': 18+12, 'useblack': False},
     ]
 
 def predef_mazy7(w, h):

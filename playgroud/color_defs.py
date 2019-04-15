@@ -69,6 +69,8 @@ def new_colorer(mode, n, cnt):
         return (0,0,0)
     if mode == 'white_const':
         return (255,255,255)
+    if mode == 'blue_const':
+        return (16,48,255)
     if mode == 'red_const':
         return (255,0,0)
     if mode == 'red':
@@ -78,7 +80,7 @@ def new_colorer(mode, n, cnt):
         color = gradient2((0,56,0), (0,255,48), n, cnt)
         return color
     if mode == 'blue':
-        color = gradient2((0,56,32), (0,48,255), n, cnt)
+        color = gradient2((0,16,56), (0,128,255), n, cnt)
         return color
     if mode == 'bg':
         color = gradient2((32,64,64), (64,255,255), n, cnt)
@@ -86,9 +88,14 @@ def new_colorer(mode, n, cnt):
     if mode == 'rg':
         color = gradient2((255,0,0), (255,255,0), n, cnt)
         return color
+    if mode == 'gb':
+        color = gradient2((64,255,64), (64,64,255), n, cnt)
+        return color
     if mode == 'bw':
         color = gradient2((0,0,0), (255,255,255), n, cnt)
         return color
+    if mode == 'blueMap':
+        ca = colors_b
     if mode == 'happy':
         ca = colors_happy
     if mode == 'wryb':
