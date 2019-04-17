@@ -6,7 +6,7 @@
 # cre: 20181020
 # upd: 20190105, 06, 13, 18, 21, 22
 # upd: 20190311, 30
-# upd: 20190414, 15
+# upd: 20190414, 15, 17
 
 # predefined forms
 
@@ -159,55 +159,71 @@ def predef_mandelbrot(w, h):
 
 def predef_mazy1(w, h):
     n = 'SMEARS#1'
+    #note: 'blur': True was lame
+    #todo: replace rgb/01
+    #todo: cleanup #1
     return [
-        #1
+        #1s rnd
         {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
-        'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False,
-        'r0': 64, 'g0': 64, 'b0': 64,
-        'r1': 256, 'g1': 256, 'b1': 256},
+        'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False,
+        'r0': 64, 'g0': 64, 'b0': 64, 'r1': 256, 'g1': 256, 'b1': 256},
 
-#        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
-#        'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False,
-#        'r0': 64, 'g0': 64, 'b0': 64,
-#        'r1': 256, 'g1': 256, 'b1': 256, 'alpha': True},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False,
+        'r0': 64, 'g0': 64, 'b0': 64, 'r1': 256, 'g1': 256, 'b1': 256, 'addalpha': 75},
 
-        #2
         {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
-        'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False, 'color': 'happy',
-        'r0': 64, 'g0': 64, 'b0': 64,
-        'r1': 256, 'g1': 256, 'b1': 256},
-        #3
-        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
-        'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False, 'color': 'wryb',
-        'r0': 64, 'g0': 64, 'b0': 64,
-        'r1': 256, 'g1': 256, 'b1': 256},
+        'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False,
+        'r0': 64, 'g0': 64, 'b0': 64, 'r1': 256, 'g1': 256, 'b1': 256, 'addalpha': 50},
 
-#        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
-#        'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False, 'color': 'happy',
-#        'r0': 64, 'g0': 64, 'b0': 64,
-#        'r1': 256, 'g1': 256, 'b1': 256, 'alpha': True},
+        #2s
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'happy'},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'wryb'},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'psych'},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'BeachTowels'},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'MoonlightBytes6'},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'Number3'},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'RainbowDash'},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'Google'},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'MetroUI'},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'ProgramCat'},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'rg'},
 
-#addalpha=60
-        # 6 powt bez blur
-        #4
+        #2s + addalpha
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'wryb', 'addalpha': 75},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'psych', 'addalpha': 75},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'BeachTowels', 'addalpha': 75},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'MoonlightBytes6', 'addalpha': 75},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'Number3', 'addalpha': 75},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'RainbowDash', 'addalpha': 75},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'Google', 'addalpha': 75},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'MetroUI', 'addalpha': 75},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'ProgramCat', 'addalpha': 75},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'rg', 'addalpha': 75},
+
+        #6 red (fix)
         {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
-        'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False, 'color': 'rg',
-        'r0': 64, 'g0': 64, 'b0': 64,
-        'r1': 256, 'g1': 256, 'b1': 256},
-        #5
-        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
-        'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': True, 'mode': 'black', 'keep': False, 'color': 'psych',
-        'r0': 64, 'g0': 64, 'b0': 64,
-        'r1': 256, 'g1': 256, 'b1': 256},
-        #6
-        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
-        'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': True, 'mode': 'red', 'keep': False,
-        'r0': 0, 'g0': 0, 'b0': 0,
-        'r1': 256, 'g1': 0, 'b1': 0},
-        #7-9
-        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': True, 'mode': 'happy', 'keep': False},
-        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': True, 'mode': 'wryb', 'keep': False},
-        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': True, 'mode': 'psych', 'keep': False},
+        'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'red', 'keep': False,
+        'r0': 0, 'g0': 0, 'b0': 0, 'r1': 256, 'g1': 0, 'b1': 0},
+
+        #7-9 no blur * v addblack
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'happy', 'keep': False},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'wryb', 'keep': False},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'psych', 'keep': False},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'happy', 'keep': False, 'addblack': True},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'wryb', 'keep': False, 'addblack': True},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'psych', 'keep': False, 'addblack': True},
+        # similar / new palletes
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'BeachTowels', 'keep': False},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'MoonlightBytes6', 'keep': False},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'Number3', 'keep': False},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'RainbowDash', 'keep': False},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'Google', 'keep': False},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'MetroUI', 'keep': False},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'ProgramCat', 'keep': False},
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'SkinTones', 'keep': False},
+
         #10
         {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
         'penw': 8, 'v': 30, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'red', 'keep': False,
@@ -223,27 +239,12 @@ def predef_mazy1(w, h):
         'penw': 5, 'v': 200, 'n': 50, 'm': 25, 'prefill': False, 'blur': False, 'mode': 'red', 'keep': True,
         'r0': 0, 'g0': 0, 'b0': 0,
         'r1': 256, 'g1': 256, 'b1': 256},
-
         #13
         {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_yellow,
         'penw': 5, 'v': 120, 'n': 48, 'm': 12, 'prefill': True, 'blur': False, 'mode': 'red', 'keep': True,
         'r0': 16, 'g0': 64, 'b0': 128,
         'r1': 128, 'g1': 256, 'b1': 256},
 
-        #rep 7-9 but no blur
-        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'happy', 'keep': False},
-        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'wryb', 'keep': False},
-        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'psych', 'keep': False},
-        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'psych', 'keep': False, 'addblack': True},
-        # new palletes
-        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'BeachTowels', 'keep': False},
-        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'MoonlightBytes6', 'keep': False},
-        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'Number3', 'keep': False},
-        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'RainbowDash', 'keep': False},
-        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'Google', 'keep': False},
-        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'MetroUI', 'keep': False},
-        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'ProgramCat', 'keep': False},
-        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'SkinTones', 'keep': False},
     ]
 
 def predef_mazy2(w, h):
@@ -253,6 +254,7 @@ def predef_mazy2(w, h):
         {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'n': 100, 'm': 200, 'color': 'bw0'},  # ?
         {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'n': 100, 'm': 40, 'color': 'bwx'},
         {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'n': 100, 'm': 30, 'color': 'happy'},
+        {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'n': 100+90, 'm': 30+30, 'color': 'happy', 'addalpha': 80}, # test
         {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'n': 100, 'm': 30, 'color': 'wryb'},
         {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'n': 100, 'm': 30, 'color': 'psych'},
         {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'n': 100, 'm': 30, 'color': 'bgo'},
@@ -268,28 +270,40 @@ def predef_mazy2(w, h):
 
         {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'n': 100, 'm': 40, 'color': 'bw'},
         {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'n': 100, 'm': 90, 'color': 'red'},
+        {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'n': 100, 'm': 90, 'color': 'green'},
+        {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'n': 100, 'm': 90, 'color': 'blue'},
+        {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'n': 100, 'm': 90, 'color': 'bg'},
+        {'name': n, 'call': mazy2, 'w': w, 'h': h, 'Background': bg_black, 'n': 100, 'm': 90, 'color': 'rg'},
     ]
 
 def predef_mazy3(w, h):
     n = 'SMEARS#3'
     a = [
-        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 20, 'color': 'happy'},
-        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 20, 'color': 'wryb'},
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 30, 'color': 'happy'},
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 30, 'color': 'wryb'},
 
         {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 80, 'color': 'happy'},
         {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 80, 'color': 'wryb'},
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 80, 'color': 'BeachTowels'},
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 80, 'color': 'Google'},
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 80, 'color': 'SkinTones'},
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 80, 'color': 'Rainbow'},
 
         {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_yellow, 'n': 30, 'color': 'red'},
         {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_yellow, 'n': 80, 'color': 'red'},
         {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_black, 'n': 30, 'color': 'red'},
         {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_black, 'n': 80, 'color': 'red'},
-        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_black, 'n': 20, 'color': 'bw'},
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_black, 'n': 30, 'color': 'bw'},
         {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 30, 'color': 'rg'},
 
         {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_orange, 'n': 80, 'color': 'bwx'},
 
         {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 90, 'color': 'happy', 'addalpha': 50},
         {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 90, 'color': 'wryb', 'addalpha': 50},
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 90, 'color': 'BeachTowels', 'addalpha': 50},
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 90, 'color': 'Google', 'addalpha': 50},
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 90, 'color': 'SkinTones', 'addalpha': 50},
+        {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_white, 'n': 90, 'color': 'Rainbow', 'addalpha': 50},
 
         {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_yellow, 'n': 90, 'color': 'red', 'addalpha': 50},
         {'name': n, 'call': mazy3, 'w': w, 'h': h, 'Background': bg_black, 'n': 90, 'color': 'red', 'addalpha': 50},
@@ -313,20 +327,26 @@ def predef_mazy4(w, h):
         {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 5, 'mode': 'center', 'color': 'happy'},
         {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 5, 'mode': 'center', 'color': 'wryb'},
         {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 4, 'mode': 'center', 'color': 'bgo'},
-        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 8, 'mode': 'center', 'color': 'avatar'},
-        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 8, 'mode': 'center', 'color': 'psych'},
+        #{'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 8, 'mode': 'center', 'color': 'avatar'}, # lame
+        #{'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 8, 'mode': 'center', 'color': 'psych'}, # lame
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 8, 'mode': 'center', 'color': 'BeachTowels'},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 8, 'mode': 'center', 'color': 'MetroUI'},
 
         {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 5, 'mode': 'center', 'color': 'happy', 'addalpha': 90},
         {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 5, 'mode': 'center', 'color': 'wryb', 'addalpha': 90},
         {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 4, 'mode': 'center', 'color': 'bgo', 'addalpha': 90},
         {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 8, 'mode': 'center', 'color': 'avatar', 'addalpha': 90},
         {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 8, 'mode': 'center', 'color': 'psych', 'addalpha': 90},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 8, 'mode': 'center', 'color': 'BeachTowels', 'addalpha': 90},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 8, 'mode': 'center', 'color': 'MetroUI', 'addalpha': 90},
 
         {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 20, 'mode': '', 'color': 'happy', 'addalpha': 50},
         {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 20, 'mode': '', 'color': 'wryb', 'addalpha': 50},
         {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 20, 'mode': '', 'color': 'bgo', 'addalpha': 50},
         {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 20, 'mode': '', 'color': 'avatar', 'addalpha': 50},
         {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 20, 'mode': '', 'color': 'psych', 'addalpha': 50},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 20, 'mode': '', 'color': 'BeachTowels', 'addalpha': 50},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_white, 'n': 20, 'mode': '', 'color': 'MetroUI', 'addalpha': 50},
 
         {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_yellow, 'n': 5, 'mode': 'center', 'color': 'red'},
         {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_yellow, 'n': 5, 'mode': 'center', 'color': 'rg'},
@@ -336,9 +356,24 @@ def predef_mazy4(w, h):
         {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': (128, 0, 0), 'n': 20, 'mode': '', 'color': 'red'}, # ?
         {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_black, 'n': 3, 'mode': 'center', 'color': 'red'},
         {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_black, 'n': 8, 'mode': 'center', 'color': 'bw'},
+
         {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_gray, 'n': 11, 'mode': 'center', 'color': 'happy'},
         {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_gray, 'n': 11, 'mode': 'center', 'color': 'wryb'},
-        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_black, 'n': 11, 'mode': 'center', 'color': 'psych'},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': (96,96,80), 'n': 11, 'mode': 'center', 'color': 'bgo'},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_gray, 'n': 11, 'mode': 'center', 'color': 'BeachTowels'},
+
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_gray, 'n': 11, 'mode': 'center', 'color': 'happy', 'sc': 2.6},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_gray, 'n': 11, 'mode': 'center', 'color': 'wryb', 'sc': 2.6},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': (96,96,80), 'n': 11, 'mode': 'center', 'color': 'bgo', 'sc': 2.6},
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_gray, 'n': 11, 'mode': 'center', 'color': 'BeachTowels', 'sc': 2.6},
+        
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_gray, 'n': 100, 'mode': 'center', 'color': 'wryb', 'addalpha': 80, 'sc': 0.3}, # test
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_gray, 'n': 100, 'mode': 'center', 'color': 'BeachTowels', 'addalpha': 80, 'sc': 0.3}, # test
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_gray, 'n': 100, 'mode': 'center', 'color': 'MetroUI', 'addalpha': 80, 'sc': 0.3}, # test
+
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_gray, 'n': 100, 'mode': 'center', 'color': 'wryb', 'addalpha': 90, 'sc': 0.15}, # test
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_gray, 'n': 100, 'mode': 'center', 'color': 'BeachTowels', 'addalpha': 90, 'sc': 0.15}, # test
+        {'name': n, 'call': mazy4, 'w': w, 'h': h, 'Background': bg_gray, 'n': 100, 'mode': 'center', 'color': 'MetroUI', 'addalpha': 90, 'sc': 0.15}, # test
     ]
 
 def predef_mazy5(w, h):
@@ -346,10 +381,12 @@ def predef_mazy5(w, h):
     return [
         {'name': n, 'call': mazy5, 'w': w, 'h': h, 'Background': bg_black, 'colors': colors_b, 'outline': None},
         {'name': n, 'call': mazy5, 'w': w, 'h': h, 'Background': bg_black, 'colors': colors_y, 'outline': None},
-        {'name': n, 'call': mazy5, 'w': w, 'h': h, 'Background': bg_black, 'colors': colors_p, 'outline': (0, 0, 0)},
+        {'name': n, 'call': mazy5, 'w': w, 'h': h, 'Background': bg_black, 'colors': colors_p, 'outline': bg_black},
         {'name': n, 'call': mazy5, 'w': w, 'h': h, 'Background': bg_black, 'colors': colors_bw0, 'outline': None},
         {'name': n, 'call': mazy5, 'w': w, 'h': h, 'Background': bg_black, 'colors': colors_bwx, 'outline': None},
         {'name': n, 'call': mazy5, 'w': w, 'h': h, 'Background': bg_black, 'colors': colors_happy, 'outline': None},
+        {'name': n, 'call': mazy5, 'w': w, 'h': h, 'Background': bg_black, 'colors': colors_BeachTowels, 'outline': bg_black},
+        {'name': n, 'call': mazy5, 'w': w, 'h': h, 'Background': bg_black, 'colors': colors_MetroUI, 'outline': bg_black},
     ]
 
 def predef_mazy6(w, h):
@@ -438,12 +475,37 @@ def predef_mazy7(w, h):
 
 def predef_mazy8(w, h):
     n = 'SMEARS#8'
-    return [
-        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 5, 'ycnt': 5},
-        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 5, 'ycnt': 10},
-        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 5, 'ycnt': 3},
-        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 15, 'ycnt': 5}
+    a = [
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 5, 'ycnt': 5, 'color': 'happy'},
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 5, 'ycnt': 10, 'color': 'happy'},
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 5, 'ycnt': 3, 'color': 'happy'},
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 15, 'ycnt': 5, 'color': 'happy'},
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 31, 'ycnt': 20, 'color': 'happy'},
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 3, 'ycnt': 20, 'color': 'happy'},
+
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 5, 'ycnt': 5, 'color': 'wryb'},
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 5, 'ycnt': 10, 'color': 'wryb'},
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 5, 'ycnt': 3, 'color': 'wryb'},
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 15, 'ycnt': 5, 'color': 'wryb'},
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 31, 'ycnt': 20, 'color': 'wryb'},
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 3, 'ycnt': 20, 'color': 'wryb'},
+
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 5, 'ycnt': 5, 'color': 'BeachTowels'},
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 5, 'ycnt': 10, 'color': 'BeachTowels'},
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 5, 'ycnt': 3, 'color': 'BeachTowels'},
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 15, 'ycnt': 5, 'color': 'BeachTowels'},
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 31, 'ycnt': 20, 'color': 'BeachTowels'},
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 3, 'ycnt': 20, 'color': 'BeachTowels'},
+
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 5, 'ycnt': 5, 'color': 'MoonlightBytes6'},
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 5, 'ycnt': 10, 'color': 'MoonlightBytes6'},
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 5, 'ycnt': 3, 'color': 'MoonlightBytes6'},
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 15, 'ycnt': 5, 'color': 'MoonlightBytes6'},
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 31, 'ycnt': 20, 'color': 'MoonlightBytes6'},
+        {'name': n, 'call': mazy8, 'w': w, 'h': h, 'Background': bg_white, 'mode': '', 'xcnt': 3, 'ycnt': 20, 'color': 'MoonlightBytes6'},
+        #? Number3 RainbowDash Google MetroUI ProgramCat SkinTones Rainbow
     ]
+    return a
 
 def predef_mazy9(w, h):
     n = 'SMEARS#9'
@@ -725,27 +787,24 @@ def predef_mazy16(w, h):
 #def predef_mazy19(w, h):
 #def predef_mazy20(w, h):
 
-
 def enum_defs():
-    print('1:', len(predef_mazy1(0, 0)))
-    print('2:', len(predef_mazy2(0, 0)))
-    print('3:', len(predef_mazy3(0, 0)))
-    print('4:', len(predef_mazy4(0, 0)))
-    print('5:', len(predef_mazy5(0, 0)))
-    print('6:', len(predef_mazy6(0, 0)))
-    print('7:', len(predef_mazy7(0, 0)))
-    print('8:', len(predef_mazy8(0, 0)))
-    print('9:', len(predef_mazy9(0, 0)))
-    print('10:', len(predef_mazy10(0, 0)))
-    print('11:', len(predef_mazy11(0, 0)))
-    print('12:', len(predef_mazy12(0, 0)))
-    print('13:', len(predef_mazy13(0, 0)))
-    print('14:', len(predef_mazy14(0, 0)))
-    print('15:', len(predef_mazy15(0, 0)))
-    print('16:', len(predef_mazy16(0, 0)))
-    #print('17:', len(predef_mazy17(0, 0)))
-    #print('18:', len(predef_mazy18(0, 0)))
-    #print('19:', len(predef_mazy19(0, 0)))
-    #print('20:', len(predef_mazy20(0, 0)))
+    suma = 0
+    for k, v in predefs.items():    #note: py3
+        cnt = len(v(0, 0))
+        suma += cnt
+        print(k, ':', cnt)
+    # todo: sort it
+    print('total:', suma)
+
+# all predefs
+predefs = {'mazy01': predef_mazy1, 'mazy02': predef_mazy2,
+           'mazy03': predef_mazy3, 'mazy04': predef_mazy4,
+           'mazy05': predef_mazy5, 'mazy06': predef_mazy6,
+           'mazy07': predef_mazy7, 'mazy08': predef_mazy8,
+           'mazy09': predef_mazy9, 'mazy10': predef_mazy10,
+           'mazy11': predef_mazy11, 'mazy12': predef_mazy12,
+           'mazy13': predef_mazy13, 'mazy14': predef_mazy14,
+           'mazy15': predef_mazy15, 'mazy16': predef_mazy16, 
+           }
 
 # EOF

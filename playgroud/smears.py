@@ -30,7 +30,7 @@
 # upd: 20181019, 20
 # upd: 20190105, 06, 12, 13, 18, 19, 21, 22
 # upd: 20190306, 11, 29, 30
-# upd: 20190414, 15
+# upd: 20190414, 15, 17
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -97,9 +97,6 @@ def mazy1(draw, params):
             if params['mode'] == 'red':
                 color = (r ^ random.randint(0, 48), 0, 0)
                 old = True
-            if params['mode'] == 'color':
-                color = (r ^ random.randint(0, 48), g ^ random.randint(0, 48), b ^ random.randint(0, 48))
-                old = True
             if params['mode'] == 'black':
                 rr = random.randint(0, 48)
                 color = (rr, rr, rr)
@@ -136,6 +133,8 @@ def mazy2(draw, params):
         for m in range(cntm):
             po[:] = [(xy[0]+random.randint(0, v)-random.randint(0, v), xy[1]+random.randint(0, v)-random.randint(0, v)) for xy in po]
             color = new_colorer(params['color'], m, cntm)
+            if 'addalpha' in params:
+                color = add_alpha(color, params['addalpha'])
             circle(draw, po[0][0], po[0][1], int(r0*(1-m*de)), fill=color, outline=None)
 
 def mazy3(draw, params):
@@ -153,7 +152,7 @@ def mazy3(draw, params):
 
     pold = [(r2(w), r2(h)), (r2(w), r2(h)), (r2(w), r2(h))]
     #d = 1.3 # par?
-    d = 0.5
+    d = 0.5 # par?
     for n in range(cnt):
         if params['mode'] == 'center':
             po = [(r(w, d), r(h, d)), (r(w, d), r(h, d)), (r(w, d), r(h, d))]
@@ -181,18 +180,18 @@ def mazy3(draw, params):
         color = new_colorer(params['color'], n, cnt)
         if 'addalpha' in params:
             color = add_alpha(color, params['addalpha'])
-
         triangle(draw, po, fill=color, outline=None)
 
 def mazy4(draw, params):
     w = params['w']
     h = params['h']
     cnt = params['n']
-    # todo: par
-    sc = 2.05 # orig
-    #sc = 1.0
-    #sc = 3.0
-    #sc = 0.7
+    sc = 2.1 # base, ok (2.05 -> 2.1)
+    if 'sc' in params:
+        sc = params['sc']
+    if sc <= 0:
+        sc = 1
+    #sc = 0.7 # so, so
     random.seed()
 
     if sc == 0:
@@ -231,7 +230,6 @@ def mazy4(draw, params):
         color = new_colorer(params['color'], n, cnt)
         if 'addalpha' in params:
             color = add_alpha(color, params['addalpha'])
-
         draw.polygon(po, fill=color, outline=None)
 
 def mazy5(draw, params):
@@ -241,14 +239,14 @@ def mazy5(draw, params):
     random.seed()
     c = math.pi/180
 
-    dg = h*0.037 # thickness
-    r0 = h/2*0.93 # base radius
-    rOut = float(h)*0.77 # outer circle radous
-    sc = float(h)/2480
-    step = 10
-    for i in range(int(8+1)):
-        a = random.randint(6, 24)
-        rv = random.randint(20, 350)
+    dg = h*0.037 # thickness, par
+    r0 = h/2*0.93 # base radius, par
+    rOut = float(h)*0.77 # outer circle radous, par
+    sc = float(h)/2480 # par
+    step = 10 # par
+    for i in range(int(8+1)):  # par
+        a = random.randint(6, 24)  # par
+        rv = random.randint(20, 350)  # par
         if i == 0:
             x0 = w/2
             y0 = h/2
@@ -266,10 +264,8 @@ def mazy5(draw, params):
                 points.extend((x, y))
 
             color = colors[m%len(colors)]   # TODO: fix: not new not old
-
             if 'addalpha' in params:
                 color = add_alpha(color, params['addalpha'])
-
             draw.polygon(points, fill=color, outline=params['outline'])
 
 def mazy6(draw, params):
@@ -299,6 +295,8 @@ def mazy6(draw, params):
                 except NameError:
                     print('ERROR: undef color mode, using black', params['mode'])
                     color = (0,0,0)
+                if 'addalpha' in params:
+                    color = add_alpha(color, params['addalpha'])
                 circle(draw, x, y, ro, fill=color, outline=None)
             c_ndx = c_ndx - 1
             if c_ndx < 0:
@@ -369,6 +367,7 @@ def mazy8(draw, params):
     xcnt = params['xcnt']
     ycnt = params['ycnt']
 #    v = 20 #par
+    # todo: opt border
 
     w1 = int(w/xcnt)
     h1 = int(h/ycnt)
@@ -377,8 +376,8 @@ def mazy8(draw, params):
             x1 = x*w1 + int(w1/2)
             y1 = y*h1 + int(h1/2)
             ci = random.randint(0, 7)
-            color = colors_happy[ci]
-            # todo: new colorer proper
+            # todo: new colorer FULLY proper
+            color = new_colorer(params['color'], ci, -1)
             # test
 #            if random.randint(0, 100) > 50: #par
 #                ar = random.randint(80, 200) #par
@@ -391,7 +390,6 @@ def mazy8(draw, params):
 #            else:
 #                vx = vy = vw = vh = 0
             vx = vy = vw = vh = 0
-            #
             rect(draw, x1+vx, y1+vy, w1+vw, h1+vh, fill=color, outline=None)
 
 def mazy9(draw, params):

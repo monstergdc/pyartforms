@@ -8,14 +8,14 @@
 <?php
 function sub_group($name, $id)
 {
-	$cnt[1]  = 25;
-	$cnt[2]  = 17;
-	$cnt[3]  = 54;
-	$cnt[4]  = 26;
-	$cnt[5]  = 6;
-	$cnt[6]  = 12;
+	$cnt[1]  = 44;
+	$cnt[2]  = 22;
+	$cnt[3]  = 78;
+	$cnt[4]  = 41;
+	$cnt[5]  = 8;
+	$cnt[6]  = 18;
 	$cnt[7]  = 46;
-	$cnt[8]  = 4;
+	$cnt[8]  = 24;
 	$cnt[9]  = 64;
 	$cnt[10]  = 20;
 	$cnt[11]  = 3;
