@@ -61,4 +61,5 @@ if what == "mandelbrot":
     bw = True
 if n >= len(p):
     n = len(p)-1
+p[n]['alpha'] = True #test
 art_painter(p[n], '', 'cgi', bw)
