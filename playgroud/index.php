@@ -48,22 +48,22 @@ function sub_group($name, $id)
 }
 
 echo "<table>";
-sub_group("smears1", 1);
-sub_group("smears2", 2);
-sub_group("smears3", 3);
-sub_group("smears4", 4);
-sub_group("smears5", 5);
-sub_group("smears6", 6);
-sub_group("smears7", 7);
-sub_group("smears8", 8);
-sub_group("smears9", 9);
-sub_group("smears10", 10);
-sub_group("smears11", 11);
-sub_group("smears12", 12);
-sub_group("smears13", 13);
-sub_group("smears14", 14);
-sub_group("smears15", 15);
-sub_group("smears16", 16);
+sub_group("mazy01", 1);
+sub_group("mazy02", 2);
+sub_group("mazy03", 3);
+sub_group("mazy04", 4);
+sub_group("mazy05", 5);
+sub_group("mazy06", 6);
+sub_group("mazy07", 7);
+sub_group("mazy08", 8);
+sub_group("mazy09", 9);
+sub_group("mazy10", 10);
+sub_group("mazy11", 11);
+sub_group("mazy12", 12);
+sub_group("mazy13", 13);
+sub_group("mazy14", 14);
+sub_group("mazy15", 15);
+sub_group("mazy16", 16);
 //---
 //sub_group("life", 101);
 //sub_group("lissajous", 102);
