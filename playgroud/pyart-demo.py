@@ -119,8 +119,11 @@ do_mazy(cnt, w, h, odir, 'mazy11')
 do_mazy(cnt, w, h, odir, 'mazy12')
 do_mazy(cnt, w, h, odir, 'mazy13')
 do_mazy(cnt, w, h, odir, 'mazy14')
+cnt = 1 # note: 15 and 16 alredy produce a lot
 do_mazy(cnt, w, h, odir, 'mazy15')
 do_mazy(cnt, w, h, odir, 'mazy16')
+
+cnt = 3
 
 do_waves(cnt, w, h, odir) # fix: does not scale down well
 

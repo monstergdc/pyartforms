@@ -670,23 +670,17 @@ def predef_mazy14(w, h):
 
 def predef_mazy15(w, h):
     n = 'SMEARS#15'
-    a = [# note: color seems lame ... but try with other tran yet
-        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 16, 'color': bg_black, 'style': 'circle', 'tran': 'difference'},
-        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 32, 'color': bg_black, 'style': 'circle', 'tran': 'difference'},
-        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 64, 'color': bg_black, 'style': 'circle', 'tran': 'difference'},
-        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 128, 'color': bg_black, 'style': 'circle', 'tran': 'difference'},
-
-        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 16, 'color': bg_black, 'style': 'rect', 'tran': 'difference'},
-        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 32, 'color': bg_black, 'style': 'rect', 'tran': 'difference'},
-        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 64, 'color': bg_black, 'style': 'rect', 'tran': 'difference'},
-        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 128, 'color': bg_black, 'style': 'rect', 'tran': 'difference'},
+    a = [
+        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 8, 'color': bg_black, 'style': 'circle'},
+        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 16, 'color': bg_black, 'style': 'circle'},
+        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 32, 'color': bg_black, 'style': 'circle'},
+        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 64, 'color': bg_black, 'style': 'circle'},
+        {'name': n, 'call': mazy15, 'w': w, 'h': h, 'Background': bg_white, 'n': 128, 'color': bg_black, 'style': 'circle'},
+        # note:  'style': 'rect'} - somehow not so cool
     ]
     a1 = copy.deepcopy(a)
     a2 = copy.deepcopy(a)
     a3 = copy.deepcopy(a)
-    a4 = copy.deepcopy(a)
-    a5 = copy.deepcopy(a)
-    a6 = copy.deepcopy(a)
     a7 = copy.deepcopy(a)
     a8 = copy.deepcopy(a)
     a9 = copy.deepcopy(a)
@@ -696,33 +690,36 @@ def predef_mazy15(w, h):
     a13 = copy.deepcopy(a)
     a14 = copy.deepcopy(a)
     for i in range(len(a)):
-        a1[i]['xs2'] = int(w/5) # cool for n=16
+        # a1 - a3 const offsets, a1 cool for n=16
+        a1[i]['xs1'] = int(-w/10)
+        a1[i]['ys1'] = int(-w/100)
+        a1[i]['xs2'] = int(w/10)
         a1[i]['ys2'] = int(w/100)
+
+        a2[i]['xs1'] = int(-w/50)
+        a2[i]['ys1'] = int(-w/100)
         a2[i]['xs2'] = int(w/50)
         a2[i]['ys2'] = int(w/100)
-        a3[i]['xs2'] = int(w/100)
-        a3[i]['ys2'] = int(w/100)
-        a4[i]['mode'] = 'rnd'
-        a4[i]['xs2v'] = int(w/5)
-        a4[i]['ys2v'] = int(w/5)
-        a5[i]['mode'] = 'rnd'
-        a5[i]['xs2v'] = 20
-        a5[i]['ys2v'] = 20
-        a6[i]['mode'] = 'rnd'
-        a6[i]['xs2v'] = int(w/50)
-        a6[i]['ys2v'] = int(w/50)
+
+        a3[i]['xs1'] = int(-w/20)
+        a3[i]['ys1'] = int(w/20)
+        a3[i]['xs2'] = int(w/20)
+        a3[i]['ys2'] = int(-w/20)
+
+        # linear - tested x for c2 only
         a7[i]['mode'] = 'linear'
-        a7[i]['xs2v'] = int(w/5)
-        a7[i]['ys2v'] = 1
+        a7[i]['xs2v'] = int(w/25)
+        a7[i]['ys2v'] = 0
         a8[i]['mode'] = 'linear'
-        a8[i]['xs2v'] = int(w/5)
-        a8[i]['ys2v'] = int(w/5)
+        a8[i]['xs2v'] = int(w/50)
+        a8[i]['ys2v'] = 0
         a9[i]['mode'] = 'linear'
-        a9[i]['xs2v'] = int(w/25)
-        a9[i]['ys2v'] = 1
+        a9[i]['xs2v'] = int(w/100)
+        a9[i]['ys2v'] = 0
         a10[i]['mode'] = 'linear'
-        a10[i]['xs2v'] = int(w/50)
-        a10[i]['ys2v'] = 1
+        a10[i]['xs2v'] = int(w/200)
+        a10[i]['ys2v'] = 0
+
         a11[i]['mode'] = 'circle'
         a11[i]['xs2v'] = int(w/50)
         a11[i]['ys2v'] = int(w/50)
@@ -735,16 +732,8 @@ def predef_mazy15(w, h):
         a14[i]['mode'] = 'circle'
         a14[i]['xs2v'] = int(w/5)
         a14[i]['ys2v'] = int(w/5)
-    a = np.concatenate((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14), axis=0)
-    a1 = copy.deepcopy(a)
-    a2 = copy.deepcopy(a)
-    a3 = copy.deepcopy(a)
-    for i in range(len(a)):
-        #note: unused now: 'darker' 'lighter' 'multiply'
-        a1[i]['tran'] = 'difference' #note: dflt
-        a2[i]['tran'] = 'blend'
-        a3[i]['tran'] = 'subtract'
-    return np.concatenate((a1, a2, a3), axis=0)
+    a = np.concatenate((a1, a2, a3, a7, a8, a9, a10, a11, a12, a13, a14), axis=0)
+    return a
 
 def predef_mazy16(w, h):
     n = 'SMEARS#16'

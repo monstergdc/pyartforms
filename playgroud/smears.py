@@ -576,7 +576,7 @@ def mazy13(draw, params):
     color = params['color']
     draw.polygon(po, fill=color, outline=None)
 
-def mazy14(draw, params):
+def mazy14(draw, params):   # note: failed, do sth else from it
     w = params['w']
     h = params['h']
     cnt = params['n']
@@ -604,7 +604,7 @@ def mazy14(draw, params):
     # spirals from center
     # TODO: rework, it's bad!
     spirals_cnt = cnt
-    spiral_steps = 112 #par
+    spiral_steps = 1024*6 #has to be ridiculously big, endings don't fit
     if w > h:
         spiral_width = int(w/2*1.5/spirals_cnt)
     else:
@@ -612,14 +612,20 @@ def mazy14(draw, params):
     for n in range(spirals_cnt):
         for m in range(spiral_steps):
             r = m * spiral_width * 1 #par
-            a = (c*m*360/spiral_steps)*4 + (c*n*360/spirals_cnt) #par
+            a = (c*m*360/spiral_steps)*(30) + (c*n*360/spirals_cnt) #par
             newp = (int(w/2)+r*math.cos(a), int(h/2)+r*math.sin(a))
             if m == 0:
                 oldp = newp
-            draw2.line([(oldp[0], oldp[1]), (newp[0], newp[1])], fill=params['Background'], width=spiral_width)
+            else:
+                draw2.line([(oldp[0], oldp[1]), (newp[0], newp[1])], fill=params['Background'], width=spiral_width)
             oldp = newp
     imout = ImageChops.difference(im1, im2)
     params['im'].paste(imout, (0, 0))
+    im1 = Image.new('RGB', (1, 1), (0,0,0))
+    im2 = Image.new('RGB', (1, 1), (0,0,0))
+    imout = Image.new('RGB', (1, 1), (0,0,0))
+    draw1 = ImageDraw.Draw(im1) # does it free mem?
+    draw2 = ImageDraw.Draw(im2) # does it free mem?
 
 def mazy15(draw, params):
     w = params['w']
@@ -631,46 +637,55 @@ def mazy15(draw, params):
         sc = w/2*1.5/cnt  # note: off-screen to fill all
     else:
         sc = h/2*1.5/cnt
-
-    im1 = Image.new('RGB', (params['w'], params['h']), params['Background'])
-    im2 = Image.new('RGB', (params['w'], params['h']), params['color']) # note: 2nd image is reversed in 'polarity' for better difference effect
-    draw1 = ImageDraw.Draw(im1)
-    draw2 = ImageDraw.Draw(im2)
-
-    # centered circles #1
-    for n in range(cnt):
-        r = int(sc*(cnt-n))
-        if n&1 == 0:
-            co = params['Background']
-        else:
-            co = params['color']
-        if params['style'] == 'circle':
-            circle(draw1, int(w/2), int(h/2), r, fill=co, outline=None)
-        else:
-            xywh = [(int(w/2-r/2), int(h/2-r/2)), (int(w/2+r/2), int(h/2+r/2))]
-            draw1.rectangle(xywh, fill=co, outline=None)
-
-# todo: also move 1st circles | freq (var) for circle opt
-
-    # de-centered circles #2
+    ys1 = 0
+    xs1 = 0
+    if 'xs1' in params:
+        xs1 = params['xs1']
+    if 'ys1' in params:
+        ys1 = params['ys1']
     ys2 = 0
     xs2 = 0
     if 'xs2' in params:
         xs2 = params['xs2']
     if 'ys2' in params:
         ys2 = params['ys2']
-    for n in range(cnt):
-        r = int(sc*(cnt-n))
+
+    def draw_it(d, xs, ys):
         if n&1 == 0:
             co = params['Background']
         else:
             co = params['color']
+        if params['style'] == 'circle':
+            circle(d, int(w/2+xs), int(h/2+ys), r, fill=co, outline=None)
+        else:
+            xywh = [(int(w/2+xs-r/2), int(h/2+ys-r/2)), (int(w/2+xs+r/2), int(h/2+ys+r/2))]
+            d.rectangle(xywh, fill=co, outline=None)
+
+    im1 = Image.new('RGB', (params['w'], params['h']), params['Background'])
+    im2 = Image.new('RGB', (params['w'], params['h']), params['color']) # note: 2nd image is reversed in 'polarity' for better difference effect
+    draw1 = ImageDraw.Draw(im1)
+    draw2 = ImageDraw.Draw(im2)
+
+    # circles #1
+    for n in range(cnt):
+        r = int(sc*(cnt-n))
         if 'mode' in params:
-            if params['mode'] == 'rnd':
-                if 'xs2v' in params:
-                    xs2 = random.randint(-params['xs2v'], params['xs2v'])
-                if 'ys2v' in params:
-                    ys2 = random.randint(-params['ys2v'], params['ys2v'])
+            if params['mode'] == 'linear':
+                if 'xs1v' in params:
+                    xs1 = xs1 + params['xs1v']
+                if 'ys1v' in params:
+                    ys1 = ys1 + params['ys1v']
+            if params['mode'] == 'circle':
+                a0 = c*n/cnt*360
+                if 'xs1v' in params:
+                    xs1 = params['ys1v']*math.cos(a0)
+                if 'ys1v' in params:
+                    ys1 = params['ys1v']*math.sin(a0)
+        draw_it(draw1, xs1, ys1)
+    # circles #2
+    for n in range(cnt):
+        r = int(sc*(cnt-n))
+        if 'mode' in params:
             if params['mode'] == 'linear':
                 if 'xs2v' in params:
                     xs2 = xs2 + params['xs2v']
@@ -682,24 +697,9 @@ def mazy15(draw, params):
                     xs2 = params['ys2v']*math.cos(a0)
                 if 'ys2v' in params:
                     ys2 = params['ys2v']*math.sin(a0)
-        if params['style'] == 'circle':
-            circle(draw2, int(w/2+xs2), int(h/2+ys2), r, fill=co, outline=None)
-        else:
-            xywh = [(int(w/2+xs2-r/2), int(h/2+ys2-r/2)), (int(w/2+xs2+r/2), int(h/2+ys2+r/2))]
-            draw2.rectangle(xywh, fill=co, outline=None)
+        draw_it(draw2, xs2, ys2)
 
-    if params['tran'] == 'difference':
-        imout = ImageChops.difference(im1, im2)
-    if params['tran'] == 'blend':
-        imout = ImageChops.blend(im1, im2, alpha=0.5) # par? orig alpha=0.5
-    if params['tran'] == 'darker':
-        imout = ImageChops.darker(im1, im2)
-    if params['tran'] == 'lighter':
-        imout = ImageChops.lighter(im1, im2)
-    if params['tran'] == 'multiply':
-        imout = ImageChops.multiply(im1, im2)
-    if params['tran'] == 'subtract':
-        imout = ImageChops.subtract(im1, im2, scale=0.75, offset=0) # par? orig scale=1.0
+    imout = ImageChops.difference(im1, im2) # only this is cool
     params['im'].paste(imout, (0, 0))
     im1 = Image.new('RGB', (1, 1), (0,0,0)) # that is probably lame way to free memory
     im2 = Image.new('RGB', (1, 1), (0,0,0))
