@@ -52,6 +52,10 @@ def mazy1(draw, params):
     w = params['w']
     h = params['h']
     cnt = params['n']
+    if 'mar' in params:
+        mar = params['mar']
+    else:
+        mar = 0
     random.seed()
     ts = [t/100.0 for t in range(101)]
     v = params['v']
@@ -61,10 +65,10 @@ def mazy1(draw, params):
         wx = 1
 
     for n in range(cnt):
-        po = [(random.randint(0, w), random.randint(0, h)),
-              (random.randint(0, w), random.randint(0, h)),
-              (random.randint(0, w), random.randint(0, h)),
-              (random.randint(0, w), random.randint(0, h))]
+        po = [(random.randint(0+mar, w-mar), random.randint(0+mar, h-mar)),
+              (random.randint(0+mar, w-mar), random.randint(0+mar, h-mar)),
+              (random.randint(0+mar, w-mar), random.randint(0+mar, h-mar)),
+              (random.randint(0+mar, w-mar), random.randint(0+mar, h-mar))]
 
         if 'color' in params:
             if params['color'] == 'rg':

@@ -163,6 +163,14 @@ def predef_mazy1(w, h):
     #todo: replace rgb/01
     #todo: cleanup #1
     return [
+        # new test, quite ok, use proper
+        #{'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 300, 'm': 4, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75, 'mar': int(w/10)},
+        #{'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 300, 'm': 4, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75, 'mar': int(-w/2)},
+        #{'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 50, 'm': 4, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75},
+        #{'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 4, 'v': 20, 'n': 20, 'm': 4, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75},
+        #{'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 4, 'v': 20, 'n': 20, 'm': 4, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75, 'mar': int(-w/2)},
+        #{'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 20, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75, 'mar': int(-w/2)},
+
         #1s rnd
         {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
         'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False,
