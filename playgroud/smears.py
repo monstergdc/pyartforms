@@ -30,7 +30,7 @@
 # upd: 20181019, 20
 # upd: 20190105, 06, 12, 13, 18, 19, 21, 22
 # upd: 20190306, 11, 29, 30
-# upd: 20190414, 15, 17
+# upd: 20190414, 15, 17, 18
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html

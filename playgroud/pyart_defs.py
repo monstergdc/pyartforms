@@ -6,7 +6,7 @@
 # cre: 20181020
 # upd: 20190105, 06, 13, 18, 21, 22
 # upd: 20190311, 30
-# upd: 20190414, 15, 17
+# upd: 20190414, 15, 17, 18
 
 # predefined forms
 
@@ -229,11 +229,17 @@ def predef_mazy1(w, h):
         'penw': 8, 'v': 30, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'red', 'keep': False,
         'r0': 64, 'g0': 64, 'b0': 0,
         'r1': 256, 'g1': 256, 'b1': 32},
-        #11
+        #11 green on white
         {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
         'penw': 8, 'v': 30, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'red', 'keep': False,
         'r0': 0, 'g0': 64, 'b0': 0,
         'r1': 32, 'g1': 256, 'b1': 32},
+
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+        'penw': 8, 'v': 30, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'red', 'keep': False,
+        'r0': 0, 'g0': 64, 'b0': 0,
+        'r1': 32, 'g1': 256, 'b1': 32, 'addalpha': 75},
+
         #12
         {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_yellow,
         'penw': 5, 'v': 200, 'n': 50, 'm': 25, 'prefill': False, 'blur': False, 'mode': 'red', 'keep': True,
@@ -245,6 +251,10 @@ def predef_mazy1(w, h):
         'r0': 16, 'g0': 64, 'b0': 128,
         'r1': 128, 'g1': 256, 'b1': 256},
 
+        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_yellow,
+        'penw': 5, 'v': 120, 'n': 48, 'm': 12, 'prefill': True, 'blur': False, 'mode': 'red', 'keep': True,
+        'r0': 16, 'g0': 64, 'b0': 128,
+        'r1': 128, 'g1': 256, 'b1': 256, 'addalpha': 75},
     ]
 
 def predef_mazy2(w, h):

@@ -8,7 +8,7 @@
 <?php
 function sub_group($name, $id)
 {
-	$cnt[1]  = 44;
+	$cnt[1]  = 46;
 	$cnt[2]  = 22;
 	$cnt[3]  = 78;
 	$cnt[4]  = 41;
