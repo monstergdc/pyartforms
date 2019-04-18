@@ -6,7 +6,7 @@
 # cre: 20181020
 # upd: 20190105, 06, 13, 18, 19, 22
 # upd: 20190302, 03, 30
-# upd: 20190414, 17
+# upd: 20190414, 17, 18
 
 # TODO:
 # - nice argparse (also per module?)
@@ -90,6 +90,7 @@ def do_mazy(cnt, w, h, odir, name):
     for n in range(cnt):
         tx = dt.now().strftime('%Y%m%d%H%M%S')
         for i in range(len(p)):
+            p[i]['alpha'] = True #test
             art_painter(p[i], odir+'%s-%dx%d-%02d-%03d-%s.png' % (name, w, h, i+1, n+1, tx))
 
 # --- go
@@ -101,12 +102,13 @@ w, h = get_canvas('A3') # for demo use this, not too big, not too small
 #w, h = get_canvas('A4')
 #w, h = get_canvas('A5')
 #w, h = get_canvas('A6')
+#w, h = get_canvas('A7')
 
 cnt = 3 # note: it takes some time
 do_mazy(cnt, w, h, odir, 'mazy01')
 do_mazy(cnt, w, h, odir, 'mazy02')
 do_mazy(cnt, w, h, odir, 'mazy03')
-do_mazy(cnt, w, h, odir, 'mazy04') # also a bit lame, only red ok, add blue
+do_mazy(cnt, w, h, odir, 'mazy04') # a bit lame, only red ok, add blue
 do_mazy(cnt, w, h, odir, 'mazy05')
 do_mazy(cnt, w, h, odir, 'mazy06')
 do_mazy(cnt, w, h, odir, 'mazy07')
