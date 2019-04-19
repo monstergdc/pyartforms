@@ -171,6 +171,23 @@ def predef_mazy1(w, h):
         #{'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 4, 'v': 20, 'n': 20, 'm': 4, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75, 'mar': int(-w/2)},
         #{'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white, 'penw': 8, 'v': 20, 'n': 20, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75, 'mar': int(-w/2)},
 
+        # 6 red tests new, ok, use
+#        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+#        'penw': 8, 'v': 25, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'red', 'keep': False,
+#        'r0': 0, 'g0': 0, 'b0': 0, 'r1': 256, 'g1': 0, 'b1': 0, 'mar': int(w/15)},
+#        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+#        'penw': 2, 'v': 120, 'n': 40, 'm': 120, 'prefill': False, 'blur': False, 'mode': 'red', 'keep': False,
+#        'r0': 0, 'g0': 0, 'b0': 0, 'r1': 256, 'g1': 0, 'b1': 0, 'mar': int(w/15)},
+#        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+#        'penw': 8, 'v': 120, 'n': 40, 'm': 120, 'prefill': False, 'blur': False, 'mode': 'red', 'keep': False,
+#        'r0': 0, 'g0': 0, 'b0': 0, 'r1': 256, 'g1': 0, 'b1': 0, 'mar': int(w/15)},
+#        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+#        'penw': 24, 'v': 120, 'n': 40, 'm': 60, 'prefill': False, 'blur': False, 'mode': 'red', 'keep': False,
+#        'r0': 0, 'g0': 0, 'b0': 0, 'r1': 256, 'g1': 0, 'b1': 0, 'mar': int(w/15)},
+#        {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
+#        'penw': 8, 'v': 20, 'n': 500, 'm': 5, 'prefill': False, 'blur': False, 'mode': 'red', 'keep': False,
+#        'r0': 0, 'g0': 0, 'b0': 0, 'r1': 256, 'g1': 0, 'b1': 0, 'mar': int(w/15)},
+
         #1s rnd
         {'name': n, 'call': mazy1, 'w': w, 'h': h, 'Background': bg_white,
         'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False,

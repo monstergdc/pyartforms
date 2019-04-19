@@ -3,7 +3,7 @@
 ## Generative art in Python
 
 My playground for tests in computer-generated art forms (graphics, video, sound). 
-Many scripts will generate multiple images for different presets, most will be in A3 print-ready format.
+Many scripts will generate multiple images for different presets, most will be in A3 print-ready format (available formats include A7..A0 and 2A0, 4A0, also some B-formats are defined).
 Feel free to tinker with it. Get inspired.
 
 Stuff here may change, may be incomplete or not fully working, may be w/o docs, etc. 
