@@ -110,29 +110,28 @@ def waves2(draw, params):
 def waves3(draw, params):
     w = params['w']
     h = params['h']
+    cnt = params['z']
     random.seed()
     c = math.pi/180
     #lw = int(w/620) # was 8, scaled for A3
-    lw = int(5*w/620)
+    lw = int(2*w/620)
     # todo: more color
-    # todo: proper poly
 
-    gr = params['gradient']
-    fz = float(params['z'])
-    for z in range(params['z']):
-        ndx = gr*z/params['z']
-        color = gradient(params['c1'], params['c2'], params['c3'], ndx, gr-1)
+    fz = float(cnt)
+    for z in range(cnt):
+        color = gradient(params['c1'], params['c2'], params['c3'], z, cnt)
         a = float(z)/fz # why bad w/o float on 2.7/linux? and ok on 3.6/win
         dx = h/2 * (1-a)
         if z == 0:
-            da = 0
+            da = 0 # flat line 1st
         else:
-            da = random.randint(0, 180)
+            da = random.randint(-270, 270)
         points = []
         for n in range(w):
             y =  h/2 + dx * math.sin(c*(n*a+da))
             points.extend((n, int(y)))
-        draw.line(points, fill=color, width=lw)
+        #draw.line(points, fill=color, width=lw)
+        draw.polygon(points, fill=None, outline=color)
 
 def waves_mux(draw, params):
     waves2(draw, params['par1'])
