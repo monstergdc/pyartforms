@@ -9,13 +9,15 @@ Feel free to tinker with it. Get inspired.
 Stuff here may change, may be incomplete or not fully working, may be w/o docs, etc. 
 as it is work and experiments in progress. Also no error checking. Tested only under Windows (paths!).
 
-Small demo is in: **pyart-demo.py** (possibly not everything yet).
-Web/CGI version in: **pyartw3.py** (also possibly not all yet).
+Small demo is in: **pyart-demo.py** (possibly not everything yet). 
+Web/CGI version in: **pyartw3.py** (also possibly not all yet). 
 GUI version in: **pyart-wxGUI.py** (just started).
 
 Actual definitions reside in file: *pyart_defs.py*.
 
-Prerequisites include: **pip install pillow** and for video: **pip install opencv-python**, possibly also **pip install cgi**
+Prerequisites include: **pip install pillow** and for video: **pip install opencv-python**, 
+possibly also **pip install cgi** for CGI version 
+and **pip install -U wxPython** for GUI version.
 
 
 
