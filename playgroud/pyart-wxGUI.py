@@ -9,14 +9,11 @@
 
 # TODO:
 # - remap paramsets to ctl and back / also get values
+# - allow save (diff sizes)
 # - render from memo txt
 # - defs - add desc names + even longer desc
 # - render - allow extra params to file names (from defs)
 # - render - allow storage of all rnd par/val for EXACT rerender
-# - allow save (diff sizes)
-# - (where) allow anims from smears
-# - mandel - cos sie popsulo???
-# - defs/calls (x3-4) ujednolicic all do mazy only
 # - ?
 
 

@@ -39,15 +39,16 @@ function sub_group($name, $id)
 	echo '<h2>' . $name . " :: n=(1..." . $n . "):</h2>\n";
 	for($i=1;$i<=$n;$i++)
 	{
-		if ($id < 100) $img = 'minis/SMEARS%23' . $id . '-256x192-' . str_pad($i, 2, '0', STR_PAD_LEFT) . '.png';
-		if ($id == 101) $img = 'minis/LIFE' . '-256x192-' . str_pad($i, 3, '0', STR_PAD_LEFT) . '.png';
-		if ($id == 102) $img = 'minis/LISSAJOUS' . '-256x192-' . str_pad($i, 3, '0', STR_PAD_LEFT) . '.png';
-		if ($id == 103) $img = 'minis/ASTROART' . '-256x192-' . str_pad($i, 3, '0', STR_PAD_LEFT) . '.png';
-		if ($id == 104) $img = 'minis/WAVES#1' . '-256x192-' . str_pad($i, 3, '0', STR_PAD_LEFT) . '.png';
-		if ($id == 105) $img = 'minis/MANDELBROT' . '-256x192-' . str_pad($i, 3, '0', STR_PAD_LEFT) . '.png';
+		$pad = '-256x192-' . str_pad($i, 2, '0', STR_PAD_LEFT) . '.png';
+		if ($id < 100) $img = 'SMEARS#' . $id . $pad;
+		if ($id == 101) $img = 'LIFE' . $pad;
+		if ($id == 102) $img = 'LISSAJOUS' . $pad;
+		if ($id == 103) $img = 'ASTROART' . $pad;
+		if ($id == 104) $img = 'WAVES#1' . $pad;
+		if ($id == 105) $img = 'MANDELBROT' . $pad;
 
 		echo '<a target="_blank" href="' . $cgi . '?what=' . $name . '&n=' . $i . '&canvas=800">';
-		echo '<img style="width: 256px; float: left; position: absoulte; margin: 2px;" src="' . $img . '" title="n='. $i . '">';
+		echo '<img style="width: 256px; float: left; position: absoulte; margin: 2px;" src="minis/' . urlencode($img) . '" title="n='. $i . '">';
 		echo "</a>\n";
 	}
 	echo "</div></td></tr>\n";
