@@ -7,9 +7,7 @@
 # cre: 20180505
 # upd: 20181020
 # upd: 20190118
-
-# see:
-# https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
+# upd: 20190421
 
 # TODO:
 # - ?
@@ -114,13 +112,16 @@ def waves3(draw, params):
     h = params['h']
     random.seed()
     c = math.pi/180
+    #lw = int(w/620) # was 8, scaled for A3
+    lw = int(5*w/620)
+    # todo: more color
+    # todo: proper poly
 
     gr = params['gradient']
     fz = float(params['z'])
     for z in range(params['z']):
         ndx = gr*z/params['z']
         color = gradient(params['c1'], params['c2'], params['c3'], ndx, gr-1)
-        #color = (255, 255, 255) # debug!
         a = float(z)/fz # why bad w/o float on 2.7/linux? and ok on 3.6/win
         dx = h/2 * (1-a)
         if z == 0:
@@ -131,7 +132,7 @@ def waves3(draw, params):
         for n in range(w):
             y =  h/2 + dx * math.sin(c*(n*a+da))
             points.extend((n, int(y)))
-        draw.line(points, fill=color, width=8)
+        draw.line(points, fill=color, width=lw)
 
 def waves_mux(draw, params):
     waves2(draw, params['par1'])
