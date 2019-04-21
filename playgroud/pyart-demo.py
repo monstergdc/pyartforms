@@ -6,7 +6,7 @@
 # cre: 20181020
 # upd: 20190105, 06, 13, 18, 19, 22
 # upd: 20190302, 03, 30
-# upd: 20190414, 17, 18
+# upd: 20190414, 17, 18, 21
 
 # TODO:
 # - nice argparse (also per module?)
@@ -38,48 +38,6 @@ if not os.path.exists(root):
     os.makedirs(root)
 odir = root+'\\'
 
-# --- life
-
-def do_life(cnt, w, h, odir):
-    p = predef_life(w, h)
-    #cnt?
-    for i in range(len(p)):
-        art_painter(p[i], odir+'life-%dx%d-%03d.png' % (w, h, i+1))
-
-# --- lissajous
-
-def do_lissajous(cnt, w, h, odir):
-    p = predef_lissajous(w, h)
-    #cnt?
-    for i in range(len(p)):
-        art_painter(p[i], odir+'lissajous-%dx%d-%03d.png' % (w, h, i+1))
-   
-# --- waves
-
-def do_waves(cnt, w, h, odir):
-    p = predef_waves(w, h)
-    for n in range(cnt):
-        for i in range(len(p)):
-            art_painter(p[i], odir+'waves-%dx%d-%02d-%03d.png' % (w, h, i+1, n))
-        
-# --- astro
-
-def do_astro(cnt, w, h, odir):
-    p = predef_astro(w, h)
-    #cnt?
-    # 2x (cir, box) bluegalaxy ellipticgalaxy spiralgalaxy neutronstar blackhole supernova nebula star
-    for i in range(len(p)):
-        art_painter(p[i], odir+'astro-%dx%d-%03d.png' % (w, h, i+1))
-
-# --- mandelbrot
-
-def do_mandelbrot(cnt, w, h, odir):
-    p = predef_mandelbrot(w, h)
-    #cnt?
-    for i in range(len(p)):
-        art_painter(p[i], odir+'mandelbrot-%03d.png' % (i+1), bw=True)
-
-# --- smears
 
 def do_mazy(cnt, w, h, odir, name):
     if name in predefs:
@@ -122,21 +80,17 @@ do_mazy(cnt, w, h, odir, 'mazy14')
 cnt = 1 # note: 15 and 16 alredy produce a lot
 do_mazy(cnt, w, h, odir, 'mazy15')
 do_mazy(cnt, w, h, odir, 'mazy16')
-
+cnt = 1 # note: astro only once
+do_mazy(cnt, w, h, odir, 'astro')
 cnt = 3
-
-do_waves(cnt, w, h, odir) # fix: does not scale down well
-
+do_mazy(cnt, w, h, odir, 'waves') # fix: does not scale down well
+cnt = 1
 w, h = get_canvas('800')
-do_life(0, w, h, odir)
-
+do_mazy(cnt, w, h, odir, 'life')
+cnt = 1
 w, h = get_canvas('A4') # fix: does not scale down well (line width)
-do_lissajous(0, w, h, odir)
-
-w, h = get_canvas('A3')
-do_astro(0, w, h, odir)
-
-do_mandelbrot(0, 700, 400, odir)
+do_mazy(cnt, w, h, odir, 'lissajous')
+do_mazy(cnt, 700, 400, odir, 'mandelbrot')
     
 time_elapsed = dt.now() - start_time
 print('ALL done. elapsed time: {}'.format(time_elapsed))

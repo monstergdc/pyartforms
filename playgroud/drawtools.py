@@ -160,6 +160,10 @@ def im2cgi(im, format='PNG'):
     sys.stdout.flush()
 
 def art_painter(params, png_file='example.png', output_mode='save', bw=False):
+    if 'bw' in params:
+        bw = params['bw']
+    else:
+        bw = False
     if output_mode == 'save':
         start_time = dt.now()
         print('drawing %s... %s' % (params['name'], png_file))
@@ -168,7 +172,7 @@ def art_painter(params, png_file='example.png', output_mode='save', bw=False):
     else:
         im = Image.new('RGB', (params['w'], params['h']), params['Background'])
 
-    if "alpha" in params:
+    if "alpha" in params and not bw:
         if params['alpha'] == True:
             draw = ImageDraw.Draw(im, 'RGBA')
         else:

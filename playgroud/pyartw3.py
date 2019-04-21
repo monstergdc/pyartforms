@@ -8,19 +8,19 @@
 # upd; 20181020, 21
 # upd; 20190118, 19
 # upd; 20190329, 30
-# upd; 20190414, 17
+# upd; 20190414, 17, 21
 
 # TODO:
 # - ?
 
 import cgi
-from drawtools import get_canvas, art_painter, get_cgi_par
-from life1 import life
-from lissajous import lissajous, lissajous_loop
-from waves import *
-from astroart import *
-from mandelbrot import generate_mandelbrot
-from smears import *
+from drawtools import *
+#from life1 import life
+#from lissajous import lissajous, lissajous_loop
+#from waves import *
+#from astroart import *
+#from mandelbrot import generate_mandelbrot
+#from smears import *
 from pyart_defs import *
 
 
@@ -42,24 +42,10 @@ else:
     n = 0
 
 w, h = canvas
-bw = False
-
 if what in predefs:
     pr = predefs[what]
     p = pr(w, h)
-
-if what == "life":
-    p = predef_life(w, h)
-if what == "lissajous":
-    p = predef_lissajous(w, h)
-if what == "astro":
-    p = predef_astro(w, h)
-if what == "waves":
-    p = predef_waves(w, h)
-if what == "mandelbrot":
-    p = predef_mandelbrot(w, h)
-    bw = True
 if n >= len(p):
     n = len(p)-1
 p[n]['alpha'] = True #test
-art_painter(p[n], '', 'cgi', bw)
+art_painter(p[n], '', 'cgi')

@@ -8,9 +8,15 @@
 
 
 # TODO:
-# - remap paramsets to ctl and back / alse ge values
-# - enum mazy for use
-# - ?
+# - remap paramsets to ctl and back / also get values
+# - render from memo txt
+# - defs - add desc names + even longer desc
+# - render - allow extra params to file names (from defs)
+# - render - allow storage of all rnd par/val for EXACT rerender
+# - allow save (diff sizes)
+# - (where) allow anims from smears
+# - mandel - cos sie popsulo???
+# - defs/calls (x3-4) ujednolicic all do mazy only
 # - ?
 
 
@@ -19,6 +25,11 @@ from PIL import Image, ImageDraw
 from drawtools import *
 from smears import *
 from pyart_defs import *
+from life1 import life
+from lissajous import lissajous, lissajous_loop
+from waves import *
+from astroart import *
+from mandelbrot import generate_mandelbrot
 
 
 
@@ -35,6 +46,7 @@ class GUIFrame(wx.Frame):
         # ensure the parent's __init__ is called
         super(GUIFrame, self).__init__(*args, **kw)
 
+        # preview images size
         #self.w = 640
         #self.h = 480
         self.w = 800
@@ -55,13 +67,17 @@ class GUIFrame(wx.Frame):
         self.SetStatusText("pyartforms GUI")
 
         screenSize = wx.DisplaySize()
-        mazy_all = ['mazy01', 'mazy02', 'mazy03', 'mazy04', 'mazy05', 'mazy06', 'mazy07', 'mazy08', 'mazy09', 'mazy10', 'mazy11', 'mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16']
+        mazy_all = ['mazy01', 'mazy02', 'mazy03', 'mazy04', 'mazy05', 'mazy06', 'mazy07', 'mazy08',
+                    'mazy09', 'mazy10', 'mazy11', 'mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16', 
+                    'life', 'lissajous', 'waves', 'astro', 'mandelbrot',
+                    ]
         x0 = 10 # ctl x0
 
         # smear selector
         self.cm = wx.ComboBox(pnl, id=wx.ID_ANY, value="", pos=(x0, 20), size=(70, 20), choices=mazy_all, style=0, validator=wx.DefaultValidator)
+        self.cm.Bind(wx.EVT_COMBOBOX, self.OnSmearChanged)
         # preset selector
-        self.sp = wx.SpinCtrl(pnl, id=wx.ID_ANY, value="0", pos=(x0, 20+30), size=(70, 20), style=wx.SP_ARROW_KEYS, min=0, max=100, initial=0)
+        self.sp = wx.SpinCtrl(pnl, id=wx.ID_ANY, value="0", pos=(x0, 20+30), size=(70, 20), style=wx.SP_ARROW_KEYS, min=0, max=1, initial=0)
         # go btn
         bn = wx.Button(pnl, id=wx.ID_ANY, label="GO", pos=(x0, 20+60), size=wx.DefaultSize, style=0, validator=wx.DefaultValidator)
         bn.Bind(wx.EVT_BUTTON, self.OnClicked) 
@@ -118,9 +134,17 @@ class GUIFrame(wx.Frame):
 
     def OnClicked(self, event): 
         btn = event.GetEventObject().GetLabel() 
-        #print("Label of pressed button = ", btn)
+        #print("DEBUG: Label of pressed button = ", btn)
         if btn == 'GO':
             self.doRender()
+
+    def OnSmearChanged(self, event):
+        mn = self.cm.Value
+        pr = predefs[mn]
+        cnt = len(pr(0, 0))
+        self.sp.SetMax(cnt-1)
+        self.sp.SetValue(0)
+        #print("DEBUG: OnSmearChanged:", mn, 'cnt:', cnt)
 
     def OnExit(self, event):
         self.Close(True)

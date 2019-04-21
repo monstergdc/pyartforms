@@ -4,6 +4,8 @@
 <title>pyartforms (c)2019 Noniewicz.art.pl</title>
 </head>
 <body style="background-color: black; color: white;">
+<p>Algorithm-generated art forms in Python.</p>
+
 
 <?php
 function sub_group($name, $id)
@@ -25,11 +27,11 @@ function sub_group($name, $id)
 	$cnt[15]  = 55;
 	$cnt[16]  = 144;
 
-//	$cnt[101]  = 7; //life
-//	$cnt[102] = 3; //lissajous
+	$cnt[101]  = 7; //life
+	$cnt[102] = 4; //lissajous
 	$cnt[103] = 16; //astro
-//	$cnt[104] = 9; //waves
-//	$cnt[105] = 2; //mandelbrot
+	$cnt[104] = 8; //waves
+	$cnt[105] = 2; //mandelbrot
 
 	$cgi = 'pyartw3.py';
 	$n = $cnt[$id];
@@ -38,7 +40,11 @@ function sub_group($name, $id)
 	for($i=1;$i<=$n;$i++)
 	{
 		if ($id < 100) $img = 'minis/SMEARS%23' . $id . '-256x192-' . str_pad($i, 2, '0', STR_PAD_LEFT) . '.png';
-		if ($id == 103) $img = 'minis/astro' . '-256x192-' . str_pad($i, 3, '0', STR_PAD_LEFT) . '.png';
+		if ($id == 101) $img = 'minis/LIFE' . '-256x192-' . str_pad($i, 3, '0', STR_PAD_LEFT) . '.png';
+		if ($id == 102) $img = 'minis/LISSAJOUS' . '-256x192-' . str_pad($i, 3, '0', STR_PAD_LEFT) . '.png';
+		if ($id == 103) $img = 'minis/ASTROART' . '-256x192-' . str_pad($i, 3, '0', STR_PAD_LEFT) . '.png';
+		if ($id == 104) $img = 'minis/WAVES#1' . '-256x192-' . str_pad($i, 3, '0', STR_PAD_LEFT) . '.png';
+		if ($id == 105) $img = 'minis/MANDELBROT' . '-256x192-' . str_pad($i, 3, '0', STR_PAD_LEFT) . '.png';
 
 		echo '<a target="_blank" href="' . $cgi . '?what=' . $name . '&n=' . $i . '&canvas=800">';
 		echo '<img style="width: 256px; float: left; position: absoulte; margin: 2px;" src="' . $img . '" title="n='. $i . '">';
@@ -64,12 +70,11 @@ sub_group("mazy13", 13);
 sub_group("mazy14", 14);
 sub_group("mazy15", 15);
 sub_group("mazy16", 16);
-//---
-//sub_group("life", 101);
-//sub_group("lissajous", 102);
+sub_group("life", 101);
+sub_group("lissajous", 102);
 sub_group("astro", 103);
-//sub_group("waves", 104);
-//sub_group("mandelbrot", 105);
+sub_group("waves", 104);
+sub_group("mandelbrot", 105);
 echo "</table>";
 ?>
 

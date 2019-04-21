@@ -37,6 +37,7 @@ if not os.path.exists(root):
 odir = root+'\\'
 
 
+
 def do_mazy(cnt, w, h, odir, name):
     if name in predefs:
         pr = predefs[name]
@@ -98,9 +99,12 @@ enum_defs()
 #do_mazy(cnt, w, h, odir, 'mazy14')
 #do_mazy(cnt, w, h, odir, 'mazy15')
 #do_mazy(cnt, w, h, odir, 'mazy16')
-do_mazy(cnt, w, h, odir, 'waves')
+#do_mazy(cnt, w, h, odir, 'waves')
 #do_mazy(cnt, w, h, odir, 'astro')
-    
+#do_mazy(cnt, w, h, odir, 'life')
+#do_mazy(cnt, w, h, odir, 'lissajous')
+#do_mazy(cnt, 700, 400, odir, 'mandelbrot')
+
 time_elapsed = dt.now() - start_time
 print('ALL done. elapsed time: {}'.format(time_elapsed))
 
