@@ -11,6 +11,7 @@ as it is work and experiments in progress. Also no error checking. Tested only u
 
 Small demo is in: **pyart-demo.py** (possibly not everything yet).
 Web/CGI version in: **pyartw3.py** (also possibly not all yet).
+GUI version in: **pyart-wxGUI.py** (just started).
 
 Actual definitions reside in file: *pyart_defs.py*.
 
