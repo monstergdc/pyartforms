@@ -83,7 +83,9 @@ do_mazy(cnt, w, h, odir, 'mazy16')
 cnt = 1 # note: astro only once
 do_mazy(cnt, w, h, odir, 'astro')
 cnt = 3
-do_mazy(cnt, w, h, odir, 'waves') # fix: does not scale down well
+do_mazy(cnt, w, h, odir, 'waves01') # fix: does not scale down well
+do_mazy(cnt, w, h, odir, 'waves02') # fix: does not scale down well
+do_mazy(cnt, w, h, odir, 'waves03') # fix: does not scale down well
 cnt = 1
 w, h = get_canvas('800')
 do_mazy(cnt, w, h, odir, 'life')

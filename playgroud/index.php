@@ -30,8 +30,10 @@ function sub_group($name, $id)
 	$cnt[101]  = 7; //life
 	$cnt[102] = 4; //lissajous
 	$cnt[103] = 16; //astro
-	$cnt[104] = 8; //waves
-	$cnt[105] = 2; //mandelbrot
+	$cnt[104] = 2; //mandelbrot
+	$cnt[105] = 5; //waves01
+	$cnt[106] = 6; //waves02
+	$cnt[107] = 1; //waves03
 
 	$cgi = 'pyartw3.py';
 	$n = $cnt[$id];
@@ -44,8 +46,10 @@ function sub_group($name, $id)
 		if ($id == 101) $img = 'LIFE' . $pad;
 		if ($id == 102) $img = 'LISSAJOUS' . $pad;
 		if ($id == 103) $img = 'ASTROART' . $pad;
-		if ($id == 104) $img = 'WAVES#1' . $pad;
-		if ($id == 105) $img = 'MANDELBROT' . $pad;
+		if ($id == 104) $img = 'MANDELBROT' . $pad;
+		if ($id == 105) $img = 'WAVES#1' . $pad;
+		if ($id == 106) $img = 'WAVES#2' . $pad;
+		if ($id == 107) $img = 'WAVES#3' . $pad;
 
 		echo '<a target="_blank" href="' . $cgi . '?what=' . $name . '&n=' . $i . '&canvas=800">';
 		echo '<img style="width: 256px; float: left; position: absoulte; margin: 2px;" src="minis/' . urlencode($img) . '" title="n='. $i . '">';
@@ -74,8 +78,10 @@ sub_group("mazy16", 16);
 sub_group("life", 101);
 sub_group("lissajous", 102);
 sub_group("astro", 103);
-sub_group("waves", 104);
-sub_group("mandelbrot", 105);
+sub_group("mandelbrot", 104);
+sub_group("waves01", 105);
+sub_group("waves02", 106);
+sub_group("waves03", 107);
 echo "</table>";
 ?>
 

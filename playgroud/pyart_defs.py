@@ -77,7 +77,7 @@ def predef_lissajous(w, h):
    
 # --- waves
 
-def predef_waves(w, h):
+def predef_waves1(w, h):
     a = [
         {'name': 'WAVES#1', 'call': waves1, 'w': w, 'h': h, 'Background': (224, 244, 0),
         'z': 14, 'f0': 1, 'horizontal': False,
@@ -104,18 +104,25 @@ def predef_waves(w, h):
         'gradient': 256,
         'c1': (255,0,0), 'c2': (0,255,0), 'c3': (0,0,255),
         },
-        {'name': 'WAVES#2', 'call': waves2, 'w': w, 'h': h, 'Background': bg_black,
-        'z': 96, 'f0': 1, 'horizontal': False,
-        'gradient': 256,
-        'c1': (255,0,0), 'c2': (255,255,0), 'c3': (255,255,255),
-        },
-        {'name': 'WAVES#2', 'call': waves2, 'w': w, 'h': h, 'Background': bg_black,
-        'z': 48, 'f0': 1, 'horizontal': True,
-        'gradient': 256,
-        'c1': (0,128,0), 'c2': (0,255,0), 'c3': (0,0,255),
-        },
+    ]
+    return a
+
+def predef_waves2(w, h):
+    a = [
+        {'Background': bg_black, 'z': 150, 'f0': 1, 'horizontal': False, 'c1': (255,0,0), 'c2': (255,255,0), 'c3': (255,255,255)},
+        {'Background': bg_black, 'z': 150, 'f0': 1, 'horizontal': True, 'c1': (255,64,0), 'c2': (64,255,64), 'c3': (64,64,255)},
+        {'Background': bg_white, 'z': 150, 'f0': 1, 'horizontal': False, 'color': 'happy'},
+        {'Background': bg_white, 'z': 500, 'f0': 1, 'horizontal': False, 'color': 'happy', 'addalpha': 50},
+        {'Background': bg_white, 'z': 150, 'f0': 1, 'horizontal': False, 'color': 'wryb'},
+        {'Background': bg_white, 'z': 150, 'f0': 1, 'horizontal': False, 'color': 'BeachTowels'},
+    ]
+    return append_dflts(a, 'WAVES#2', waves2, w, h)
+
+#{'name': 'WAVES#2#MUX', 'call': waves_mux, 'w': w, 'h': h, 'Background': bg_black, 'par1': params1a, 'par2': params2a},
+
+def predef_waves3(w, h):
+    a = [
         {'name': 'WAVES#3', 'call': waves3, 'w': w, 'h': h, 'Background': bg_black, 'z': 18*3, 'c1': (255,255,255), 'c2': (255,255,0), 'c3': (255,0,0)},
-#        {'name': 'WAVES#2#MUX', 'call': waves_mux, 'w': w, 'h': h, 'Background': bg_black, 'par1': params1a, 'par2': params2a},
     ]
     return a
         
@@ -797,6 +804,8 @@ def predef_mazy16(w, h):
 #def predef_mazy18(w, h):
 #def predef_mazy19(w, h):
 #def predef_mazy20(w, h):
+#def predef_mazy21(w, h):
+#def predef_mazy22(w, h):
 
 def enum_defs():
     suma = 0
@@ -812,8 +821,8 @@ predefs = {'mazy01': predef_mazy1, 'mazy02': predef_mazy2, 'mazy03': predef_mazy
            'mazy05': predef_mazy5, 'mazy06': predef_mazy6, 'mazy07': predef_mazy7, 'mazy08': predef_mazy8,
            'mazy09': predef_mazy9, 'mazy10': predef_mazy10, 'mazy11': predef_mazy11, 'mazy12': predef_mazy12,
            'mazy13': predef_mazy13, 'mazy14': predef_mazy14, 'mazy15': predef_mazy15, 'mazy16': predef_mazy16,
-           'life': predef_life, 'lissajous': predef_lissajous, 'waves': predef_waves, 'astro': predef_astro,
-           'mandelbrot': predef_mandelbrot,
+           'life': predef_life, 'lissajous': predef_lissajous, 'astro': predef_astro, 'mandelbrot': predef_mandelbrot,
+           'waves01': predef_waves1,'waves02': predef_waves2, 'waves03': predef_waves3, 
            }
 
 # EOF

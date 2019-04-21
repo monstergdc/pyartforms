@@ -66,7 +66,8 @@ class GUIFrame(wx.Frame):
         screenSize = wx.DisplaySize()
         mazy_all = ['mazy01', 'mazy02', 'mazy03', 'mazy04', 'mazy05', 'mazy06', 'mazy07', 'mazy08',
                     'mazy09', 'mazy10', 'mazy11', 'mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16', 
-                    'life', 'lissajous', 'waves', 'astro', 'mandelbrot',
+                    'life', 'lissajous', 'astro', 'mandelbrot',
+                    'waves01', 'waves02', 'waves03', 
                     ]
         x0 = 10 # ctl x0
 

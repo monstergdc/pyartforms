@@ -17,6 +17,7 @@ from PIL import Image, ImageDraw
 import random, math, string, os, sys
 from bezier import make_bezier
 from drawtools import *
+from color_defs import *
 
 
 def waves1(draw, params):
@@ -63,22 +64,28 @@ def waves1(draw, params):
             y += 1
 
 def waves2(draw, params):
+    # todo: uproscic kod, more color
     w = params['w']
     h = params['h']
+    cnt = params['z']
     random.seed()
     c = math.pi/180
 
     if params['horizontal'] == True:
         rn = w
-        dx = h/params['z']*4
+        dx = h/cnt*4
     else:
         rn = h
-        dx = w/params['z']*4
+        dx = w/cnt*4
 
-    gr = params['gradient']
-    for z in range(params['z']):
-        ndx = random.randint(0, gr)
-        color = gradient(params['c1'], params['c2'], params['c3'], ndx, gr-1)
+    for z in range(cnt):
+        ndx = random.randint(0, cnt)
+        if 'c1' in params and 'c2' in params and 'c3' in params:
+            color = gradient(params['c1'], params['c2'], params['c3'], ndx, cnt)
+        if 'color' in params:
+            color = new_colorer(params['color'], ndx, cnt)
+        if 'addalpha' in params:
+            color = add_alpha(color, params['addalpha'])
         aofs1 = random.randint(0, 360)
         aofs2 = random.randint(0, 360)
         aofs3 = random.randint(0, 360)
@@ -94,9 +101,11 @@ def waves2(draw, params):
         y = 0
         points1 = []
         points2 = []
+        points1a = []
+        points2a = []
         for n in range(rn):
-            x_in =  mofs1 + dx * (1 + (math.sin(c*(n*fofs1+aofs1))+2*math.sin(c*(n*fofs3+aofs3)))/3)
-            x_out = mofs1 + dx * (1 + (math.sin(c*(n*fofs2+aofs2))+2*math.sin(c*(n*fofs4+aofs4)))/3)
+            x_in =  int(mofs1 + dx * (1 + (math.sin(c*(n*fofs1+aofs1))+2*math.sin(c*(n*fofs3+aofs3)))/3))
+            x_out = int(mofs1 + dx * (1 + (math.sin(c*(n*fofs2+aofs2))+2*math.sin(c*(n*fofs4+aofs4)))/3))
             if params['horizontal'] == True:
                 points1.extend((y, x_in))
                 points2.extend((y, x_out))
@@ -104,18 +113,33 @@ def waves2(draw, params):
                 points1.extend((x_in, y))
                 points2.extend((x_out, y))
             y += 1
-        draw.line(points1, fill=color, width=random.randint(2, 8))
-        draw.line(points2, fill=color, width=random.randint(2, 8))
+        #lw = int(w/50)
+        lw = random.randint(1, int(w/50))
+
+        points1a[:] = [xy for xy in points1]
+        points2a[:] = [xy for xy in points2]
+        for a in range(int(len(points1a)/2)):
+            ndx = int(len(points1a)/2)-1-a
+            if params['horizontal'] == True:
+                points1.extend((points1a[ndx*2], lw+points1a[ndx*2+1]))
+            else:
+                points1.extend((lw+points1a[ndx*2], points1a[ndx*2+1]))
+        for a in range(int(len(points2a)/2)):
+            ndx = int(len(points2a)/2)-1-a
+            if params['horizontal'] == True:
+                points2.extend((points2a[ndx*2], lw+points2a[ndx*2+1]))
+            else:
+                points2.extend((lw+points2a[ndx*2], points2a[ndx*2+1]))
+        draw.polygon(points1, fill=color, outline=color)
+        draw.polygon(points2, fill=color, outline=color)
 
 def waves3(draw, params):
+    # todo: more color
     w = params['w']
     h = params['h']
     cnt = params['z']
     random.seed()
     c = math.pi/180
-    #lw = int(w/620) # was 8, scaled for A3
-    lw = int(2*w/620)
-    # todo: more color
 
     fz = float(cnt)
     for z in range(cnt):
@@ -130,7 +154,6 @@ def waves3(draw, params):
         for n in range(w):
             y =  h/2 + dx * math.sin(c*(n*a+da))
             points.extend((n, int(y)))
-        #draw.line(points, fill=color, width=lw)
         draw.polygon(points, fill=None, outline=color)
 
 def waves_mux(draw, params):
