@@ -6,7 +6,7 @@
 # upd: 20181020, 21
 # upd: 20190112, 19, 21, 22
 # upd: 20190311, 29
-# upd: 20190414
+# upd: 20190414, 21
 
 from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin, ImageFont
 from datetime import datetime as dt
@@ -22,11 +22,14 @@ CANVASES = {
     'A7': (1240, 874),
     'A6': (1748, 1240), # note: almost like 10x15 cm photo
     'A5': (2480, 1748),
-    'A4': (3507, 2480),	 # for cm rule is: 29.7/2.54*300 x 21/2.54*300 (in*DPI=300)
+    'A4': (3507, 2480),	# note: for cm rule is: 29.7/2.54*300 x 21/2.54*300 (in*DPI=300)
     'A3': (4960, 3507),
     'A2': (7015, 4960),
     'A1': (9933, 7015),
     'A0': (14043, 9933),
+    '4A0': (28086, 19866),
+    '2A0': (19866, 14043),
+
     'B7': (1476, 1039),
     'B6': (2078, 1476),
     'B5': (2952, 2078),
@@ -35,8 +38,7 @@ CANVASES = {
     'B2': (8350, 5905),
     'B1': (11811, 8350),
     'B0': (16700, 11811),
-    '4A0': (28086, 19866),
-    '2A0': (19866, 14043),
+
     '128': (128, 96),
     '256': (256, 192),
     '320': (320, 200),
@@ -73,6 +75,7 @@ def triangle(draw, points, fill, outline):
     draw.polygon(points, fill=fill, outline=outline)
 
 def gradient(colorStart, colorMid, colorEnd, i, n):
+    """Return gradient color i of n in colorStart..colorMid..colorEnd range."""
     # note: weird, py 2.7 needs these float conversions, on 3.6 it was ok
     n2 = float(n/2)
     if i < n/2:
@@ -92,6 +95,7 @@ def gradient(colorStart, colorMid, colorEnd, i, n):
         return (r2, g2, b2)
 
 def gradient2(colorStart, colorEnd, i, n):
+    """Return gradient color i of n in colorStart..colorEnd range."""
     downc = float(n-i)/float(n)
     upc = float(i)/float(n)
     r1 = int( float(colorStart[0])*downc + float(colorEnd[0])*upc )
@@ -101,11 +105,12 @@ def gradient2(colorStart, colorEnd, i, n):
 
 def script_it(draw, xy, font, size, fill):
     fnt = ImageFont.truetype(font, size)
-    draw.text(xy, "Noniewicz.art.pl", font=fnt, fill=fill)
+    draw.text(xy, "Jakub.Noniewicz.art.pl", font=fnt, fill=fill)
 
 def add_myself(draw, w, h, bg):
+    """Mark image authorship."""
     # note: needs local font on server
-    txt = "Noniewicz.art.pl"
+    txt = "Jakub.Noniewicz.art.pl"
     fnt = ImageFont.truetype(font='./timesbi.ttf', size=14)
     twh = fnt.getsize(txt)
     bgx = (bg[0]^255&0xF0, bg[1]^255&0xF0, bg[2]^255&0xF0)
@@ -116,6 +121,7 @@ def add_myself(draw, w, h, bg):
     draw.text((x, y), txt, font=fnt, fill=bgx)
 
 def append_myself(title):
+    """Append some tags to PNG image."""
     x = PngImagePlugin.PngInfo()
     #x.add_itxt(key='Title', value=title, lang='', tkey='', zip=False)
     #x.add_itxt(key='Description', value='generated in pyartforms', lang='', tkey='', zip=False)
@@ -129,6 +135,7 @@ def append_myself(title):
     return x
 
 def im2cgi(im, format='PNG'):
+    """Output image in CGI mode as bytes to stdout."""
     ct = ''
     if format == 'PNG':
         ct = 'image/png'
@@ -138,19 +145,18 @@ def im2cgi(im, format='PNG'):
         ct = 'image/gif'
     if ct == '':
         ct = 'image/png'
-        format='PNG'
+        format = 'PNG'
     imgByteArr = io.BytesIO()
     if format == 'PNG':
         im.save(imgByteArr, format=format, pnginfo=append_myself('pyartforms'))
     else:
         im.save(imgByteArr, format=format)
-    imgByteArr = imgByteArr.getvalue()
+    data = imgByteArr.getvalue()
     sys.stdout.write("Content-Type: "+ct+"\n")
-#todo: fin
-#    sys.stdout.write("Content-Length: " + str(?) + "\n")
+    sys.stdout.write("Content-Length: " + str(len(data)) + "\n") # todo: chk if proper
     sys.stdout.write("\n")
     sys.stdout.flush()
-    sys.stdout.write(imgByteArr)
+    sys.stdout.write(data)
     sys.stdout.flush()
 
 def art_painter(params, png_file='example.png', output_mode='save', bw=False):
@@ -158,7 +164,7 @@ def art_painter(params, png_file='example.png', output_mode='save', bw=False):
         start_time = dt.now()
         print('drawing %s... %s' % (params['name'], png_file))
     if bw:
-        im = Image.new('L', (params['w'], params['h']), (0))
+        im = Image.new('L', (params['w'], params['h']), (0)) # todo: bg par?
     else:
         im = Image.new('RGB', (params['w'], params['h']), params['Background'])
 
@@ -174,6 +180,7 @@ def art_painter(params, png_file='example.png', output_mode='save', bw=False):
     f = params['call']
     f(draw, params)
     im = xsmooth(params, im)
+
     if output_mode == 'save':
         #add_myself(draw, params['w'], params['h'], params['Background'])
         im.save(png_file, dpi=(300,300), pnginfo=append_myself('pyartforms'))
@@ -201,12 +208,13 @@ def get_cgi_par(default=None):
     return par
 
 def show_benchmark(start_time):
+    """Show benchmark."""
     time_elapsed = dt.now() - start_time
     print('done. elapsed time: {}'.format(time_elapsed))
     return time_elapsed
 
-# image to array
 def im2arr(image_path):
+    """Image to array."""
     #im = Image.load(image_path)
     im = Image.open(image_path)
     im = im.convert('L')
