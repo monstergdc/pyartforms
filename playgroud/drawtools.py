@@ -187,9 +187,13 @@ def art_painter(params, png_file='example.png', output_mode='save', bw=False):
         show_benchmark(start_time)
         im = Image.new('L', (1, 1), (0)) # ???
         draw = ImageDraw.Draw(im) # ???
-    else:
+        return
+    if output_mode == 'cgi':
         add_myself(draw, params['w'], params['h'], params['Background'])
         im2cgi(im, format='PNG')
+        return
+    if output_mode == 'preview':
+        return im
 
 def get_cgi_par(default=None):
     form = cgi.FieldStorage()
