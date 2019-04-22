@@ -2,13 +2,12 @@
 # -*- coding: utf-8 -*-
 
 # Repixelize algorithm (artificial artist), v1.0, Python version
+# IDEA: src pixels as big filled circles/boxes/rnd-shapes, possible rnd size variation, src img rescale
 # (c)2018-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20190330
 # upd: 20190401, 02, 03, 15, 22
 
-# repixelize
-# IDEA: src pixels as big filled circles/boxes/rnd-shapes, possible rnd size variation, src img rescale
-# TODO: xy scale sync issue, proper params, ext call
+# TODO: xy scale sync issue | proper params | ext call | more shapes (brush?)
 
 
 import random, math, string, os, sys
@@ -103,7 +102,25 @@ indir = 'repixel-in\\'
 #w, h = get_canvas('A2')
 w, h = get_canvas('A1')
 
-params = {'w': w, 'h': h, 'infile': '', 'outfile': '', 'bk': (255, 255, 255), 'coef': 0.8, 'scale': 0.5, 'rnd': True, 'mode': 'poly', 'rmin': 50, 'rmax': 250}
+
+params = {'w': w, 'h': h, 'bk': (0, 0, 0), 'coef': 0.9, 'scale': 1.0, 'rnd': True, 'mode': 'rect', 'rmin': 99, 'rmax': 150}
+params['infile'] = indir+'mntr1.png'
+params['outfile'] = odir+'repixel12-mntr1-rect.png'
+repix(params)
+params['mode'] = 'circle'
+params['outfile'] = odir+'repixel12-mntr1-circle.png'
+repix(params)
+params['mode'] = 'poly'
+params['outfile'] = odir+'repixel12-mntr1-poly.png'
+repix(params)
+params['mode'] = 'mix-rc'
+params['outfile'] = odir+'repixel12-mntr1-mixrc.png'
+repix(params)
+params['mode'] = 'mix-rcp'
+params['outfile'] = odir+'repixel12-mntr1-mixrcp.png'
+repix(params)
+
+params = {'w': w, 'h': h, 'bk': (255, 255, 255), 'coef': 0.8, 'scale': 0.5, 'rnd': True, 'mode': 'poly', 'rmin': 50, 'rmax': 250}
 # note: high rmax may be cool, eg 500
 
 params['infile'] = indir+'grow22c1v3-1.png'
@@ -130,7 +147,7 @@ repix(params)
 params = {'w': w, 'h': h, 'infile': indir+'Zuza-popr2.jpg', 'outfile': odir+'repixel10-x-Zuza3.png', 'bk': (255, 255, 255), 'coef': 0.95, 'scale': 0.05, 'rnd': True, 'mode': 'poly', 'rmin': 90, 'rmax': 140}
 repix(params)
 
-params = {'w': w, 'h': h, 'infile': '', 'outfile': '', 'bk': (0, 0, 0), 'coef': 0.9, 'scale': 0.1, 'rnd': True, 'mode': 'rect', 'rmin': 5, 'rmax': 110}
+params = {'w': w, 'h': h, 'bk': (0, 0, 0), 'coef': 0.9, 'scale': 0.1, 'rnd': True, 'mode': 'rect', 'rmin': 15, 'rmax': 180}
 
 params['infile'] = indir+'enter.png'
 params['outfile'] = odir+'repixel10-x-enter.png'
