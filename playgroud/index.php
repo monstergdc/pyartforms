@@ -4,8 +4,9 @@
 <title>pyartforms (c)2019 Noniewicz.art.pl</title>
 </head>
 <body style="background-color: black; color: white;">
+<h2>pyartforms (c)2019 Noniewicz.art.pl</h2>
 <p>Algorithm-generated art forms in Python.</p>
-
+<p>Source code: <a target=_new href="https://github.com/monstergdc/pyartforms">https://github.com/monstergdc/pyartforms</a></p>
 
 <?php
 function sub_group($name, $id)
@@ -31,8 +32,8 @@ function sub_group($name, $id)
 	$cnt[102] = 4; //lissajous
 	$cnt[103] = 16; //astro
 	$cnt[104] = 2; //mandelbrot
-	$cnt[105] = 5; //waves01
-	$cnt[106] = 6; //waves02
+	$cnt[105] = 8; //waves01
+	$cnt[106] = 10; //waves02
 	$cnt[107] = 1; //waves03
 
 	$cgi = 'pyartw3.py';

@@ -7,7 +7,7 @@
 # cre: 20180505
 # upd: 20181020
 # upd: 20190118
-# upd: 20190421
+# upd: 20190421, 22
 
 # TODO:
 # - ?
@@ -23,39 +23,41 @@ from color_defs import *
 def waves1(draw, params):
     w = params['w']
     h = params['h']
+    cnt = params['z']
     random.seed()
     c = math.pi/180
-    div = params['z']*2+4
+
+    div = cnt*2+4 # par
     if div == 0:
         div = 1
-
     if params['horizontal'] == True:
-        rn = params['w']
-        dx = params['h']/div
+        rn = w
+        dx = h/div
     else:
-        rn = params['h']
-        dx = params['w']/div
+        rn = h
+        dx = w/div
 
-    gr = params['gradient']
-    for z in range(params['z']):
-        ndx = random.randint(0, gr)
-        color = gradient(params['c1'], params['c2'], params['c3'], ndx, gr-1)
+    for z in range(cnt):
+        ndx = random.randint(0, cnt)
+        color = new_colorer(params['color'], ndx, cnt)
+        if 'addalpha' in params:
+            color = add_alpha(color, params['addalpha'])
         aofs1 = random.randint(0, 360)
         aofs2 = random.randint(0, 360)
         aofs3 = random.randint(0, 360)
         aofs4 = random.randint(0, 360)
-        fx = 100
         fd = 100*params['f0']
-        fofs1 = random.randint(0, fx)/fd
-        fofs2 = random.randint(0, fx)/fd
-        fofs3 = random.randint(0, fx)/fd*2
-        fofs4 = random.randint(0, fx)/fd*2
+        fofs1 = random.randint(0, 100)/fd*1
+        fofs2 = random.randint(0, 100)/fd*1
+        fofs3 = random.randint(0, 100)/fd*2
+        fofs4 = random.randint(0, 100)/fd*2
         mofs1 = (z+2)*dx
 
         y = 0
         for n in range(rn):
-            x_in =  mofs1 + dx * (1 + (math.sin(c*(n*fofs1+aofs1))+2*math.sin(c*(n*fofs3+aofs3)))/3)
-            x_out = mofs1 + dx * (1 + (math.sin(c*(n*fofs2+aofs2))+2*math.sin(c*(n*fofs4+aofs4)))/3)
+            nsc = n/rn*360*10 # par 10
+            x_in =  mofs1 + dx * (1 + (math.sin(c*(nsc*fofs1+aofs1))+2*math.sin(c*(nsc*fofs3+aofs3)))/3)
+            x_out = mofs1 + dx * (1 + (math.sin(c*(nsc*fofs2+aofs2))+2*math.sin(c*(nsc*fofs4+aofs4)))/3)
             if params['horizontal'] == True:
                 xy = [(y, x_in), (y, h - x_out)]
             else:
@@ -64,39 +66,39 @@ def waves1(draw, params):
             y += 1
 
 def waves2(draw, params):
-    # todo: uproscic kod, more color
+    # todo: uproscic kod (czemu 2x?) | exp par
     w = params['w']
     h = params['h']
     cnt = params['z']
     random.seed()
     c = math.pi/180
 
+    sc = 3  #par was 4
     if params['horizontal'] == True:
         rn = w
-        dx = h/cnt*4
+        dx = h/cnt*sc
     else:
         rn = h
-        dx = w/cnt*4
+        dx = w/cnt*sc
 
     for z in range(cnt):
         ndx = random.randint(0, cnt)
-        if 'c1' in params and 'c2' in params and 'c3' in params:
-            color = gradient(params['c1'], params['c2'], params['c3'], ndx, cnt)
-        if 'color' in params:
-            color = new_colorer(params['color'], ndx, cnt)
+        color = new_colorer(params['color'], ndx, cnt)
         if 'addalpha' in params:
             color = add_alpha(color, params['addalpha'])
         aofs1 = random.randint(0, 360)
         aofs2 = random.randint(0, 360)
         aofs3 = random.randint(0, 360)
         aofs4 = random.randint(0, 360)
-        fx = 100
-        fd = 100*params['f0']
-        fofs1 = random.randint(0, fx)/fd
-        fofs2 = random.randint(0, fx)/fd
-        fofs3 = random.randint(0, fx)/fd*2
-        fofs4 = random.randint(0, fx)/fd*2
+        fofs1 = random.randint(0, 100)/100*1 # par
+        fofs2 = random.randint(0, 100)/100*1 # par
+        fofs3 = random.randint(0, 100)/100*2 # par
+        fofs4 = random.randint(0, 100)/100*2 # par
         mofs1 = z*dx
+        am1 = 1 # par
+        am2 = 1 # par
+        am3 = 3 # par was 2
+        am4 = 3 # par was 2
 
         y = 0
         points1 = []
@@ -104,8 +106,9 @@ def waves2(draw, params):
         points1a = []
         points2a = []
         for n in range(rn):
-            x_in =  int(mofs1 + dx * (1 + (math.sin(c*(n*fofs1+aofs1))+2*math.sin(c*(n*fofs3+aofs3)))/3))
-            x_out = int(mofs1 + dx * (1 + (math.sin(c*(n*fofs2+aofs2))+2*math.sin(c*(n*fofs4+aofs4)))/3))
+            nsc = n/rn*360*10 # par 10
+            x_in =  int(mofs1 + dx * (1 + (am1*math.sin(c*(nsc*fofs1+aofs1))+am3*math.sin(c*(nsc*fofs3+aofs3)))))
+            x_out = int(mofs1 + dx * (1 + (am2*math.sin(c*(nsc*fofs2+aofs2))+am4*math.sin(c*(nsc*fofs4+aofs4)))))
             if params['horizontal'] == True:
                 points1.extend((y, x_in))
                 points2.extend((y, x_out))
@@ -113,8 +116,7 @@ def waves2(draw, params):
                 points1.extend((x_in, y))
                 points2.extend((x_out, y))
             y += 1
-        #lw = int(w/50)
-        lw = random.randint(1, int(w/50))
+        lw = random.randint(1, int(w/30)) #par, opt big->small?
 
         points1a[:] = [xy for xy in points1]
         points2a[:] = [xy for xy in points2]

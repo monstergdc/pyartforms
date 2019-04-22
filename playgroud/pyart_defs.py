@@ -6,7 +6,7 @@
 # cre: 20181020
 # upd: 20190105, 06, 13, 18, 21, 22
 # upd: 20190311, 30
-# upd: 20190414, 15, 17, 18, 21
+# upd: 20190414, 15, 17, 18, 21, 22
 
 
 # TODO:
@@ -79,46 +79,36 @@ def predef_lissajous(w, h):
 
 def predef_waves1(w, h):
     a = [
-        {'name': 'WAVES#1', 'call': waves1, 'w': w, 'h': h, 'Background': (224, 244, 0),
-        'z': 14, 'f0': 1, 'horizontal': False,
-        'gradient': 256,
-        'c1': (0,0,255), 'c2': (0,255,255), 'c3': (255,255,255),
-        },
-        {'name': 'WAVES#1', 'call': waves1, 'w': w, 'h': h, 'Background': (224, 244, 0),
-        'z': 12, 'f0': 1, 'horizontal': True,
-        'gradient': 256,
-        'c1': (0,0,0), 'c2': (0,255,0), 'c3': (255,255,0),
-        },
-        {'name': 'WAVES#1', 'call': waves1, 'w': w, 'h': h, 'Background': bg_black,
-        'z': 9, 'f0': 1, 'horizontal': False,
-        'gradient': 24,
-        'c1': (0,0,0), 'c2': (255,0,0), 'c3': (255,255,0),
-        },
-        {'name': 'WAVES#1', 'call': waves1, 'w': w, 'h': h, 'Background': bg_black,
-        'z': 4, 'f0': 0.33, 'horizontal': True,
-        'gradient': 256,
-        'c1': (255,0,0), 'c2': (0,255,0), 'c3': (0,0,255),
-        },
-        {'name': 'WAVES#1', 'call': waves1, 'w': w, 'h': h, 'Background': bg_black,
-        'z': 4, 'f0': 3.0, 'horizontal': True,
-        'gradient': 256,
-        'c1': (255,0,0), 'c2': (0,255,0), 'c3': (0,0,255),
-        },
+        {'Background': bg_white, 'z': 12, 'f0': 1, 'horizontal': False, 'color': 'happy'},
+        {'Background': bg_white, 'z': 12, 'f0': 1, 'horizontal': True, 'color': 'happy'},
+        {'Background': bg_white, 'z': 12, 'f0': 1, 'horizontal': True, 'color': 'happy', 'addalpha': 50},
+        {'Background': (200, 200, 0), 'z': 10, 'f0': 1, 'horizontal': True, 'color': 'rg'},
+        {'Background': bg_black, 'z': 10, 'f0': 1, 'horizontal': True, 'color': 'Number3'},
+        {'Background': bg_black, 'z': 10, 'f0': 0.5, 'horizontal': True, 'color': 'Number3'},
+        {'Background': bg_black, 'z': 10, 'f0': 3.0, 'horizontal': True, 'color': 'Number3'},
+        {'Background': bg_black, 'z': 15, 'f0': 3.5, 'horizontal': True, 'color': 'Number3', 'addalpha': 70},
     ]
-    return a
+    return append_dflts(a, 'WAVES#1', waves1, w, h)
 
 def predef_waves2(w, h):
     a = [
-        {'Background': bg_black, 'z': 150, 'f0': 1, 'horizontal': False, 'c1': (255,0,0), 'c2': (255,255,0), 'c3': (255,255,255)},
-        {'Background': bg_black, 'z': 150, 'f0': 1, 'horizontal': True, 'c1': (255,64,0), 'c2': (64,255,64), 'c3': (64,64,255)},
-        {'Background': bg_white, 'z': 150, 'f0': 1, 'horizontal': False, 'color': 'happy'},
-        {'Background': bg_white, 'z': 500, 'f0': 1, 'horizontal': False, 'color': 'happy', 'addalpha': 50},
-        {'Background': bg_white, 'z': 150, 'f0': 1, 'horizontal': False, 'color': 'wryb'},
-        {'Background': bg_white, 'z': 150, 'f0': 1, 'horizontal': False, 'color': 'BeachTowels'},
+        {'Background': bg_black, 'z': 100, 'horizontal': False, 'color': 'rg'},
+        {'Background': bg_black, 'z': 100, 'horizontal': True, 'color': 'rg'},
+        {'Background': bg_white, 'z': 100, 'horizontal': True, 'color': 'happy'},
+        {'Background': bg_white, 'z': 250, 'horizontal': True, 'color': 'happy', 'addalpha': 50},
+        {'Background': bg_white, 'z': 250, 'horizontal': True, 'color': 'happy', 'addalpha': 25},
+        {'Background': bg_white, 'z': 100, 'horizontal': True, 'color': 'Number3'},
+        {'Background': bg_white, 'z': 100, 'horizontal': True, 'color': 'Number3', 'addalpha': 50},
+        {'Background': bg_white, 'z': 100, 'horizontal': True, 'color': 'BeachTowels'},
+        {'Background': bg_black, 'z': 250, 'horizontal': True, 'color': 'green', 'addalpha': 70},
     ]
-    return append_dflts(a, 'WAVES#2', waves2, w, h)
-
-#{'name': 'WAVES#2#MUX', 'call': waves_mux, 'w': w, 'h': h, 'Background': bg_black, 'par1': params1a, 'par2': params2a},
+    params1a = {'w': w, 'h': h, 'Background': bg_white, 'z': 90, 'horizontal': True, 'color': 'BeachTowels', 'addalpha': 90}
+    params2a = {'w': w, 'h': h, 'Background': bg_white, 'z': 90, 'horizontal': False, 'color': 'happy', 'addalpha': 70}
+    a2 = [
+        {'name': 'MUXWAVES#2', 'call': waves_mux, 'w': w, 'h': h, 'Background': bg_white, 'par1': params1a, 'par2': params2a},
+    ]
+    a = append_dflts(a, 'WAVES#2', waves2, w, h)
+    return np.concatenate((a, a2), axis=0)
 
 def predef_waves3(w, h):
     a = [
