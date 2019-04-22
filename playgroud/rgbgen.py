@@ -2,11 +2,12 @@
 # -*- coding: utf-8 -*-
 
 # paint algorithms (artificial artist) - RGB generated, v1.0, Python version
-# based on my old FilterMeister plugins
-# (c)2018 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# based a bit on my old FilterMeister plugins
+# (c)2018-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20181020
 # upd: 20181021, 22
 # upd: 20181110
+# upd: 20190422
 
 # TODO:
 # - ?
@@ -373,7 +374,10 @@ def rgbzx(params, fn):
 # ---
 
 start_time = dt.now()
-odir = '!output1\\'
+root = '!output-rgb'
+if not os.path.exists(root):
+    os.makedirs(root)
+odir = root+'\\'
 
 w, h = 256, 192
 params1 = {'w': w, 'h': h}
