@@ -10,7 +10,7 @@
 # upd: 20190421, 22
 
 # TODO:
-# - ?
+# - waves 1/2 bez sinusa - tez cool opcja
 
 
 from PIL import Image, ImageDraw
@@ -27,7 +27,7 @@ def waves1(draw, params):
     random.seed()
     c = math.pi/180
 
-    div = cnt*2+4 # par
+    div = float(cnt*2+4) # par
     if div == 0:
         div = 1
     if params['horizontal'] == True:
@@ -46,7 +46,7 @@ def waves1(draw, params):
         aofs2 = random.randint(0, 360)
         aofs3 = random.randint(0, 360)
         aofs4 = random.randint(0, 360)
-        fd = 100*params['f0']
+        fd = 100.0*params['f0']
         fofs1 = random.randint(0, 100)/fd*1
         fofs2 = random.randint(0, 100)/fd*1
         fofs3 = random.randint(0, 100)/fd*2
@@ -55,7 +55,7 @@ def waves1(draw, params):
 
         y = 0
         for n in range(rn):
-            nsc = n/rn*360*10 # par 10
+            nsc = float(n)/float(rn)*360*10 # par 10
             x_in =  mofs1 + dx * (1 + (math.sin(c*(nsc*fofs1+aofs1))+2*math.sin(c*(nsc*fofs3+aofs3)))/3)
             x_out = mofs1 + dx * (1 + (math.sin(c*(nsc*fofs2+aofs2))+2*math.sin(c*(nsc*fofs4+aofs4)))/3)
             if params['horizontal'] == True:
@@ -73,13 +73,13 @@ def waves2(draw, params):
     random.seed()
     c = math.pi/180
 
-    sc = 3  #par was 4
+    sc = 3.0  #par was 4
     if params['horizontal'] == True:
         rn = w
-        dx = h/cnt*sc
+        dx = h/float(cnt)*sc
     else:
         rn = h
-        dx = w/cnt*sc
+        dx = w/float(cnt)*sc
 
     for z in range(cnt):
         ndx = random.randint(0, cnt)
@@ -90,15 +90,15 @@ def waves2(draw, params):
         aofs2 = random.randint(0, 360)
         aofs3 = random.randint(0, 360)
         aofs4 = random.randint(0, 360)
-        fofs1 = random.randint(0, 100)/100*1 # par
-        fofs2 = random.randint(0, 100)/100*1 # par
-        fofs3 = random.randint(0, 100)/100*2 # par
-        fofs4 = random.randint(0, 100)/100*2 # par
-        mofs1 = z*dx
-        am1 = 1 # par
-        am2 = 1 # par
-        am3 = 3 # par was 2
-        am4 = 3 # par was 2
+        fofs1 = random.randint(0, 100)/100.0*1 # par
+        fofs2 = random.randint(0, 100)/100.0*1 # par
+        fofs3 = random.randint(0, 100)/100.0*2 # par
+        fofs4 = random.randint(0, 100)/100.0*2 # par
+        mofs1 = float(z*dx)
+        am1 = 1.0 # par
+        am2 = 1.0 # par
+        am3 = 3.0 # par was 2
+        am4 = 3.0 # par was 2
 
         y = 0
         points1 = []
@@ -106,7 +106,7 @@ def waves2(draw, params):
         points1a = []
         points2a = []
         for n in range(rn):
-            nsc = n/rn*360*10 # par 10
+            nsc = float(n)/float(rn)*360*10 # par 10
             x_in =  int(mofs1 + dx * (1 + (am1*math.sin(c*(nsc*fofs1+aofs1))+am3*math.sin(c*(nsc*fofs3+aofs3)))))
             x_out = int(mofs1 + dx * (1 + (am2*math.sin(c*(nsc*fofs2+aofs2))+am4*math.sin(c*(nsc*fofs4+aofs4)))))
             if params['horizontal'] == True:

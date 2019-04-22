@@ -105,7 +105,7 @@ def predef_waves2(w, h):
     params1a = {'w': w, 'h': h, 'Background': bg_white, 'z': 90, 'horizontal': True, 'color': 'BeachTowels', 'addalpha': 90}
     params2a = {'w': w, 'h': h, 'Background': bg_white, 'z': 90, 'horizontal': False, 'color': 'happy', 'addalpha': 70}
     a2 = [
-        {'name': 'MUXWAVES#2', 'call': waves_mux, 'w': w, 'h': h, 'Background': bg_white, 'par1': params1a, 'par2': params2a},
+        {'name': 'WAVES#2', 'call': waves_mux, 'w': w, 'h': h, 'Background': bg_white, 'par1': params1a, 'par2': params2a},
     ]
     a = append_dflts(a, 'WAVES#2', waves2, w, h)
     return np.concatenate((a, a2), axis=0)
