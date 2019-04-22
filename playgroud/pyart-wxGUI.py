@@ -4,7 +4,7 @@
 # wx GUI for pyartforms
 # (c)2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20190420
-# upd: 20190421
+# upd: 20190421, 22
 
 
 # TODO:
@@ -65,7 +65,8 @@ class GUIFrame(wx.Frame):
 
         screenSize = wx.DisplaySize()
         mazy_all = ['mazy01', 'mazy02', 'mazy03', 'mazy04', 'mazy05', 'mazy06', 'mazy07', 'mazy08',
-                    'mazy09', 'mazy10', 'mazy11', 'mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16', 
+                    'mazy09', 'mazy10', 'mazy11', 'mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16',
+                    'mazy17', 'mazy18', 
                     'life', 'lissajous', 'astro', 'mandelbrot',
                     'waves01', 'waves02', 'waves03', 
                     ]

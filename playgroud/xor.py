@@ -62,7 +62,7 @@ def xor(params, fn):
 start_time = dt.now()
 
 w, h = get_canvas('640')
-odir = '!output\\'
+odir = '!output-test\\'
 params1 = {'w': w, 'h': h, 'bg': (0, 0, 0), 'n': 1, 'red': True, 'green': True, 'blue': True, 'xfloatmul': 1.0, 'yfloatmul': 1.0, 'tfloatmul': 1.0}
 params2 = {'w': w, 'h': h, 'bg': (0, 0, 0), 'n': 2, 'red': True, 'green': False, 'blue': False, 'xfloatmul': 1.0, 'yfloatmul': 1.0, 'tfloatmul': 1.0}
 params3 = {'w': w, 'h': h, 'bg': (0, 0, 0), 'n': 2, 'red': False, 'green': True, 'blue': False, 'xfloatmul': 1.0, 'yfloatmul': 1.0, 'tfloatmul': 0.2}
