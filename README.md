@@ -62,7 +62,8 @@ script: **smears.py**
 # WAVES:
 script: **waves.py**
 
-![example - waves1](/examples/waves1-4960x3507-03-003.png?raw=true "Waves#1 example")
+![example - waves1](/examples/WAVES#1-1748x1240-01-001-20190422130753.png?raw=true "Waves#1 example")
+![example - waves1](/examples/WAVES#1-4960x3507-02-001-20190422130757.png?raw=true "Waves#1 example")
 ![example - waves3](/examples/waves3-4960x3507-01-003.png?raw=true "Waves#3 example")
 
 # LISSAJOUS:
