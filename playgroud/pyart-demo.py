@@ -82,6 +82,7 @@ do_mazy(cnt, w, h, odir, 'mazy15')
 do_mazy(cnt, w, h, odir, 'mazy16')
 cnt = 3
 do_mazy(cnt, w, h, odir, 'mazy17')
+do_mazy(cnt, w, h, odir, 'mazy18')
 cnt = 1 # note: astro only once
 do_mazy(cnt, w, h, odir, 'astro')
 cnt = 3

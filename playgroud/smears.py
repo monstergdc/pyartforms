@@ -739,8 +739,6 @@ def mazy16(draw, params):
         ys2 = rscale*sc/2*math.sin(a0)
         circle(draw, int(w/2+xs2), int(h/2+ys2), r, fill=co, outline=ou)
 
-# future fun
-
 def mazy17(draw, params):
     w = params['w']
     h = params['h']
@@ -767,9 +765,21 @@ def mazy18(draw, params):
     w = params['w']
     h = params['h']
     cnt = params['n']
+    v = params['v']
     random.seed()
-    # ...
-    return 0
+
+    for n in range(cnt):
+        x = random.randint(0, w)
+        y = random.randint(0, h)
+        r0 = random.randint(0, w) # par
+        for m in range(params['m']):
+            r = r0 + random.randint(-v, v)
+            color = new_colorer(params['color'], n, cnt)
+            if 'addalpha' in params:
+                color = add_alpha(color, params['addalpha'])
+            circle(draw, x, y, r, fill=None, outline=color)
+
+# future fun
 
 def mazy19(draw, params):
     w = params['w']
@@ -780,6 +790,22 @@ def mazy19(draw, params):
     return 0
 
 def mazy20(draw, params):
+    w = params['w']
+    h = params['h']
+    cnt = params['n']
+    random.seed()
+    # ...
+    return 0
+
+def mazy21(draw, params):
+    w = params['w']
+    h = params['h']
+    cnt = params['n']
+    random.seed()
+    # ...
+    return 0
+
+def mazy22(draw, params):
     w = params['w']
     h = params['h']
     cnt = params['n']
