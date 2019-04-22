@@ -9,9 +9,9 @@ Feel free to tinker with it. Get inspired.
 Stuff here may change, may be incomplete or not fully working, may be w/o docs, etc. 
 as it is work and experiments in progress. Also no error checking. Tested only under Windows (paths!).
 
-Small demo is in: **pyart-demo.py** (possibly not everything yet). 
-Web/CGI version in: **pyartw3.py** (also possibly not all yet). 
-GUI version in: **pyart-wxGUI.py** (just started).
+- Small demo in: **pyart-demo.py** (possibly not everything yet). 
+- Web/CGI version in: **pyartw3.py** (also possibly not all yet). 
+- GUI version in: **pyart-wxGUI.py** (just started).
 
 Actual definitions reside in file: *pyart_defs.py*.
 
@@ -52,19 +52,26 @@ script: **astroart.py**
 # SMEARS:
 script: **smears.py**
 
-![example - mazy1](/examples/mazy1-4960x3507-01-003.png?raw=true "Smears#1 example")
-![example - mazy1](/examples/mazy1-4960x3507-02-003.png?raw=true "Smears#1 example")
-![example - mazy1](/examples/mazy1-4960x3507-06-002.png?raw=true "Smears#1 example")
-![example - mazy4](/examples/mazy4-4960x3507-01-002.png?raw=true "Smears#4 example")
-![example - mazy4](/examples/mazy4-4960x3507-05-003.png?raw=true "Smears#4 example")
-![example - mazy4](/examples/mazy4-4960x3507-07-003.png?raw=true "Smears#4 example")
+![example - mazy1](/examples/SMEARS1-1748x1240-04-001-20190422132718.png?raw=true "Smears#1 example")
+![example - mazy1](/examples/SMEARS1-1748x1240-23-001-20190422132718.png?raw=true "Smears#1 example")
+![example - mazy1](/examples/SMEARS1-1748x1240-26-001-20190422132718.png?raw=true "Smears#1 example")
+![example - mazy1](/examples/SMEARS1-1748x1240-27-001-20190422132718.png?raw=true "Smears#1 example")
+![example - mazy1](/examples/SMEARS1-1748x1240-43-001-20190422132718.png?raw=true "Smears#1 example")
+![example - mazy1](/examples/SMEARS1-1748x1240-46-001-20190422132718.png?raw=true "Smears#1 example")
+![example - mazy2](/examples/SMEARS2-1748x1240-15-001-20190422133254.png?raw=true "Smears#2 example")
+![example - mazy4](/examples/SMEARS4-1748x1240-01-001-20190422133419.png?raw=true "Smears#4 example")
+![example - mazy4](/examples/SMEARS4-1748x1240-06-001-20190422133419.png?raw=true "Smears#4 example")
+![example - mazy4](/examples/SMEARS4-1748x1240-37-001-20190422133419.png?raw=true "Smears#4 example")
+![example - mazy6](/examples/SMEARS6-1748x1240-05-001-20190422133450.png?raw=true "Smears#6 example")
+![example - mazy6](/examples/SMEARS6-1748x1240-09-001-20190422133450.png?raw=true "Smears#6 example")
+![example - mazy7](/examples/SMEARS7-1748x1240-25-001-20190422133459.png?raw=true "Smears#7 example")
+![example - mazy9](/examples/SMEARS9-1748x1240-33-001-20190422133516.png?raw=true "Smears#9 example")
 
 # WAVES:
 script: **waves.py**
 
 ![example - waves1](/examples/WAVES1-1748x1240-01-001-20190422130753.png?raw=true "Waves#1 example")
 ![example - waves1](/examples/WAVES1-4960x3507-02-001-20190422130757.png?raw=true "Waves#1 example")
-![example - waves3](/examples/waves3-4960x3507-01-003.png?raw=true "Waves#3 example")
 
 # LISSAJOUS:
 script: **lissajous.py**
