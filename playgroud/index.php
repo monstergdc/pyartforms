@@ -27,6 +27,7 @@ function sub_group($name, $id)
 	$cnt[14]  = 4;
 	$cnt[15]  = 55;
 	$cnt[16]  = 144;
+	$cnt[17]  = 7;
 
 	$cnt[101]  = 7; //life
 	$cnt[102] = 4; //lissajous
@@ -76,6 +77,7 @@ sub_group("mazy13", 13);
 sub_group("mazy14", 14);
 sub_group("mazy15", 15);
 sub_group("mazy16", 16);
+sub_group("mazy17", 17);
 sub_group("life", 101);
 sub_group("lissajous", 102);
 sub_group("astro", 103);

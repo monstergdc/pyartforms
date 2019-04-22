@@ -790,7 +790,18 @@ def predef_mazy16(w, h):
     a = np.concatenate((a1, a2, a3, a4), axis=0)
     return append_dflts(a, 'SMEARS#16', mazy16, w, h)
 
-#def predef_mazy17(w, h):
+def predef_mazy17(w, h):
+    a = [
+        {'Background': bg_white, 'n': 90, 'v': int(w/30), 'color': 'happy'},
+        {'Background': bg_white, 'n': 90, 'v': int(w/30), 'color': 'happy', 'addalpha': 60},
+        {'Background': bg_white, 'n': 90, 'v': int(w/30), 'color': 'happy', 'addalpha': 30},
+        {'Background': bg_white, 'n': 90, 'v': int(w/30), 'color': 'BeachTowels'},
+        {'Background': bg_white, 'n': 90, 'v': int(w/30), 'color': 'BeachTowels', 'addalpha': 90},
+        {'Background': bg_white, 'n': 150, 'v': int(w/200), 'color': 'BeachTowels'},
+        {'Background': bg_white, 'n': 150, 'v': int(w/200), 'color': 'BeachTowels', 'addalpha': 50},
+    ]
+    return append_dflts(a, 'SMEARS#17', mazy17, w, h)
+
 #def predef_mazy18(w, h):
 #def predef_mazy19(w, h):
 #def predef_mazy20(w, h):
@@ -811,6 +822,7 @@ predefs = {'mazy01': predef_mazy1, 'mazy02': predef_mazy2, 'mazy03': predef_mazy
            'mazy05': predef_mazy5, 'mazy06': predef_mazy6, 'mazy07': predef_mazy7, 'mazy08': predef_mazy8,
            'mazy09': predef_mazy9, 'mazy10': predef_mazy10, 'mazy11': predef_mazy11, 'mazy12': predef_mazy12,
            'mazy13': predef_mazy13, 'mazy14': predef_mazy14, 'mazy15': predef_mazy15, 'mazy16': predef_mazy16,
+           'mazy17': predef_mazy17, 
            'life': predef_life, 'lissajous': predef_lissajous, 'astro': predef_astro, 'mandelbrot': predef_mandelbrot,
            'waves01': predef_waves1,'waves02': predef_waves2, 'waves03': predef_waves3, 
            }

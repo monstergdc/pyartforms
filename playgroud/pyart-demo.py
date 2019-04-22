@@ -6,7 +6,7 @@
 # cre: 20181020
 # upd: 20190105, 06, 13, 18, 19, 22
 # upd: 20190302, 03, 30
-# upd: 20190414, 17, 18, 21
+# upd: 20190414, 17, 18, 21, 22
 
 # TODO:
 # - nice argparse (also per module?)
@@ -80,6 +80,8 @@ do_mazy(cnt, w, h, odir, 'mazy14')
 cnt = 1 # note: 15 and 16 alredy produce a lot
 do_mazy(cnt, w, h, odir, 'mazy15')
 do_mazy(cnt, w, h, odir, 'mazy16')
+cnt = 3
+do_mazy(cnt, w, h, odir, 'mazy17')
 cnt = 1 # note: astro only once
 do_mazy(cnt, w, h, odir, 'astro')
 cnt = 3

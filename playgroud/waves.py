@@ -10,7 +10,7 @@
 # upd: 20190421, 22
 
 # TODO:
-# - waves 1/2 bez sinusa - tez cool opcja
+# - ?
 
 
 from PIL import Image, ImageDraw

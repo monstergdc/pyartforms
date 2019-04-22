@@ -19,7 +19,7 @@
 # #14 ?
 # #15 ?
 # #16 opart-like circles
-# #17
+# #17 scottish grid
 # #18
 # #19
 # #20 
@@ -30,7 +30,7 @@
 # upd: 20181019, 20
 # upd: 20190105, 06, 12, 13, 18, 19, 21, 22
 # upd: 20190306, 11, 29, 30
-# upd: 20190414, 15, 17, 18
+# upd: 20190414, 15, 17, 18, 22
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -745,9 +745,23 @@ def mazy17(draw, params):
     w = params['w']
     h = params['h']
     cnt = params['n']
+    v = params['v']
+    if v < 1:
+        v = 1
     random.seed()
-    # ...
-    return 0
+
+    for z in range(cnt):
+        ndx = random.randint(0, cnt)
+        color = new_colorer(params['color'], ndx, cnt)
+        if 'addalpha' in params:
+            color = add_alpha(color, params['addalpha'])
+        x = random.randint(0, w)
+        y = random.randint(0, h)
+        lw = random.randint(1, v)
+        xy = [(0, y), (w, y+lw)]
+        draw.rectangle(xy, fill=color, outline=None)
+        xy = [(x, 0), (x+lw, h)]
+        draw.rectangle(xy, fill=color, outline=None)
 
 def mazy18(draw, params):
     w = params['w']
