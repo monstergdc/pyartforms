@@ -6,7 +6,7 @@
 # cre: 20181020
 # upd: 20190105, 12, 13, 18, 19
 # upd: 20190311, 30
-# upd: 20190414, 21, 22
+# upd: 20190414, 21, 22, 24
 
 # TODO:
 # - nice argparse (also per module?)
@@ -96,11 +96,11 @@ enum_defs()
 #do_mazy(cnt, w, h, odir, 'mazy11')
 #do_mazy(cnt, w, h, odir, 'mazy12')
 #do_mazy(cnt, w, h, odir, 'mazy13')
-#do_mazy(cnt, w, h, odir, 'mazy14')
+#do_mazy(cnt, w, h, odir, 'mazy14') # need fix
 #do_mazy(cnt, w, h, odir, 'mazy15')
 #do_mazy(cnt, w, h, odir, 'mazy16')
 #do_mazy(cnt, w, h, odir, 'mazy17')
-do_mazy(cnt, w, h, odir, 'mazy18')
+#do_mazy(cnt, w, h, odir, 'mazy18')
 #do_mazy(cnt, w, h, odir, 'waves01')
 #do_mazy(cnt, w, h, odir, 'waves02')
 #do_mazy(cnt, w, h, odir, 'waves03')

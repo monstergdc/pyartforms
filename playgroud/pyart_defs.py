@@ -6,7 +6,7 @@
 # cre: 20181020
 # upd: 20190105, 06, 13, 18, 21, 22
 # upd: 20190311, 30
-# upd: 20190414, 15, 17, 18, 21, 22
+# upd: 20190414, 15, 17, 18, 21, 22, 24
 
 
 # TODO:
@@ -757,26 +757,24 @@ def predef_mazy15(w, h):
 
 def predef_mazy16(w, h):
     a = [
-        {'Background': bg_white, 'n': 12, 'color': bg_black, 'rcoef': 1.0, 'acoef': 1.0, 'rscale': 1.0},
         {'Background': bg_white, 'n': 24, 'color': bg_black, 'rcoef': 1.0, 'acoef': 1.0, 'rscale': 1.0},
         {'Background': bg_white, 'n': 48, 'color': bg_black, 'rcoef': 1.0, 'acoef': 1.0, 'rscale': 1.0},
         {'Background': bg_white, 'n': 96, 'color': bg_black, 'rcoef': 1.0, 'acoef': 1.0, 'rscale': 1.0},
+        {'Background': bg_white, 'n': 256, 'color': bg_black, 'rcoef': 1.0, 'acoef': 1.0, 'rscale': 1.0},
     ]
     a1 = copy.deepcopy(a)
     a2 = copy.deepcopy(a)
-    a3 = copy.deepcopy(a)
     for i in range(len(a)):
-        a1[i]['rcoef'] = 1.0 #note: dflt
-        a2[i]['rcoef'] = 1.1
-        a3[i]['rcoef'] = 1.5
-    a = np.concatenate((a1, a2, a3), axis=0)
+        a1[i]['rcoef'] = 1.5
+        a2[i]['rcoef'] = 3.0
+    a = np.concatenate((a1, a2), axis=0)
     a1 = copy.deepcopy(a)
     a2 = copy.deepcopy(a)
     a3 = copy.deepcopy(a)
     for i in range(len(a)):
         a1[i]['acoef'] = 1.0 #note: dflt
-        a2[i]['acoef'] = 1.5
-        a3[i]['acoef'] = 2.0
+        a2[i]['acoef'] = 7.0
+        a3[i]['acoef'] = 19.0
     a = np.concatenate((a1, a2, a3), axis=0)
     a1 = copy.deepcopy(a)
     a2 = copy.deepcopy(a)
