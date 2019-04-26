@@ -135,8 +135,10 @@ w, h = get_canvas('A2') # test
 
 
 params = {'w': w, 'h': h, 'bk': (0, 0, 0), 'coef': 0.9, 'scale': 1.0, 'rnd': True, 'rmin': 78, 'rmax': 98}
-params['infile'] = indir+'mntr1.png'
+
+#params['infile'] = indir+'mntr1.png'
 #params['infile'] = indir+'head.png'
+params['infile'] = indir+'xor1.png'
 
 params['mode'] = 'rect'
 params['outfile'] = odir+'repixel-rect.png'
