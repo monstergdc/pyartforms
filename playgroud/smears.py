@@ -541,35 +541,46 @@ def mazy12(draw, params):
     w, h, cnt = init_common(params)
     o = params['o']
     v = params['v']
+    if 'rc' in params:
+        rc = params['rc']
+    else:
+        rc = 1.0
     c = math.pi/180
     w0 = w/2
     h0 = h/2
-    color = params['color']
-    r = int(h/2/2)
+    r = int(h/2/2 * rc)
     for i in range(cnt):
         a = c*i/cnt*360
         x = int(w0+r*math.cos(a))
         y = int(h0+r*math.sin(a))
         if v:
-            va = random.randint(int(-h0/5), int(h0/5)) # par
+            va = random.randint(int(-h0/8), int(h0/8)) # par
+            vx = random.randint(int(-w0/8), int(w0/8)) # par
+            vy = random.randint(int(-h0/8), int(h0/8)) # par
         else:
             va = 0
+            vx = 0
+            vy = 0
         if i&1 == 0:
             co = (0,0,0)
-            if color != None:
-                co = new_colorer(color, random.randint(0, 7), 0)
-            if o == 'box':
-                rect(draw, x, y, r+va, r+va, fill=co, outline=None)
-            if o == 'cir':
-                circle(draw, x, y, r+va, fill=co, outline=None)
+            #ou = None
+            ou = (255,255,255)
         else:
             co = (255,255,255)
-            if color != None:
-                co = new_colorer(color, random.randint(0, 7), 0)
-            if o == 'box':
-                rect(draw, x, y, r+va, r+va, fill=co, outline=(0,0,0))
-            if o == 'cir':
-                circle(draw, x, y, r+va, fill=co, outline=(0,0,0))
+            ou = (0,0,0)
+        if o == 'box':
+            rect(draw, x+vx, y+vy, r+va, r+va, fill=co, outline=ou)
+        if o == 'cir':
+            circle(draw, x+vx, y+vy, r+va, fill=co, outline=ou)
+        if o == 'tri':
+            vx1 = random.randint(int(-w0/2), int(w0/2)) # par
+            vx2 = random.randint(int(-w0/2), int(w0/2)) # par
+            vx3 = random.randint(int(-w0/2), int(w0/2)) # par
+            vy1 = random.randint(int(-h0/2), int(h0/2)) # par
+            vy2 = random.randint(int(-h0/2), int(h0/2)) # par
+            vy3 = random.randint(int(-h0/2), int(h0/2)) # par
+            points = [(x+vx1, y+vy1), (x+vx2, y+vy2), (x+vx3, y+vy3)]
+            triangle(draw, points, fill=co, outline=ou)
 
 def mazy13(draw, params):
     w, h, cnt = init_common(params)

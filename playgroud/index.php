@@ -23,7 +23,7 @@ function sub_group($name, $id)
 	$cnt[9]  = 64;
 	$cnt[10]  = 20;
 	$cnt[11]  = 12;
-	$cnt[12]  = 16;
+	$cnt[12]  = 12;
 	$cnt[13]  = 4;
 	$cnt[14]  = 4;
 	$cnt[15]  = 55;

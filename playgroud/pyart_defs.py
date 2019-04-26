@@ -634,25 +634,19 @@ def predef_mazy11(w, h):
 
 def predef_mazy12(w, h):
     a = [
-        {'Background': bg_white, 'n': 24, 'color': None, 'o': 'box', 'v': False},
-        {'Background': bg_white, 'n': 48, 'color': None, 'o': 'box', 'v': False},
-        {'Background': bg_white, 'n': 96, 'color': None, 'o': 'box', 'v': False},
-        {'Background': bg_white, 'n': 24, 'color': None, 'o': 'cir', 'v': False},
-        {'Background': bg_white, 'n': 48, 'color': None, 'o': 'cir', 'v': False},
-        {'Background': bg_white, 'n': 96, 'color': None, 'o': 'cir', 'v': False},
+        {'Background': bg_white, 'n': 48, 'o': 'box', 'v': False},
+        {'Background': bg_white, 'n': 96, 'o': 'box', 'v': False},
+        {'Background': bg_white, 'n': 48, 'o': 'cir', 'v': False},
+        {'Background': bg_white, 'n': 96, 'o': 'cir', 'v': False},
+        {'Background': bg_white, 'n': 48, 'o': 'tri', 'v': False},
+        {'Background': bg_white, 'n': 96, 'o': 'tri', 'v': False},
 
-        {'Background': bg_white, 'n': 48, 'color': 'happy', 'o': 'box', 'v': False},
-        {'Background': bg_white, 'n': 48, 'color': 'happy', 'o': 'cir', 'v': False},
-
-        {'Background': bg_white, 'n': 24, 'color': None, 'o': 'box', 'v': True},
-        {'Background': bg_white, 'n': 48, 'color': None, 'o': 'box', 'v': True},
-        {'Background': bg_white, 'n': 96, 'color': None, 'o': 'box', 'v': True},
-        {'Background': bg_white, 'n': 24, 'color': None, 'o': 'cir', 'v': True},
-        {'Background': bg_white, 'n': 48, 'color': None, 'o': 'cir', 'v': True},
-        {'Background': bg_white, 'n': 96, 'color': None, 'o': 'cir', 'v': True},
-
-        {'Background': bg_white, 'n': 48, 'color': 'happy', 'o': 'box', 'v': True},
-        {'Background': bg_white, 'n': 48, 'color': 'happy', 'o': 'cir', 'v': True},
+        {'Background': bg_white, 'n': 48, 'o': 'box', 'v': True, 'rc': 0.9},
+        {'Background': bg_white, 'n': 96, 'o': 'box', 'v': True, 'rc': 0.9},
+        {'Background': bg_white, 'n': 48, 'o': 'cir', 'v': True, 'rc': 0.9},
+        {'Background': bg_white, 'n': 96, 'o': 'cir', 'v': True, 'rc': 0.9},
+        {'Background': bg_white, 'n': 48, 'o': 'tri', 'v': True, 'rc': 1.0},
+        {'Background': bg_white, 'n': 96, 'o': 'tri', 'v': True, 'rc': 1.0},
     ]
     return append_dflts(a, 'SMEARS#12', mazy12, w, h)
 
