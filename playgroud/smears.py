@@ -502,18 +502,17 @@ def mazy10(draw, params):
         if params['mode'] == 'fill':
             draw.polygon(points, fill=color, outline=None)
 
-# TODO: canvas 800 or 2000 - fix width - issue only on srv?!
-# TODO: also like 11 only more freq + diagonals + symetric opt?
+# TODO: also like 11 only more (var?) freq + diagonals or weirds
 def mazy11(draw, params):
     w, h, cnt = init_common(params)
 
-    dy = int(h/cnt)
+    dy = float(h)/cnt
     if dy*cnt < h:  # lame fix for small images
         cnt += 3
-    steps = 512 #const, max rational limit
+    steps = 256 # const, max rational limit for RGB24 gradient
     if steps > w:
         steps = w
-    dx = w/steps
+    dx = float(w)/steps
     for n in range(cnt):
         if params['color'] == 'happy':
             cx = colors_happy
@@ -533,7 +532,10 @@ def mazy11(draw, params):
         # todo: new colorer proper
         for step in range(steps):
             color = gradient(color1, color2, color3, step, steps)
-            rect(draw, int(step*dx+dx/2), int(n*dy+dy/2), int(dx), int(dy), fill=color, outline=None)
+            x = step*dx
+            y = n*dy
+            xy = [(x, y), (x+dx, y+dy)]
+            draw.rectangle(xy, fill=color, outline=None)
 
 def mazy12(draw, params):
     w, h, cnt = init_common(params)
