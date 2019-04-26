@@ -69,10 +69,12 @@ def new_colorer(mode, n, cnt):
         return (0,0,0)
     if mode == 'white_const':
         return (255,255,255)
-    if mode == 'blue_const':
-        return (16,48,255)
     if mode == 'red_const':
         return (255,0,0)
+    if mode == 'green_const':
+        return (8,255,48)
+    if mode == 'blue_const':
+        return (16,48,255)
     if mode == 'red':
         color = gradient2((0,0,0), (255,0,0), n, cnt)
         return color
@@ -94,6 +96,24 @@ def new_colorer(mode, n, cnt):
     if mode == 'bw':
         color = gradient2((0,0,0), (255,255,255), n, cnt)
         return color
+    if mode == 'any_rnd':
+        r = random.randint(64, 256)
+        g = random.randint(64, 256)
+        b = random.randint(64, 256)
+        return (r, g, b)
+    if mode == 'red_rnd':
+        r = random.randint(0, 256)
+        return (r, 0, 0)
+    if mode == 'green_rnd':
+        r = random.randint(0, 32)
+        g = random.randint(64, 256)
+        b = random.randint(0, 32)
+        return (r, g, b)
+    if mode == 'blue_rnd':
+        r = random.randint(16, 128)
+        g = random.randint(64, 256)
+        b = random.randint(128, 256)
+        return (r, g, b)
     if mode == 'blueMap':
         ca = colors_b
     if mode == 'happy':
