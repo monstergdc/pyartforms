@@ -13,14 +13,7 @@
 
 import os
 from datetime import datetime as dt
-
-from drawtools import get_canvas, art_painter
-from life1 import life
-from lissajous import lissajous, lissajous_loop
-from waves import *
-from astroart import *
-from mandelbrot import generate_mandelbrot
-from smears import *
+from drawtools import *
 from pyart_defs import *
 
 
@@ -46,7 +39,9 @@ def do_mazy(cnt, w, h, odir, name):
 
 w, h = get_canvas('256')
 cnt = 1
-for m in predef_names:
+predef_names1 = predef_names
+#predef_names1 = ['mazy11']
+for m in predef_names1:
     do_mazy(cnt, w, h, odir, m)
     
 time_elapsed = dt.now() - start_time

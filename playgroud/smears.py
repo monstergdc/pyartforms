@@ -3,7 +3,7 @@
 
 # experimental paint algorithms (artificial artist) in Python, v1.0
 # (c)2017-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
-# #1 cruel red smears
+# #1 'cruel red smears', not only red
 # #2 circles
 # #3 triangles
 # #4 poly
@@ -279,9 +279,9 @@ def mazy5(draw, params):
 def mazy6(draw, params):
     w = params['w']
     h = params['h']
-    cnt = params['cnt']
-    useblack = params['useblack']
+    cnt = params['cnt'] # todo: cnt -> n, then common
     random.seed()
+    useblack = params['useblack']
 
     #c_ndx = 7
     for m in range(cnt):
@@ -313,7 +313,7 @@ def mazy6(draw, params):
 def mazy7(draw, params):
     w = params['w']
     h = params['h']
-    cnt = params['cnt']
+    cnt = params['cnt'] # todo: cnt -> n, then common
     random.seed()
 
     for m in range(cnt):
@@ -515,12 +515,21 @@ def mazy11(draw, params):
         steps = w
     dx = w/steps
     for n in range(cnt):
-        n1 = random.randint(0, 7)
-        n2 = n%8
-        n3 = random.randint(0, 7)
-        color1 = colors_happy[n1]
-        color2 = colors_happy[n2]
-        color3 = colors_happy[n3]
+        if params['color'] == 'happy':
+            cx = colors_happy
+        if params['color'] == 'BeachTowels':
+            cx = colors_BeachTowels
+        if params['color'] == 'Rainbow':
+            cx = colors_Rainbow
+        if params['color'] == 'MoonlightBytes6':
+            cx = colors_MoonlightBytes6
+        csize = len(cx)
+        n1 = random.randint(0, csize-1)
+        n2 = n%csize
+        n3 = random.randint(0, csize-1)
+        color1 = cx[n1]
+        color2 = cx[n2]
+        color3 = cx[n3]
         # todo: new colorer proper
         for step in range(steps):
             color = gradient(color1, color2, color3, step, steps)

@@ -617,9 +617,18 @@ def predef_mazy10(w, h):
 
 def predef_mazy11(w, h):
     a = [
-        {'Background': bg_black, 'n': 8},
-        {'Background': bg_black, 'n': 16},
-        {'Background': bg_black, 'n': 64}
+        {'Background': bg_black, 'n': 8, 'color': 'happy'},
+        {'Background': bg_black, 'n': 16, 'color': 'happy'},
+        {'Background': bg_black, 'n': 64, 'color': 'happy'},
+        {'Background': bg_black, 'n': 8, 'color': 'BeachTowels'},
+        {'Background': bg_black, 'n': 16, 'color': 'BeachTowels'},
+        {'Background': bg_black, 'n': 64, 'color': 'BeachTowels'},
+        {'Background': bg_black, 'n': 8, 'color': 'MoonlightBytes6'},
+        {'Background': bg_black, 'n': 16, 'color': 'MoonlightBytes6'},
+        {'Background': bg_black, 'n': 64, 'color': 'MoonlightBytes6'},
+        {'Background': bg_black, 'n': 8, 'color': 'Rainbow'},
+        {'Background': bg_black, 'n': 16, 'color': 'Rainbow'},
+        {'Background': bg_black, 'n': 64, 'color': 'Rainbow'},
     ]
     return append_dflts(a, 'SMEARS#11', mazy11, w, h)
 
