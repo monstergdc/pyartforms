@@ -4,20 +4,20 @@
 # wx GUI for pyartforms
 # (c)2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20190420
-# upd: 20190421, 22
+# upd: 20190421, 22, 26
 
 
 # TODO:
-# - remap paramsets to ctl and back / also get values
+# - [!] remap paramsets to ctl and back / also get values
+# .- [!] render from memo txt (fix call issue)
 # - allow save (diff sizes)
-# - render from memo txt
 # - defs - add desc names + even longer desc
 # - render - allow extra params to file names (from defs)
 # - render - allow storage of all rnd par/val for EXACT rerender
-# - ?
 
 
 import wx
+import ast
 from PIL import Image, ImageDraw
 from drawtools import *
 from smears import *
@@ -31,6 +31,7 @@ from mandelbrot import generate_mandelbrot
 
 
 def PIL2wx(image):
+    """Convert image from PIL to wx.Bitmap"""
     width, height = image.size
     return wx.Bitmap.FromBuffer(width, height, image.tobytes())
 
@@ -64,28 +65,26 @@ class GUIFrame(wx.Frame):
         self.SetStatusText("pyartforms GUI")
 
         screenSize = wx.DisplaySize()
-        mazy_all = ['mazy01', 'mazy02', 'mazy03', 'mazy04', 'mazy05', 'mazy06', 'mazy07', 'mazy08',
-                    'mazy09', 'mazy10', 'mazy11', 'mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16',
-                    'mazy17', 'mazy18', 
-                    'life', 'lissajous', 'astro', 'mandelbrot',
-                    'waves01', 'waves02', 'waves03', 
-                    ]
+        mazy_all = predef_names
         x0 = 10 # ctl x0
+        y0 = 20 # ctl y0
 
         # smear selector
-        self.cm = wx.ComboBox(pnl, id=wx.ID_ANY, value="", pos=(x0, 20), size=(70, 20), choices=mazy_all, style=0, validator=wx.DefaultValidator)
+        self.cm = wx.ComboBox(pnl, id=wx.ID_ANY, value="", pos=(x0, y0), size=(70, 20), choices=mazy_all, style=0, validator=wx.DefaultValidator)
         self.cm.Bind(wx.EVT_COMBOBOX, self.OnSmearChanged)
         # preset selector
-        self.sp = wx.SpinCtrl(pnl, id=wx.ID_ANY, value="0", pos=(x0, 20+30), size=(70, 20), style=wx.SP_ARROW_KEYS, min=0, max=1, initial=0)
+        self.sp = wx.SpinCtrl(pnl, id=wx.ID_ANY, value="0", pos=(x0, y0+30), size=(70, 20), style=wx.SP_ARROW_KEYS, min=0, max=1, initial=0)
         # go btn
-        bn = wx.Button(pnl, id=wx.ID_ANY, label="GO", pos=(x0, 20+60), size=wx.DefaultSize, style=0, validator=wx.DefaultValidator)
+        bn = wx.Button(pnl, id=wx.ID_ANY, label="GO", pos=(x0, y0+60), size=wx.DefaultSize, style=0, validator=wx.DefaultValidator)
         bn.Bind(wx.EVT_BUTTON, self.OnClicked) 
+        bn2 = wx.Button(pnl, id=wx.ID_ANY, label="GO2", pos=(x0+100, y0+60), size=wx.DefaultSize, style=0, validator=wx.DefaultValidator)
+        bn2.Bind(wx.EVT_BUTTON, self.OnClicked) 
 
-        #self.sl = wx.Slider(pnl, id=wx.ID_ANY, value=0, minValue=0, maxValue=100, pos=(x0, 20+90), size=wx.DefaultSize, style=wx.SL_HORIZONTAL, validator=wx.DefaultValidator)
+        #self.sl = wx.Slider(pnl, id=wx.ID_ANY, value=0, minValue=0, maxValue=100, pos=(x0, y0+90), size=wx.DefaultSize, style=wx.SL_HORIZONTAL, validator=wx.DefaultValidator)
 
-        #self.cb = wx.CheckBox(pnl, id=wx.ID_ANY, label="chk", pos=(x0, 20+120), size=wx.DefaultSize, style=0, validator=wx.DefaultValidator)
+        #self.cb = wx.CheckBox(pnl, id=wx.ID_ANY, label="chk", pos=(x0, y0+120), size=wx.DefaultSize, style=0, validator=wx.DefaultValidator)
 
-        self.tx = wx.TextCtrl(pnl, id=wx.ID_ANY, value="", pos=(x0, 20+150), size=(400,300), style=wx.TE_MULTILINE, validator=wx.DefaultValidator)
+        self.tx = wx.TextCtrl(pnl, id=wx.ID_ANY, value="", pos=(x0, y0+150), size=(400,300), style=wx.TE_MULTILINE, validator=wx.DefaultValidator)
 
         # preview image
         im = Image.new('RGB', (self.w, self.h), (0,0,0))
@@ -131,11 +130,21 @@ class GUIFrame(wx.Frame):
         im = art_painter(params=px, png_file='preview.png', output_mode='preview', bw=False)
         return im
 
-    def OnClicked(self, event): 
+    def do_mazy_p2(self, w, h, x, name):
+        px = ast.literal_eval(self.tx.Value)
+        px['call'] = mazy1 #test only, todo: make proper
+        px['alpha'] = True #test
+        im = art_painter(params=px, png_file='preview.png', output_mode='preview', bw=False)
+        return im
+
+    def OnClicked(self, event):
+        """Button clicks"""
         btn = event.GetEventObject().GetLabel() 
         #print("DEBUG: Label of pressed button = ", btn)
         if btn == 'GO':
             self.doRender()
+        if btn == 'GO2':
+            self.doRender2()
 
     def OnSmearChanged(self, event):
         mn = self.cm.Value
@@ -158,11 +167,19 @@ class GUIFrame(wx.Frame):
         """Display an About Dialog"""
         wx.MessageBox("pyartforms GUI v1.0beta", "About", wx.OK|wx.ICON_INFORMATION)
 
-    def doRender(self): 
-            mn = self.cm.Value
-            n = self.sp.Value
-            im = self.do_mazy_p(self.w, self.h, n, mn)
-            self.bm.SetBitmap(PIL2wx(im))
+    def doRender(self):
+        """Main render call"""
+        mn = self.cm.Value
+        n = self.sp.Value
+        im = self.do_mazy_p(self.w, self.h, n, mn)
+        self.bm.SetBitmap(PIL2wx(im))
+
+    def doRender2(self):
+        """Main render call v2"""
+        mn = self.cm.Value
+        n = self.sp.Value
+        im = self.do_mazy_p2(self.w, self.h, n, mn)
+        self.bm.SetBitmap(PIL2wx(im))
 
 
 if __name__ == '__main__':

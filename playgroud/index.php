@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE HTML>
 <html>
 <head>
-<title>pyartforms (c)2019 Noniewicz.art.pl</title>
+<title>pyartforms (c)2019 Jakub.Noniewicz.art.pl</title>
 </head>
 <body style="background-color: black; color: white;">
 <h2>pyartforms (c)2019 Noniewicz.art.pl</h2>
@@ -12,7 +12,7 @@
 <?php
 function sub_group($name, $id)
 {
-	$cnt[1]  = 46;
+	$cnt[1]  = 141;
 	$cnt[2]  = 22;
 	$cnt[3]  = 78;
 	$cnt[4]  = 41;

@@ -8,19 +8,13 @@
 # upd; 20181020, 21
 # upd; 20190118, 19
 # upd; 20190329, 30
-# upd; 20190414, 17, 21
+# upd; 20190414, 17, 21, 26
 
 # TODO:
 # - ?
 
 import cgi
 from drawtools import *
-#from life1 import life
-#from lissajous import lissajous, lissajous_loop
-#from waves import *
-#from astroart import *
-#from mandelbrot import generate_mandelbrot
-#from smears import *
 from pyart_defs import *
 
 

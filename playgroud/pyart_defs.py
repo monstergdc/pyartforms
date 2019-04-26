@@ -6,7 +6,7 @@
 # cre: 20181020
 # upd: 20190105, 06, 13, 18, 21, 22
 # upd: 20190311, 30
-# upd: 20190414, 15, 17, 18, 21, 22, 24
+# upd: 20190414, 15, 17, 18, 21, 22, 24, 26
 
 
 # TODO:
@@ -157,116 +157,88 @@ def predef_mandelbrot(w, h):
 
 # --- smears
 
-# note: use this for aplha (but call must handle alpha value too): 'alpha': True
-
 def predef_mazy1(w, h):
-    #note: 'blur': True was lame
-    #todo: replace rgb/01
-    #todo: cleanup #1
+    # prefilled
     a = [
+        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'mode': 'black', 'keep': False, 'color': 'any_rnd'},
+        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'mode': 'black', 'keep': False, 'color': 'happy'},
+        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'mode': 'black', 'keep': False, 'color': 'wryb'},
+        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'mode': 'black', 'keep': False, 'color': 'psych'},
+        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'mode': 'black', 'keep': False, 'color': 'BeachTowels'},
+        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'mode': 'black', 'keep': False, 'color': 'MoonlightBytes6'},
+        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'mode': 'black', 'keep': False, 'color': 'Number3'},
+        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'mode': 'black', 'keep': False, 'color': 'RainbowDash'},
+        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'mode': 'black', 'keep': False, 'color': 'Google'},
+        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'mode': 'black', 'keep': False, 'color': 'MetroUI'},
+        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'mode': 'black', 'keep': False, 'color': 'ProgramCat'},
+        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'mode': 'black', 'keep': False, 'color': 'rg'},
+        {'Background': bg_yellow, 'penw': 5, 'v': 120, 'n': 48, 'm': 12, 'prefill': True, 'mode': 'red', 'keep': True, 'color': 'blue_rnd'},
+        {'Background': bg_white, 'penw': 8, 'v': 30, 'n': 100, 'm': 40, 'prefill': True, 'mode': 'red', 'keep': False, 'color': 'green_rnd'},
+
         # new test, quite ok, use proper
-        #{'Background': bg_white, 'penw': 8, 'v': 20, 'n': 300, 'm': 4, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75, 'mar': int(w/10)},
-        #{'Background': bg_white, 'penw': 8, 'v': 20, 'n': 300, 'm': 4, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75, 'mar': int(-w/2)},
-        #{'Background': bg_white, 'penw': 8, 'v': 20, 'n': 50, 'm': 4, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75},
-        #{'Background': bg_white, 'penw': 4, 'v': 20, 'n': 20, 'm': 4, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75},
-        #{'Background': bg_white, 'penw': 4, 'v': 20, 'n': 20, 'm': 4, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75, 'mar': int(-w/2)},
-        #{'Background': bg_white, 'penw': 8, 'v': 20, 'n': 20, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75, 'mar': int(-w/2)},
+#        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 300, 'm': 4, 'prefill': True, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75, 'mar': int(w/10)},
+#        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 300, 'm': 4, 'prefill': True, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75, 'mar': int(-w/2)},
+#        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 50, 'm': 4, 'prefill': True, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75},
+#        {'Background': bg_white, 'penw': 4, 'v': 20, 'n': 20, 'm': 4, 'prefill': True, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75},
+#        {'Background': bg_white, 'penw': 4, 'v': 20, 'n': 20, 'm': 4, 'prefill': True, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75, 'mar': int(-w/2)},
+#        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 20, 'm': 40, 'prefill': True, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75, 'mar': int(-w/2)},
+    ]
+
+    # unfilled
+    b = [
+        #6 red (fix? mar?)
+        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'red', 'keep': False, 'color': 'red_rnd'},
 
         # 6 red tests new, ok, use
-#        {'Background': bg_white, 'penw': 8, 'v': 25, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'red', 'keep': False,
-#        'r0': 0, 'g0': 0, 'b0': 0, 'r1': 256, 'g1': 0, 'b1': 0, 'mar': int(w/15)},
-#        {'Background': bg_white, 'penw': 2, 'v': 120, 'n': 40, 'm': 120, 'prefill': False, 'blur': False, 'mode': 'red', 'keep': False,
-#        'r0': 0, 'g0': 0, 'b0': 0, 'r1': 256, 'g1': 0, 'b1': 0, 'mar': int(w/15)},
-#        {'Background': bg_white, 'penw': 8, 'v': 120, 'n': 40, 'm': 120, 'prefill': False, 'blur': False, 'mode': 'red', 'keep': False,
-#        'r0': 0, 'g0': 0, 'b0': 0, 'r1': 256, 'g1': 0, 'b1': 0, 'mar': int(w/15)},
-#        {'Background': bg_white, 'penw': 24, 'v': 120, 'n': 40, 'm': 60, 'prefill': False, 'blur': False, 'mode': 'red', 'keep': False,
-#        'r0': 0, 'g0': 0, 'b0': 0, 'r1': 256, 'g1': 0, 'b1': 0, 'mar': int(w/15)},
-#        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 500, 'm': 5, 'prefill': False, 'blur': False, 'mode': 'red', 'keep': False,
-#        'r0': 0, 'g0': 0, 'b0': 0, 'r1': 256, 'g1': 0, 'b1': 0, 'mar': int(w/15)},
+#        {'Background': bg_white, 'penw': 8, 'v': 25, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'red', 'keep': False, 'color': 'red_rnd', 'mar': int(w/15)},
+#        {'Background': bg_white, 'penw': 2, 'v': 120, 'n': 40, 'm': 120, 'prefill': False, 'mode': 'red', 'keep': False, 'color': 'red_rnd', 'mar': int(w/15)},
+#        {'Background': bg_white, 'penw': 8, 'v': 120, 'n': 40, 'm': 120, 'prefill': False, 'mode': 'red', 'keep': False, 'color': 'red_rnd', 'mar': int(w/15)},
+#        {'Background': bg_white, 'penw': 24, 'v': 120, 'n': 40, 'm': 60, 'prefill': False, 'mode': 'red', 'keep': False, 'color': 'red_rnd', 'mar': int(w/15)},
+#        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 500, 'm': 5, 'prefill': False, 'mode': 'red', 'keep': False, 'color': 'red_rnd', 'mar': int(w/15)},
 
-        #1s rnd
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False,
-        'r0': 64, 'g0': 64, 'b0': 64, 'r1': 256, 'g1': 256, 'b1': 256},
+        #?
+        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'happy', 'keep': False},
+        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'wryb', 'keep': False},
+        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'psych', 'keep': False},
+        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'happy', 'keep': False, 'addblack': True},
+        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'wryb', 'keep': False, 'addblack': True},
+        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'psych', 'keep': False, 'addblack': True},
+        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'BeachTowels', 'keep': False},
+        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'MoonlightBytes6', 'keep': False},
+        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'Number3', 'keep': False},
+        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'RainbowDash', 'keep': False},
+        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'Google', 'keep': False},
+        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'MetroUI', 'keep': False},
+        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'ProgramCat', 'keep': False},
 
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False,
-        'r0': 64, 'g0': 64, 'b0': 64, 'r1': 256, 'g1': 256, 'b1': 256, 'addalpha': 75},
-
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False,
-        'r0': 64, 'g0': 64, 'b0': 64, 'r1': 256, 'g1': 256, 'b1': 256, 'addalpha': 50},
-
-        #2s
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'happy'},
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'wryb'},
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'psych'},
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'BeachTowels'},
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'MoonlightBytes6'},
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'Number3'},
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'RainbowDash'},
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'Google'},
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'MetroUI'},
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'ProgramCat'},
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'rg'},
-
-        #2s + addalpha
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75},
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'wryb', 'addalpha': 75},
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'psych', 'addalpha': 75},
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'BeachTowels', 'addalpha': 75},
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'MoonlightBytes6', 'addalpha': 75},
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'Number3', 'addalpha': 75},
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'RainbowDash', 'addalpha': 75},
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'Google', 'addalpha': 75},
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'MetroUI', 'addalpha': 75},
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'ProgramCat', 'addalpha': 75},
-        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'black', 'keep': False, 'color': 'rg', 'addalpha': 75},
-
-        #6 red (fix)
-        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'red', 'keep': False,
-        'r0': 0, 'g0': 0, 'b0': 0, 'r1': 256, 'g1': 0, 'b1': 0},
-
-        #7-9 no blur * v addblack
-        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'happy', 'keep': False},
-        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'wryb', 'keep': False},
-        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'psych', 'keep': False},
-        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'happy', 'keep': False, 'addblack': True},
-        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'wryb', 'keep': False, 'addblack': True},
-        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'psych', 'keep': False, 'addblack': True},
-        # similar / new palletes
-        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'BeachTowels', 'keep': False},
-        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'MoonlightBytes6', 'keep': False},
-        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'Number3', 'keep': False},
-        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'RainbowDash', 'keep': False},
-        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'Google', 'keep': False},
-        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'MetroUI', 'keep': False},
-        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'ProgramCat', 'keep': False},
-        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'blur': False, 'mode': 'SkinTones', 'keep': False},
-
-        #10
-        {'Background': bg_white, 'penw': 8, 'v': 30, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'red', 'keep': False,
-        'r0': 64, 'g0': 64, 'b0': 0,
-        'r1': 256, 'g1': 256, 'b1': 32},
-        #11 green on white
-        {'Background': bg_white, 'penw': 8, 'v': 30, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'red', 'keep': False,
-        'r0': 0, 'g0': 64, 'b0': 0,
-        'r1': 32, 'g1': 256, 'b1': 32},
-
-        {'Background': bg_white, 'penw': 8, 'v': 30, 'n': 100, 'm': 40, 'prefill': True, 'blur': False, 'mode': 'red', 'keep': False,
-        'r0': 0, 'g0': 64, 'b0': 0,
-        'r1': 32, 'g1': 256, 'b1': 32, 'addalpha': 75},
-
-        #12
-        {'Background': bg_yellow, 'penw': 5, 'v': 200, 'n': 50, 'm': 25, 'prefill': False, 'blur': False, 'mode': 'red', 'keep': True,
-        'r0': 0, 'g0': 0, 'b0': 0,
-        'r1': 256, 'g1': 256, 'b1': 256},
-        #13
-        {'Background': bg_yellow, 'penw': 5, 'v': 120, 'n': 48, 'm': 12, 'prefill': True, 'blur': False, 'mode': 'red', 'keep': True,
-        'r0': 16, 'g0': 64, 'b0': 128,
-        'r1': 128, 'g1': 256, 'b1': 256},
-
-        {'Background': bg_yellow, 'penw': 5, 'v': 120, 'n': 48, 'm': 12, 'prefill': True, 'blur': False, 'mode': 'red', 'keep': True,
-        'r0': 16, 'g0': 64, 'b0': 128,
-        'r1': 128, 'g1': 256, 'b1': 256, 'addalpha': 75},
+        {'Background': bg_yellow, 'penw': 5, 'v': 200, 'n': 50, 'm': 25, 'prefill': False, 'mode': 'red', 'keep': True, 'color': 'any_rnd', 'mar': int(w/20)},
     ]
+
+    # * addalpha
+    a1 = copy.deepcopy(a)
+    a2 = copy.deepcopy(a)
+    a3 = copy.deepcopy(a)
+    for i in range(len(a)):
+        #a1 - orig, no alpha
+        a2[i]['addalpha'] = 75
+        a3[i]['addalpha'] = 50
+    a = np.concatenate((a1, a2, a3), axis=0)
+
+    # * variation
+    a1 = copy.deepcopy(a)
+    a2 = copy.deepcopy(a)
+    a3 = copy.deepcopy(a)
+    for i in range(len(a)):
+        #a1 - orig, no change
+        a2[i]['v'] = 500 # 'v': 500, 'n': 10, 'm': 4, ...
+        a2[i]['n'] = 10
+        a2[i]['m'] = 4
+        a3[i]['v'] = 50 # 'v': 100, 'n': 20, 'm': 4, ...
+        a3[i]['n'] = 20
+        a3[i]['m'] = 4
+    a = np.concatenate((a1, a2, a3), axis=0)
+
+    a = np.concatenate((a, b), axis=0)
     return append_dflts(a, 'SMEARS#1', mazy1, w, h)
 
 def predef_mazy2(w, h):
@@ -610,6 +582,10 @@ def predef_mazy9(w, h):
 def predef_mazy10(w, h):
     bk = (0x84, 0x8B, 0x9B)
     a = [
+            # new test n=3 also ok
+            #{'Background': bg_white, 'n': 1, 'penw': 1, 'color': 'blue_const', 'mode': 'fill', 'complexity': 990, 'open': False, 'addalpha': 99},
+
+            #{'Background': bk, 'n': 30-15, 'penw': 8+24, 'color': 'happy', 'mode': 'line', 'complexity': 70+130, 'open': False},
             {'Background': bk, 'n': 30, 'penw': 8, 'color': 'happy', 'mode': 'line', 'complexity': 70, 'open': False},
             {'Background': bk, 'n': 40, 'penw': 8, 'color': 'rg', 'mode': 'line', 'complexity': 70, 'open': False},
             {'Background': bk, 'n': 40, 'penw': 8, 'color': 'red', 'mode': 'line', 'complexity': 70, 'open': False},
@@ -834,5 +810,13 @@ predefs = {'mazy01': predef_mazy1, 'mazy02': predef_mazy2, 'mazy03': predef_mazy
            'life': predef_life, 'lissajous': predef_lissajous, 'astro': predef_astro, 'mandelbrot': predef_mandelbrot,
            'waves01': predef_waves1,'waves02': predef_waves2, 'waves03': predef_waves3, 
            }
+
+# all names
+predef_names = [
+        'mazy01', 'mazy02', 'mazy03', 'mazy04',  'mazy05', 'mazy06', 'mazy07', 'mazy08',
+        'mazy09', 'mazy10', 'mazy11', 'mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16',
+        'mazy17', 'mazy18',
+        'astro', 'life', 'lissajous', 'mandelbrot', 'waves01', 'waves02', 'waves03'
+        ]
 
 # EOF

@@ -6,7 +6,7 @@
 # cre: 20181020
 # upd: 20190105, 06, 13, 18, 19, 22
 # upd: 20190302, 03, 30
-# upd: 20190414, 17, 18, 21, 22
+# upd: 20190414, 17, 18, 21, 22, 26
 
 # TODO:
 # - nice argparse (also per module?)
@@ -21,14 +21,13 @@
 
 import os
 from datetime import datetime as dt
-
-from drawtools import get_canvas, art_painter
-from life1 import life
-from lissajous import lissajous, lissajous_loop
-from waves import *
-from astroart import *
-from mandelbrot import generate_mandelbrot
-from smears import *
+from drawtools import *
+#from life1 import life
+#from lissajous import lissajous, lissajous_loop
+#from waves import *
+#from astroart import *
+#from mandelbrot import generate_mandelbrot
+#from smears import *
 from pyart_defs import *
 
 
@@ -62,41 +61,15 @@ w, h = get_canvas('A3') # for demo use this, not too big, not too small
 #w, h = get_canvas('A6')
 #w, h = get_canvas('A7')
 
-cnt = 3 # note: it takes some time
-do_mazy(cnt, w, h, odir, 'mazy01')
-do_mazy(cnt, w, h, odir, 'mazy02')
-do_mazy(cnt, w, h, odir, 'mazy03')
-do_mazy(cnt, w, h, odir, 'mazy04') # a bit lame, only red ok, add blue
-do_mazy(cnt, w, h, odir, 'mazy05')
-do_mazy(cnt, w, h, odir, 'mazy06')
-do_mazy(cnt, w, h, odir, 'mazy07')
-do_mazy(cnt, w, h, odir, 'mazy08')
-do_mazy(cnt, w, h, odir, 'mazy09')
-do_mazy(cnt, w, h, odir, 'mazy10')
-do_mazy(cnt, w, h, odir, 'mazy11')
-do_mazy(cnt, w, h, odir, 'mazy12')
-do_mazy(cnt, w, h, odir, 'mazy13')
-do_mazy(cnt, w, h, odir, 'mazy14')
-cnt = 1 # note: 15 and 16 alredy produce a lot
-do_mazy(cnt, w, h, odir, 'mazy15')
-do_mazy(cnt, w, h, odir, 'mazy16')
-cnt = 3
-do_mazy(cnt, w, h, odir, 'mazy17')
-do_mazy(cnt, w, h, odir, 'mazy18')
-cnt = 1 # note: astro only once
-do_mazy(cnt, w, h, odir, 'astro')
-cnt = 3
-do_mazy(cnt, w, h, odir, 'waves01') # fix: does not scale down well
-do_mazy(cnt, w, h, odir, 'waves02') # fix: does not scale down well
-do_mazy(cnt, w, h, odir, 'waves03') # fix: does not scale down well
-cnt = 1
-w, h = get_canvas('800')
-do_mazy(cnt, w, h, odir, 'life')
-cnt = 1
-w, h = get_canvas('A4') # fix: does not scale down well (line width)
-do_mazy(cnt, w, h, odir, 'lissajous')
-do_mazy(cnt, 700, 400, odir, 'mandelbrot')
-    
+for m in predef_names:
+    if m in ['mazy15', 'mazy16', 'astro', 'lissajous', 'life', 'mandelbrot']
+        cnt = 1 # note: only once
+    else:
+        cnt = 3 # note: it takes some time
+    if m in ['life', 'mandelbrot']:
+        w, h = get_canvas('800')
+    do_mazy(cnt, w, h, odir, m)
+
 time_elapsed = dt.now() - start_time
 print('ALL done. elapsed time: {}'.format(time_elapsed))
 

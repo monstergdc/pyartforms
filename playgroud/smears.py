@@ -20,9 +20,12 @@
 # #15 ?
 # #16 opart-like circles
 # #17 scottish grid
-# #18
-# #19
+# #18 ?
+# #19 
 # #20 
+# #21 
+# #22 
+
 # cre: 20180430
 # upd: 20180501, 02, 03
 # cre: 20180805, 07, 08
@@ -30,7 +33,7 @@
 # upd: 20181019, 20
 # upd: 20190105, 06, 12, 13, 18, 19, 21, 22
 # upd: 20190306, 11, 29, 30
-# upd: 20190414, 15, 17, 18, 22
+# upd: 20190414, 15, 17, 18, 22, 24, 26
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -48,17 +51,26 @@ from color_defs import *
 
 # ---
 
-def mazy1(draw, params):
+def init_common(params):
     w = params['w']
     h = params['h']
     cnt = params['n']
+    random.seed()
+    return w, h, cnt
+
+# ---
+
+def mazy1(draw, params):
+    w, h, cnt = init_common(params)
     if 'mar' in params:
         mar = params['mar']
     else:
         mar = 0
-    random.seed()
-    ts = [t/100.0 for t in range(101)]
-    v = params['v']
+    if 'v' in params:
+        v = params['v']
+    else:
+        v = 0
+    ts = [t/100.0 for t in range(101)] # par?
     sc = float(h) / 3507 # lame par!
     wx = int(float(params['penw']) * sc)
     if wx <= 0:
@@ -76,7 +88,7 @@ def mazy1(draw, params):
             else:
                 color = new_colorer(params['color'], n, cnt)
         else:
-            color = old_colorer(params)
+            color = (0,0,0)
         if 'addalpha' in params:
             color = add_alpha(color, params['addalpha'])
         r = color[0]
@@ -117,9 +129,7 @@ def mazy1(draw, params):
             draw.line(points, fill=color, width=wx)
 
 def mazy2(draw, params):
-    w = params['w']
-    h = params['h']
-    cnt = params['n']
+    w, h, cnt = init_common(params)
     cntm = params['m']
     v = int(h/50)
     random.seed()
@@ -142,10 +152,7 @@ def mazy2(draw, params):
             circle(draw, po[0][0], po[0][1], int(r0*(1-m*de)), fill=color, outline=None)
 
 def mazy3(draw, params):
-    w = params['w']
-    h = params['h']
-    cnt = params['n']
-    random.seed()
+    w, h, cnt = init_common(params)
 
     def r(p, d):
         return int(p/2+random.randint(int(-p/d), int(p/d)))
@@ -187,16 +194,13 @@ def mazy3(draw, params):
         triangle(draw, po, fill=color, outline=None)
 
 def mazy4(draw, params):
-    w = params['w']
-    h = params['h']
-    cnt = params['n']
+    w, h, cnt = init_common(params)
     sc = 2.1 # base, ok (2.05 -> 2.1)
     if 'sc' in params:
         sc = params['sc']
     if sc <= 0:
         sc = 1
     #sc = 0.7 # so, so
-    random.seed()
 
     if sc == 0:
         sc = 1
@@ -397,10 +401,7 @@ def mazy8(draw, params):
             rect(draw, x1+vx, y1+vy, w1+vw, h1+vh, fill=color, outline=None)
 
 def mazy9(draw, params):
-    w = params['w']
-    h = params['h']
-    cnt = params['n']
-    random.seed()
+    w, h, cnt = init_common(params)
     c = math.pi/180
     if 'v' in params: 
         v = params['v']
@@ -456,12 +457,12 @@ def mazy9(draw, params):
 
 
 def mazy10(draw, params):
-    w = params['w']
-    h = params['h']
-    cnt = params['n']
+    w, h, cnt = init_common(params)
     mode = params['mode']
-    random.seed()
-    np = 1800 #par
+
+    # todo: for closed make internal pts bigger while 1st+last with margin?
+    #np = 1800 #par
+    np = 5000 #par
     ts = [t/float(np) for t in range(np+1)]
     sc = float(h) / 3507
     wx = int(float(params['penw']) * sc)
@@ -479,6 +480,8 @@ def mazy10(draw, params):
         po = [rwh()]
         for x in range(params['complexity']):
             po.extend([rwh()])
+        if params['color'] == 'blue_const':
+            color = (16,48,255)
         if params['color'] == 'happy':
             color = colors_happy[n%len(colors_happy)]
         if params['color'] == 'rg':
@@ -502,10 +505,8 @@ def mazy10(draw, params):
 # TODO: canvas 800 or 2000 - fix width - issue only on srv?!
 # TODO: also like 11 only more freq + diagonals + symetric opt?
 def mazy11(draw, params):
-    w = params['w']
-    h = params['h']
-    cnt = params['n']
-    random.seed()
+    w, h, cnt = init_common(params)
+
     dy = int(h/cnt)
     if dy*cnt < h:  # lame fix for small images
         cnt += 3
@@ -526,12 +527,9 @@ def mazy11(draw, params):
             rect(draw, int(step*dx+dx/2), int(n*dy+dy/2), int(dx), int(dy), fill=color, outline=None)
 
 def mazy12(draw, params):
-    w = params['w']
-    h = params['h']
-    cnt = params['n']
+    w, h, cnt = init_common(params)
     o = params['o']
     v = params['v']
-    random.seed()
     c = math.pi/180
     w0 = w/2
     h0 = h/2
@@ -563,11 +561,7 @@ def mazy12(draw, params):
                 circle(draw, x, y, r+va, fill=co, outline=(0,0,0))
 
 def mazy13(draw, params):
-    w = params['w']
-    h = params['h']
-    cnt = params['n']
-    random.seed()
-
+    w, h, cnt = init_common(params)
     w0 = w/2
     h0 = h/2
     sc = 1.0
@@ -581,10 +575,7 @@ def mazy13(draw, params):
     draw.polygon(po, fill=color, outline=None)
 
 def mazy14(draw, params):   # note: failed, do sth else from it
-    w = params['w']
-    h = params['h']
-    cnt = params['n']
-    random.seed()
+    w, h, cnt = init_common(params)
     c = math.pi/180
     if w > h:
         sc = w/2*1.5/cnt
@@ -632,10 +623,7 @@ def mazy14(draw, params):   # note: failed, do sth else from it
     draw2 = ImageDraw.Draw(im2) # does it free mem?
 
 def mazy15(draw, params):
-    w = params['w']
-    h = params['h']
-    cnt = params['n']
-    random.seed()
+    w, h, cnt = init_common(params)
     c = math.pi/180
     if w > h:
         sc = w/2*1.5/cnt  # note: off-screen to fill all
@@ -712,10 +700,7 @@ def mazy15(draw, params):
     draw2 = ImageDraw.Draw(im2) # does it free mem?
 
 def mazy16(draw, params):
-    w = params['w']
-    h = params['h']
-    cnt = params['n']
-    random.seed()
+    w, h, cnt = init_common(params)
     c = math.pi/180
     if w > h:
         sc = w/2
@@ -740,13 +725,10 @@ def mazy16(draw, params):
         circle(draw, int(w/2+xs2), int(h/2+ys2), r, fill=co, outline=ou)
 
 def mazy17(draw, params):
-    w = params['w']
-    h = params['h']
-    cnt = params['n']
+    w, h, cnt = init_common(params)
     v = params['v']
     if v < 1:
         v = 1
-    random.seed()
 
     for z in range(cnt):
         ndx = random.randint(0, cnt)
@@ -762,11 +744,8 @@ def mazy17(draw, params):
         draw.rectangle(xy, fill=color, outline=None)
 
 def mazy18(draw, params):
-    w = params['w']
-    h = params['h']
-    cnt = params['n']
+    w, h, cnt = init_common(params)
     v = params['v']
-    random.seed()
 
     for n in range(cnt):
         x = random.randint(0, w)
@@ -782,33 +761,21 @@ def mazy18(draw, params):
 # future fun
 
 def mazy19(draw, params):
-    w = params['w']
-    h = params['h']
-    cnt = params['n']
-    random.seed()
+    w, h, cnt = init_common(params)
     # ...
     return 0
 
 def mazy20(draw, params):
-    w = params['w']
-    h = params['h']
-    cnt = params['n']
-    random.seed()
+    w, h, cnt = init_common(params)
     # ...
     return 0
 
 def mazy21(draw, params):
-    w = params['w']
-    h = params['h']
-    cnt = params['n']
-    random.seed()
+    w, h, cnt = init_common(params)
     # ...
     return 0
 
 def mazy22(draw, params):
-    w = params['w']
-    h = params['h']
-    cnt = params['n']
-    random.seed()
+    w, h, cnt = init_common(params)
     # ...
     return 0
