@@ -5,10 +5,11 @@
 # loosely based on article in "ENTER" 2/93
 # (c)1993 Noniewicz.com (orig Turbo Pascal v1.6)
 # (c)2011 Noniewicz.com (unf. Delphi ver start)
-# (c)2014-2015, 2017, 2018 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2014-2015, 2017, 2018, 2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20180430
 # upd: 20180501, 02, 03
 # upd: 20181020
+# upd: 20190427
 
 # see: https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
 # http://pillow.readthedocs.io/en/5.1.x/reference/ImageFilter.html
@@ -206,9 +207,8 @@ def main():
         g.generate(params)
         g.draw(canvas, image)
         ima = cv2.imread(image)
-        video.write(ima)
-        video.write(ima)
-        video.write(ima)
+        for frame in range(3):
+            video.write(ima)
         params['BranchLen'] = 7 + params['BranchLen']
         params['AngleSpread'] = 2.0 + params['AngleSpread']
 
@@ -216,13 +216,12 @@ def main():
         g.generate(params)
         g.draw(canvas, image)
         ima = cv2.imread(image)
-        video.write(ima)
-        video.write(ima)
-        video.write(ima)
+        for frame in range(3):
+            video.write(ima)
         params['Iterations'] = 1 + params['Iterations']
 
     ima = cv2.imread(image)
-    for n in range(50):
+    for frame in range(50):
         video.write(ima)
 
 # ---
@@ -248,9 +247,8 @@ def main():
         g.generate(params)
         g.draw(canvas, image)
         ima = cv2.imread(image)
-        video.write(ima)
-        video.write(ima)
-        video.write(ima)
+        for frame in range(3):
+            video.write(ima)
         params['BranchLen'] = 7 + params['BranchLen']
         params['AngleSpread'] = 0.5 + params['AngleSpread']
 
@@ -258,21 +256,18 @@ def main():
         g.generate(params)
         g.draw(canvas, image)
         ima = cv2.imread(image)
-        video.write(ima)
-        video.write(ima)
-        video.write(ima)
+        for frame in range(3):
+            video.write(ima)
         params['Iterations'] = 1 + params['Iterations']
 
     ima = cv2.imread(image)
-    for n in range(50):
+    for frame in range(50):
         video.write(ima)
 
 # ---
-    return
-# ---
 
-    params = {
-        'p0': (canvas[0]/2, canvas[1]-80),
+    params = [
+        {'p0': (canvas[0]/2, canvas[1]-80),
         'Iterations': 10,
         'BranchLen': 100,
         'AngleStart': 90.0,
@@ -285,11 +280,8 @@ def main():
         'Color': (255, 255, 255),
         'PenWidth': 1,
         'ThickDecPerIter': 0,
-    }
-    gen(g, canvas, params, dt, image, video)
-
-    params = {
-        'p0': (canvas[0]/2, canvas[1]-80),
+    },
+        {'p0': (canvas[0]/2, canvas[1]-80),
         'Iterations': 12,
         'BranchLen': 120,
         'AngleStart': 90.0,
@@ -302,11 +294,8 @@ def main():
         'Color': (255, 255, 255),
         'PenWidth': 8,
         'ThickDecPerIter': 1,
-    }
-    gen(g, canvas, params, dt, image, video)
-
-    params = {
-        'p0': (canvas[0]/2, canvas[1]/2),
+    },
+        {'p0': (canvas[0]/2, canvas[1]/2),
         'Iterations': 10,
         'BranchLen': 120,
         'AngleStart': 90.0,
@@ -319,11 +308,8 @@ def main():
         'Color': (255, 255, 255),
         'PenWidth': 1,
         'ThickDecPerIter': 0,
-    }
-    gen(g, canvas, params, dt, image, video)
-
-    params = {
-        'p0': (canvas[0]/2, canvas[1]-100),
+    },
+        {'p0': (canvas[0]/2, canvas[1]-100),
         'Iterations': 11,
         'BranchLen': 120,
         'AngleStart': 90.0,
@@ -336,10 +322,11 @@ def main():
         'Color': (255, 255, 255),
         'PenWidth': 1,
         'ThickDecPerIter': 0,
-    }
-    gen(g, canvas, params, dt, image, video)
+    },
+    ]
 
-
+    for p in params:
+        gen(g, canvas, p, dt, image, video)
     cv2.destroyAllWindows()
     video.release()
 
