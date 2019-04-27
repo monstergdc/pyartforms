@@ -17,14 +17,16 @@
 # #12 opart-like boxes/circles
 # #13 single big poly
 # #14 ?
-# #15 ?
+# #15 opart-like circle-interference patterns
 # #16 opart-like circles
 # #17 scottish grid
-# #18 ?
-# #19 
+# #18 slim colorful circles
+# #19 op-art grid
 # #20 
 # #21 
 # #22 
+# #23 
+# #24 
 
 # cre: 20180430
 # upd: 20180501, 02, 03
@@ -33,7 +35,7 @@
 # upd: 20181019, 20
 # upd: 20190105, 06, 12, 13, 18, 19, 21, 22
 # upd: 20190306, 11, 29, 30
-# upd: 20190414, 15, 17, 18, 22, 24, 26
+# upd: 20190414, 15, 17, 18, 22, 24, 26, 27
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -780,12 +782,54 @@ def mazy18(draw, params):
                 color = add_alpha(color, params['addalpha'])
             circle(draw, x, y, r, fill=None, outline=color)
 
-# future fun
-
 def mazy19(draw, params):
     w, h, cnt = init_common(params)
-    # ...
-    return 0
+    c = math.pi/180
+    nx = cnt
+    ny = params['m']
+    dx = int(2*w/nx)
+    dy = int(2*h/ny)
+    fncx = []
+    coef = 17 # par / const 17 good for 40
+    for x in range(coef): # precalc
+        fx = 2.0*math.exp(-x/4)
+        fncx.append(fx)
+    dxmap = []
+    f = 0
+    x = 0
+    while f < w+dx:  # fill whole width
+        fx = 0
+        if x > 0:
+            if params['mode'] == 'grid':
+                fx = dx
+            if params['mode'] == 'rnd':
+                fx = random.randint(1, dx)
+            if params['mode'] == 'exp':
+                if x < coef:
+                    fx = dx * fncx[x]
+                else:
+                    if x < 2*coef:
+                        ndx = coef-(x-coef)-1
+                        fx = dx * fncx[ndx]
+                    else:
+                        fx = dx
+        if fx < 1:
+            fx = 1
+        f = f + fx
+        dxmap.append(f)
+        x += 1
+    for y in range(ny):
+        for x in range(len(dxmap)-1):
+            b = ((x&1) == 1 and (y&1) == 1) or ((x&1) == 0 and (y&1) == 0)
+            if b == True:
+                cx = (255,255,255)
+            else:
+                cx = (0,0,0)
+            xp = dxmap[x]
+            xy = [(xp, y*dy), (xp+(dxmap[x+1]-dxmap[x]), y*dy+dy)]
+            draw.rectangle(xy, fill=cx, outline=None)
+
+# future fun
 
 def mazy20(draw, params):
     w, h, cnt = init_common(params)
@@ -798,6 +842,16 @@ def mazy21(draw, params):
     return 0
 
 def mazy22(draw, params):
+    w, h, cnt = init_common(params)
+    # ...
+    return 0
+
+def mazy23(draw, params):
+    w, h, cnt = init_common(params)
+    # ...
+    return 0
+
+def mazy24(draw, params):
     w, h, cnt = init_common(params)
     # ...
     return 0
