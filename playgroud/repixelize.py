@@ -133,34 +133,40 @@ indir = 'repixel-in\\'
 w, h = get_canvas('A2') # test
 #w, h = get_canvas('A1') # final
 
-
 params = {'w': w, 'h': h, 'bk': (0, 0, 0), 'coef': 0.9, 'scale': 1.0, 'rnd': True, 'rmin': 78, 'rmax': 98}
 
 #params['infile'] = indir+'mntr1.png'
 #params['infile'] = indir+'head.png'
-params['infile'] = indir+'xor1.png'
+#params['infile'] = indir+'xor1.png'
+#params['infile'] = indir+'rgbxxx-1024x768-04-001.png'
+#params['infile'] = indir+'ifs-2480x1748-01-001.png'
 
-params['mode'] = 'rect'
-params['outfile'] = odir+'repixel-rect.png'
-repix(params)
-params['mode'] = 'circle'
-params['outfile'] = odir+'repixel-circle.png'
-repix(params)
-params['mode'] = 'brush'
-params['outfile'] = odir+'repixel-brush.png'
-repix(params)
-params['mode'] = 'lines'
-params['outfile'] = odir+'repixel-lines.png'
-repix(params)
-params['mode'] = 'poly'
-params['outfile'] = odir+'repixel-poly.png'
-repix(params)
-params['mode'] = 'mix-rc'
-params['outfile'] = odir+'repixel-mixrc.png'
-repix(params)
-params['mode'] = 'mix-rcp'
-params['outfile'] = odir+'repixel-mixrcp.png'
-repix(params)
+#files = ['BARBAR.png', 'CABAL.png', 'Cobra.png', 'JETPAC.png', 'MNTYMOLE.png', 'NOD_YSOD.png', 'ROBOCOP1.png', 'skatecrz.png', 'STORM.png', 'URIDIUM.png']
+files = ['AlanW1.png']
+
+for fn in files:
+    params['infile'] = indir+'zx\\'+fn
+    params['mode'] = 'rect'
+    params['outfile'] = odir+fn+'repixel-rect.png'
+    repix(params)
+    params['mode'] = 'circle'
+    params['outfile'] = odir+fn+'repixel-circle.png'
+    repix(params)
+    params['mode'] = 'brush'
+    params['outfile'] = odir+fn+'repixel-brush.png'
+    repix(params)
+    params['mode'] = 'lines'
+    params['outfile'] = odir+fn+'repixel-lines.png'
+    repix(params)
+    params['mode'] = 'poly'
+    params['outfile'] = odir+fn+'repixel-poly.png'
+    repix(params)
+#    params['mode'] = 'mix-rc'
+#    params['outfile'] = odir+fn+'repixel-mixrc.png'
+#    repix(params)
+    params['mode'] = 'mix-rcp'
+    params['outfile'] = odir+fn+'repixel-mixrcp.png'
+    repix(params)
 
 quit()
 

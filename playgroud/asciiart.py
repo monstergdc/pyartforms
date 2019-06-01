@@ -4,14 +4,25 @@
 # ASCII ART v1.0 - image to text, Python version
 # based on Delphi component by Matthias Matting
 # which was based on PHP source code from Boosty's Ascii Artist,
-# (c)2018 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2018-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20180504
 # upd: 20181020
+# upd: 20190601
+
+# todo:
+#- ascii back to image
+#- pil not cv2?
 
 import cv2
 
+RC1 = ['W', '@', '#', '*', '+', ':', '.', ',', ' '] # std/dflt
+RC2 = ['W', 'X', 'S', 'H', 'C', 'I', '.', '.', ' ']
+RC3 = ['@', '$', '#', '*', '+', ':', '.', ',', ' ']
+
 def asciiart(params, fn):
-    RC = ['W', '@', '#', '*', '+', ':', '.', ',', ' ']
+    RC = RC1
+    if 'RC' in params:
+        RC = params['RC']
     ima = cv2.imread(fn, 0) # note: as gray
     rows, cols = ima.shape
     text = ''
