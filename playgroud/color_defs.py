@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # experimental paint algorithms (artificial artist) in Python, v1.0
-# (c)2017-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2017-2020 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 
 # color definitions, and color mappers/functions
 
@@ -34,6 +34,9 @@ colors_p = [(0x78, 0xE6, 0x7B), (0x8F, 0x60, 0xEE), (0xFE, 0x7B, 0x65), (0xE7, 0
 colors_b = [(0x00, 0x10, 0x20), (0x00, 0x20, 0x40), (0x00, 0x30, 0x60), (0x00, 0x40, 0x80), (0x00, 0x50, 0xA0), (0x00, 0x60, 0xC0), (0x00, 0x70, 0xE0), (0x00, 0x80, 0xFF)]
 # just yellow
 colors_y = [(0x20, 0x20, 0x00), (0x40, 0x40, 0x00), (0x60, 0x60, 0x00), (0x80, 0x80, 0x00), (0xA0, 0xA0, 0x00), (0xC0, 0xC0, 0x00), (0xE0, 0xE0, 0x00), (0xFF, 0xFF, 0x00)]
+
+# yellow orange red blue
+colors_yorb = [(0xEC, 0xD1, 0x27), (0xfa, 0x60, 0x00), (0xD1, 0x3B, 0x29), (0x20, 0x80, 0xd8)]
 
 # https://digitalsynopsis.com/design/beautiful-color-palettes-combinations-schemes/
 # by 5 + opt whites/~black + more
@@ -129,6 +132,8 @@ def new_colorer(mode, n, cnt):
         ca = colors_fwd
     if mode == 'bgo':
         ca = colors_bgo
+    if mode == 'yorb':
+        ca = colors_yorb
     if mode == 'avatar':
         ca = colors_avatar
     if mode == 'psych':
@@ -155,6 +160,8 @@ def new_colorer(mode, n, cnt):
         ca = colors_SkinTones
     if mode == 'Rainbow':
         ca = colors_Rainbow
+    if mode == 'colors_ZXC1':
+        ca = colors_ZXC1
     try:
         ca
     except NameError:

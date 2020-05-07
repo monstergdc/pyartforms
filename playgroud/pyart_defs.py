@@ -2,11 +2,12 @@
 # -*- coding: utf-8 -*-
 
 # pyartforms - paint algorithms (artificial artist) in Python - predefined forms
-# (c)2018-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2018-2020 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20181020
 # upd: 20190105, 06, 13, 18, 21, 22
 # upd: 20190311, 30
 # upd: 20190414, 15, 17, 18, 21, 22, 24, 26, 27
+# upd: 20200507
 
 
 # TODO:
@@ -174,6 +175,8 @@ def predef_mazy1(w, h):
         {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 100, 'm': 40, 'prefill': True, 'mode': 'black', 'keep': False, 'color': 'rg'},
         {'Background': bg_yellow, 'penw': 5, 'v': 120, 'n': 48, 'm': 12, 'prefill': True, 'mode': 'red', 'keep': True, 'color': 'blue_rnd'},
         {'Background': bg_white, 'penw': 8, 'v': 30, 'n': 100, 'm': 40, 'prefill': True, 'mode': 'red', 'keep': False, 'color': 'green_rnd'},
+
+        {'Background': bg_white, 'penw': 8, 'v': 30, 'n': 100, 'm': 40, 'prefill': True, 'mode': 'black', 'keep': False, 'color': 'colors_ZXC1'},
 
         # new test, quite ok, use proper
 #        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 300, 'm': 4, 'prefill': True, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75, 'mar': int(w/10)},
@@ -784,6 +787,8 @@ def predef_mazy18(w, h):
         {'Background': bg_white, 'n': 90, 'm': 30, 'v': 20, 'color': 'happy'},
         {'Background': bg_white, 'n': 60, 'm': 16, 'v': 80, 'color': 'happy'},
         {'Background': bg_white, 'n': 120, 'm': 40, 'v': 20, 'color': 'happy', 'addalpha': 50},
+        {'Background': bg_white, 'n': 90, 'm': 400, 'v': 100, 'color': 'yorb', 'addalpha': 50}, # new 202005
+        {'Background': bg_white, 'n': 90, 'm': 400, 'v': 100, 'color': 'happy', 'addalpha': 50}, # new 202005
         {'Background': bg_white, 'n': 90, 'm': 30, 'v': 20, 'color': 'BeachTowels'},
         {'Background': bg_white, 'n': 90, 'm': 30, 'v': 20, 'color': 'BeachTowels', 'addalpha': 50},
         {'Background': bg_white, 'n': 40, 'm': 120, 'v': 50, 'color': 'BeachTowels', 'addalpha': 50},

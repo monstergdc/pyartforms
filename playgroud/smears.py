@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # experimental paint algorithms (artificial artist) in Python, v1.0
-# (c)2017-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2017-2020 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # #1 'cruel red smears', not only red
 # #2 circles
 # #3 triangles
@@ -36,6 +36,7 @@
 # upd: 20190105, 06, 12, 13, 18, 19, 21, 22
 # upd: 20190306, 11, 29, 30
 # upd: 20190414, 15, 17, 18, 22, 24, 26, 27
+# upd: 20200507
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -780,7 +781,8 @@ def mazy18(draw, params):
             color = new_colorer(params['color'], n, cnt)
             if 'addalpha' in params:
                 color = add_alpha(color, params['addalpha'])
-            circle(draw, x, y, r, fill=None, outline=color)
+            for th in range(5): # test
+                circle(draw, x, y, r+th*0.2, fill=None, outline=color)
 
 def mazy19(draw, params):
     w, h, cnt = init_common(params)

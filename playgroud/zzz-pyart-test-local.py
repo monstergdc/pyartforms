@@ -2,22 +2,20 @@
 # -*- coding: utf-8 -*-
 
 # paint algorithms (artificial artist) in Python - demo
-# (c)2018-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2018-2020 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20181020
 # upd: 20190105, 12, 13, 18, 19
 # upd: 20190311, 30
-# upd: 20190414, 21, 22, 24
+# upd: 20190414, 21, 22, 24, 26
+# upd: 20190606
+# upd: 20200507
 
 # TODO:
-# - nice argparse (also per module?)
-# - anims: anims | grow (also img) | zxoids-anim (also img maybe?)
-# - smears5post
-# - asciiart | city-lame | faces (fin) | brush
+# - ?
 
 
 import os
 from datetime import datetime as dt
-
 from drawtools import get_canvas, art_painter
 from life1 import life
 from lissajous import lissajous, lissajous_loop
@@ -67,14 +65,15 @@ def do_mazy(cnt, w, h, odir, name):
 # --- 
 
 #w, h = get_canvas('A0')
-#w, h = get_canvas('A1') # fin - ten
+#w, h = get_canvas('A1') # fin - this
 #w, h = get_canvas('A2')
 #w, h = get_canvas('A3')
-#w, h = get_canvas('A4') # test - ten
+#w, h = get_canvas('A4') # test - this
 #w, h = get_canvas('A5')
-w, h = get_canvas('A6') # small - ten
+w, h = get_canvas('A6') # small - this
 #w, h = get_canvas('A7')
 #w, h = get_canvas('1024')
+#w, h = get_canvas('800')
 
 cnt = 1
 #cnt = 2
@@ -82,28 +81,14 @@ cnt = 1
 #cnt = 4
 
 enum_defs()
-    
-#do_mazy(cnt, w, h, odir, 'mazy01')
-#do_mazy(cnt, w, h, odir, 'mazy02')
-#do_mazy(cnt, w, h, odir, 'mazy03')
-#do_mazy(cnt, w, h, odir, 'mazy04')
-#do_mazy(cnt, w, h, odir, 'mazy05')
-#do_mazy(cnt, w, h, odir, 'mazy06')
-#do_mazy(cnt, w, h, odir, 'mazy07')
-#do_mazy(cnt, w, h, odir, 'mazy08')
-#do_mazy(cnt, w, h, odir, 'mazy09')
-#do_mazy(cnt, w, h, odir, 'mazy10')
-#do_mazy(cnt, w, h, odir, 'mazy11')
-#do_mazy(cnt, w, h, odir, 'mazy12')
-#do_mazy(cnt, w, h, odir, 'mazy13')
-#do_mazy(cnt, w, h, odir, 'mazy14') # need fix
-#do_mazy(cnt, w, h, odir, 'mazy15')
-#do_mazy(cnt, w, h, odir, 'mazy16')
-#do_mazy(cnt, w, h, odir, 'mazy17')
-#do_mazy(cnt, w, h, odir, 'mazy18')
-#do_mazy(cnt, w, h, odir, 'waves01')
-#do_mazy(cnt, w, h, odir, 'waves02')
-#do_mazy(cnt, w, h, odir, 'waves03')
+
+#predef_names1 = predef_names
+#predef_names1 = ['mazy19']
+predef_names1 = ['mazy18']
+#predef_names1 = ['mazy01']
+for m in predef_names1:
+    do_mazy(cnt, w, h, odir, m)
+
 #do_mazy(cnt, w, h, odir, 'astro')
 #do_mazy(cnt, w, h, odir, 'life')
 #do_mazy(cnt, w, h, odir, 'lissajous')

@@ -1,10 +1,10 @@
 ﻿<!DOCTYPE HTML>
 <html>
 <head>
-<title>pyartforms (c)2019 Jakub.Noniewicz.art.pl</title>
+<title>pyartforms (c) Jakub.Noniewicz.art.pl</title>
 </head>
 <body style="background-color: black; color: white;">
-<h2>pyartforms (c)2019 Jakub.Noniewicz.art.pl</h2>
+<h2>pyartforms (c)2019-2020 Jakub.Noniewicz.art.pl</h2>
 <p>Algorithm-generated art forms in Python.</p>
 <p>Click on thumbnail to see bigger image, then refresh to see new variation.</p>
 <p>Source code: <a target=_new href="https://github.com/monstergdc/pyartforms">https://github.com/monstergdc/pyartforms</a></p>
@@ -30,6 +30,7 @@ function sub_group($name, $id)
 	$cnt[16]  = 96;
 	$cnt[17]  = 7;
 	$cnt[18]  = 6;
+	$cnt[19]  = 7;
 
 	$cnt[101]  = 7; //life
 	$cnt[102] = 4; //lissajous
@@ -81,6 +82,7 @@ sub_group("mazy15", 15);
 sub_group("mazy16", 16);
 sub_group("mazy17", 17);
 sub_group("mazy18", 18);
+sub_group("mazy19", 7);
 sub_group("life", 101);
 sub_group("lissajous", 102);
 sub_group("astro", 103);
