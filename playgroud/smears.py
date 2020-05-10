@@ -36,7 +36,7 @@
 # upd: 20190105, 06, 12, 13, 18, 19, 21, 22
 # upd: 20190306, 11, 29, 30
 # upd: 20190414, 15, 17, 18, 22, 24, 26, 27
-# upd: 20200507
+# upd: 20200507, 10
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -452,6 +452,11 @@ def mazy9(draw, params):
                 color = colors_BeachTowels[random.randint(0, len(colors_BeachTowels)-1)]
             else:
                 color = colors_BeachTowels[n%len(colors_BeachTowels)]
+        if params['color'] == 'gits':
+            if rndc == True:
+                color = colors_gits[random.randint(0, len(colors_gits)-1)]
+            else:
+                color = colors_gits[n%len(colors_gits)]
         # todo: new colorer proper
         #test
         #color = (color[0], color[1], color[2], 100)

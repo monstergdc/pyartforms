@@ -8,7 +8,7 @@
 # upd: 20190311, 30
 # upd: 20190414, 21, 22, 24, 26
 # upd: 20190606
-# upd: 20200507
+# upd: 20200507, 10
 
 # TODO:
 # - ?
@@ -40,7 +40,9 @@ def do_mazy(cnt, w, h, odir, name):
     if name in predefs:
         pr = predefs[name]
         p = pr(w, h)
-    #else: ?
+    else:
+        print('name [%s] not in predefs?' % name)
+        # more?
 
 #    snapshot1 = tracemalloc.take_snapshot()
     for n in range(cnt):
@@ -84,7 +86,7 @@ enum_defs()
 
 #predef_names1 = predef_names
 #predef_names1 = ['mazy19']
-predef_names1 = ['mazy18']
+predef_names1 = ['mazy09', 'mazy18']
 #predef_names1 = ['mazy01']
 for m in predef_names1:
     do_mazy(cnt, w, h, odir, m)

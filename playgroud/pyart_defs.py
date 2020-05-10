@@ -7,7 +7,7 @@
 # upd: 20190105, 06, 13, 18, 21, 22
 # upd: 20190311, 30
 # upd: 20190414, 15, 17, 18, 21, 22, 24, 26, 27
-# upd: 20200507
+# upd: 20200507, 10
 
 
 # TODO:
@@ -579,6 +579,10 @@ def predef_mazy9(w, h):
         {'n': 20, 'Background': bg_black, 'color': 'BeachTowels', 'v': v3, 'rndc': True},
         {'n': 60, 'Background': bg_black, 'color': 'BeachTowels', 'v': v3, 'rndc': True},
         {'n': 120, 'Background': bg_black, 'color': 'BeachTowels', 'v': v3, 'rndc': True},
+
+        {'n': 20, 'Background': bg_black, 'color': 'gits', 'v': v3, 'rndc': True},
+        {'n': 60, 'Background': bg_black, 'color': 'gits', 'v': v3, 'rndc': True},
+        {'n': 120, 'Background': bg_black, 'color': 'gits', 'v': v3, 'rndc': True},
     ]
     return append_dflts(a, 'SMEARS#9', mazy9, w, h)
 
@@ -788,6 +792,7 @@ def predef_mazy18(w, h):
         {'Background': bg_white, 'n': 60, 'm': 16, 'v': 80, 'color': 'happy'},
         {'Background': bg_white, 'n': 120, 'm': 40, 'v': 20, 'color': 'happy', 'addalpha': 50},
         {'Background': bg_white, 'n': 90, 'm': 400, 'v': 100, 'color': 'yorb', 'addalpha': 50}, # new 202005
+        {'Background': bg_white, 'n': 90, 'm': 400, 'v': 100, 'color': 'gits', 'addalpha': 50}, # new 202005
         {'Background': bg_white, 'n': 90, 'm': 400, 'v': 100, 'color': 'happy', 'addalpha': 50}, # new 202005
         {'Background': bg_white, 'n': 90, 'm': 30, 'v': 20, 'color': 'BeachTowels'},
         {'Background': bg_white, 'n': 90, 'm': 30, 'v': 20, 'color': 'BeachTowels', 'addalpha': 50},
