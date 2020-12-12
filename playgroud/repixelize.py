@@ -12,7 +12,7 @@
 
 # note: input must be 24-bit RGB
 
-# TODO: xy scale sync issue | more params for lines mode
+# TODO: aspect ratio src->dst issue (opt add border to preserve ratio?)
 
 
 import random, math
@@ -22,7 +22,7 @@ from drawtools import *
 
 def repix(params):
     """
-    'Repixelize' - remake small image into big one, change each pixel to bigger predefined but variable multipixel shape
+    'Repixelize' - remake small image into big one, change each pixel to bigger predefined but variable multipixel form
     """
     def rect_():
         rect(d, int(x*dx), int(y*dy), int(dx*coef), int(dy*coef), fill=cin, outline=None)
@@ -50,7 +50,7 @@ def repix(params):
             po.append((x1, y1))
         d.polygon(po, fill=cin, outline=None)
     def brush_():
-        if 'bs' in params: # bruch rect block size variation, default 15
+        if 'bs' in params: # 'bs' - brush rect block size variation, default 15
             bs0 = int(params['bs'])
             if bs0 < 0:
                 bs0 = 0
@@ -70,30 +70,43 @@ def repix(params):
             else:
                 ofsx = random.randint(0+1, int(dx)-1)
                 ofsy = random.randint(0+1, int(dy)-1)
-            rect(d, int(x*dx+ofsx), int(y*dy+ofsy), int(bs), int(bs), fill=cin, outline=None)
+            rect(d, int(x*dx+ofsx), int(y*dy+ofsy), int(bs), int(bs), fill=cin, outline=None) #note: with outline migth be interesting too
     def lines_():
         horizontal = False
-        if 'horizontal' in params:
+        if 'horizontal' in params: # 'horizontal' - opt only horizontal lines
             horizontal = params['horizontal']
-        for b in range(random.randint(25, 25+55)): # par
-            bs = random.randint(1, 6) # par
+        maxlinewidth = 2
+        if 'maxlinewidth' in params: # 'maxlinewidth' - max line width, default 2
+            maxlinewidth = int(params['maxlinewidth'])
+        treshold = 80
+        if 'treshold' in params: # 'treshold' - probability treshold for line rnd extension beyond current 'pixel' area, default 80
+            treshold = int(params['treshold'])
+        nn = 4
+        if 'nn' in params:  # 'nn' - line iteration count per 'pixel' (big slows down), default 4
+            nn = int(params['nn'])
+        ex = 4
+        for b in range(nn):
             addx1 = 0
             addy1 = 0
             addx2 = 0
             addy2 = 0
-            ex = 4 # par
-            if random.randint(0, 100) >= 80: #par?
+            if random.randint(0, 100) >= treshold:
                 addx1 = -dx * random.randint(1, ex)
-            if random.randint(0, 100) >= 80: #par?
+            if random.randint(0, 100) >= treshold:
                 addx2 = dx * random.randint(1, ex)
             if not horizontal:
-                if random.randint(0, 100) > 80: #par?
+                if random.randint(0, 100) >= treshold:
                     addy1 = -dy * random.randint(1, ex)
-                if random.randint(0, 100) >= 80: #par?
+                if random.randint(0, 100) >= treshold:
                     addy2 = dy * random.randint(1, ex)
-            points = [x*dx+addx1+random.randint(0+1, int(dx)-1), y*dy+addy1+random.randint(0+1, int(dy)-1), x*dx+addx2+random.randint(0+1, int(dx)-1), y*dy+addy2+random.randint(0+1, int(dy)-1)]
+            points = [x*dx+addx1+random.randint(0+1, int(dx)-1), y*dy+addy1+random.randint(0+1, int(dy)-1),
+                      x*dx+addx2+random.randint(0+1, int(dx)-1), y*dy+addy2+random.randint(0+1, int(dy)-1)]
+            bs = random.randint(1, maxlinewidth)
             d.line(points, fill=cin, width=bs)
 
+    if not 'mode' in params:
+        print("Mode not given")
+        return
     if not 'infile' in params:
         print("Source image (inflie) not given")
         return
@@ -140,7 +153,7 @@ def repix(params):
     print('repix', params['mode'], params['infile'], '->', outfile, '- resize:', (srcw, srch), '->', (w, h))
     d = ImageDraw.Draw(img)
     dx = w/srcw
-    dy = h/srch
+    dy = h/srch # todo: opt fix for aspect ratio here?
     for x in range(srcw):
         for y in range(srch):
             cin = src.getpixel((x, y))
