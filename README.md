@@ -142,3 +142,10 @@ script: **asciiart.py**
 :::::::::::::::.................:WWWWWWWWW#.*#####:.............:::::::::::::::::::::::::
 :::::::::::::::.................*WWWWWWWW@..#####+...............::::::::..::::::::::::::
 </pre>
+
+# REPIXELIZE:
+script: **repixelize.py** and **repixelize-demo.py**
+
+![small source image](/playgroud/repixel-in/zz-zx-0011-1-cir.png?raw=true "small source image")
+
+TODO: more
