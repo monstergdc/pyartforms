@@ -141,6 +141,9 @@ def repix(params):
         coef = params['coef']
     else:
         coef = 0.9
+    outfile = ''
+    if 'outfile' in params:
+        outfile = params['outfile']
     img = Image.new('RGB', (w, h), color = bk)
     srcw = src.width
     srch = src.height
@@ -167,8 +170,7 @@ def repix(params):
             if params['mode'] == 'lines':
                 lines_()
 
-    if 'outfile' in params:
-        outfile = params['outfile']
+    if outfile != '':
         img.save(outfile)
     return img
 

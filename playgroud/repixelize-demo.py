@@ -58,6 +58,14 @@ def demo_lines_test():
                 params['nn'] = nn
                 params['postfix'] = 'tr' + str(tr) + 'lw' + str(lw) + 'nn' + str(nn)
                 demo_looper(params, files=['zz-zx-0011-1-cir.png'], modes=['lines'])
+
+# rect and circle test
+def demo_rect_and_circle_test():
+    params = {'w': w, 'h': h, 'bk': (0, 0, 0), 'coef': 0.9, 'scale': 1.0, 'rmin': 78, 'rmax': 180}
+    for r in [False, True]:
+        params['rnd'] = r
+        params['postfix'] = 'rnd' + str(r)
+        demo_looper(params, files=['zz-zx-0011-1-cir.png'], modes=['rect', 'circle'])
     
 # demo for private zx files
 def demo_private_zx():
@@ -105,6 +113,7 @@ w, h = get_canvas('A4') # test4
 demo_poly_test()
 demo_brush_test()
 demo_lines_test()
+demo_rect_and_circle_test()
 #demo_private_zx()
 #demo_private()
 
