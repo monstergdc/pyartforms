@@ -8,7 +8,7 @@
 # cre: 20190330
 # upd: 20190401, 02, 03, 15, 22, 23
 # upd: 20200724, 25, 30
-# upd: 20201208, 10, 11, 12
+# upd: 20201208, 10, 11, 12, 13
 
 # note: input must be 24-bit RGB
 
@@ -110,15 +110,11 @@ def repix(params):
     if not 'infile' in params:
         print("Source image (inflie) not given")
         return
-    if not 'outfile' in params:
-        print("Destination image (outfile) not given")
-        return
     try:
         src = Image.open(params['infile'])
     except:
         print("Error opening source image:", params['infile'])
         return
-    outfile = params['outfile']
     if not 'w' in params:
         print("Destination width not given")
         return
@@ -170,6 +166,10 @@ def repix(params):
                 brush_()
             if params['mode'] == 'lines':
                 lines_()
-    img.save(outfile)
+
+    if 'outfile' in params:
+        outfile = params['outfile']
+        img.save(outfile)
+    return img
 
 # EOF

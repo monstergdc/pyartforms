@@ -146,6 +146,7 @@ script: **asciiart.py**
 # REPIXELIZE:
 script: **repixelize.py** and **repixelize-demo.py**
 
+eg. this 256x192 small image
 ![small source image](/playgroud/repixel-in/zz-zx-0011-1-cir.png?raw=true "small source image")
-
-TODO: more
+can be remade into bigger (800x600 here) image with different 'finish' style:
+![example](/examples/repixel-demo.png?raw=true "Repixelize example")

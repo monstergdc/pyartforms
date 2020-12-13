@@ -3,7 +3,7 @@
 
 # PyArtForms - Repixelize algorithm (artificial artist), v1.0, Python version - DEMO
 # (c)2018-2020 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
-# cre: 20201208, 10, 11, 12
+# cre: 20201208, 10, 11, 12, 13
 
 
 import os, sys
@@ -58,7 +58,7 @@ def demo_lines_test():
                 params['nn'] = nn
                 params['postfix'] = 'tr' + str(tr) + 'lw' + str(lw) + 'nn' + str(nn)
                 demo_looper(params, files=['zz-zx-0011-1-cir.png'], modes=['lines'])
-
+    
 # demo for private zx files
 def demo_private_zx():
         f = 'zx\\'
@@ -99,6 +99,7 @@ w, h = get_canvas('A4') # test4
 #w, h = get_canvas('A3') # test3
 #w, h = get_canvas('A2') # test2
 #w, h = get_canvas('A1') # final
+#w, h = get_canvas('800') # for web examples
 
 # select here which demos to run
 demo_poly_test()
