@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # PyArtForms - Repixelize algorithm (artificial artist), v1.0, Python version - DEMO
-# (c)2018-2020 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2018-2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20201208, 10, 11, 12, 13
 
 
@@ -78,6 +78,8 @@ def demo_private_zx():
 # demo for private files
 def demo_private():
     # todo: test/use new params
+
+    """
     params = {'w': w, 'h': h, 'bk': (0, 0, 0), 'coef': 0.9, 'scale': 1.0, 'rnd': True, 'rmin': 78, 'rmax': 98}
     files = ['dragon07e.jpg', 'dragon08x.jpg', 'firemaster.jpg', 'greendevil.jpg', 'robo.jpg', 'zjawa.jpg']
     demo_looper(params, files, modes=['brush', 'lines', 'poly'])
@@ -93,6 +95,10 @@ def demo_private():
 
     params = {'w': w, 'h': h, 'bk': (0, 0, 0), 'coef': 0.9, 'scale': 0.1, 'rnd': True, 'rmin': 15, 'rmax': 180}
     demo_looper(params, files=['rgbxxx-1024-test.png'], modes=['lines'])
+    """
+
+    params = {'w': w, 'h': h, 'bk': (0, 0, 0), 'coef': 0.9, 'scale': 1.0, 'rnd': True, 'rmin': 78, 'rmax': 98}
+    demo_looper(params, files=['jolka-x.png'], modes=['brush', 'lines', 'poly'])
 
 # ---
 
@@ -110,12 +116,12 @@ w, h = get_canvas('A4') # test4
 #w, h = get_canvas('800') # for web examples
 
 # select here which demos to run
-demo_poly_test()
-demo_brush_test()
-demo_lines_test()
-demo_rect_and_circle_test()
+##demo_poly_test()
+##demo_brush_test()
+##demo_lines_test()
+##demo_rect_and_circle_test()
 #demo_private_zx()
-#demo_private()
+demo_private()
 
 time_elapsed = dt.now() - start_time
 print('ALL done. elapsed time: {}'.format(time_elapsed))
