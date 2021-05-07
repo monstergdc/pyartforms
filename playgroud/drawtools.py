@@ -1,12 +1,13 @@
 
 # Python art forms
 # some common code/tools
-# (c)2018-2019 Noniewicz.com
+# (c)2018-2021 Noniewicz.com
 # upd: 20180503, 08
 # upd: 20181020, 21
 # upd: 20190112, 19, 21, 22
 # upd: 20190311, 29
 # upd: 20190414, 21
+# upd: 20210301
 
 from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin, ImageFont
 from datetime import datetime as dt
@@ -120,7 +121,7 @@ def add_myself(draw, w, h, bg):
     draw.text((x+1, y+1), txt, font=fnt, fill=bgx1)
     draw.text((x, y), txt, font=fnt, fill=bgx)
 
-def append_myself(title):
+def append_myself(title=""):
     """Append some tags to PNG image."""
     x = PngImagePlugin.PngInfo()
     #x.add_itxt(key='Title', value=title, lang='', tkey='', zip=False)
