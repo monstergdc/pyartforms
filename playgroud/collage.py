@@ -3,11 +3,14 @@
 
 # PyArtForms collage builder, v1.0
 # (c)2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
-# cre: 20210508
+# cre: 20210508, 09
 
 # pip install colorthief
 
 # TODO:
+# - manage pool of 'same' map pix - swap randomly from the same
+# - issue with round err and lame lines - de facto ratio issue
+# - issue with ratio src v dst
 # - ?
 
 """
@@ -31,13 +34,13 @@ import binascii
 import json
 from colorthief import ColorThief # for dominant color, https://github.com/fengsp/color-thief-py
 
-# ima = image_resize(ima, height = canvas[1])
-# d = ImageDraw.Draw(img)
-# cin = src.getpixel((x, y))
 
-# ---
 
-def prepare_map(root, outmap, one):
+def prepare_map(params):
+    print('prepare_map:', params)
+    root = params['folder']
+    outmap = params['outmap']
+    one = int(params['one'])
     # scan folder for src images
     src = []
     for r, d, f in os.walk(root): # r=root, d=directories, f = files
@@ -48,18 +51,19 @@ def prepare_map(root, outmap, one):
     dim = int(math.sqrt(n))+1 #note: +1 fix
     print('total src images:', n, 'box dim:', dim)
 
-    #resize + crop
+    #resize + crop + map
     bimg = [[None for x in range(dim)] for y in range(dim)]
     dc = [[None for x in range(dim)] for y in range(dim)] # dominating color?
     x = 0
     y = 0
     for i in range(n):
+        msg = ""
         try:
             image = Image.open(src[i]).convert("RGBA")
-            print('loaded', i+1, 'of', n, src[i])
+            msg += 'loaded %d/%d [%s]' % (i+1, n, src[i])
         except:
             print("Error opening source image:", params['infile'])
-            continue # skip bad and continue
+            continue # just skip bad and continue
         w = image.size[0]
         h = image.size[1]
         d = w
@@ -79,33 +83,37 @@ def prepare_map(root, outmap, one):
         dw = int((nw - one) / 2)
         dh = int((nh - one) / 2)
         box = (dw, dh, dw+one-1, dh+one-1)
-        print('resize:', (w ,h), '->', (nw, nh), 'crop box:', box)
         bimg[y][x] = bimg[y][x].crop(box)
+        msg += ' resize: (%dx%d)->(%dx%d)' % (w, h, nw, nh)
 
-        bimg[y][x].save('tmp-image.png', dpi=(300,300))
-        color_thief = ColorThief('tmp-image.png')
-        dominant_color = color_thief.get_color(quality=1)
-        colour = binascii.hexlify(bytearray(int(c) for c in dominant_color)).decode('ascii')
-        print('dominant_color', dominant_color, colour)
-        dc[y][x] = dominant_color
+        #opt also by average (better in fact)
+        if False:
+            bimg[y][x].save('tmp-image.png', dpi=(300,300))
+            color_thief = ColorThief('tmp-image.png')
+            dominant_color = color_thief.get_color(quality=1)
+            colour = binascii.hexlify(bytearray(int(c) for c in dominant_color)).decode('ascii')
+            print(msg, 'dominant_color', dominant_color, '#'+colour)
+            dc[y][x] = dominant_color
+        if True:
+            img2 = bimg[y][x].resize((1, 1), resample=Image.BICUBIC, box=None)
+            dc[y][x] = img2.getpixel((0, 0))
+            print(msg, 'avg_color', dc[y][x])
 
         x += 1
         if x == dim:
             x = 0
             y += 1
 
-    # make map
+    # make map as one big image
     print('make map')
     w = dim * one
     h = dim * one
-    bk = (0, 0, 0)
-    img = Image.new('RGBA', (w, h), color = bk)
+    img = Image.new('RGBA', (w, h), color = (0, 0, 0))
     for y in range(dim):
         for x in range(dim):
             position = (x*one, y*one)
             item = bimg[y][x]
             if item != None:
-                print('paste at:', position)
                 img.paste(item, position, item)
 
     # save map
@@ -114,19 +122,28 @@ def prepare_map(root, outmap, one):
     with open(outmap+"-dominant_color_map.json", 'w') as filehandle:
         json.dump(dc, filehandle)
 
-def get_tile(outmap, outmap_data, cin): # todo: by color, but opt by luminosity
+def get_tile(outmap, outmap_data, cin): # works by color, or luminosity
     color_diffs = []
     if len(cin) == 4:
         r, g, b, a = cin # watch out for alpha
     else:
-        r, g, b = cin
+        if len(cin) == 3:
+            r, g, b = cin
+        else: #grayscale?
+            r = cin
+            g = cin
+            b = cin
     for y in range(len(outmap_data)):
         row = outmap_data[y]
         for x in range(len(row)):
             c = outmap_data[y][x]
             if c is None:
                 continue
-            cr, cg, cb = c
+            if len(c) == 4:
+                cr, cg, cb, a = c
+            else:
+                if len(c) == 3:
+                    cr, cg, cb = c
             color_diff = math.sqrt(abs(r - cr)**2 + abs(g - cg)**2 + abs(b - cb)**2)
             color_diffs.append((color_diff, x, y))
             #print('debug:', y, x, c)
@@ -136,6 +153,7 @@ def get_tile(outmap, outmap_data, cin): # todo: by color, but opt by luminosity
     return mx, my
 
 def make_collage(params):
+    print('make_collage:', params)
     random.seed()
     if not 'w' in params or not 'h' in params or not 'one' in params:
         print("No w, h or one in params")
@@ -177,17 +195,21 @@ def make_collage(params):
 
     srcw = src.width
     srch = src.height
+    print('src:', srcw, srch, 'dst:', w, h, 'map:', outmap.width, outmap.height, 'working...')
     img = Image.new('RGB', (w, h), color = bk)
     d = ImageDraw.Draw(img)
     dx = w/srcw
     dy = h/srch # todo: opt fix for aspect ratio here?
 
     for x in range(srcw):
-        print('x', x+1, 'of', srcw)
+        #print('x', x+1, 'of', srcw)
+        if x % 10 == 0:
+            print('%0.2f %s' % (x/srcw*100, '%'))
         for y in range(srch):
-            #print('pixel', 'x', x, 'y', y)
             cin = src.getpixel((x, y))
-            ox, oy = get_tile(outmap, outmap_data, cin) # map color -> college item from outmap
+            if cin == bk: # skip bk
+                continue
+            ox, oy = get_tile(outmap, outmap_data, cin) # map color -> item from outmap
             box = (ox*one, oy*one, (ox+1)*one-1, (oy+1)*one-1)
             b = outmap.crop(box)
             b = b.resize((int(dx), int(dy)), resample=Image.BICUBIC, box=None)
@@ -195,19 +217,31 @@ def make_collage(params):
             img.paste(b, position, b)
 
     outfile = params['outfile']
+    print('saving', outfile, '...')
     img.save(outfile, dpi=(300,300))
 
 # ---
 
-if __name__ == '__main__':
-    folder = '.\\00 src img ideas\\'
+def test():
+    folder = '.\\map-in-1\\'
     outmap = '.\\outmap.png'
-    one = 512
+    infile = '.\\repixel-in\\38a.jpg'
+    outfile = 'mosaic-1.png'
+    one = 80
+    w = one*160
+    h = one*178
 
-#    prepare_map(root=folder, outmap=outmap, one=one)
+#'A2': (7015, 4960), 'A1': (9933, 7015), 'A0': (14043, 9933),
 
-    # 'A2': (7015, 4960)
-    params = {'w': 7015, 'h': 4960, 'bk': (0, 0, 0), 'infile': '.\\00 src img ideas\\Image2.png', 'outfile': 'mosaic-1.png', 'outmap': outmap, 'one': one}
-    make_collage(params)
+    params1 = {'folder': folder, 'outmap': outmap, 'one': one}
+    params2 = {'w': w, 'h': h, 'bk': (0, 0, 0), 'infile': infile, 'outfile': outfile, 'outmap': outmap, 'one': one}
+
+    prepare_map(params1)
+    make_collage(params2)
+
+# ---
+
+if __name__ == '__main__':
+    test()
 
 # EOF
