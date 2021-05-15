@@ -1,10 +1,12 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# drawing life (2d) in Python
-# (c)2018 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# PyArtForms - Python generative art forms paint algorithms (artificial artist)
+# drawing life (2d) in Python, v1.0
+# (c)2018-2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20181021
-# upd; 201810??
+# upd; 20210301
+# upd; 20210515
 
 # note: slow, but interesting, do experiment more!
 
@@ -185,7 +187,7 @@ def life2_image(src, f):
 
 def life2_video(src, f, video_name, frames):
     image_tmp = 'life-tmp.png'   #tmp img file
-    #fcc = -1
+    #fcc = -1 # will ask for video codec
     #fcc = cv2.VideoWriter_fourcc(*"XVID")
     fcc = cv2.VideoWriter_fourcc(*"MJPG")
 
@@ -216,12 +218,14 @@ def life2_video(src, f, video_name, frames):
 src = 'test-src4-life2.png'
 
 # img
-life2_image(src=src, f='f2a')
-life2_image(src=src, f='f2b')
-life2_image(src=src, f='f2c')
+if True:
+    life2_image(src=src, f='f2a')
+    life2_image(src=src, f='f2b')
+    life2_image(src=src, f='f2c')
 
-# vid
-life2_video(src=src, f='f2a', video_name='life-video-f2a.avi', frames=80)
-life2_video(src=src, f='f2b', video_name='life-video-f2b.avi', frames=45)
-life2_video(src=src, f='f2c', video_name='life-video-f2c.avi', frames=40)
+# video
+if True:
+    life2_video(src=src, f='f2a', video_name='life-video-f2a.avi', frames=80)
+    life2_video(src=src, f='f2b', video_name='life-video-f2b.avi', frames=45)
+    life2_video(src=src, f='f2c', video_name='life-video-f2c.avi', frames=40)
 
