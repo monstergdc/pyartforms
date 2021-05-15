@@ -1,14 +1,17 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# drawings (astro objects) in Python
-# (c)2018-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
-# https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
+# PyArtForms - drawings in Python - astro objects
+# (c)2018-2021 MoNsTeR/GDC, Noniewicz.com, Noniewicz.art.pl, Jakub Noniewicz
 # cre: 20180405
 # upd; 20180406, 07
 # upd; 20180502, 03
 # upd: 20181020, 21
 # upd: 20190119
+# upd: 20210515
+
+# read:
+# https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
 
 # TODO:
 # - big bang, more
@@ -20,6 +23,11 @@ import random, math, string, os, sys
 from drawtools import *
 
 
+def init_astro(params):
+    if not 'w' in params or not 'h' in params:
+        raise('w or h not set in params')
+    random.seed()
+    return params['w'], params['h'], math.pi/180
 
 def draw_tool(draw, params, color, x, y, z):
     box_or_cir = params['box_or_cir']
@@ -31,9 +39,7 @@ def draw_tool(draw, params, color, x, y, z):
 
 # blue galaxy
 def paint0(draw, params):
-    w = params['w']
-    h = params['h']
-    c = math.pi/180
+    w, h, c = init_astro(params)
     s = float(h)/3507 # 'A3': (4960, 3507), float = =fix for py 2.7
     for r in range(36):
         for n in range(8):
@@ -46,11 +52,8 @@ def paint0(draw, params):
 
 # elliptic galaxy
 def paint1(draw, params):
-    w = params['w']
-    h = params['h']
-    c = math.pi/180
+    w, h, c = init_astro(params)
     s = float(h)/3507
-    random.seed()
     for r in range(48):
         for n in range(24):
             if random.randint(0, 100) > 80:
@@ -66,9 +69,7 @@ def paint1(draw, params):
 
 # spiral galaxy
 def paint2(draw, params):
-    w = params['w']
-    h = params['h']
-    c = math.pi/180
+    w, h, c = init_astro(params)
     s = float(h)/3507
     for r in range(48):
         for n in range(18):
@@ -81,9 +82,7 @@ def paint2(draw, params):
 
 # neutron star
 def paint3(draw, params):
-    w = params['w']
-    h = params['h']
-    c = math.pi/180
+    w, h, c = init_astro(params)
     s = float(h)/3507
     for r in range(50):
         for n in range(12):
@@ -99,9 +98,7 @@ def paint3(draw, params):
 
 # black hole
 def paint4(draw, params):
-    w = params['w']
-    h = params['h']
-    c = math.pi/180
+    w, h, c = init_astro(params)
     s = float(h)/3507
     for r in range(32):
         for n in range(16):
@@ -115,9 +112,7 @@ def paint4(draw, params):
 
 # supernova
 def paint5(draw, params):
-    w = params['w']
-    h = params['h']
-    c = math.pi/180
+    w, h, c = init_astro(params)
     s = float(h)/3507
     for r in range(48):
         for n in range(8):
@@ -130,11 +125,8 @@ def paint5(draw, params):
 
 # nebula
 def paint6(draw, params):
-    w = params['w']
-    h = params['h']
-    c = math.pi/180
+    w, h, c = init_astro(params)
     s = float(h)/3507
-    random.seed()
     for r in range(2048):
         for n in range(24):
             color = (random.randint(32, 256), 32+r*12, 32+n*32)
@@ -146,9 +138,7 @@ def paint6(draw, params):
 
 # star
 def paint7(draw, params):
-    w = params['w']
-    h = params['h']
-    c = math.pi/180
+    w, h, c = init_astro(params)
     s = float(h)/3507
     for r in range(40):
         for n in range(8):
