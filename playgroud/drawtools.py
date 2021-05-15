@@ -134,7 +134,7 @@ def append_myself(title=""):
     x.add_text(key='Title', value=title, zip=False)
     x.add_text(key='Description', value='generated in PyArtForms', zip=False)
     x.add_text(key='Author', value='Jakub Noniewicz', zip=False)
-    x.add_text(key='Copyright', value='(c)'+y+' Jakub Noniewicz', zip=False)
+    x.add_text(key='Copyright', value='(c)'+str(y)+' Jakub Noniewicz', zip=False)
     x.add_itxt(key='Concept', value='PyArtForms concept by: Jakub Noniewicz | noniewicz.com | noniewicz.art.pl', lang='', tkey='', zip=False)
     return x
 
@@ -188,14 +188,18 @@ def art_painter(params, png_file='example.png', output_mode='save', bw=False):
     params['im'] = im  # pass the Image object too
     f = params['call']
     f(draw, params)
-    im = xsmooth(params, im)
+    if "blur" in params:
+        if params['blur'] == True:
+            im = xsmooth(params, im)
 
     if output_mode == 'save':
         #add_myself(draw, params['w'], params['h'], params['Background'])
         im.save(png_file, dpi=(300,300), pnginfo=append_myself('pyartforms'))
         show_benchmark(start_time)
-        im = Image.new('L', (1, 1), (0)) # ???
-        draw = ImageDraw.Draw(im) # ???
+        draw = None #?
+        im = None #?
+        #im = Image.new('L', (1, 1), (0)) # ???
+        #draw = ImageDraw.Draw(im) # ???
         return
     if output_mode == 'cgi':
         add_myself(draw, params['w'], params['h'], params['Background'])
@@ -236,13 +240,11 @@ def im2arr(image_path):
     a.resize(im.height, im.width)
     return a
 
-def xsmooth(params, im):
-    """Smooth image - 2x blur then sharpen back (only if blur==True in params)"""
-    if "blur" in params:
-        if params['blur'] == True:
-            im = im.filter(ImageFilter.BLUR)
-            im = im.filter(ImageFilter.BLUR)
-            im = im.filter(ImageFilter.SHARPEN)
-            im = im.filter(ImageFilter.SHARPEN)
+def xsmooth(im):
+    """Smooth image - 2x blur then sharpen back"""
+    im = im.filter(ImageFilter.BLUR)
+    im = im.filter(ImageFilter.BLUR)
+    im = im.filter(ImageFilter.SHARPEN)
+    im = im.filter(ImageFilter.SHARPEN)
     return im
 
