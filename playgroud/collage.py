@@ -1,9 +1,10 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# PyArtForms collage builder, v1.0
+# PyArtForms - Python generative art forms paint algorithms (artificial artist)
+# collage builder, v1.0
 # (c)2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
-# cre: 20210508, 09
+# cre: 20210508, 09, 10, 15
 
 # pip install colorthief
 
@@ -11,6 +12,7 @@
 # - manage pool of 'same' map pix - swap randomly from the same
 # - issue with round err and lame lines - de facto ratio issue
 # - issue with ratio src v dst
+# - some collor scalling to better fit?
 # - ?
 
 """
@@ -84,7 +86,7 @@ def prepare_map(params):
         dh = int((nh - one) / 2)
         box = (dw, dh, dw+one-1, dh+one-1)
         bimg[y][x] = bimg[y][x].crop(box)
-        msg += ' resize: (%dx%d)->(%dx%d)' % (w, h, nw, nh)
+        msg += ' resize: (%dx%d)->(%dx%d)->(%dx%d)' % (w, h, nw, nh, bimg[y][x].width, bimg[y][x].height)
 
         #opt also by average (better in fact)
         if False:
@@ -172,6 +174,19 @@ def make_collage(params):
     else:
         bk = (0,0,0)
 
+    x0 = 0
+    y0 = 0
+    x1 = 0
+    y1 = 0
+    if 'x0' in params:
+        x0 = params['x0']
+    if 'y0' in params:
+        y0 = params['y0']
+    if 'x1' in params:
+        x1 = params['x1']
+    if 'y1' in params:
+        y1 = params['y1']
+
     #todo: chk for infile outfile outmap outmap-json
 
     try:
@@ -193,8 +208,8 @@ def make_collage(params):
         print("Error opening outmap json:", fn_json)
         return
 
-    srcw = src.width
-    srch = src.height
+    srcw = src.width-x0-x1
+    srch = src.height-y0-y1
     print('src:', srcw, srch, 'dst:', w, h, 'map:', outmap.width, outmap.height, 'working...')
     img = Image.new('RGB', (w, h), color = bk)
     d = ImageDraw.Draw(img)
@@ -206,8 +221,8 @@ def make_collage(params):
         if x % 10 == 0:
             print('%0.2f %s' % (x/srcw*100, '%'))
         for y in range(srch):
-            cin = src.getpixel((x, y))
-            if cin == bk: # skip bk
+            cin = src.getpixel((x+x0, y+y0))
+            if len(cin) >= 3 and cin[0] == bk[0] and cin[1] == bk[1] and cin[2] == bk[2]: # skip bk
                 continue
             ox, oy = get_tile(outmap, outmap_data, cin) # map color -> item from outmap
             box = (ox*one, oy*one, (ox+1)*one-1, (oy+1)*one-1)
@@ -223,6 +238,9 @@ def make_collage(params):
 # ---
 
 def test():
+
+# - #1
+
     folder = '.\\map-in-1\\'
     outmap = '.\\outmap.png'
     infile = '.\\repixel-in\\38a.jpg'
@@ -232,12 +250,27 @@ def test():
     h = one*178
 
 #'A2': (7015, 4960), 'A1': (9933, 7015), 'A0': (14043, 9933),
+#14043 / 9933 = 1.41377227423739
 
     params1 = {'folder': folder, 'outmap': outmap, 'one': one}
     params2 = {'w': w, 'h': h, 'bk': (0, 0, 0), 'infile': infile, 'outfile': outfile, 'outmap': outmap, 'one': one}
+#    prepare_map(params1)
+#    make_collage(params2)
 
-    prepare_map(params1)
-    make_collage(params2)
+# - #2
+
+    if True:
+        folder = '.\\map-in-2\\'
+        outmap = '.\\outmap2.png'
+        outfile = 'mosaic-2.png'
+        one = 56
+        infile = '.\\me-src1.png'
+        w = one*238
+        h = one*266
+        params1 = {'folder': folder, 'outmap': outmap, 'one': one}
+        params2 = {'w': w, 'h': h, 'bk': (255, 255, 255), 'infile': infile, 'outfile': outfile, 'outmap': outmap, 'one': one}
+        prepare_map(params1)
+        make_collage(params2)
 
 # ---
 

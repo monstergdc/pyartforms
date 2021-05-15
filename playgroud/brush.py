@@ -1,11 +1,13 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# paint algorithms (artificial artist) - FLOWERS (brush paint test), v1.0, Python version
-# (c)2018 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# PyArtForms - Python generative art forms paint algorithms (artificial artist)
+# FLOWERS (brush paint test), v1.0
+# (c)2018-2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20180505
 # upd: 20180929
 # upd: 20181020
+# upd: 20210507, 15
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -22,7 +24,7 @@ from datetime import datetime as dt
 from drawtools import *
 
 
-def brush(params, fn):
+def brush1(params, fn):
     start_time = dt.now()
     w = params['w']
     h = params['h']
@@ -57,12 +59,12 @@ def brush(params, fn):
 # ---
 
 def do_brush(cnt, w, h, odir):
-    params1 = {'w': w, 'h': h, 'bg': (255, 255, 255), 'brush': '.\\brush-flowers-01.png'}
+    params1 = {'w': w, 'h': h, 'bg': (255, 255, 255), 'brush': '.\\brush-flowers-01.png'} # 3x red, 3x yellow, 3x white
     params2 = {'w': w, 'h': h, 'bg': (255, 255, 255), 'brush': '.\\brush-weggies-01.png'}
 
     for n in range(cnt):
-        brush(params1, odir+'flowers1-%dx%d-01-%03d.png' % (w, h, n+1))
-        brush(params2, odir+'weggies1-%dx%d-01-%03d.png' % (w, h, n+1))
+        brush1(params1, odir+'flowers1-%dx%d-01-%03d.png' % (w, h, n+1))
+        brush1(params2, odir+'weggies1-%dx%d-01-%03d.png' % (w, h, n+1))
 
 # ---
 

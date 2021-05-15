@@ -1,13 +1,16 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# pyartforms - paint algorithms (artificial artist) in Python - predefined forms
-# (c)2018-2020 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# PyArtForms - Python generative art forms paint algorithms (artificial artist)
+# predefined forms
+# (c)2018-2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20181020
 # upd: 20190105, 06, 13, 18, 21, 22
 # upd: 20190311, 30
 # upd: 20190414, 15, 17, 18, 21, 22, 24, 26, 27
 # upd: 20200507, 10
+# upd: 20210106
+# upd: 20210515
 
 
 # TODO:
@@ -813,7 +816,13 @@ def predef_mazy19(w, h):
     ]
     return append_dflts(a, 'SMEARS#19', mazy19, w, h)
 
-#def predef_mazy20(w, h):
+def predef_mazy20(w, h):
+    a = [
+        {'Background': bg_black, 'n': 1, 'mode': '1'},
+        {'Background': bg_black, 'n': 1, 'mode': '2'},
+    ]
+    return append_dflts(a, 'SMEARS#20', mazy20, w, h)
+
 #def predef_mazy21(w, h):
 #def predef_mazy22(w, h):
 #def predef_mazy23(w, h):
@@ -833,7 +842,7 @@ predefs = {'mazy01': predef_mazy1, 'mazy02': predef_mazy2, 'mazy03': predef_mazy
            'mazy05': predef_mazy5, 'mazy06': predef_mazy6, 'mazy07': predef_mazy7, 'mazy08': predef_mazy8,
            'mazy09': predef_mazy9, 'mazy10': predef_mazy10, 'mazy11': predef_mazy11, 'mazy12': predef_mazy12,
            'mazy13': predef_mazy13, 'mazy14': predef_mazy14, 'mazy15': predef_mazy15, 'mazy16': predef_mazy16,
-           'mazy17': predef_mazy17, 'mazy18': predef_mazy18, 'mazy19': predef_mazy19, 
+           'mazy17': predef_mazy17, 'mazy18': predef_mazy18, 'mazy19': predef_mazy19, 'mazy20': predef_mazy20,
            'life': predef_life, 'lissajous': predef_lissajous, 'astro': predef_astro, 'mandelbrot': predef_mandelbrot,
            'waves01': predef_waves1,'waves02': predef_waves2, 'waves03': predef_waves3, 
            }
@@ -842,7 +851,7 @@ predefs = {'mazy01': predef_mazy1, 'mazy02': predef_mazy2, 'mazy03': predef_mazy
 predef_names = [
         'mazy01', 'mazy02', 'mazy03', 'mazy04',  'mazy05', 'mazy06', 'mazy07', 'mazy08',
         'mazy09', 'mazy10', 'mazy11', 'mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16',
-        'mazy17', 'mazy18', 'mazy19',
+        'mazy17', 'mazy18', 'mazy19', 'mazy20',
         'astro', 'life', 'lissajous', 'mandelbrot', 'waves01', 'waves02', 'waves03'
         ]
 

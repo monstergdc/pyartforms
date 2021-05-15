@@ -1,5 +1,5 @@
 
-# Python art forms
+# PyArtForms - Python generative art forms paint algorithms (artificial artist)
 # some common code/tools
 # (c)2018-2021 Noniewicz.com
 # upd: 20180503, 08
@@ -8,6 +8,7 @@
 # upd: 20190311, 29
 # upd: 20190414, 21
 # upd: 20210301
+# upd: 20210507, 15
 
 from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin, ImageFont
 from datetime import datetime as dt
@@ -124,15 +125,17 @@ def add_myself(draw, w, h, bg):
 def append_myself(title=""):
     """Append some tags to PNG image."""
     x = PngImagePlugin.PngInfo()
+    today = dt.today()
+    y = today.year
     #x.add_itxt(key='Title', value=title, lang='', tkey='', zip=False)
     #x.add_itxt(key='Description', value='generated in pyartforms', lang='', tkey='', zip=False)
     #x.add_itxt(key='Author', value='Jakub Noniewicz', lang='', tkey='', zip=False)
     #x.add_itxt(key='Copyright', value='(c) Jakub Noniewicz', lang='', tkey='', zip=False)
     x.add_text(key='Title', value=title, zip=False)
-    x.add_text(key='Description', value='generated in pyartforms', zip=False)
+    x.add_text(key='Description', value='generated in PyArtForms', zip=False)
     x.add_text(key='Author', value='Jakub Noniewicz', zip=False)
-    x.add_text(key='Copyright', value='(c) Jakub Noniewicz', zip=False)
-    x.add_itxt(key='Concept', value='pyartforms concept by: Jakub Noniewicz | http://noniewicz.com | http://noniewicz.art.pl', lang='', tkey='', zip=False)
+    x.add_text(key='Copyright', value='(c)'+y+' Jakub Noniewicz', zip=False)
+    x.add_itxt(key='Concept', value='PyArtForms concept by: Jakub Noniewicz | noniewicz.com | noniewicz.art.pl', lang='', tkey='', zip=False)
     return x
 
 def im2cgi(im, format='PNG'):
@@ -161,6 +164,7 @@ def im2cgi(im, format='PNG'):
     sys.stdout.flush()
 
 def art_painter(params, png_file='example.png', output_mode='save', bw=False):
+    """Main/common 'painter' call."""
     if 'bw' in params:
         bw = params['bw']
     else:
@@ -201,6 +205,7 @@ def art_painter(params, png_file='example.png', output_mode='save', bw=False):
         return im
 
 def get_cgi_par(default=None):
+    """Parse CGI parameters"""
     form = cgi.FieldStorage()
     if default == None:
         par = {'w': 800, 'h': 600, 'f': '', 'n': 0}
@@ -232,6 +237,7 @@ def im2arr(image_path):
     return a
 
 def xsmooth(params, im):
+    """Smooth image - 2x blur then sharpen back (only if blur==True in params)"""
     if "blur" in params:
         if params['blur'] == True:
             im = im.filter(ImageFilter.BLUR)

@@ -1,4 +1,10 @@
 
+# PyArtForms - Python generative art forms paint algorithms (artificial artist)
+# bezier stuff
+# (c)2018-2021 Noniewicz.com
+# upd: 20210515
+
+# based on:
 # https://stackoverflow.com/questions/246525/how-can-i-draw-a-bezier-curve-using-pythons-pil
 
 def make_bezier(xys):
@@ -28,8 +34,7 @@ def pascal_row(n):
         x /= denominator
         result.append(x)
         numerator -= 1
-    if n&1 == 0:
-        # n is even
+    if n&1 == 0: # n is even
         result.extend(reversed(result[:-1]))
     else:
         result.extend(reversed(result)) 
