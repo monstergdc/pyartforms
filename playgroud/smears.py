@@ -1,8 +1,9 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# experimental paint algorithms (artificial artist) in Python, v1.0
-# (c)2017-2020 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# PyArtForms - Python generative art forms paint algorithms (artificial artist)
+# experimental 'smears' paint algorithms, v1.0
+# (c)2017-2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # #1 'cruel red smears', not only red
 # #2 circles
 # #3 triangles
@@ -22,7 +23,7 @@
 # #17 scottish grid
 # #18 slim colorful circles
 # #19 op-art grid
-# #20 
+# #20 <new 2020 in progress>
 # #21 
 # #22 
 # #23 
@@ -37,6 +38,8 @@
 # upd: 20190306, 11, 29, 30
 # upd: 20190414, 15, 17, 18, 22, 24, 26, 27
 # upd: 20200507, 10
+# upd: 20210106, 15, 16, 19, 20, 21, 22
+# upd: 20210515, 16
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -55,10 +58,13 @@ from color_defs import *
 # ---
 
 def init_common(params):
+    random.seed()
     w = params['w']
     h = params['h']
-    cnt = params['n']
-    random.seed()
+    if 'n' in params:
+        cnt = params['n']
+    else:
+        cnt = None
     return w, h, cnt
 
 # ---
@@ -244,28 +250,32 @@ def mazy4(draw, params):
         draw.polygon(po, fill=color, outline=None)
 
 def mazy5(draw, params):
-    w = params['w']
-    h = params['h']
+    w, h, cnt = init_common(params) # cnt unused
     colors = params['colors']
-    random.seed()
     c = math.pi/180
 
     dg = h*0.037 # thickness, par
+    #dg = h*0.01 # TEST interesting...
     r0 = h/2*0.93 # base radius, par
-    rOut = float(h)*0.77 # outer circle radous, par
+    #r0 = h/2*1.5 # TEST
+    rOut = float(h)*0.77 # outer circle radius, par
+    #rOut = float(h)*0.3 # TEST
     sc = float(h)/2480 # par
-    step = 10 # par
-    for i in range(int(8+1)):  # par
-        a = random.randint(6, 24)  # par
-        rv = random.randint(20, 350)  # par
+    step = 10 # par (?)
+    n = 10 # count of all 'stars', const, par
+    for i in range(n):
+        a = random.randint(4, 28)  # number of 'spikes', par
+        rv = random.randint(20, int(300/a*2))  # 'spike' amplitude, [todo: correlate with a - less if a big] par
         if i == 0:
             x0 = w/2
             y0 = h/2
         else:
-            axy = c*(i-1)*360/8
+            axy = c*(i-1)*360/8 # par
             x0 = w/2 + rOut * math.cos(axy)
             y0 = h/2 + rOut * math.sin(axy)
-        for m in range(16):
+        bands = 16 # par r decrease steps, also related to num colors
+        #bands = len(colors)*3 # test
+        for m in range(bands):
             points = []
             for n in range(int(360*step)):
                 angle = c*float(n)/float(step)
@@ -280,44 +290,43 @@ def mazy5(draw, params):
             draw.polygon(points, fill=color, outline=params['outline'])
 
 def mazy6(draw, params):
-    w = params['w']
-    h = params['h']
-    cnt = params['cnt'] # todo: cnt -> n, then common
-    random.seed()
-    useblack = params['useblack']
+    """ Co-centered circle groups """
+    w, h, cnt = init_common(params)
+    if 'useblack' in params:
+        useblack = params['useblack']
+    else:
+        useblack = False
 
-    #c_ndx = 7
     for m in range(cnt):
         x = random.randint(int(w/2-w/3), int(w/2+w/3))
         y = random.randint(int(h/2-h/3), int(h/2+h/3))
-        r = random.randint(int(h/25), int(h/7))
-        n_r = random.randint(3, 16)
-        c_ndx = 7
+        #todo: start with big 1st?
+        r = random.randint(int(h/25), int(h/7)) # par
+        n_r = random.randint(3, 16) # par
         for n in range(n_r):
             nn = n_r - n
             ro = int(r*(1+nn*nn*0.015)) # todo: par, and more other par
             if n & 1 and useblack == True:
-                c = (0, 0, 0)
-                circle(draw, x, y, ro, fill=c, outline=None)
+                color = (0, 0, 0)
             else:
                 color = new_colorer(params['mode'], n, n_r)
                 try:
                     color
                 except NameError:
-                    print('ERROR: undef color mode, using black', params['mode'])
+                    print('ERROR: undefined color mode, using black', params['mode'])
                     color = (0,0,0)
-                if 'addalpha' in params:
-                    color = add_alpha(color, params['addalpha'])
-                circle(draw, x, y, ro, fill=color, outline=None)
-            c_ndx = c_ndx - 1
-            if c_ndx < 0:
-                c_ndx = 7
+            circle(draw, x, y, ro, fill=color, outline=None)
 
 def mazy7(draw, params):
-    w = params['w']
-    h = params['h']
+    """ Random rectangles """
+    w, h, cnt = init_common(params)
     cnt = params['cnt'] # todo: cnt -> n, then common
-    random.seed()
+    hdiv = int(h/30) # dflt
+    if 'div' in params:
+        d = int(params['div'])
+        if d <= 0:
+            d = 1
+        hdiv = int(h/d)
 
     for m in range(cnt):
         x1 = random.randint(int(w/2-w/3), int(w/2+w/3))
@@ -344,8 +353,8 @@ def mazy7(draw, params):
             h1 = random.randint(int(h/35), hm)
 
         if params['mode'] == 'const':   # const small sqare
-            w1 = int(h/30)
-            h1 = int(h/30)
+            w1 = hdiv
+            h1 = hdiv
 
         color = (0,0,0)
         if params['cmode'] == 'std':
@@ -373,12 +382,12 @@ def mazy7(draw, params):
         rect(draw, x1, y1, w1, h1, fill=color, outline=None)
 
 def mazy8(draw, params):
-    w = params['w']
-    h = params['h']
+    """ Block grid with random colors """
+    w, h, cnt = init_common(params) # cnt unused
     xcnt = params['xcnt']
     ycnt = params['ycnt']
-#    v = 20 #par
-    # todo: opt border
+    #v = 20 #par
+    # todo: opt border?
 
     w1 = int(w/xcnt)
     h1 = int(h/ycnt)
@@ -389,11 +398,11 @@ def mazy8(draw, params):
             ci = random.randint(0, 7)
             # todo: new colorer FULLY proper
             color = new_colorer(params['color'], ci, -1)
-            # test
+            # test (rnd flux) ok
 #            if random.randint(0, 100) > 50: #par
 #                ar = random.randint(80, 200) #par
 #                color = add_alpha(color, ar)
-#            if random.randint(0, 100) > 80: #par
+#            if random.randint(0, 100) > 75: #par
 #                vx = float(x1)*(random.randint(0, v)-random.randint(0, v))/100.0
 #                vy = float(y1)*(random.randint(0, v)-random.randint(0, v))/100.0
 #                vw = float(w)*(random.randint(0, v)-random.randint(0, v))/100.0
@@ -404,6 +413,7 @@ def mazy8(draw, params):
             rect(draw, x1+vx, y1+vy, w1+vw, h1+vh, fill=color, outline=None)
 
 def mazy9(draw, params):
+    """ 'Warp' effect - triangles around center, opt center point shifted """
     w, h, cnt = init_common(params)
     c = math.pi/180
     if 'v' in params: 
@@ -465,14 +475,18 @@ def mazy9(draw, params):
 
 
 def mazy10(draw, params):
+    """ Random bezier threads or aeas """
     w, h, cnt = init_common(params)
     mode = params['mode']
 
+    # todo: fix make threads no-lame
     # todo: for closed make internal pts bigger while 1st+last with margin?
+    # todo: 1-2 bezier stripes then rnd mutate?
+
     #np = 1800 #par
     np = 5000 #par
     ts = [t/float(np) for t in range(np+1)]
-    sc = float(h) / 3507
+    sc = float(h) / 3507 # todo: not like that?
     wx = int(float(params['penw']) * sc)
     if wx <= 0:
         wx = 1
@@ -512,6 +526,7 @@ def mazy10(draw, params):
 
 # TODO: also like 11 only more (var?) freq + diagonals or weirds
 def mazy11(draw, params):
+    """ ? """
     w, h, cnt = init_common(params)
 
     dy = float(h)/cnt
@@ -546,6 +561,7 @@ def mazy11(draw, params):
             draw.rectangle(xy, fill=color, outline=None)
 
 def mazy12(draw, params):
+    """ ? """
     w, h, cnt = init_common(params)
     o = params['o']
     v = params['v']
@@ -840,7 +856,129 @@ def mazy19(draw, params):
 
 def mazy20(draw, params):
     w, h, cnt = init_common(params)
-    # ...
+    m = params['mode']
+    c = math.pi/180
+    #d = 8 # pixel
+    d = 2 # pixel
+    xs = int(w/d/2)
+    ys = int(h/d/2)
+    for y in range(int(h/d)):
+        for x in range(int(w/d)):
+
+            """
+            vr = 32+128+128*math.sin(x*c)*math.cos(y*c)
+            vg = 32+128+128*math.cos(4*x*c)*math.cos(y*c)
+            vb = 32+128+64*(math.cos(3*x*c)+math.sin(2*y*c))
+            if m == '1':
+                cx = (int(vr), int(vr), int(vr))
+            if m == '2':
+                cx = (int(vg), int(vg), int(vg))
+            if m == '3':
+                cx = (int(vb), int(vb), int(vb))
+            """
+
+            """
+            vr = 32+64+64*(math.sin(8*x*c)+math.cos(8*y*c))
+            vg = 32+64+64*(math.sin(8*y*c)+math.cos(8*x*c))
+            vb = 32+64+64*(math.sin(4*y*c)+math.sin(4*x*c))
+            cx = (int(vr),int(vg),int(vb))
+            """
+
+            #vr = 2000*math.exp(-x/100)
+            #vr = 2000*math.exp(-x/50)
+            #vg = vr #2000*math.exp(-x/100)+x
+            #vb = vr #2000*math.exp(-x/100)+x*2
+
+            """
+            a = 0
+            b = 0
+#            if m == '1':
+#                b = 0
+#            if m == '2':
+#                b = 10
+#            if m == '3':
+#                b = 100
+            vr = (x+a)*1*math.sin((x+b)*c*2)+y*1*math.cos(y*c*2)
+            a = 10
+            b = 50
+            vg = (x+a)*1*math.sin((x+b)*c*2)+y*1*math.cos(y*c*2)
+            b = 20
+            b = 100
+            vb = (x+a)*1*math.sin((x+b)*c*2)+y*1*math.cos(y*c*2)
+            vr = int(vr) % 255
+            vg = int(vg) % 255
+            vb = int(vb) % 255
+            cx = (int(vr), int(vg), int(vb))
+
+            hue = int(vr) % 255
+            saturation = 244
+            vb = 2000*math.exp(-x/50)
+            luminance = int(vb) % 255
+            #luminance = 192 # int(vb * 0.7)
+
+            vr = 2000*math.exp(-x/100)
+            vg = 2000*math.exp(-y/100)
+            hue = int(vr) % 255
+            saturation = 244
+            luminance = int(vg) % 255
+
+            cx = 'hsl(%d, %d%%, %d%%)' % (hue, saturation, luminance)
+            """
+
+            """
+            v = (1*math.sqrt((x-xs)*(x-xs)+(y-ys)*(y-ys)))
+            #v = (1*math.sqrt((x-xs)*(x-xs)+(y-ys)*(y-ys))) * (math.sin(3.5*c*x)*math.cos(c*x)+math.sin(4*c*y)*math.cos(4*c*x))
+            #v = 32+128+128 * (math.sin(4*c*x)*math.cos(c*x)+math.sin(c*y)*math.cos(4*c*x)) / 2
+            cx = (int(abs(v)), int(0), int(0))
+            """
+            """
+            vr = (20*math.sqrt((x-xs)*(x-xs)+(y-ys)*(y-ys)))
+            vg = (20*math.sqrt((x-xs*0.6)*(x-xs*0.6)+(y-ys)*(y-ys)))
+            vb = (20*math.sqrt((x-xs)*(x-xs)+(y-ys*0.6)*(y-ys*0.6)))
+            cx = (int(vr)%255, int(vg)%255, int(vb)%255)
+            """
+            """
+            vr = 64*(math.cos(2*x*c)+math.sin(2*y*c))
+            vg = 64*(math.cos(3*y*c)+math.sin(3*x*c))
+            vb = 64*(math.cos(3*x*c)+math.sin(2*y*c))
+            def sca(x):
+                if x < 0:
+                    if x < 32:
+                        return 0
+                    else:
+                        return 64
+                if x > 32:
+                    return 192
+                else:
+                    return 128
+            vr1 = sca(vr)
+            vg1 = sca(vg)
+            vb1 = sca(vb)
+            cx = (vr1,vg1,vb1)
+            """
+
+            """
+            f0 = 1 + math.cos(x*c*2)
+            f1 = 1 + math.cos(y*c*4)
+            f0 = int(f0*255)
+            f1 = int(5+f1*25)
+            cx = 'hsl(%d, %d%%, %d%%)' % (f0, 80, f1)
+            """
+
+            #v = (8*math.sqrt((x-xs)*(x-xs)+(y-ys)*(y-ys))) / 4 # opt w/o /4
+            v0 = math.sqrt((x-xs)*(x-xs)+(y-ys)*(y-ys))
+            v = 3 + math.cos(x*c*1) + math.sin(y*c*1) - math.sin(v0*c*1) # to ok
+            v = v * 254
+            f0 = int(v) % 255
+            #v = (2*math.sqrt((x-xs)*(x-xs)+(y-ys)*(y-ys)))
+            #f1 = int(v*100) % 100
+            #f1 = random.randint(20, 80) #ok1
+            f1 = random.randint(45, 70)
+            cx = 'hsl(%d, %d%%, %d%%)' % (f0, 80, f1)
+            
+            xy = [(x*d, y*d), (x*d+d, y*d+d)]
+            draw.rectangle(xy, fill=cx, outline=None)
+    # ... todo: fin
     return 0
 
 def mazy21(draw, params):

@@ -10,7 +10,7 @@
 # upd: 20190414, 15, 17, 18, 21, 22, 24, 26, 27
 # upd: 20200507, 10
 # upd: 20210106
-# upd: 20210515
+# upd: 20210515, 16
 
 
 # TODO:
@@ -379,37 +379,41 @@ def predef_mazy4(w, h):
 def predef_mazy5(w, h):
     a = [
         {'Background': bg_black, 'colors': colors_b, 'outline': None},
-        {'Background': bg_black, 'colors': colors_y, 'outline': None},
-        {'Background': bg_black, 'colors': colors_p, 'outline': bg_black},
+        {'Background': bg_black, 'colors': colors_p, 'outline': None},
         {'Background': bg_black, 'colors': colors_bw0, 'outline': None},
         {'Background': bg_black, 'colors': colors_bwx, 'outline': None},
         {'Background': bg_black, 'colors': colors_happy, 'outline': None},
-        {'Background': bg_black, 'colors': colors_BeachTowels, 'outline': bg_black},
-        {'Background': bg_black, 'colors': colors_MetroUI, 'outline': bg_black},
+        {'Background': bg_black, 'colors': colors_BeachTowels, 'outline': None},
+        {'Background': bg_black, 'colors': colors_MetroUI, 'outline': None},
+        {'Background': bg_black, 'colors': colors_Number3, 'outline': None},
+        {'Background': bg_black, 'colors': colors_RainbowDash, 'outline': None},
+        {'Background': bg_black, 'colors': colors_ProgramCat, 'outline': None},
+        {'Background': bg_black, 'colors': colors_Rainbow, 'outline': None},
+        {'Background': bg_black, 'colors': colors_fwd, 'outline': None},
+        {'Background': bg_black, 'colors': colors_happy_nw7, 'outline': None},
     ]
     return append_dflts(a, 'SMEARS#5', mazy5, w, h)
 
 def predef_mazy6(w, h):
     a = [
-        {'Background': bg_black, 'mode': 'red_const', 'cnt': 18, 'useblack': True},
-        {'Background': bg_black, 'mode': 'blue_const', 'cnt': 18, 'useblack': True},
-        {'Background': bg_black, 'mode': 'blue', 'cnt': 18, 'useblack': True},
-        {'Background': bg_black, 'mode': 'blueMap', 'cnt': 18, 'useblack': True},
-        {'Background': bg_black, 'mode': 'white_const', 'cnt': 18, 'useblack': True},
-        {'Background': bg_black, 'mode': 'rg', 'cnt': 18, 'useblack': True},
-        {'Background': bg_black, 'mode': 'gb', 'cnt': 18, 'useblack': True},
-        {'Background': bg_black, 'mode': 'happy', 'cnt': 18, 'useblack': True},
+        {'Background': bg_black, 'mode': 'red_const', 'n': 18, 'useblack': True},
+        {'Background': bg_black, 'mode': 'blue_const', 'n': 18, 'useblack': True},
+        {'Background': bg_black, 'mode': 'blue', 'n': 18, 'useblack': True},
+        {'Background': bg_black, 'mode': 'blueMap', 'n': 18, 'useblack': True},
+        {'Background': bg_black, 'mode': 'white_const', 'n': 18, 'useblack': True},
+        {'Background': bg_black, 'mode': 'rg', 'n': 18, 'useblack': True},
+        {'Background': bg_black, 'mode': 'gb', 'n': 18, 'useblack': True},
+        {'Background': bg_black, 'mode': 'happy', 'n': 18, 'useblack': True},
 
-        {'Background': bg_black, 'mode': 'happy', 'cnt': 18+12, 'useblack': False},
-        {'Background': bg_black, 'mode': 'bwx', 'cnt': 18+12, 'useblack': False},
-        {'Background': bg_black, 'mode': 'psych', 'cnt': 18+12, 'useblack': False},
-        {'Background': bg_white, 'mode': 'BeachTowels', 'cnt': 18+12, 'useblack': False},
-        {'Background': bg_white, 'mode': 'MoonlightBytes6', 'cnt': 18+12, 'useblack': False},
-        {'Background': bg_white, 'mode': 'RainbowDash', 'cnt': 18+12, 'useblack': False},
-        {'Background': bg_white, 'mode': 'Google', 'cnt': 18+12, 'useblack': False},
-        {'Background': bg_white, 'mode': 'MetroUI', 'cnt': 18+12, 'useblack': False},
-        {'Background': bg_white, 'mode': 'ProgramCat', 'cnt': 18+12, 'useblack': False},
-        {'Background': bg_white, 'mode': 'SkinTones', 'cnt': 18+12, 'useblack': False},
+        {'Background': bg_black, 'mode': 'happy', 'n': 18+12, 'useblack': False},
+        {'Background': bg_black, 'mode': 'bwx', 'n': 18+12, 'useblack': False},
+        {'Background': bg_black, 'mode': 'psych', 'n': 18+12, 'useblack': False},
+        {'Background': bg_white, 'mode': 'BeachTowels', 'n': 18+12, 'useblack': False},
+        {'Background': bg_white, 'mode': 'MoonlightBytes6', 'n': 18+12, 'useblack': False},
+        {'Background': bg_white, 'mode': 'RainbowDash', 'n': 18+12, 'useblack': False},
+        {'Background': bg_white, 'mode': 'Google', 'n': 18+12, 'useblack': False},
+        {'Background': bg_white, 'mode': 'MetroUI', 'n': 18+12, 'useblack': False},
+        {'Background': bg_white, 'mode': 'ProgramCat', 'n': 18+12, 'useblack': False},
     ]
     return append_dflts(a, 'SMEARS#6', mazy6, w, h)
 
@@ -418,6 +422,7 @@ def predef_mazy7(w, h):
     a = [
         {'Background': bk, 'cnt': 500,  'cmode': 'rnd', 'mode': 'const'},
         {'Background': bk, 'cnt': 2000, 'cmode': 'rnd', 'mode': 'const'},
+
         {'Background': bk, 'cnt': 200,  'cmode': 'std', 'mode': 'decp'},
         {'Background': bk, 'cnt': 100,  'cmode': 'std', 'mode': 'decp'},
         {'Background': bk, 'cnt': 50,   'cmode': 'std', 'mode': 'decp'},
@@ -466,10 +471,17 @@ def predef_mazy7(w, h):
         {'Background': bk, 'cnt': 50,   'cmode': 'MoonlightBytes6', 'mode': 'dec'},
         {'Background': bk, 'cnt': 10,   'cmode': 'MoonlightBytes6', 'mode': 'dec'},
 
-        {'Background': bk, 'cnt': 200,  'cmode': 'RainbowDash', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 100,  'cmode': 'RainbowDash', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 50,   'cmode': 'RainbowDash', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 10,   'cmode': 'RainbowDash', 'mode': 'dec'},
+        # new new 202105
+        {'Background': bk, 'cnt': 2000, 'cmode': 'BeachTowels', 'mode': 'const'},
+        {'Background': bk, 'cnt': 2000, 'cmode': 'MoonlightBytes6', 'mode': 'const'},
+        {'Background': bk, 'cnt': 2000, 'cmode': 'BeachTowels', 'mode': 'const', 'addalpha': 99},
+        {'Background': bk, 'cnt': 2000, 'cmode': 'MoonlightBytes6', 'mode': 'const', 'addalpha': 99},
+        {'Background': bk, 'cnt': 2000, 'cmode': 'BeachTowels', 'mode': 'const', 'addalpha': 99, 'div': 10},
+        {'Background': bk, 'cnt': 2000, 'cmode': 'MoonlightBytes6', 'mode': 'const', 'addalpha': 99, 'div': 10},
+        {'Background': bk, 'cnt': 2000, 'cmode': 'BeachTowels', 'mode': 'const', 'addalpha': 99, 'div': 5},
+        {'Background': bk, 'cnt': 2000, 'cmode': 'MoonlightBytes6', 'mode': 'const', 'addalpha': 99, 'div': 5},
+        {'Background': bk, 'cnt': 50, 'cmode': 'BeachTowels', 'mode': 'const', 'addalpha': 99, 'div': 5},
+        {'Background': bk, 'cnt': 50, 'cmode': 'MoonlightBytes6', 'mode': 'const', 'addalpha': 99, 'div': 5},
     ]
     return append_dflts(a, 'SMEARS#7', mazy7, w, h)
 
@@ -502,7 +514,20 @@ def predef_mazy8(w, h):
         {'Background': bg_white, 'xcnt': 15, 'ycnt': 5, 'color': 'MoonlightBytes6'},
         {'Background': bg_white, 'xcnt': 31, 'ycnt': 20, 'color': 'MoonlightBytes6'},
         {'Background': bg_white, 'xcnt': 3, 'ycnt': 20, 'color': 'MoonlightBytes6'},
-        #? Number3 RainbowDash Google MetroUI ProgramCat SkinTones Rainbow
+
+        {'Background': bg_white, 'xcnt': 5, 'ycnt': 5, 'color': 'MetroUI'},
+        {'Background': bg_white, 'xcnt': 5, 'ycnt': 10, 'color': 'MetroUI'},
+        {'Background': bg_white, 'xcnt': 5, 'ycnt': 3, 'color': 'MetroUI'},
+        {'Background': bg_white, 'xcnt': 15, 'ycnt': 5, 'color': 'MetroUI'},
+        {'Background': bg_white, 'xcnt': 31, 'ycnt': 20, 'color': 'MetroUI'},
+        {'Background': bg_white, 'xcnt': 3, 'ycnt': 20, 'color': 'MetroUI'},
+
+        {'Background': bg_white, 'xcnt': 5, 'ycnt': 5, 'color': 'ProgramCat'},
+        {'Background': bg_white, 'xcnt': 5, 'ycnt': 10, 'color': 'ProgramCat'},
+        {'Background': bg_white, 'xcnt': 5, 'ycnt': 3, 'color': 'ProgramCat'},
+        {'Background': bg_white, 'xcnt': 15, 'ycnt': 5, 'color': 'ProgramCat'},
+        {'Background': bg_white, 'xcnt': 31, 'ycnt': 20, 'color': 'ProgramCat'},
+        {'Background': bg_white, 'xcnt': 3, 'ycnt': 20, 'color': 'ProgramCat'},
     ]
     return append_dflts(a, 'SMEARS#8', mazy8, w, h)
 
@@ -583,9 +608,10 @@ def predef_mazy9(w, h):
         {'n': 60, 'Background': bg_black, 'color': 'BeachTowels', 'v': v3, 'rndc': True},
         {'n': 120, 'Background': bg_black, 'color': 'BeachTowels', 'v': v3, 'rndc': True},
 
-        {'n': 20, 'Background': bg_black, 'color': 'gits', 'v': v3, 'rndc': True},
-        {'n': 60, 'Background': bg_black, 'color': 'gits', 'v': v3, 'rndc': True},
-        {'n': 120, 'Background': bg_black, 'color': 'gits', 'v': v3, 'rndc': True},
+        # todo: other like that too
+        {'n': 360, 'Background': bg_black, 'color': 'BeachTowels', 'v': v, 'rndc': True},
+        {'n': 360, 'Background': bg_black, 'color': 'BeachTowels', 'v': v2, 'rndc': True},
+        {'n': 360, 'Background': bg_black, 'color': 'BeachTowels', 'v': v3, 'rndc': True},
     ]
     return append_dflts(a, 'SMEARS#9', mazy9, w, h)
 
@@ -593,9 +619,11 @@ def predef_mazy10(w, h):
     bk = (0x84, 0x8B, 0x9B)
     a = [
             # new test n=3 also ok
-            #{'Background': bg_white, 'n': 1, 'penw': 1, 'color': 'blue_const', 'mode': 'fill', 'complexity': 990, 'open': False, 'addalpha': 99},
+            #{'Background': bk, 'n': 1, 'penw': 2, 'color': 'blue_const', 'mode': 'fill', 'complexity': 1000, 'open': False, 'addalpha': 90},
+            #{'Background': bk, 'n': 3, 'penw': 2, 'color': 'blue_const', 'mode': 'fill', 'complexity': 1000, 'open': False, 'addalpha': 90},
 
-            #{'Background': bk, 'n': 30-15, 'penw': 8+24, 'color': 'happy', 'mode': 'line', 'complexity': 70+130, 'open': False},
+            #{'Background': bk, 'n': 15, 'penw': 32, 'color': 'happy', 'mode': 'line', 'complexity': 70+130, 'open': False},
+
             {'Background': bk, 'n': 30, 'penw': 8, 'color': 'happy', 'mode': 'line', 'complexity': 70, 'open': False},
             {'Background': bk, 'n': 40, 'penw': 8, 'color': 'rg', 'mode': 'line', 'complexity': 70, 'open': False},
             {'Background': bk, 'n': 40, 'penw': 8, 'color': 'red', 'mode': 'line', 'complexity': 70, 'open': False},
@@ -610,6 +638,7 @@ def predef_mazy10(w, h):
             {'Background': bk, 'n': 40, 'penw': 8, 'color': 'rg', 'mode': 'line', 'complexity': 70, 'open': True, 'addalpha': 90},
             {'Background': bk, 'n': 40, 'penw': 8, 'color': 'red', 'mode': 'line', 'complexity': 70, 'open': True, 'addalpha': 90},
             {'Background': bk, 'n': 40, 'penw': 8, 'color': 'wryb', 'mode': 'line', 'complexity': 70, 'open': True, 'addalpha': 90},
+
 # TODO: more wryb
             {'Background': bg_white, 'n': 6, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': False},
             {'Background': bg_white, 'n': 6, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': True},
