@@ -10,7 +10,7 @@
 # upd: 20190414, 15, 17, 18, 21, 22, 24, 26, 27
 # upd: 20200507, 10
 # upd: 20210106
-# upd: 20210515, 16
+# upd: 20210515, 16, 22
 
 
 # TODO:
@@ -255,24 +255,14 @@ def predef_mazy2(w, h):
         {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'happy'},
         {'Background': bg_black, 'n': 100+90, 'm': 30+30, 'color': 'happy', 'addalpha': 80}, # test
         {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'wryb'},
-        {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'psych'},
         {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'bgo'},
 
         {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'BeachTowels'},
         {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'MoonlightBytes6'},
         {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'Number3'},
         {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'RainbowDash'},
-        {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'Google'},
         {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'MetroUI'},
         {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'ProgramCat'},
-        {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'SkinTones'},
-
-        {'Background': bg_black, 'n': 100, 'm': 40, 'color': 'bw'},
-        {'Background': bg_black, 'n': 100, 'm': 90, 'color': 'red'},
-        {'Background': bg_black, 'n': 100, 'm': 90, 'color': 'green'},
-        {'Background': bg_black, 'n': 100, 'm': 90, 'color': 'blue'},
-        {'Background': bg_black, 'n': 100, 'm': 90, 'color': 'bg'},
-        {'Background': bg_black, 'n': 100, 'm': 90, 'color': 'rg'},
     ]
     return append_dflts(a, 'SMEARS#2', mazy2, w, h)
 
@@ -284,7 +274,6 @@ def predef_mazy3(w, h):
         {'Background': bg_white, 'n': 80, 'color': 'happy'},
         {'Background': bg_white, 'n': 80, 'color': 'wryb'},
         {'Background': bg_white, 'n': 80, 'color': 'BeachTowels'},
-        {'Background': bg_white, 'n': 80, 'color': 'Google'},
         {'Background': bg_white, 'n': 80, 'color': 'SkinTones'},
         {'Background': bg_white, 'n': 80, 'color': 'Rainbow'},
 
@@ -293,21 +282,18 @@ def predef_mazy3(w, h):
         {'Background': bg_black, 'n': 30, 'color': 'red'},
         {'Background': bg_black, 'n': 80, 'color': 'red'},
         {'Background': bg_black, 'n': 30, 'color': 'bw'},
-        {'Background': bg_white, 'n': 30, 'color': 'rg'},
 
         {'Background': bg_orange, 'n': 80, 'color': 'bwx'},
 
         {'Background': bg_white, 'n': 90, 'color': 'happy', 'addalpha': 50},
         {'Background': bg_white, 'n': 90, 'color': 'wryb', 'addalpha': 50},
         {'Background': bg_white, 'n': 90, 'color': 'BeachTowels', 'addalpha': 50},
-        {'Background': bg_white, 'n': 90, 'color': 'Google', 'addalpha': 50},
         {'Background': bg_white, 'n': 90, 'color': 'SkinTones', 'addalpha': 50},
         {'Background': bg_white, 'n': 90, 'color': 'Rainbow', 'addalpha': 50},
 
         {'Background': bg_yellow, 'n': 90, 'color': 'red', 'addalpha': 50},
         {'Background': bg_black, 'n': 90, 'color': 'red', 'addalpha': 50},
         {'Background': bg_black, 'n': 90, 'color': 'bw', 'addalpha': 50},
-        {'Background': bg_white, 'n': 90, 'color': 'rg', 'addalpha': 50},
 
         {'Background': bg_orange, 'n': 80, 'color': 'bwx', 'addalpha': 50},
     ]

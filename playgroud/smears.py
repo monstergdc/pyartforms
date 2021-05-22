@@ -39,7 +39,7 @@
 # upd: 20190414, 15, 17, 18, 22, 24, 26, 27
 # upd: 20200507, 10
 # upd: 20210106, 15, 16, 19, 20, 21, 22
-# upd: 20210515, 16
+# upd: 20210515, 16, 22
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -141,7 +141,8 @@ def mazy2(draw, params):
     w, h, cnt = init_common(params)
     cntm = params['m']
     v = int(h/50)
-    random.seed()
+    #v = int(h/20) # test2
+    #v = int(h/200) # test3
     if cntm <= 0:
         cntm = 1
 
@@ -154,6 +155,8 @@ def mazy2(draw, params):
             r0 = cntm
         de = 1/cntm
         for m in range(cntm):
+            #v = int((cntm-m)/cntm * h/20) # test4
+            # w/ v=0 interesting too?
             po[:] = [(xy[0]+random.randint(0, v)-random.randint(0, v), xy[1]+random.randint(0, v)-random.randint(0, v)) for xy in po]
             color = new_colorer(params['color'], m, cntm)
             if 'addalpha' in params:
@@ -170,6 +173,7 @@ def mazy3(draw, params):
     def r2(p):
         return r(p, 2)
 
+    # todo: what is/was cycle for???
     pold = [(r2(w), r2(h)), (r2(w), r2(h)), (r2(w), r2(h))]
     #d = 1.3 # par?
     d = 0.5 # par?
