@@ -611,6 +611,7 @@ def mazy12(draw, params):
             triangle(draw, points, fill=co, outline=ou)
 
 def mazy13(draw, params):
+    """ ? """
     w, h, cnt = init_common(params)
     w0 = w/2
     h0 = h/2
@@ -625,6 +626,7 @@ def mazy13(draw, params):
     draw.polygon(po, fill=color, outline=None)
 
 def mazy14(draw, params):   # note: failed, do sth else from it
+    """ ? """
     w, h, cnt = init_common(params)
     c = math.pi/180
     if w > h:
@@ -673,6 +675,7 @@ def mazy14(draw, params):   # note: failed, do sth else from it
     draw2 = ImageDraw.Draw(im2) # does it free mem?
 
 def mazy15(draw, params):
+    """ ? """
     w, h, cnt = init_common(params)
     c = math.pi/180
     if w > h:
@@ -750,6 +753,7 @@ def mazy15(draw, params):
     draw2 = ImageDraw.Draw(im2) # does it free mem?
 
 def mazy16(draw, params):
+    """ ? """
     w, h, cnt = init_common(params)
     c = math.pi/180
     if w > h:
@@ -775,6 +779,7 @@ def mazy16(draw, params):
         circle(draw, int(w/2+xs2), int(h/2+ys2), r, fill=co, outline=ou)
 
 def mazy17(draw, params):
+    """ ? """
     w, h, cnt = init_common(params)
     v = params['v']
     if v < 1:
@@ -794,6 +799,7 @@ def mazy17(draw, params):
         draw.rectangle(xy, fill=color, outline=None)
 
 def mazy18(draw, params):
+    """ ? """
     w, h, cnt = init_common(params)
     v = params['v']
 
@@ -810,6 +816,7 @@ def mazy18(draw, params):
                 circle(draw, x, y, r+th*0.2, fill=None, outline=color)
 
 def mazy19(draw, params):
+    """ Chequered grids """
     w, h, cnt = init_common(params)
     c = math.pi/180
     nx = cnt
@@ -821,6 +828,11 @@ def mazy19(draw, params):
     for x in range(coef): # precalc
         fx = 2.0*math.exp(-x/4)
         fncx.append(fx)
+    fncx2 = []
+    coef2 = nx # ?
+    for x in range(coef2): # precalc
+        fx = abs(1.1*math.sin(x/coef2*360*2*c)) #par x2
+        fncx2.append(fx)
     dxmap = []
     f = 0
     x = 0
@@ -829,8 +841,8 @@ def mazy19(draw, params):
         if x > 0:
             if params['mode'] == 'grid':
                 fx = dx
-            if params['mode'] == 'rnd':
-                fx = random.randint(1, dx)
+            if params['mode'] == 'lin':
+                fx = dx*f/(w+dx)*1.01
             if params['mode'] == 'exp':
                 if x < coef:
                     fx = dx * fncx[x]
@@ -840,6 +852,11 @@ def mazy19(draw, params):
                         fx = dx * fncx[ndx]
                     else:
                         fx = dx
+            if params['mode'] == 'sin':
+                if x < coef2:
+                    fx = dx * fncx2[x]
+                else:
+                    fx = dx
         if fx < 1:
             fx = 1
         f = f + fx
@@ -850,8 +867,10 @@ def mazy19(draw, params):
             b = ((x&1) == 1 and (y&1) == 1) or ((x&1) == 0 and (y&1) == 0)
             if b == True:
                 cx = (255,255,255)
+                #cx = (0,0,255)
             else:
                 cx = (0,0,0)
+                #cx = (255,0,0)
             xp = dxmap[x]
             xy = [(xp, y*dy), (xp+(dxmap[x+1]-dxmap[x]), y*dy+dy)]
             draw.rectangle(xy, fill=cx, outline=None)

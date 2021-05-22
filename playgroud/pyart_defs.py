@@ -820,14 +820,19 @@ def predef_mazy18(w, h):
 
 def predef_mazy19(w, h):
     a = [
-        {'Background': bg_white, 'n': 10, 'm': 10, 'mode': 'grid'},
-        {'Background': bg_white, 'n': 20, 'm': 10, 'mode': 'grid'},
-        {'Background': bg_white, 'n': 40, 'm': 10, 'mode': 'grid'},
-        {'Background': bg_white, 'n': 10, 'm': 10, 'mode': 'rnd'},
-        {'Background': bg_white, 'n': 20, 'm': 10, 'mode': 'rnd'},
-        {'Background': bg_white, 'n': 40, 'm': 10, 'mode': 'rnd'},
+        {'Background': bg_black, 'n': 20, 'm': 10, 'mode': 'grid'},
+        {'Background': bg_black, 'n': 60, 'm': 10, 'mode': 'grid'},
 
-        {'Background': bg_white, 'n': 40, 'm': 10, 'mode': 'exp'},
+        {'Background': bg_black, 'n': 8, 'm': 10, 'mode': 'lin'},
+        {'Background': bg_black, 'n': 8, 'm': 20, 'mode': 'lin'},
+        
+        {'Background': bg_black, 'n': 40, 'm': 10, 'mode': 'exp'},
+        {'Background': bg_black, 'n': 40, 'm': 40, 'mode': 'exp'},
+        {'Background': bg_black, 'n': 80, 'm': 40, 'mode': 'exp'},
+        {'Background': bg_black, 'n': 20, 'm': 20, 'mode': 'exp'},
+
+        {'Background': bg_black, 'n': 80, 'm': 40, 'mode': 'sin'},
+        {'Background': bg_black, 'n': 160, 'm': 40, 'mode': 'sin'},
     ]
     return append_dflts(a, 'SMEARS#19', mazy19, w, h)
 
@@ -842,6 +847,7 @@ def predef_mazy20(w, h):
 #def predef_mazy22(w, h):
 #def predef_mazy23(w, h):
 #def predef_mazy24(w, h):
+#def predef_mazy25(w, h):
 
 def enum_defs():
     suma = 0
