@@ -8,7 +8,7 @@
 # #2 circles
 # #3 triangles
 # #4 poly
-# #5 new smears (star flowers)
+# #5 new smears aka star flowers
 # #6 circle ripples
 # #7 grayish rects mess
 # #8 just rectangles, may flux
@@ -17,17 +17,18 @@
 # #11 horizontal gradients with suprizes
 # #12 opart-like boxes/circles
 # #13 single big poly
-# #14 ?
+# #14 opart-like cicrles xor-cut by triangles (tested, ok)
 # #15 opart-like circle-interference patterns
-# #16 opart-like circles
-# #17 scottish grid
-# #18 slim colorful circles
-# #19 op-art grid
+# #16 opart-like circles (tested, ok)
+# #17 scottish grid (tested, so-so)
+# #18 slim colorful circles (tested, ok)
+# #19 op-art grid (tested, ok)
 # #20 <new 2020 in progress>
 # #21 
 # #22 
 # #23 
-# #24 
+# #24
+# #25 
 
 # cre: 20180430
 # upd: 20180501, 02, 03
@@ -39,7 +40,7 @@
 # upd: 20190414, 15, 17, 18, 22, 24, 26, 27
 # upd: 20200507, 10
 # upd: 20210106, 15, 16, 19, 20, 21, 22
-# upd: 20210515, 16, 22
+# upd: 20210515, 16, 22, 23
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -70,6 +71,7 @@ def init_common(params):
 # ---
 
 def mazy1(draw, params):
+    """ ? """
     w, h, cnt = init_common(params)
     if 'mar' in params:
         mar = params['mar']
@@ -138,6 +140,7 @@ def mazy1(draw, params):
             draw.line(points, fill=color, width=wx)
 
 def mazy2(draw, params):
+    """ ? """
     w, h, cnt = init_common(params)
     cntm = params['m']
     v = int(h/50)
@@ -164,6 +167,7 @@ def mazy2(draw, params):
             circle(draw, po[0][0], po[0][1], int(r0*(1-m*de)), fill=color, outline=None)
 
 def mazy3(draw, params):
+    """ ? """
     w, h, cnt = init_common(params)
 
     def r(p, d):
@@ -207,6 +211,7 @@ def mazy3(draw, params):
         triangle(draw, po, fill=color, outline=None)
 
 def mazy4(draw, params):
+    """ ? """
     w, h, cnt = init_common(params)
     sc = 2.1 # base, ok (2.05 -> 2.1)
     if 'sc' in params:
@@ -254,6 +259,7 @@ def mazy4(draw, params):
         draw.polygon(po, fill=color, outline=None)
 
 def mazy5(draw, params):
+    """ ? """
     w, h, cnt = init_common(params) # cnt unused
     colors = params['colors']
     c = math.pi/180
@@ -477,7 +483,6 @@ def mazy9(draw, params):
         #
         triangle(draw, po, fill=color, outline=None)
 
-
 def mazy10(draw, params):
     """ Random bezier threads or aeas """
     w, h, cnt = init_common(params)
@@ -625,22 +630,32 @@ def mazy13(draw, params):
     color = params['color']
     draw.polygon(po, fill=color, outline=None)
 
-def mazy14(draw, params):   # note: failed, do sth else from it
-    """ ? """
+def mazy14(draw, params):
+    """ Opart-like cicrles xor-cut by triangles """
     w, h, cnt = init_common(params)
     c = math.pi/180
     if w > h:
         sc = w/2*1.5/cnt
     else:
         sc = h/2*1.5/cnt
+    if 'm' in params:
+        cnt2 = params['m']
+        if cnt2 < 4:
+            cnt2 = 4
+    else:
+        cnt2 = 4 # some min
+    v = 0
+    if 'div' in params:
+        v = params['div']
+        if v > 0:
+            v = w/v
 
     im1 = Image.new('RGB', (params['w'], params['h']), params['Background'])
     im2 = Image.new('RGB', (params['w'], params['h']), params['color']) # note: 2nd image is reversed
     draw1 = ImageDraw.Draw(im1)
     draw2 = ImageDraw.Draw(im2)
 
-    # centered circles
-    for n in range(cnt):
+    for n in range(cnt): # centered circles 1st
         r = int(sc*(cnt-n))
         if n&1 == 0:
             co = params['Background']
@@ -648,31 +663,33 @@ def mazy14(draw, params):   # note: failed, do sth else from it
             co = params['color']
         circle(draw1, int(w/2), int(h/2), r, fill=co, outline=None)
 
-    # spirals from center
-    # TODO: rework, it's bad!
-    spirals_cnt = cnt
-    spiral_steps = 1024*6 #has to be ridiculously big, endings don't fit
-    if w > h:
-        spiral_width = int(w/2*1.5/spirals_cnt)
-    else:
-        spiral_width = int(h/2*1.5/spirals_cnt)
-    for n in range(spirals_cnt):
-        for m in range(spiral_steps):
-            r = m * spiral_width * 1 #par
-            a = (c*m*360/spiral_steps)*(30) + (c*n*360/spirals_cnt) #par
-            newp = (int(w/2)+r*math.cos(a), int(h/2)+r*math.sin(a))
-            if m == 0:
-                oldp = newp
-            else:
-                draw2.line([(oldp[0], oldp[1]), (newp[0], newp[1])], fill=params['Background'], width=spiral_width)
-            oldp = newp
+    po = [(int(w/2), int(h/2)), (0, 0), (0, 0)]
+    da = float(360)/cnt2
+    r = w
+    for n in range(cnt2):
+        if v > 0:
+            v1 = random.randint(int(-v), int(v))
+            v2 = random.randint(int(-v), int(v))
+            po[0] = (int(w/2)+v1, int(h/2)+v2)
+        x = w/2 + r * math.cos(c*da*n)
+        y = h/2 + r * math.sin(c*da*n)
+        po[1] = (x, y)
+        x = w/2 + r * math.cos(c*da*(n+1))
+        y = h/2 + r * math.sin(c*da*(n+1))
+        po[2] = (x, y)
+        if n&1 == 0:
+            color = params['Background']
+        else:
+            color = params['color']
+        triangle(draw2, po, fill=color, outline=None)
+
     imout = ImageChops.difference(im1, im2)
     params['im'].paste(imout, (0, 0))
-    im1 = Image.new('RGB', (1, 1), (0,0,0))
-    im2 = Image.new('RGB', (1, 1), (0,0,0))
-    imout = Image.new('RGB', (1, 1), (0,0,0))
-    draw1 = ImageDraw.Draw(im1) # does it free mem?
-    draw2 = ImageDraw.Draw(im2) # does it free mem?
+    draw1 = None
+    draw2 = None
+    im1 = None
+    im2 = None
+    imout = None
 
 def mazy15(draw, params):
     """ ? """
@@ -753,7 +770,7 @@ def mazy15(draw, params):
     draw2 = ImageDraw.Draw(im2) # does it free mem?
 
 def mazy16(draw, params):
-    """ ? """
+    """ Opart-like circles """
     w, h, cnt = init_common(params)
     c = math.pi/180
     if w > h:
@@ -779,7 +796,7 @@ def mazy16(draw, params):
         circle(draw, int(w/2+xs2), int(h/2+ys2), r, fill=co, outline=ou)
 
 def mazy17(draw, params):
-    """ ? """
+    """ Scottish grid """
     w, h, cnt = init_common(params)
     v = params['v']
     if v < 1:
@@ -799,40 +816,49 @@ def mazy17(draw, params):
         draw.rectangle(xy, fill=color, outline=None)
 
 def mazy18(draw, params):
-    """ ? """
+    """ Random circle bundles """
     w, h, cnt = init_common(params)
     v = params['v']
+    r0v = w
+    if 'r0v' in params:
+        r0v = params['r0v']
 
     for n in range(cnt):
         x = random.randint(0, w)
         y = random.randint(0, h)
-        r0 = random.randint(0, w) # par
+        r0 = random.randint(0, r0v)
         for m in range(params['m']):
             r = r0 + random.randint(-v, v)
-            color = new_colorer(params['color'], n, cnt)
-            if 'addalpha' in params:
-                color = add_alpha(color, params['addalpha'])
-            for th in range(5): # test
-                circle(draw, x, y, r+th*0.2, fill=None, outline=color)
+            color = new_colorer(params['color'], n, cnt) # note: alpha for outline does not seem to work
+            for th in range(5): # test/par
+                circle(draw, x, y, r+th*0.15, fill=None, outline=color)
 
 def mazy19(draw, params):
-    """ Chequered grids """
+    """ Chequered opart grids with x variations """
     w, h, cnt = init_common(params)
     c = math.pi/180
     nx = cnt
     ny = params['m']
     dx = int(2*w/nx)
     dy = int(2*h/ny)
-    fncx = []
-    coef = 17 # par / const 17 good for 40
-    for x in range(coef): # precalc
-        fx = 2.0*math.exp(-x/4)
-        fncx.append(fx)
-    fncx2 = []
-    coef2 = nx # ?
-    for x in range(coef2): # precalc
-        fx = abs(1.1*math.sin(x/coef2*360*2*c)) #par x2
-        fncx2.append(fx)
+    c_white = (255,255,255)
+    c_black = (0,0,0)
+    if 'c_white' in params:
+        c_white = params['c_white']
+    if 'c_black' in params:
+        c_black = params['c_black']
+    if params['mode'] == 'exp':
+        fncx = []
+        coef = 17 # par / const 17 good for 40
+        for x in range(coef): # precalc
+            fx = 2.0*math.exp(-x/4)
+            fncx.append(fx)
+    if params['mode'] == 'sin':
+        fncx2 = []
+        coef2 = nx # ?
+        for x in range(coef2): # precalc
+            fx = abs(1.1*math.sin(x/coef2*360*2*c)) #par x2
+            fncx2.append(fx)
     dxmap = []
     f = 0
     x = 0
@@ -866,11 +892,9 @@ def mazy19(draw, params):
         for x in range(len(dxmap)-1):
             b = ((x&1) == 1 and (y&1) == 1) or ((x&1) == 0 and (y&1) == 0)
             if b == True:
-                cx = (255,255,255)
-                #cx = (0,0,255)
+                cx = c_white
             else:
-                cx = (0,0,0)
-                #cx = (255,0,0)
+                cx = c_black
             xp = dxmap[x]
             xy = [(xp, y*dy), (xp+(dxmap[x+1]-dxmap[x]), y*dy+dy)]
             draw.rectangle(xy, fill=cx, outline=None)

@@ -10,7 +10,7 @@
 # upd: 20190414, 15, 17, 18, 21, 22, 24, 26, 27
 # upd: 20200507, 10
 # upd: 20210106
-# upd: 20210515, 16, 22
+# upd: 20210515, 16, 22, 23
 
 
 # TODO:
@@ -686,11 +686,24 @@ def predef_mazy13(w, h):
 
 def predef_mazy14(w, h):
     a = [
+        {'Background': bg_white, 'n': 6, 'color': bg_black},
         {'Background': bg_white, 'n': 12, 'color': bg_black},
         {'Background': bg_white, 'n': 24, 'color': bg_black},
         {'Background': bg_white, 'n': 36, 'color': bg_black},
         {'Background': bg_white, 'n': 48, 'color': bg_black},
     ]
+    a1 = copy.deepcopy(a)
+    a2 = copy.deepcopy(a)
+    a3 = copy.deepcopy(a)
+    a4 = copy.deepcopy(a)
+    for i in range(len(a)):
+        a1[i]['m'] = 4
+        a2[i]['m'] = 8
+        a3[i]['m'] = 32
+        a4[i]['m'] = 100
+    a = np.concatenate((a1, a2, a3, a4), axis=0)
+    a_ = [{'Background': bg_white, 'n': 24, 'm': 32, 'color': bg_black, 'div': 5}] # 'special' case (test)
+    a = np.concatenate((a, a_), axis=0)
     return append_dflts(a, 'SMEARS#14', mazy14, w, h)
 
 def predef_mazy15(w, h):
@@ -801,21 +814,29 @@ def predef_mazy17(w, h):
         {'Background': bg_white, 'n': 90, 'v': int(w/30), 'color': 'BeachTowels', 'addalpha': 90},
         {'Background': bg_white, 'n': 150, 'v': int(w/200), 'color': 'BeachTowels'},
         {'Background': bg_white, 'n': 150, 'v': int(w/200), 'color': 'BeachTowels', 'addalpha': 50},
+        {'Background': bg_black, 'n': 90, 'v': int(w/30), 'color': 'bw'},
+        {'Background': bg_black, 'n': 90, 'v': int(w/30), 'color': 'wryb'},
+        {'Background': bg_black, 'n': 90, 'v': int(w/30), 'color': 'Number3'},
     ]
     return append_dflts(a, 'SMEARS#17', mazy17, w, h)
 
 def predef_mazy18(w, h):
     a = [
-        {'Background': bg_white, 'n': 90, 'm': 30, 'v': 20, 'color': 'happy'},
-        {'Background': bg_white, 'n': 60, 'm': 16, 'v': 80, 'color': 'happy'},
-        {'Background': bg_white, 'n': 120, 'm': 40, 'v': 20, 'color': 'happy', 'addalpha': 50},
-        {'Background': bg_white, 'n': 90, 'm': 400, 'v': 100, 'color': 'yorb', 'addalpha': 50}, # new 202005
-        {'Background': bg_white, 'n': 90, 'm': 400, 'v': 100, 'color': 'gits', 'addalpha': 50}, # new 202005
-        {'Background': bg_white, 'n': 90, 'm': 400, 'v': 100, 'color': 'happy', 'addalpha': 50}, # new 202005
-        {'Background': bg_white, 'n': 90, 'm': 30, 'v': 20, 'color': 'BeachTowels'},
-        {'Background': bg_white, 'n': 90, 'm': 30, 'v': 20, 'color': 'BeachTowels', 'addalpha': 50},
-        {'Background': bg_white, 'n': 40, 'm': 120, 'v': 50, 'color': 'BeachTowels', 'addalpha': 50},
+        {'Background': bg_white, 'n': 40, 'm': 120, 'v': 50},
+        {'Background': bg_white, 'n': 60, 'm': 16, 'v': 80},
+        {'Background': bg_white, 'n': 90, 'm': 30, 'v': 20},
+        {'Background': bg_white, 'n': 90, 'm': 400, 'v': 100},
+        {'Background': bg_white, 'n': 120, 'm': 40, 'v': 20},
+        {'Background': bg_white, 'n': 160, 'm': 40, 'v': 20, 'r0v': 250},
     ]
+    a1 = copy.deepcopy(a)
+    a2 = copy.deepcopy(a)
+    a3 = copy.deepcopy(a)
+    for i in range(len(a)):
+        a1[i]['color'] = 'happy'
+        a2[i]['color'] = 'yorb'
+        a3[i]['color'] = 'BeachTowels'
+    a = np.concatenate((a1, a2, a3), axis=0)
     return append_dflts(a, 'SMEARS#18', mazy18, w, h)
 
 def predef_mazy19(w, h):
@@ -831,8 +852,13 @@ def predef_mazy19(w, h):
         {'Background': bg_black, 'n': 80, 'm': 40, 'mode': 'exp'},
         {'Background': bg_black, 'n': 20, 'm': 20, 'mode': 'exp'},
 
+        {'Background': bg_black, 'n': 40, 'm': 40, 'mode': 'sin'},
         {'Background': bg_black, 'n': 80, 'm': 40, 'mode': 'sin'},
         {'Background': bg_black, 'n': 160, 'm': 40, 'mode': 'sin'},
+
+        {'Background': bg_black, 'n': 40, 'm': 40, 'mode': 'sin', 'c_black': (255,0,0), 'c_white': (0,0,255)},
+        {'Background': bg_black, 'n': 80, 'm': 40, 'mode': 'sin', 'c_black': (255,0,0), 'c_white': (0,0,255)},
+        {'Background': bg_black, 'n': 160, 'm': 40, 'mode': 'sin', 'c_black': (255,0,0), 'c_white': (0,0,255)},
     ]
     return append_dflts(a, 'SMEARS#19', mazy19, w, h)
 

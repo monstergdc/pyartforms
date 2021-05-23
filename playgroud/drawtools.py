@@ -8,7 +8,7 @@
 # upd: 20190311, 29
 # upd: 20190414, 21
 # upd: 20210301
-# upd: 20210507, 15
+# upd: 20210507, 15, 23
 
 from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin, ImageFont
 from datetime import datetime as dt
@@ -127,14 +127,10 @@ def append_myself(title=""):
     x = PngImagePlugin.PngInfo()
     today = dt.today()
     y = today.year
-    #x.add_itxt(key='Title', value=title, lang='', tkey='', zip=False)
-    #x.add_itxt(key='Description', value='generated in pyartforms', lang='', tkey='', zip=False)
-    #x.add_itxt(key='Author', value='Jakub Noniewicz', lang='', tkey='', zip=False)
-    #x.add_itxt(key='Copyright', value='(c) Jakub Noniewicz', lang='', tkey='', zip=False)
     x.add_text(key='Title', value=title, zip=False)
     x.add_text(key='Description', value='generated in PyArtForms', zip=False)
     x.add_text(key='Author', value='Jakub Noniewicz', zip=False)
-    x.add_text(key='Copyright', value='(c)'+str(y)+' Jakub Noniewicz', zip=False)
+    x.add_text(key='Copyright', value='(c)'+str(y)+' Jakub Noniewicz | noniewicz.com | noniewicz.art.pl', zip=False)
     x.add_itxt(key='Concept', value='PyArtForms concept by: Jakub Noniewicz | noniewicz.com | noniewicz.art.pl', lang='', tkey='', zip=False)
     return x
 
@@ -152,7 +148,7 @@ def im2cgi(im, format='PNG'):
         format = 'PNG'
     imgByteArr = io.BytesIO()
     if format == 'PNG':
-        im.save(imgByteArr, format=format, pnginfo=append_myself('pyartforms'))
+        im.save(imgByteArr, format=format, pnginfo=append_myself('PyArtForms '+params['name']))
     else:
         im.save(imgByteArr, format=format)
     data = imgByteArr.getvalue()
@@ -194,7 +190,7 @@ def art_painter(params, png_file='example.png', output_mode='save', bw=False):
 
     if output_mode == 'save':
         #add_myself(draw, params['w'], params['h'], params['Background'])
-        im.save(png_file, dpi=(300,300), pnginfo=append_myself('pyartforms'))
+        im.save(png_file, dpi=(300,300), pnginfo=append_myself('PyArtForms '+params['name']))
         show_benchmark(start_time)
         draw = None #?
         im = None #?
