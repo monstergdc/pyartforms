@@ -4,6 +4,7 @@
 # PyArtForms - Python generative art forms paint algorithms (artificial artist)
 # experimental 'smears' paint algorithms, v1.0
 # (c)2017-2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+
 # #1 'cruel red smears', not only red
 # #2 circles
 # #3 triangles
@@ -14,11 +15,11 @@
 # #8 just rectangles, may flux
 # #9 rays from center
 # #10 long beziers
-# #11 horizontal gradients with suprizes
-# #12 opart-like boxes/circles
-# #13 single big poly
+# #11 horizontal gradients with suprizes (tested, ok) --- finish new colorer
+# #12 opart-like boxes/circles/triangles (tested, ok/so-so)
+# #13 opart-like single big poly (tested, ok)
 # #14 opart-like cicrles xor-cut by triangles (tested, ok)
-# #15 opart-like circle-interference patterns
+# #15 opart-like circle-interference patterns (...)
 # #16 opart-like circles (tested, ok)
 # #17 scottish grid (tested, so-so)
 # #18 slim colorful circles (tested, ok)
@@ -533,9 +534,8 @@ def mazy10(draw, params):
         if params['mode'] == 'fill':
             draw.polygon(points, fill=color, outline=None)
 
-# TODO: also like 11 only more (var?) freq + diagonals or weirds
 def mazy11(draw, params):
-    """ ? """
+    """ Horizontal gradients with suprizes """
     w, h, cnt = init_common(params)
 
     dy = float(h)/cnt
@@ -554,6 +554,14 @@ def mazy11(draw, params):
             cx = colors_Rainbow
         if params['color'] == 'MoonlightBytes6':
             cx = colors_MoonlightBytes6
+        if params['color'] == 'MetroUI':
+            cx = colors_MetroUI
+        if params['color'] == 'ProgramCat':
+            cx = colors_ProgramCat
+        if params['color'] == 'wryb':
+            cx = colors_fwd
+        if params['color'] == 'yorb':
+            cx = colors_yorb
         csize = len(cx)
         n1 = random.randint(0, csize-1)
         n2 = n%csize
@@ -570,15 +578,16 @@ def mazy11(draw, params):
             draw.rectangle(xy, fill=color, outline=None)
 
 def mazy12(draw, params):
-    """ ? """
+    """ Opart-like boxes/circles/triangles """
     w, h, cnt = init_common(params)
+    c = math.pi/180
     o = params['o']
-    v = params['v']
+    v = False
+    if 'v' in params:
+        v = params['v']
+    rc = 1.0
     if 'rc' in params:
         rc = params['rc']
-    else:
-        rc = 1.0
-    c = math.pi/180
     w0 = w/2
     h0 = h/2
     r = int(h/2/2 * rc)
@@ -596,7 +605,6 @@ def mazy12(draw, params):
             vy = 0
         if i&1 == 0:
             co = (0,0,0)
-            #ou = None
             ou = (255,255,255)
         else:
             co = (255,255,255)
@@ -616,7 +624,7 @@ def mazy12(draw, params):
             triangle(draw, points, fill=co, outline=ou)
 
 def mazy13(draw, params):
-    """ ? """
+    """ Opart-like single big poly """
     w, h, cnt = init_common(params)
     w0 = w/2
     h0 = h/2
