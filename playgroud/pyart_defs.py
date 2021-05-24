@@ -10,7 +10,7 @@
 # upd: 20190414, 15, 17, 18, 21, 22, 24, 26, 27
 # upd: 20200507, 10
 # upd: 20210106
-# upd: 20210515, 16, 22, 23
+# upd: 20210515, 16, 22, 23, 24
 
 
 # TODO:
@@ -473,48 +473,34 @@ def predef_mazy7(w, h):
 
 def predef_mazy8(w, h):
     a = [
-        {'Background': bg_white, 'xcnt': 5, 'ycnt': 5, 'color': 'happy'},
-        {'Background': bg_white, 'xcnt': 5, 'ycnt': 10, 'color': 'happy'},
-        {'Background': bg_white, 'xcnt': 5, 'ycnt': 3, 'color': 'happy'},
-        {'Background': bg_white, 'xcnt': 15, 'ycnt': 5, 'color': 'happy'},
-        {'Background': bg_white, 'xcnt': 31, 'ycnt': 20, 'color': 'happy'},
-        {'Background': bg_white, 'xcnt': 3, 'ycnt': 20, 'color': 'happy'},
-
-        {'Background': bg_white, 'xcnt': 5, 'ycnt': 5, 'color': 'wryb'},
-        {'Background': bg_white, 'xcnt': 5, 'ycnt': 10, 'color': 'wryb'},
-        {'Background': bg_white, 'xcnt': 5, 'ycnt': 3, 'color': 'wryb'},
-        {'Background': bg_white, 'xcnt': 15, 'ycnt': 5, 'color': 'wryb'},
-        {'Background': bg_white, 'xcnt': 31, 'ycnt': 20, 'color': 'wryb'},
-        {'Background': bg_white, 'xcnt': 3, 'ycnt': 20, 'color': 'wryb'},
-
-        {'Background': bg_white, 'xcnt': 5, 'ycnt': 5, 'color': 'BeachTowels'},
-        {'Background': bg_white, 'xcnt': 5, 'ycnt': 10, 'color': 'BeachTowels'},
-        {'Background': bg_white, 'xcnt': 5, 'ycnt': 3, 'color': 'BeachTowels'},
-        {'Background': bg_white, 'xcnt': 15, 'ycnt': 5, 'color': 'BeachTowels'},
-        {'Background': bg_white, 'xcnt': 31, 'ycnt': 20, 'color': 'BeachTowels'},
-        {'Background': bg_white, 'xcnt': 3, 'ycnt': 20, 'color': 'BeachTowels'},
-
-        {'Background': bg_white, 'xcnt': 5, 'ycnt': 5, 'color': 'MoonlightBytes6'},
-        {'Background': bg_white, 'xcnt': 5, 'ycnt': 10, 'color': 'MoonlightBytes6'},
-        {'Background': bg_white, 'xcnt': 5, 'ycnt': 3, 'color': 'MoonlightBytes6'},
-        {'Background': bg_white, 'xcnt': 15, 'ycnt': 5, 'color': 'MoonlightBytes6'},
-        {'Background': bg_white, 'xcnt': 31, 'ycnt': 20, 'color': 'MoonlightBytes6'},
-        {'Background': bg_white, 'xcnt': 3, 'ycnt': 20, 'color': 'MoonlightBytes6'},
-
-        {'Background': bg_white, 'xcnt': 5, 'ycnt': 5, 'color': 'MetroUI'},
-        {'Background': bg_white, 'xcnt': 5, 'ycnt': 10, 'color': 'MetroUI'},
-        {'Background': bg_white, 'xcnt': 5, 'ycnt': 3, 'color': 'MetroUI'},
-        {'Background': bg_white, 'xcnt': 15, 'ycnt': 5, 'color': 'MetroUI'},
-        {'Background': bg_white, 'xcnt': 31, 'ycnt': 20, 'color': 'MetroUI'},
-        {'Background': bg_white, 'xcnt': 3, 'ycnt': 20, 'color': 'MetroUI'},
-
-        {'Background': bg_white, 'xcnt': 5, 'ycnt': 5, 'color': 'ProgramCat'},
-        {'Background': bg_white, 'xcnt': 5, 'ycnt': 10, 'color': 'ProgramCat'},
-        {'Background': bg_white, 'xcnt': 5, 'ycnt': 3, 'color': 'ProgramCat'},
-        {'Background': bg_white, 'xcnt': 15, 'ycnt': 5, 'color': 'ProgramCat'},
-        {'Background': bg_white, 'xcnt': 31, 'ycnt': 20, 'color': 'ProgramCat'},
-        {'Background': bg_white, 'xcnt': 3, 'ycnt': 20, 'color': 'ProgramCat'},
+        {'Background': bg_white, 'xcnt': 5, 'ycnt': 5},
+        {'Background': bg_white, 'xcnt': 5, 'ycnt': 10},
+        {'Background': bg_white, 'xcnt': 5, 'ycnt': 3},
+        {'Background': bg_white, 'xcnt': 15, 'ycnt': 5},
+        {'Background': bg_white, 'xcnt': 31, 'ycnt': 20},
+        {'Background': bg_white, 'xcnt': 3, 'ycnt': 20},
     ]
+    a1 = copy.deepcopy(a)
+    a2 = copy.deepcopy(a)
+    a3 = copy.deepcopy(a)
+    a4 = copy.deepcopy(a)
+    a5 = copy.deepcopy(a)
+    a6 = copy.deepcopy(a)
+    for i in range(len(a)):
+        a1[i]['color'] = 'happy'
+        a2[i]['color'] = 'wryb'
+        a3[i]['color'] = 'BeachTowels'
+        a4[i]['color'] = 'MoonlightBytes6'
+        a5[i]['color'] = 'MetroUI'
+        a6[i]['color'] = 'ProgramCat'
+    a = np.concatenate((a1, a2, a3, a4, a5, a6), axis=0)
+    a1 = copy.deepcopy(a)
+    a2 = copy.deepcopy(a)
+    for i in range(len(a)):
+        a2[i]['flux_p'] = 75
+        a2[i]['v'] = 50
+    a = np.concatenate((a1, a2), axis=0)
+    # todo: add flux alpha | add border
     return append_dflts(a, 'SMEARS#8', mazy8, w, h)
 
 def predef_mazy9(w, h):

@@ -12,7 +12,7 @@
 # #5 new smears aka star flowers
 # #6 circle ripples
 # #7 grayish rects mess
-# #8 just rectangles, may flux
+# #8 just rectangles, may flux (tested, ok) --- finish: new colorer, new params, more variants in defs
 # #9 rays from center
 # #10 long beziers
 # #11 horizontal gradients with suprizes (tested, ok) --- finish new colorer
@@ -41,7 +41,7 @@
 # upd: 20190414, 15, 17, 18, 22, 24, 26, 27
 # upd: 20200507, 10
 # upd: 20210106, 15, 16, 19, 20, 21, 22
-# upd: 20210515, 16, 22, 23
+# upd: 20210515, 16, 22, 23, 24
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -397,30 +397,44 @@ def mazy8(draw, params):
     w, h, cnt = init_common(params) # cnt unused
     xcnt = params['xcnt']
     ycnt = params['ycnt']
-    #v = 20 #par
-    # todo: opt border?
+
+    # todo: new par use ext
+    alpha_flux_p = 50
+    alpha_flux_p = None
+    alpha_flux_vmin = 20
+    alpha_flux_vmax = 90-40
+
+    flux_p = None
+    v = 0
+    if 'flux_p' in params:
+        flux_p = params['flux_p']
+    if 'v' in params:
+        v = params['v']
+
+    border = 0
+    if 'border' in params:
+        border = params['border']
 
     w1 = int(w/xcnt)
     h1 = int(h/ycnt)
-    for y in range(ycnt):
-        for x in range(xcnt):
-            x1 = x*w1 + int(w1/2)
-            y1 = y*h1 + int(h1/2)
+    for y in range(ycnt-border*2):
+        for x in range(xcnt-border*2):
+            x1 = x*w1 + int(w1/2) + border*w1
+            y1 = y*h1 + int(h1/2) + border*h1
             ci = random.randint(0, 7)
-            # todo: new colorer FULLY proper
+            # todo: new colorer FULLY proper (range)
             color = new_colorer(params['color'], ci, -1)
-            # test (rnd flux) ok
-#            if random.randint(0, 100) > 50: #par
-#                ar = random.randint(80, 200) #par
-#                color = add_alpha(color, ar)
-#            if random.randint(0, 100) > 75: #par
-#                vx = float(x1)*(random.randint(0, v)-random.randint(0, v))/100.0
-#                vy = float(y1)*(random.randint(0, v)-random.randint(0, v))/100.0
-#                vw = float(w)*(random.randint(0, v)-random.randint(0, v))/100.0
-#                vh = float(h)*(random.randint(0, v)-random.randint(0, v))/100.0
-#            else:
-#                vx = vy = vw = vh = 0
+            if alpha_flux_p != None and alpha_flux_p > 0: # rnd flux
+                if random.randint(0, 100) > alpha_flux_p:
+                    ar = random.randint(alpha_flux_vmin, alpha_flux_vmax)
+                    color = add_alpha(color, ar)
             vx = vy = vw = vh = 0
+            if flux_p != None and flux_p > 0: # rnd flux
+                if random.randint(0, 100) > flux_p:
+                    vx = float(w1)*(random.randint(0, v)-random.randint(0, v))/100.0
+                    vy = float(h1)*(random.randint(0, v)-random.randint(0, v))/100.0
+                    vw = float(w1)*(random.randint(0, v)-random.randint(0, v))/100.0
+                    vh = float(h1)*(random.randint(0, v)-random.randint(0, v))/100.0
             rect(draw, x1+vx, y1+vy, w1+vw, h1+vh, fill=color, outline=None)
 
 def mazy9(draw, params):
