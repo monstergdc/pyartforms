@@ -8,9 +8,9 @@
 # upd: 20190311, 29
 # upd: 20190414, 21
 # upd: 20210301
-# upd: 20210507, 15, 23
+# upd: 20210507, 15, 23, 26, 27
 
-from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin, ImageFont
+from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin, ImageFont, ImageOps
 from datetime import datetime as dt
 import random, math, string, os, sys, io
 from array import array
@@ -167,7 +167,7 @@ def art_painter(params, png_file='example.png', output_mode='save', bw=False):
         bw = False
     if output_mode == 'save':
         start_time = dt.now()
-        print('drawing %s... %s' % (params['name'], png_file))
+        print('drawing %s... %s ' % (params['name'], png_file), end="", flush=True) # note same line next
     if bw:
         im = Image.new('L', (params['w'], params['h']), (0)) # todo: bg par?
     else:
@@ -184,6 +184,7 @@ def art_painter(params, png_file='example.png', output_mode='save', bw=False):
     params['im'] = im  # pass the Image object too
     f = params['call']
     f(draw, params)
+    im = params['im'] # fix?
     if "blur" in params:
         if params['blur'] == True:
             im = xsmooth(params, im)
@@ -244,3 +245,13 @@ def xsmooth(im):
     im = im.filter(ImageFilter.SHARPEN)
     return im
 
+def invert_image(image):
+    """ Inverse image """
+    if image.mode == 'RGBA':
+        r, g, b, a = image.split()
+        rgb_image = Image.merge('RGB', (r, g, b))
+        inverted_image = ImageOps.invert(rgb_image)
+        r2, g2, b2 = inverted_image.split()
+        return Image.merge('RGBA', (r2, g2, b2, a))
+    else:
+        return ImageOps.invert(image)

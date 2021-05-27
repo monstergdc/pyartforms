@@ -23,8 +23,8 @@
 # #16 opart-like circles (tested, ok)
 # #17 scottish grid (tested, so-so)
 # #18 slim colorful circles (tested, ok)
-# #19 op-art grid (tested, ok)
-# #20 <new 2020 in progress>
+# #19 opart-like grid (tested, ok)
+# #20 opart-like / papercut-like / video feedback-like 'dragon' effect (tested, ok)
 # #21 
 # #22 
 # #23 
@@ -41,7 +41,7 @@
 # upd: 20190414, 15, 17, 18, 22, 24, 26, 27
 # upd: 20200507, 10
 # upd: 20210106, 15, 16, 19, 20, 21, 22
-# upd: 20210515, 16, 22, 23, 24
+# upd: 20210515, 16, 22, 23, 24, 25, 26, 27
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -51,7 +51,7 @@
 # - ?
 
 
-from PIL import Image, ImageDraw, ImageChops
+from PIL import Image, ImageDraw, ImageChops, ImageOps
 import random, math, string, os, sys
 from bezier import make_bezier
 from drawtools import *
@@ -403,6 +403,8 @@ def mazy8(draw, params):
     alpha_flux_p = None
     alpha_flux_vmin = 20
     alpha_flux_vmax = 90-40
+
+    # todo: opt dodatkowe 'cienkie'
 
     flux_p = None
     v = 0
@@ -921,151 +923,61 @@ def mazy19(draw, params):
             xy = [(xp, y*dy), (xp+(dxmap[x+1]-dxmap[x]), y*dy+dy)]
             draw.rectangle(xy, fill=cx, outline=None)
 
+def mazy20(draw, params):
+    """ opart-like / papercut-like / video feedback-like 'dragon' effect """
+    w, h, cnt = init_common(params)
+    da = params['da']
+    dd = 10 # dflt
+    if 'dd' in params:
+        dd = params['dd']
+        if dd < 1:
+            dd = 1
+    dx = int(w/dd)
+    dy = int(h/dd)
+    sc = 0.75 # dflt
+    if 'sc' in params:
+        sc = params['sc']
+    nw = int(sc*w)
+    nh = int(sc*h)
+
+    xy = [(dx, dy), (w-dx, h-dy)]
+    draw.rectangle(xy, fill=params['Foreground'], outline=None)
+    xy = [(dx*2, dy*2), (w-dx*2, h-dy*2)]
+    draw.rectangle(xy, fill=params['Background'], outline=None)
+
+    for n in range(cnt):
+        im1 = params['im']
+        im1 = im1.resize((nw, nh), Image.BICUBIC)
+        im1 = im1.rotate(da, Image.BICUBIC)
+        params['im'].paste(im1, (int((w-nw)/2), int((h-nh)/2)))
+    im1 = None
+
+    if 'invert' in params:
+        if params['invert'] == True:
+            params['im'] = invert_image(params['im'])
+
 # future fun
 
-def mazy20(draw, params):
-    w, h, cnt = init_common(params)
-    m = params['mode']
-    c = math.pi/180
-    #d = 8 # pixel
-    d = 2 # pixel
-    xs = int(w/d/2)
-    ys = int(h/d/2)
-    for y in range(int(h/d)):
-        for x in range(int(w/d)):
-
-            """
-            vr = 32+128+128*math.sin(x*c)*math.cos(y*c)
-            vg = 32+128+128*math.cos(4*x*c)*math.cos(y*c)
-            vb = 32+128+64*(math.cos(3*x*c)+math.sin(2*y*c))
-            if m == '1':
-                cx = (int(vr), int(vr), int(vr))
-            if m == '2':
-                cx = (int(vg), int(vg), int(vg))
-            if m == '3':
-                cx = (int(vb), int(vb), int(vb))
-            """
-
-            """
-            vr = 32+64+64*(math.sin(8*x*c)+math.cos(8*y*c))
-            vg = 32+64+64*(math.sin(8*y*c)+math.cos(8*x*c))
-            vb = 32+64+64*(math.sin(4*y*c)+math.sin(4*x*c))
-            cx = (int(vr),int(vg),int(vb))
-            """
-
-            #vr = 2000*math.exp(-x/100)
-            #vr = 2000*math.exp(-x/50)
-            #vg = vr #2000*math.exp(-x/100)+x
-            #vb = vr #2000*math.exp(-x/100)+x*2
-
-            """
-            a = 0
-            b = 0
-#            if m == '1':
-#                b = 0
-#            if m == '2':
-#                b = 10
-#            if m == '3':
-#                b = 100
-            vr = (x+a)*1*math.sin((x+b)*c*2)+y*1*math.cos(y*c*2)
-            a = 10
-            b = 50
-            vg = (x+a)*1*math.sin((x+b)*c*2)+y*1*math.cos(y*c*2)
-            b = 20
-            b = 100
-            vb = (x+a)*1*math.sin((x+b)*c*2)+y*1*math.cos(y*c*2)
-            vr = int(vr) % 255
-            vg = int(vg) % 255
-            vb = int(vb) % 255
-            cx = (int(vr), int(vg), int(vb))
-
-            hue = int(vr) % 255
-            saturation = 244
-            vb = 2000*math.exp(-x/50)
-            luminance = int(vb) % 255
-            #luminance = 192 # int(vb * 0.7)
-
-            vr = 2000*math.exp(-x/100)
-            vg = 2000*math.exp(-y/100)
-            hue = int(vr) % 255
-            saturation = 244
-            luminance = int(vg) % 255
-
-            cx = 'hsl(%d, %d%%, %d%%)' % (hue, saturation, luminance)
-            """
-
-            """
-            v = (1*math.sqrt((x-xs)*(x-xs)+(y-ys)*(y-ys)))
-            #v = (1*math.sqrt((x-xs)*(x-xs)+(y-ys)*(y-ys))) * (math.sin(3.5*c*x)*math.cos(c*x)+math.sin(4*c*y)*math.cos(4*c*x))
-            #v = 32+128+128 * (math.sin(4*c*x)*math.cos(c*x)+math.sin(c*y)*math.cos(4*c*x)) / 2
-            cx = (int(abs(v)), int(0), int(0))
-            """
-            """
-            vr = (20*math.sqrt((x-xs)*(x-xs)+(y-ys)*(y-ys)))
-            vg = (20*math.sqrt((x-xs*0.6)*(x-xs*0.6)+(y-ys)*(y-ys)))
-            vb = (20*math.sqrt((x-xs)*(x-xs)+(y-ys*0.6)*(y-ys*0.6)))
-            cx = (int(vr)%255, int(vg)%255, int(vb)%255)
-            """
-            """
-            vr = 64*(math.cos(2*x*c)+math.sin(2*y*c))
-            vg = 64*(math.cos(3*y*c)+math.sin(3*x*c))
-            vb = 64*(math.cos(3*x*c)+math.sin(2*y*c))
-            def sca(x):
-                if x < 0:
-                    if x < 32:
-                        return 0
-                    else:
-                        return 64
-                if x > 32:
-                    return 192
-                else:
-                    return 128
-            vr1 = sca(vr)
-            vg1 = sca(vg)
-            vb1 = sca(vb)
-            cx = (vr1,vg1,vb1)
-            """
-
-            """
-            f0 = 1 + math.cos(x*c*2)
-            f1 = 1 + math.cos(y*c*4)
-            f0 = int(f0*255)
-            f1 = int(5+f1*25)
-            cx = 'hsl(%d, %d%%, %d%%)' % (f0, 80, f1)
-            """
-
-            #v = (8*math.sqrt((x-xs)*(x-xs)+(y-ys)*(y-ys))) / 4 # opt w/o /4
-            v0 = math.sqrt((x-xs)*(x-xs)+(y-ys)*(y-ys))
-            v = 3 + math.cos(x*c*1) + math.sin(y*c*1) - math.sin(v0*c*1) # to ok
-            v = v * 254
-            f0 = int(v) % 255
-            #v = (2*math.sqrt((x-xs)*(x-xs)+(y-ys)*(y-ys)))
-            #f1 = int(v*100) % 100
-            #f1 = random.randint(20, 80) #ok1
-            f1 = random.randint(45, 70)
-            cx = 'hsl(%d, %d%%, %d%%)' % (f0, 80, f1)
-            
-            xy = [(x*d, y*d), (x*d+d, y*d+d)]
-            draw.rectangle(xy, fill=cx, outline=None)
-    # ... todo: fin
-    return 0
-
 def mazy21(draw, params):
+    """ ? """
     w, h, cnt = init_common(params)
     # ...
     return 0
 
 def mazy22(draw, params):
+    """ ? """
     w, h, cnt = init_common(params)
     # ...
     return 0
 
 def mazy23(draw, params):
+    """ ? """
     w, h, cnt = init_common(params)
     # ...
     return 0
 
 def mazy24(draw, params):
+    """ ? """
     w, h, cnt = init_common(params)
     # ...
     return 0

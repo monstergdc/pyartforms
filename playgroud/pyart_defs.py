@@ -10,7 +10,7 @@
 # upd: 20190414, 15, 17, 18, 21, 22, 24, 26, 27
 # upd: 20200507, 10
 # upd: 20210106
-# upd: 20210515, 16, 22, 23, 24
+# upd: 20210515, 16, 22, 23, 24, 26, 27
 
 
 # TODO:
@@ -18,6 +18,7 @@
 # - ?
 
 import copy
+from collections import OrderedDict
 from drawtools import get_canvas, art_painter
 from life1 import life
 from lissajous import lissajous, lissajous_loop
@@ -875,25 +876,68 @@ def predef_mazy19(w, h):
     return append_dflts(a, 'SMEARS#19', mazy19, w, h)
 
 def predef_mazy20(w, h):
+    n = 16 # good for A4
     a = [
-        {'Background': bg_black, 'n': 1, 'mode': '1'},
-        {'Background': bg_black, 'n': 1, 'mode': '2'},
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'da': 6},
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'da': 6, 'invert': True},
+        {'Background': bg_white, 'Foreground': bg_black, 'n': n, 'da': 6},
+
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'da': 15},
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'da': 15, 'invert': True},
+        {'Background': bg_white, 'Foreground': bg_black, 'n': n, 'da': 15},
+
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'da': 20},
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'da': 20, 'invert': True},
+        {'Background': bg_white, 'Foreground': bg_black, 'n': n, 'da': 20},
+
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'da': 30},
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'da': 30, 'invert': True},
+        {'Background': bg_white, 'Foreground': bg_black, 'n': n, 'da': 30},
+        
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'da': 45},
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'da': 45, 'invert': True},
+        {'Background': bg_white, 'Foreground': bg_black, 'n': n, 'da': 45},
     ]
+    a1 = copy.deepcopy(a)
+    a2 = copy.deepcopy(a)
+    for i in range(len(a)):
+        a1[i]['sc'] = 0.75 #dflt is nice
+        a2[i]['sc'] = 0.85
+    a = np.concatenate((a1, a2), axis=0)
+    a1 = copy.deepcopy(a)
+    a2 = copy.deepcopy(a)
+    for i in range(len(a)):
+        a1[i]['dd'] = 10 #dflt is nice
+        a2[i]['dd'] = 7
+    a = np.concatenate((a1, a2), axis=0)
     return append_dflts(a, 'SMEARS#20', mazy20, w, h)
 
-#def predef_mazy21(w, h):
-#def predef_mazy22(w, h):
+def predef_mazy21(w, h):
+    a = [
+        {'Background': bg_black, 'n': 1},
+    ]
+    return append_dflts(a, 'SMEARS#21', mazy21, w, h)
+
+def predef_mazy22(w, h):
+    a = [
+        {'Background': bg_black, 'n': 1},
+    ]
+    return append_dflts(a, 'SMEARS#22', mazy22, w, h)
+
 #def predef_mazy23(w, h):
 #def predef_mazy24(w, h):
 #def predef_mazy25(w, h):
 
 def enum_defs():
     suma = 0
+    dout = {}
     for k, v in predefs.items():    #note: py3
         cnt = len(v(0, 0))
         suma += cnt
-        print(k, ':', cnt)
-    # todo: sort it
+        dout[k] = cnt
+    dout1 = OrderedDict(sorted(dout.items()))
+    for k, v in dout1.items():    #note: py3
+        print(k, ':', v)
     print('total:', suma)
 
 # all predefs
@@ -902,6 +946,7 @@ predefs = {'mazy01': predef_mazy1, 'mazy02': predef_mazy2, 'mazy03': predef_mazy
            'mazy09': predef_mazy9, 'mazy10': predef_mazy10, 'mazy11': predef_mazy11, 'mazy12': predef_mazy12,
            'mazy13': predef_mazy13, 'mazy14': predef_mazy14, 'mazy15': predef_mazy15, 'mazy16': predef_mazy16,
            'mazy17': predef_mazy17, 'mazy18': predef_mazy18, 'mazy19': predef_mazy19, 'mazy20': predef_mazy20,
+           'mazy21': predef_mazy21,
            'life': predef_life, 'lissajous': predef_lissajous, 'astro': predef_astro, 'mandelbrot': predef_mandelbrot,
            'waves01': predef_waves1,'waves02': predef_waves2, 'waves03': predef_waves3, 
            }
@@ -910,7 +955,7 @@ predefs = {'mazy01': predef_mazy1, 'mazy02': predef_mazy2, 'mazy03': predef_mazy
 predef_names = [
         'mazy01', 'mazy02', 'mazy03', 'mazy04',  'mazy05', 'mazy06', 'mazy07', 'mazy08',
         'mazy09', 'mazy10', 'mazy11', 'mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16',
-        'mazy17', 'mazy18', 'mazy19', 'mazy20',
+        'mazy17', 'mazy18', 'mazy19', 'mazy20', 'mazy21',
         'astro', 'life', 'lissajous', 'mandelbrot', 'waves01', 'waves02', 'waves03'
         ]
 
