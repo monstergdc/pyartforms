@@ -25,7 +25,7 @@
 # #18 slim colorful circles (tested, ok)
 # #19 opart-like grid (tested, ok)
 # #20 opart-like / papercut-like / video feedback-like 'dragon' effect (tested, ok)
-# #21 
+# #21 opart-like scaled and pasted frames (testd, ok)
 # #22 
 # #23 
 # #24
@@ -956,13 +956,57 @@ def mazy20(draw, params):
         if params['invert'] == True:
             params['im'] = invert_image(params['im'])
 
-# future fun
-
 def mazy21(draw, params):
-    """ ? """
+    """ opart-like scaled and pasted frames """
     w, h, cnt = init_common(params)
-    # ...
-    return 0
+    dx = int(w/10)
+    dy = int(h/10)
+    sc = 0.666
+    nw = int(sc*w)
+    nh = int(sc*h)
+    mode = 0
+    if 'mode' in params:
+        mode = params['mode']
+
+    xy = [(dx, dy), (w-dx, h-dy)]
+    draw.rectangle(xy, fill=params['Foreground'], outline=None)
+    xy = [(dx*2, dy*2), (w-dx*2, h-dy*2)]
+    draw.rectangle(xy, fill=params['Background'], outline=None)
+
+    for n in range(cnt):
+        im1 = params['im'].resize((nw, nh), Image.BICUBIC)
+        xx = int(nw/2)
+        yy = int(nh/2)
+        if mode == 0:
+            params['im'].paste(im1, (0+int(nw/2/2), 0+int(nh/2/2))) #center
+        if mode == 1:
+            params['im'].paste(im1, (0, 0)) #l/u
+        if mode == 2:
+            params['im'].paste(im1, (xx, yy)) #r/d
+        if mode == 3 or mode == 4: # l/u + r/d - extravagant
+            if n&1 == 0:
+                params['im'].paste(im1, (0, 0)) #l/u
+            else:
+                params['im'].paste(im1, (xx, yy)) #r/d
+        if mode == 4 or mode == 5:
+            params['im'].paste(im1, (0+int(nw/3), 0+int(nh/3))) # lame
+        if mode == 6: # maxxx fract like
+            nn = n&3
+            if nn == 0:
+                params['im'].paste(im1, (0, 0))
+            if nn == 1:
+                params['im'].paste(im1, (xx, 0))
+            if nn == 2:
+                params['im'].paste(im1, (0, yy))
+            if nn == 3:
+                params['im'].paste(im1, (xx, yy))
+    im1 = None
+
+    if 'invert' in params:
+        if params['invert'] == True:
+            params['im'] = invert_image(params['im'])
+
+# future fun
 
 def mazy22(draw, params):
     """ ? """

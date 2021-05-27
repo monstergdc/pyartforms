@@ -903,8 +903,22 @@ def predef_mazy20(w, h):
     return append_dflts(a, 'SMEARS#20', mazy20, w, h)
 
 def predef_mazy21(w, h):
+    n = 9+3
     a = [
-        {'Background': bg_black, 'n': 1},
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'mode': 0},
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'mode': 0, 'invert': True},
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'mode': 1},
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'mode': 1, 'invert': True},
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'mode': 2},
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'mode': 2, 'invert': True},
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'mode': 3},
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'mode': 3, 'invert': True},
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'mode': 4},
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'mode': 4, 'invert': True},
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'mode': 5},
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'mode': 5, 'invert': True},
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'mode': 6},
+        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'mode': 6, 'invert': True},
     ]
     return append_dflts(a, 'SMEARS#21', mazy21, w, h)
 
