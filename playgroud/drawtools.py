@@ -167,7 +167,7 @@ def art_painter(params, png_file='example.png', output_mode='save', bw=False):
         bw = False
     if output_mode == 'save':
         start_time = dt.now()
-        print('drawing %s... %s ' % (params['name'], png_file), end="", flush=True) # note same line next
+        print('drawing %s... %s - ' % (params['name'], png_file), end="", flush=True) # note same line next
     if bw:
         im = Image.new('L', (params['w'], params['h']), (0)) # todo: bg par?
     else:
@@ -195,8 +195,6 @@ def art_painter(params, png_file='example.png', output_mode='save', bw=False):
         show_benchmark(start_time)
         draw = None #?
         im = None #?
-        #im = Image.new('L', (1, 1), (0)) # ???
-        #draw = ImageDraw.Draw(im) # ???
         return
     if output_mode == 'cgi':
         add_myself(draw, params['w'], params['h'], params['Background'])

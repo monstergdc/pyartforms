@@ -981,3 +981,9 @@ def mazy24(draw, params):
     w, h, cnt = init_common(params)
     # ...
     return 0
+
+def mazy25(draw, params):
+    """ ? """
+    w, h, cnt = init_common(params)
+    # ...
+    return 0

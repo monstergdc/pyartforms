@@ -886,10 +886,6 @@ def predef_mazy20(w, h):
         {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'da': 15, 'invert': True},
         {'Background': bg_white, 'Foreground': bg_black, 'n': n, 'da': 15},
 
-        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'da': 20},
-        {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'da': 20, 'invert': True},
-        {'Background': bg_white, 'Foreground': bg_black, 'n': n, 'da': 20},
-
         {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'da': 30},
         {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'da': 30, 'invert': True},
         {'Background': bg_white, 'Foreground': bg_black, 'n': n, 'da': 30},
@@ -902,13 +898,7 @@ def predef_mazy20(w, h):
     a2 = copy.deepcopy(a)
     for i in range(len(a)):
         a1[i]['sc'] = 0.75 #dflt is nice
-        a2[i]['sc'] = 0.85
-    a = np.concatenate((a1, a2), axis=0)
-    a1 = copy.deepcopy(a)
-    a2 = copy.deepcopy(a)
-    for i in range(len(a)):
-        a1[i]['dd'] = 10 #dflt is nice
-        a2[i]['dd'] = 7
+        a2[i]['sc'] = 0.50
     a = np.concatenate((a1, a2), axis=0)
     return append_dflts(a, 'SMEARS#20', mazy20, w, h)
 
@@ -924,9 +914,25 @@ def predef_mazy22(w, h):
     ]
     return append_dflts(a, 'SMEARS#22', mazy22, w, h)
 
-#def predef_mazy23(w, h):
-#def predef_mazy24(w, h):
-#def predef_mazy25(w, h):
+def predef_mazy23(w, h):
+    a = [
+        {'Background': bg_black, 'n': 1},
+    ]
+    return append_dflts(a, 'SMEARS#23', mazy23, w, h)
+
+def predef_mazy24(w, h):
+    a = [
+        {'Background': bg_black, 'n': 1},
+    ]
+    return append_dflts(a, 'SMEARS#24', mazy24, w, h)
+
+def predef_mazy25(w, h):
+    a = [
+        {'Background': bg_black, 'n': 1},
+    ]
+    return append_dflts(a, 'SMEARS#25', mazy25, w, h)
+
+# ---
 
 def enum_defs():
     suma = 0
@@ -946,7 +952,8 @@ predefs = {'mazy01': predef_mazy1, 'mazy02': predef_mazy2, 'mazy03': predef_mazy
            'mazy09': predef_mazy9, 'mazy10': predef_mazy10, 'mazy11': predef_mazy11, 'mazy12': predef_mazy12,
            'mazy13': predef_mazy13, 'mazy14': predef_mazy14, 'mazy15': predef_mazy15, 'mazy16': predef_mazy16,
            'mazy17': predef_mazy17, 'mazy18': predef_mazy18, 'mazy19': predef_mazy19, 'mazy20': predef_mazy20,
-           'mazy21': predef_mazy21,
+           'mazy21': predef_mazy21, 'mazy22': predef_mazy22, 'mazy23': predef_mazy23, 'mazy24': predef_mazy24,
+           'mazy25': predef_mazy25,
            'life': predef_life, 'lissajous': predef_lissajous, 'astro': predef_astro, 'mandelbrot': predef_mandelbrot,
            'waves01': predef_waves1,'waves02': predef_waves2, 'waves03': predef_waves3, 
            }
@@ -955,7 +962,8 @@ predefs = {'mazy01': predef_mazy1, 'mazy02': predef_mazy2, 'mazy03': predef_mazy
 predef_names = [
         'mazy01', 'mazy02', 'mazy03', 'mazy04',  'mazy05', 'mazy06', 'mazy07', 'mazy08',
         'mazy09', 'mazy10', 'mazy11', 'mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16',
-        'mazy17', 'mazy18', 'mazy19', 'mazy20', 'mazy21',
+        'mazy17', 'mazy18', 'mazy19', 'mazy20',
+        'mazy21', 'mazy22', 'mazy23', 'mazy24', 'mazy25',
         'astro', 'life', 'lissajous', 'mandelbrot', 'waves01', 'waves02', 'waves03'
         ]
 
