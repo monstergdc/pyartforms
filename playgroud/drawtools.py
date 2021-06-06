@@ -9,6 +9,7 @@
 # upd: 20190414, 21
 # upd: 20210301
 # upd: 20210507, 15, 23, 26, 27
+# upd: 20210606
 
 from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin, ImageFont, ImageOps
 from datetime import datetime as dt
@@ -195,6 +196,7 @@ def art_painter(params, png_file='example.png', output_mode='save', bw=False):
         show_benchmark(start_time)
         draw = None #?
         im = None #?
+        params['im'] = None #?
         return
     if output_mode == 'cgi':
         add_myself(draw, params['w'], params['h'], params['Background'])
