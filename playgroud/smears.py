@@ -42,6 +42,7 @@
 # upd: 20200507, 10
 # upd: 20210106, 15, 16, 19, 20, 21, 22
 # upd: 20210515, 16, 22, 23, 24, 25, 26, 27
+# upd: 20210606
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -52,6 +53,7 @@
 
 
 from PIL import Image, ImageDraw, ImageChops, ImageOps
+#from PIL import ImageMorph, ImageMath # test
 import random, math, string, os, sys
 from bezier import make_bezier
 from drawtools import *
@@ -1010,14 +1012,65 @@ def mazy21(draw, params):
 
 def mazy22(draw, params):
     """ ? """
+    #todo: with flex par may be good for anims
     w, h, cnt = init_common(params)
-    # ...
-    return 0
+    colorer = params['color']
+    do_rnd = False
+    if 'rnd' in params:
+        do_rnd = params['rnd']
+
+    drc = 0.97
+    if 'drc' in params:
+        drc = params['drc']
+    a_s = 0
+    a_e = 35
+    if 'a_e' in params:
+        a_e = params['a_e']
+    da = 12
+    if 'da' in params:
+        da = params['da']
+
+    #note: some nice: drc a_e da
+    #0.97, 90, 12
+    #0.97, 35, 12
+    #0.97, 10, 12
+    #0.97, 90, 45 # good for colorsets
+    #0.97, 90 90 # special
+    #0.97, 90 89 # special + good for colorsets
+    #0.97, 90 85 # special + good for colorsets
+    #0.97, 90 80 # special + good for colorsets
+    #0.9, 90, 45
+
+    radius = h/2 * 1.0 # par
+
+    for i in range(cnt):
+        if do_rnd:
+            a_s = random.randint(0, 360) # par x2
+            a_e = random.randint(0, 360) # par x2
+            drc = random.randint(92, 98)/100 # par x2
+            if i == cnt-1:
+                a_s = 0
+                a_e = 360
+        if params['Background'] == (255,255,255) and do_rnd and params['color'] == 'bw': # rev bw color in this special case
+            color = new_colorer(colorer, cnt-1-i, cnt)
+        else:
+            color = new_colorer(colorer, i, cnt)
+        draw.pieslice((w/2-radius, h/2-radius, w/2+radius, h/2+radius), a_s, a_e, fill=color)
+        radius = radius * drc
+        if not do_rnd:
+            a_s = a_s + da
+            a_e = a_e + da
 
 def mazy23(draw, params):
     """ ? """
     w, h, cnt = init_common(params)
     # ...
+    #xy = [(200, 200), (500, 300)]
+    #fill = (255,0,0)
+    #draw.ellipse(xy, fill=fill, outline=None)
+    #xy = [(500, 500), (600, 900)]
+    #fill = (255,255,0)
+    #draw.ellipse(xy, fill=fill, outline=None)
     return 0
 
 def mazy24(draw, params):

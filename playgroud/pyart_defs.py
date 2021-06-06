@@ -11,6 +11,7 @@
 # upd: 20200507, 10
 # upd: 20210106
 # upd: 20210515, 16, 22, 23, 24, 26, 27
+# upd: 20210606
 
 
 # TODO:
@@ -923,9 +924,72 @@ def predef_mazy21(w, h):
     return append_dflts(a, 'SMEARS#21', mazy21, w, h)
 
 def predef_mazy22(w, h):
-    a = [
-        {'Background': bg_black, 'n': 1},
+    b = [
+        {'Background': bg_black, 'n': 36*1, 'color': 'bw'},
+        {'Background': bg_black, 'n': 36*2, 'color': 'bw'},
+        {'Background': bg_black, 'n': 36*3, 'color': 'bw'},
+        {'Background': bg_black, 'n': 36*4, 'color': 'bw'},
+        {'Background': bg_black, 'n': 36*8, 'color': 'bw'},
+
+        {'Background': bg_black, 'n': 36*1, 'color': 'red'},
+        {'Background': bg_black, 'n': 36*2, 'color': 'red'},
+        {'Background': bg_black, 'n': 36*3, 'color': 'red'},
+        {'Background': bg_black, 'n': 36*4, 'color': 'red'},
+
+        {'Background': bg_black, 'n': 36*1, 'color': 'happy'},
+        {'Background': bg_black, 'n': 36*3, 'color': 'happy'},
+        {'Background': bg_black, 'n': 36*4, 'color': 'happy'},
+        {'Background': bg_black, 'n': 36*1, 'color': 'Number3'},
+        {'Background': bg_black, 'n': 36*3, 'color': 'Number3'},
+        {'Background': bg_black, 'n': 36*4, 'color': 'Number3'},
+        {'Background': bg_black, 'n': 36*1, 'color': 'wryb'},
+        {'Background': bg_black, 'n': 36*3, 'color': 'wryb'},
+        {'Background': bg_black, 'n': 36*4, 'color': 'wryb'},
+        {'Background': bg_black, 'n': 36*1, 'color': 'ProgramCat'},
+        {'Background': bg_black, 'n': 36*3, 'color': 'ProgramCat'},
+        {'Background': bg_black, 'n': 36*4, 'color': 'ProgramCat'},
     ]
+
+    # TODO: color last?
+
+    a = []
+    for da in [90, 89, 85, 80, 45, 12, 5]: # 7
+        a1 = copy.deepcopy(b)
+        for i in range(len(a1)):
+            a1[i]['da'] = da
+        a = np.concatenate((a, a1), axis=0)
+
+    b = copy.deepcopy(a)
+    a = []
+    for a_e in [90, 60, 45, 35, 10, 5]: # 6
+        a1 = copy.deepcopy(b)
+        for i in range(len(a1)):
+            a1[i]['a_e'] = a_e
+        a = np.concatenate((a, a1), axis=0)
+
+    b = copy.deepcopy(a)
+    a = []
+    for drc in [0.97, 0.98]: # 2
+        a1 = copy.deepcopy(b)
+        for i in range(len(a1)):
+            a1[i]['drc'] = drc
+        a = np.concatenate((a, a1), axis=0)
+
+    #7*6*2*(5+4+4*3) = 1764
+
+    n = 48
+    c = [
+        {'Background': bg_black, 'n': n-8, 'color': 'bw', 'rnd': True},
+        {'Background': bg_white, 'n': n-8, 'color': 'bw', 'rnd': True},
+        {'Background': bg_black, 'n': n-8, 'color': 'red', 'rnd': True},
+        {'Background': bg_white, 'n': n+8, 'color': 'happy', 'rnd': True},
+        {'Background': bg_white, 'n': n+8, 'color': 'Number3', 'rnd': True},
+        {'Background': bg_white, 'n': n+8, 'color': 'wryb', 'rnd': True},
+        {'Background': bg_white, 'n': n+8, 'color': 'ProgramCat', 'rnd': True},
+    ]
+
+    a = np.concatenate((a, c), axis=0)
+    a = c #test rnd
     return append_dflts(a, 'SMEARS#22', mazy22, w, h)
 
 def predef_mazy23(w, h):
