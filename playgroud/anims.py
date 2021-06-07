@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 
 # ANIMS v1.0, Python version
-# (c)2018 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2018-2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # anim#1/anim#2 - recreated from seeing as in some GIFs I've once seen (so concept isn't mine)
 # cre: 20180505
 # upd: 20180506, 12
 # upd: 20180928, 30
 # upd: 20181020
+# upd: 20210507
 
 # orig GIFs md5:
 # #1: ad2bde22541ac1b05b2c08fd805ebafe *001.gif
@@ -20,12 +21,17 @@
 # TODO:
 # - fin anim #3 proper
 # - fin anim #4
+# - fin anim #7
+# - opt easy call smears and such
+# - common draw class
+# - opt cont paint over prev frame image
 
 
 from PIL import Image, ImageDraw, ImageFilter
 import random, math, os, sys
 import cv2
 from drawtools import *
+from color_defs import * # for anim7
 
 image = 'tmp.png'   #tmp img file
 c = math.pi/180
@@ -369,6 +375,39 @@ class Anim6():
         im.save(image)
         self.dt += 1
 
+
+class Anim7():
+    def _init__(self):
+        self.init((0, 0))
+
+    def init(self, canvas):
+        self.dt = 0
+        self.canvas = canvas
+
+    def drawframe(self, image, params):
+        im = Image.new('RGB', self.canvas, (0, 0, 0))
+        draw = ImageDraw.Draw(im)
+
+        w = self.canvas[0]
+        h = self.canvas[1]
+        radius = h/2 * params['scale']
+        cnt = params['n']
+        colorer = params['color']
+        drc = 0.97 # !
+        a_s = 0
+        a_e = params['a_e']
+        da = params['da']
+
+        for i in range(cnt):
+            color = new_colorer(colorer, i, cnt)
+            draw.pieslice((w/2-radius, h/2-radius, w/2+radius, h/2+radius), a_s, a_e, fill=color)
+            radius = radius * drc
+            a_s = a_s + da
+            a_e = a_e + da
+
+        im.save(image)
+        self.dt += 1
+
 # ---
 
 def do_anim1(fcc, video_name):
@@ -473,6 +512,54 @@ def do_anim6(fcc, video_name, steps):
     cv2.destroyAllWindows()
     video.release()
 
+def do_anim7(fcc, video_name, steps):
+    o = Anim7()
+
+    canvas = (720, 576)
+    video = cv2.VideoWriter(video_name, fcc, 25, canvas)
+
+#    da in [90, 89, 85, 80, 45, 12, 5]
+#    a_e in [90, 60, 45, 35, 10, 5]
+#n 36*1 to *4
+# 'color': 'bw' 'red' 'Number3' 'ProgramCat'
+
+    o.init(canvas)
+
+    params = {'n': 36*1-35, 'color': 'wryb', 'da': 12, 'a_e': 45, 'scale': 3.4}
+    for n in range(steps):
+        o.drawframe(image, params)
+        ima = cv2.imread(image)
+        for m in range(2): #speed
+            video.write(ima)
+        params['n'] = params['n']+1
+
+    params = {'n': 36*1-35, 'color': 'happy', 'da': 12, 'a_e': 30, 'scale': 3.4}
+    for n in range(steps):
+        o.drawframe(image, params)
+        ima = cv2.imread(image)
+        for m in range(2): #speed
+            video.write(ima)
+        params['n'] = params['n']+1
+
+    params = {'n': 36*1, 'color': 'happy', 'da': 4, 'a_e': 30, 'scale': 1.0}
+    for n in range(steps):
+        o.drawframe(image, params)
+        ima = cv2.imread(image)
+        for m in range(2): #speed
+            video.write(ima)
+        params['da'] = params['da']+1
+
+    params = {'n': 36*1, 'color': 'happy', 'da': 12, 'a_e': 10, 'scale': 1.0}
+    for n in range(steps):
+        o.drawframe(image, params)
+        ima = cv2.imread(image)
+        for m in range(2): #speed
+            video.write(ima)
+        params['a_e'] = params['a_e']+1
+
+    cv2.destroyAllWindows()
+    video.release()
+
 # ---
 
 def main():
@@ -480,12 +567,15 @@ def main():
     #fcc = cv2.VideoWriter_fourcc(*"XVID")
     fcc = cv2.VideoWriter_fourcc(*"MJPG")
 
-    do_anim1(fcc, video_name = 'anim-01-video.avi')
-    do_anim2(fcc, video_name = 'anim-02-video.avi')
-    do_anim3(fcc, video_name = 'anim-03-video.avi', steps = 25)
-    do_anim4(fcc, video_name = 'anim-04-video.avi', steps = 300)
-    do_anim5(fcc, video_name = 'anim-05-video.avi', steps = 300)
-#    do_anim6(fcc, video_name = 'anim-06-video.avi', steps = 300)    # slow one!
+    if False:
+        do_anim1(fcc, video_name = 'anim-01-video.avi')
+        do_anim2(fcc, video_name = 'anim-02-video.avi')
+        do_anim3(fcc, video_name = 'anim-03-video.avi', steps = 25)
+        do_anim4(fcc, video_name = 'anim-04-video.avi', steps = 300)
+        do_anim5(fcc, video_name = 'anim-05-video.avi', steps = 300)
+#        do_anim6(fcc, video_name = 'anim-06-video.avi', steps = 300)    # slow one!
+
+    do_anim7(fcc, video_name = 'anim-07-video.avi', steps = 200)
 
 if __name__ == '__main__':
     main()
