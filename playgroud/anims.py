@@ -521,15 +521,15 @@ def do_anim7(fcc, video_name, steps):
 #    da in [90, 89, 85, 80, 45, 12, 5]
 #    a_e in [90, 60, 45, 35, 10, 5]
 #n 36*1 to *4
-# 'color': 'bw' 'red' 'Number3' 'ProgramCat'
 
     o.init(canvas)
+    speed = 2 # frames per render
 
     params = {'n': 36*1-35, 'color': 'wryb', 'da': 12, 'a_e': 45, 'scale': 3.4}
     for n in range(steps):
         o.drawframe(image, params)
         ima = cv2.imread(image)
-        for m in range(2): #speed
+        for m in range(speed):
             video.write(ima)
         params['n'] = params['n']+1
 
@@ -537,24 +537,53 @@ def do_anim7(fcc, video_name, steps):
     for n in range(steps):
         o.drawframe(image, params)
         ima = cv2.imread(image)
-        for m in range(2): #speed
+        for m in range(speed):
             video.write(ima)
         params['n'] = params['n']+1
+
+    params = {'n': 36*1-35, 'color': 'Number3', 'da': 12, 'a_e': 30, 'scale': 3.4}
+    for n in range(steps):
+        o.drawframe(image, params)
+        ima = cv2.imread(image)
+        for m in range(speed):
+            video.write(ima)
+        params['n'] = params['n']+1
+
+    params = {'n': 36*1-35, 'color': 'bw', 'da': 12, 'a_e': 30, 'scale': 3.4}
+    for n in range(steps):
+        o.drawframe(image, params)
+        ima = cv2.imread(image)
+        for m in range(speed):
+            video.write(ima)
+        params['n'] = params['n']+1
+
+    # next
 
     params = {'n': 36*1, 'color': 'happy', 'da': 4, 'a_e': 30, 'scale': 1.0}
     for n in range(steps):
         o.drawframe(image, params)
         ima = cv2.imread(image)
-        for m in range(2): #speed
+        for m in range(speed):
             video.write(ima)
         params['da'] = params['da']+1
 
-    params = {'n': 36*1, 'color': 'happy', 'da': 12, 'a_e': 10, 'scale': 1.0}
+    params = {'n': 36*1, 'color': 'bw', 'da': 4, 'a_e': 30, 'scale': 1.0}
     for n in range(steps):
         o.drawframe(image, params)
         ima = cv2.imread(image)
-        for m in range(2): #speed
+        for m in range(speed):
             video.write(ima)
+        params['da'] = params['da']+1
+
+    # note: a_e olny - lame
+
+    params = {'n': 36*1, 'color': 'happy', 'da': 4, 'a_e': 10, 'scale': 1.0}
+    for n in range(steps):
+        o.drawframe(image, params)
+        ima = cv2.imread(image)
+        for m in range(speed):
+            video.write(ima)
+        params['da'] = params['da']+1
         params['a_e'] = params['a_e']+1
 
     cv2.destroyAllWindows()

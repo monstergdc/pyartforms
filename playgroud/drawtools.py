@@ -9,7 +9,7 @@
 # upd: 20190414, 21
 # upd: 20210301
 # upd: 20210507, 15, 23, 26, 27
-# upd: 20210606
+# upd: 20210606, 07
 
 from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin, ImageFont, ImageOps
 from datetime import datetime as dt
@@ -127,9 +127,10 @@ def append_myself(title=""):
     """Append some tags to PNG image."""
     x = PngImagePlugin.PngInfo()
     today = dt.today()
+    sdt = dt.now().strftime('%Y-%m-%d_%H.%M.%S')
     y = today.year
     x.add_text(key='Title', value=title, zip=False)
-    x.add_text(key='Description', value='generated in PyArtForms', zip=False)
+    x.add_text(key='Description', value='generated in PyArtForms @'+sdt, zip=False)
     x.add_text(key='Author', value='Jakub Noniewicz', zip=False)
     x.add_text(key='Copyright', value='(c)'+str(y)+' Jakub Noniewicz | noniewicz.com | noniewicz.art.pl', zip=False)
     x.add_itxt(key='Concept', value='PyArtForms concept by: Jakub Noniewicz | noniewicz.com | noniewicz.art.pl', lang='', tkey='', zip=False)
