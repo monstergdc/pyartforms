@@ -11,7 +11,7 @@
 # upd: 20200507, 10
 # upd: 20210106
 # upd: 20210515, 16, 22, 23, 24, 26, 27
-# upd: 20210606
+# upd: 20210606, 07
 
 
 # TODO:
@@ -993,8 +993,28 @@ def predef_mazy22(w, h):
     return append_dflts(a, 'SMEARS#22', mazy22, w, h)
 
 def predef_mazy23(w, h):
+    mar = 3/100 # 3% margin
+    n = 8 # n=8 ok for A4
+    #n = 10 # n=10 ok for A0
     a = [
-        {'Background': bg_black, 'n': 1},
+        {'Background': bg_black, 'color1': bg_white, 'color2': bg_black, 'n': 4, 'margin': mar},
+        {'Background': bg_black, 'color1': bg_white, 'color2': bg_black, 'n': 5, 'margin': mar},
+        {'Background': bg_black, 'color1': bg_white, 'color2': bg_black, 'n': n, 'margin': mar},
+        {'Background': bg_white, 'color1': bg_black, 'color2': bg_white, 'n': n, 'margin': mar},
+        {'Background': bg_white, 'color1': bg_black, 'color2': (255,0,0), 'n': n, 'margin': mar},
+        {'Background': bg_white, 'color1': (0,0,240), 'color2': (255,128,0), 'n': n, 'margin': mar},
+
+        {'Background': bg_white, 'color1': bg_black, 'color2': None, 'colorer': 'wryb', 'colorer_mode': 0, 'n': n, 'margin': mar},
+        {'Background': bg_white, 'color1': bg_black, 'color2': None, 'colorer': 'ProgramCat', 'colorer_mode': 0, 'n': n, 'margin': mar},
+        {'Background': bg_white, 'color1': bg_black, 'color2': None, 'colorer': 'Number3', 'colorer_mode': 0, 'n': n, 'margin': mar},
+        {'Background': bg_white, 'color1': bg_black, 'color2': None, 'colorer': 'bw', 'colorer_mode': 0, 'n': n, 'margin': mar},
+        {'Background': bg_white, 'color1': bg_black, 'color2': None, 'colorer': 'red', 'colorer_mode': 0, 'n': n, 'margin': mar},
+
+        {'Background': bg_white, 'color1': bg_black, 'color2': None, 'colorer': 'wryb', 'colorer_mode': 1, 'n': n, 'margin': mar},
+        {'Background': bg_white, 'color1': bg_black, 'color2': None, 'colorer': 'ProgramCat', 'colorer_mode': 1, 'n': n, 'margin': mar},
+        {'Background': bg_white, 'color1': bg_black, 'color2': None, 'colorer': 'Number3', 'colorer_mode': 1, 'n': n, 'margin': mar},
+        {'Background': bg_white, 'color1': bg_black, 'color2': None, 'colorer': 'bw', 'colorer_mode': 1, 'n': n, 'margin': mar},
+        {'Background': bg_white, 'color1': bg_black, 'color2': None, 'colorer': 'red', 'colorer_mode': 1, 'n': n, 'margin': mar},
     ]
     return append_dflts(a, 'SMEARS#23', mazy23, w, h)
 

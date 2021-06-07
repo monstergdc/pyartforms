@@ -26,10 +26,13 @@
 # #19 opart-like grid (tested, ok)
 # #20 opart-like / papercut-like / video feedback-like 'dragon' effect (tested, ok)
 # #21 opart-like scaled and pasted frames (testd, ok)
-# #22 
-# #23 
+# #22 Pieslice effects (...)
+# #23 Sierpinski's triangle fractal (...)
 # #24
-# #25 
+# #25
+# #26
+# #27
+# #28 
 
 # cre: 20180430
 # upd: 20180501, 02, 03
@@ -42,7 +45,7 @@
 # upd: 20200507, 10
 # upd: 20210106, 15, 16, 19, 20, 21, 22
 # upd: 20210515, 16, 22, 23, 24, 25, 26, 27
-# upd: 20210606
+# upd: 20210606, 07
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -1011,7 +1014,7 @@ def mazy21(draw, params):
 # future fun
 
 def mazy22(draw, params):
-    """ ? """
+    """ Pieslice effects """
     #todo: with flex par may be good for anims
     w, h, cnt = init_common(params)
     colorer = params['color']
@@ -1062,6 +1065,78 @@ def mazy22(draw, params):
             a_e = a_e + da
 
 def mazy23(draw, params):
+    """ Sierpinski's triangle fractal """
+    # https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle
+    w, h, cnt = init_common(params)
+    limit0 = cnt
+    margin = 5/100
+    if 'margin' in params:
+        margin = params['margin']
+    dd = h*margin
+    color = (255, 255, 255)
+    if 'color1' in params:
+        color = params['color1']
+    color2 = (0, 0, 0)
+    if 'color2' in params:
+        if params['color2'] != None:
+            color2 = params['color2']
+    colorer = None
+    if 'colorer' in params:
+        colorer = params['colorer']
+    colorer_mode = None
+    if 'colorer_mode' in params:
+        colorer_mode = params['colorer_mode']
+
+    def m23(draw, limit, a, htr, ofsx, ofsy):
+        if limit <= 0:
+            return
+        a /= 2
+        htr = 0.5 * math.sqrt(3) * a
+
+        c2 = color2
+        if colorer != None and colorer_mode == 0:
+            c2 = new_colorer(colorer, limit, limit0) # mode=0
+
+        xx1 = wo+a/4
+        xx2 = wo+a/2
+        xx3 = wo+a-a/4
+        yy1 = h-dd-htr/2
+        yy2 = h-dd
+
+        fix_x = ofsx
+        fix_y = ofsy
+        po = [(int(xx1+fix_x), int(yy1+fix_y)), (int(xx2+fix_x), int(yy2+fix_y)), (int(xx3+fix_x), int(yy1+fix_y))]
+        if colorer != None and colorer_mode == 1:
+            c2 = new_colorer(colorer, limit+0, limit0) # mode=1
+        triangle(draw, po, fill=c2, outline=None)
+        m23(draw, limit-1, a, htr, fix_x, fix_y)
+
+        fix_x = a + ofsx
+        fix_y = ofsy
+        po = [(int(xx1+fix_x), int(yy1+fix_y)), (int(xx2+fix_x), int(yy2+fix_y)), (int(xx3+fix_x), int(yy1+fix_y))]
+        if colorer != None and colorer_mode == 1:
+            c2 = new_colorer(colorer, limit+1, limit0) # mode=1
+        triangle(draw, po, fill=c2, outline=None)
+        m23(draw, limit-1, a, htr, fix_x, fix_y)
+
+        fix_x = a/2 + ofsx
+        fix_y = -htr + ofsy
+        po = [(int(xx1+fix_x), int(yy1+fix_y)), (int(xx2+fix_x), int(yy2+fix_y)), (int(xx3+fix_x), int(yy1+fix_y))]
+        if colorer != None and colorer_mode == 1:
+            c2 = new_colorer(colorer, limit+2, limit0) # mode=1
+        triangle(draw, po, fill=c2, outline=None)
+        m23(draw, limit-1, a, htr, fix_x, fix_y)
+
+    a = h-dd-dd # start side len
+    wo = (w-a)/2
+    htr = 0.5 * math.sqrt(3) * a
+    po = [(wo, h-dd), (wo+a/2, h-dd-htr), (wo+a, h-dd)]
+    triangle(draw, po, fill=color, outline=None) # main
+    po = [(wo+a/4, h-dd-htr/2), (wo+a/2, h-dd), (wo+a-a/4, h-dd-htr/2)]
+    triangle(draw, po, fill=color2, outline=None) # 1st cut
+    m23(draw, limit0-1, a, htr, 0, 0) # recurent inside
+
+def mazy24(draw, params):
     """ ? """
     w, h, cnt = init_common(params)
     # ...
@@ -1073,13 +1148,25 @@ def mazy23(draw, params):
     #draw.ellipse(xy, fill=fill, outline=None)
     return 0
 
-def mazy24(draw, params):
+def mazy25(draw, params):
     """ ? """
     w, h, cnt = init_common(params)
     # ...
     return 0
 
-def mazy25(draw, params):
+def mazy26(draw, params):
+    """ ? """
+    w, h, cnt = init_common(params)
+    # ...
+    return 0
+
+def mazy27(draw, params):
+    """ ? """
+    w, h, cnt = init_common(params)
+    # ...
+    return 0
+
+def mazy28(draw, params):
     """ ? """
     w, h, cnt = init_common(params)
     # ...

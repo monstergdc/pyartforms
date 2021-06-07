@@ -127,7 +127,7 @@ def append_myself(title=""):
     """Append some tags to PNG image."""
     x = PngImagePlugin.PngInfo()
     today = dt.today()
-    sdt = dt.now().strftime('%Y-%m-%d_%H.%M.%S')
+    sdt = dt.now().strftime('%Y-%m-%d %H:%M:%S')
     y = today.year
     x.add_text(key='Title', value=title, zip=False)
     x.add_text(key='Description', value='generated in PyArtForms @'+sdt, zip=False)
