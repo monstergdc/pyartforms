@@ -3,7 +3,7 @@
 
 # PyArtForms - Python generative art forms paint algorithms (artificial artist)
 # experimental 'smears' paint algorithms, v1.0
-# (c)2017-2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2017-2021 MoNsTeR/GDC, Noniewicz.com, Noniewicz.art.pl, Jakub Noniewicz
 
 # #1 'cruel red smears', not only red
 # #2 circles
@@ -13,8 +13,8 @@
 # #6 circle ripples
 # #7 grayish rects mess
 # #8 just rectangles, may flux (tested, ok) --- finish: new colorer, new params, more variants in defs
-# #9 rays from center
-# #10 long beziers
+# #9 rays from center (...)
+# #10 long beziers (...)
 # #11 horizontal gradients with suprizes (tested, ok) --- finish new colorer
 # #12 opart-like boxes/circles/triangles (tested, ok/so-so)
 # #13 opart-like single big poly (tested, ok)
@@ -26,13 +26,15 @@
 # #19 opart-like grid (tested, ok)
 # #20 opart-like / papercut-like / video feedback-like 'dragon' effect (tested, ok)
 # #21 opart-like scaled and pasted frames (testd, ok)
-# #22 Pieslice effects (...)
-# #23 Sierpinski's triangle fractal (...)
-# #24
+# #22 pie slice effects (...)
+# #23 Sierpinski's triangle fractal (testd, ok)
+# #24 rotated traingles - predictable (no rnd parts) (tested, ok) --- finish: reduce total count
 # #25
 # #26
 # #27
 # #28 
+# #29 
+# #30 
 
 # cre: 20180430
 # upd: 20180501, 02, 03
@@ -45,7 +47,7 @@
 # upd: 20200507, 10
 # upd: 20210106, 15, 16, 19, 20, 21, 22
 # upd: 20210515, 16, 22, 23, 24, 25, 26, 27
-# upd: 20210606, 07
+# upd: 20210606, 07, 10, 11
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -1011,11 +1013,8 @@ def mazy21(draw, params):
         if params['invert'] == True:
             params['im'] = invert_image(params['im'])
 
-# future fun
-
 def mazy22(draw, params):
-    """ Pieslice effects """
-    #todo: with flex par may be good for anims
+    """ pie slice effects """
     w, h, cnt = init_common(params)
     colorer = params['color']
     do_rnd = False
@@ -1078,8 +1077,7 @@ def mazy23(draw, params):
         color = params['color1']
     color2 = (0, 0, 0)
     if 'color2' in params:
-        if params['color2'] != None:
-            color2 = params['color2']
+        color2 = params['color2']
     colorer = None
     if 'colorer' in params:
         colorer = params['colorer']
@@ -1097,11 +1095,11 @@ def mazy23(draw, params):
         if colorer != None and colorer_mode == 0:
             c2 = new_colorer(colorer, limit, limit0) # mode=0
 
-        xx1 = wo+a/4
+        xx1 = wo+a/4 +(0.5) # note: 0.5 'visual' fix
         xx2 = wo+a/2
-        xx3 = wo+a-a/4
-        yy1 = h-dd-htr/2
-        yy2 = h-dd
+        xx3 = wo+a-a/4 -(0.5)
+        yy1 = h-dd-htr/2 +(0.5)
+        yy2 = h-dd -(0.5)
 
         fix_x = ofsx
         fix_y = ofsy
@@ -1129,7 +1127,7 @@ def mazy23(draw, params):
 
     a = h-dd-dd # start side len
     wo = (w-a)/2
-    htr = 0.5 * math.sqrt(3) * a
+    htr = 0.5 * math.sqrt(3) * a # start triangle h
     po = [(wo, h-dd), (wo+a/2, h-dd-htr), (wo+a, h-dd)]
     triangle(draw, po, fill=color, outline=None) # main
     po = [(wo+a/4, h-dd-htr/2), (wo+a/2, h-dd), (wo+a-a/4, h-dd-htr/2)]
@@ -1137,16 +1135,51 @@ def mazy23(draw, params):
     m23(draw, limit0-1, a, htr, 0, 0) # recurent inside
 
 def mazy24(draw, params):
-    """ ? """
+    """ rotated traingles - predictable (no rnd parts) """
     w, h, cnt = init_common(params)
-    # ...
-    #xy = [(200, 200), (500, 300)]
-    #fill = (255,0,0)
-    #draw.ellipse(xy, fill=fill, outline=None)
-    #xy = [(500, 500), (600, 900)]
-    #fill = (255,255,0)
-    #draw.ellipse(xy, fill=fill, outline=None)
-    return 0
+    cx = w/2
+    cy = h/2 + h/12 # 'y center' slightly moved down, nicer this way
+    c = math.pi/180
+    colorer = params['colorer']
+    ou = None
+    if 'ou' in params:
+        ou = params['ou']
+
+    def rotate_point(p, cx, cy, angle):
+        x = p[0]
+        y = p[1]
+        si = math.sin(angle)
+        co = math.cos(angle)
+        x -= cx
+        y -= cy
+        xnew = x * co - y * si
+        ynew = x * si + y * co
+        x = xnew + cx
+        y = ynew + cy
+        return (x, y)
+
+    a_sc = 0.93 # par
+    a_base = 1.0
+    if 'a_base' in params:
+        a_base = params['a_base']
+    an_sc = 1.0
+    if 'an_sc' in params:
+        an_sc = params['an_sc']
+
+    a = h*a_base
+    for i in range(cnt):
+        htr = 0.5 * math.sqrt(3) * a
+        po = [(cx-a/2, cy-htr/2), (cx, cy+htr/2), (cx+a/2, cy-htr/2)]
+        ce = (1/3*(po[0][0]+po[1][0]+po[2][0]), 1/3*(po[0][1]+po[1][1]+po[2][1])) # actual triangle center is here (triangle centroid)
+        an = i/cnt * 360 * c * an_sc
+        po_ = [rotate_point(po[0], ce[0], ce[1], an), rotate_point(po[1], ce[0], ce[1], an), rotate_point(po[2], ce[0], ce[1], an)]
+        color = new_colorer(colorer, i, cnt)
+        if 'addalpha' in params:
+            color = add_alpha(color, params['addalpha'])
+        triangle(draw, po_, fill=color, outline=ou)
+        a = a * a_sc
+
+# future fun
 
 def mazy25(draw, params):
     """ ? """
@@ -1167,6 +1200,18 @@ def mazy27(draw, params):
     return 0
 
 def mazy28(draw, params):
+    """ ? """
+    w, h, cnt = init_common(params)
+    # ...
+    return 0
+
+def mazy29(draw, params):
+    """ ? """
+    w, h, cnt = init_common(params)
+    # ...
+    return 0
+
+def mazy30(draw, params):
     """ ? """
     w, h, cnt = init_common(params)
     # ...

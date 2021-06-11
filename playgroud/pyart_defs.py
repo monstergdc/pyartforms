@@ -11,7 +11,7 @@
 # upd: 20200507, 10
 # upd: 20210106
 # upd: 20210515, 16, 22, 23, 24, 26, 27
-# upd: 20210606, 07
+# upd: 20210606, 07, 10, 11
 
 
 # TODO:
@@ -50,6 +50,16 @@ def append_dflts(a, name, call, w, h):
     a = append_dct_item(a, 'call', call)
     a = append_dct_item(a, 'w', w)
     a = append_dct_item(a, 'h', h)
+    return a
+
+def mux_param(a, name, values):
+    b = copy.deepcopy(a)
+    a = []
+    for p in values:
+        a1 = copy.deepcopy(b)
+        for i in range(len(a1)):
+            a1[i][name] = p
+        a = np.concatenate((a, a1), axis=0)
     return a
 
 
@@ -482,20 +492,7 @@ def predef_mazy8(w, h):
         {'Background': bg_white, 'xcnt': 31, 'ycnt': 20},
         {'Background': bg_white, 'xcnt': 3, 'ycnt': 20},
     ]
-    a1 = copy.deepcopy(a)
-    a2 = copy.deepcopy(a)
-    a3 = copy.deepcopy(a)
-    a4 = copy.deepcopy(a)
-    a5 = copy.deepcopy(a)
-    a6 = copy.deepcopy(a)
-    for i in range(len(a)):
-        a1[i]['color'] = 'happy'
-        a2[i]['color'] = 'wryb'
-        a3[i]['color'] = 'BeachTowels'
-        a4[i]['color'] = 'MoonlightBytes6'
-        a5[i]['color'] = 'MetroUI'
-        a6[i]['color'] = 'ProgramCat'
-    a = np.concatenate((a1, a2, a3, a4, a5, a6), axis=0)
+    a = mux_param(a, 'color', ['happy', 'wryb', 'BeachTowels', 'MoonlightBytes6', 'MetroUI', 'ProgramCat'])
     a1 = copy.deepcopy(a)
     a2 = copy.deepcopy(a)
     for i in range(len(a)):
@@ -706,16 +703,7 @@ def predef_mazy14(w, h):
         {'Background': bg_white, 'n': 36, 'color': bg_black},
         {'Background': bg_white, 'n': 48, 'color': bg_black},
     ]
-    a1 = copy.deepcopy(a)
-    a2 = copy.deepcopy(a)
-    a3 = copy.deepcopy(a)
-    a4 = copy.deepcopy(a)
-    for i in range(len(a)):
-        a1[i]['m'] = 4
-        a2[i]['m'] = 8
-        a3[i]['m'] = 32
-        a4[i]['m'] = 100
-    a = np.concatenate((a1, a2, a3, a4), axis=0)
+    a = mux_param(a, 'm', [4, 8, 32, 100])
     a_ = [{'Background': bg_white, 'n': 24, 'm': 32, 'color': bg_black, 'div': 5}] # 'special' case (test)
     a = np.concatenate((a, a_), axis=0)
     return append_dflts(a, 'SMEARS#14', mazy14, w, h)
@@ -793,30 +781,9 @@ def predef_mazy16(w, h):
         {'Background': bg_white, 'n': 96, 'color': bg_black, 'rcoef': 1.0, 'acoef': 1.0, 'rscale': 1.0},
         {'Background': bg_white, 'n': 256, 'color': bg_black, 'rcoef': 1.0, 'acoef': 1.0, 'rscale': 1.0},
     ]
-    a1 = copy.deepcopy(a)
-    a2 = copy.deepcopy(a)
-    for i in range(len(a)):
-        a1[i]['rcoef'] = 1.5
-        a2[i]['rcoef'] = 3.0
-    a = np.concatenate((a1, a2), axis=0)
-    a1 = copy.deepcopy(a)
-    a2 = copy.deepcopy(a)
-    a3 = copy.deepcopy(a)
-    for i in range(len(a)):
-        a1[i]['acoef'] = 1.0 #note: dflt
-        a2[i]['acoef'] = 7.0
-        a3[i]['acoef'] = 19.0
-    a = np.concatenate((a1, a2, a3), axis=0)
-    a1 = copy.deepcopy(a)
-    a2 = copy.deepcopy(a)
-    a3 = copy.deepcopy(a)
-    a4 = copy.deepcopy(a)
-    for i in range(len(a)):
-        a1[i]['rscale'] = 1.0 #note: dflt
-        a2[i]['rscale'] = 0.33
-        a3[i]['rscale'] = 1.5
-        a4[i]['rscale'] = 2.0
-    a = np.concatenate((a1, a2, a3, a4), axis=0)
+    a = mux_param(a, 'rcoef', [1.5, 3.0])
+    a = mux_param(a, 'acoef', [1.0, 7.0, 19.0])
+    a = mux_param(a, 'rscale', [1.0, 0.33, 1.5, 2.0])
     return append_dflts(a, 'SMEARS#16', mazy16, w, h)
 
 def predef_mazy17(w, h):
@@ -843,14 +810,7 @@ def predef_mazy18(w, h):
         {'Background': bg_white, 'n': 120, 'm': 40, 'v': 20},
         {'Background': bg_white, 'n': 160, 'm': 40, 'v': 20, 'r0v': 250},
     ]
-    a1 = copy.deepcopy(a)
-    a2 = copy.deepcopy(a)
-    a3 = copy.deepcopy(a)
-    for i in range(len(a)):
-        a1[i]['color'] = 'happy'
-        a2[i]['color'] = 'yorb'
-        a3[i]['color'] = 'BeachTowels'
-    a = np.concatenate((a1, a2, a3), axis=0)
+    a = mux_param(a, 'color', ['happy', 'yorb', 'BeachTowels'])
     return append_dflts(a, 'SMEARS#18', mazy18, w, h)
 
 def predef_mazy19(w, h):
@@ -895,12 +855,7 @@ def predef_mazy20(w, h):
         {'Background': bg_black, 'Foreground': bg_white, 'n': n, 'da': 45, 'invert': True},
         {'Background': bg_white, 'Foreground': bg_black, 'n': n, 'da': 45},
     ]
-    a1 = copy.deepcopy(a)
-    a2 = copy.deepcopy(a)
-    for i in range(len(a)):
-        a1[i]['sc'] = 0.75 #dflt is nice
-        a2[i]['sc'] = 0.50
-    a = np.concatenate((a1, a2), axis=0)
+    a = mux_param(a, 'sc', [0.75, 0.5])
     return append_dflts(a, 'SMEARS#20', mazy20, w, h)
 
 def predef_mazy21(w, h):
@@ -952,29 +907,9 @@ def predef_mazy22(w, h):
 
     # TODO: color last?
 
-    a = []
-    for da in [90, 89, 85, 80, 45, 12, 5]: # 7
-        a1 = copy.deepcopy(b)
-        for i in range(len(a1)):
-            a1[i]['da'] = da
-        a = np.concatenate((a, a1), axis=0)
-
-    b = copy.deepcopy(a)
-    a = []
-    for a_e in [90, 60, 45, 35, 10, 5]: # 6
-        a1 = copy.deepcopy(b)
-        for i in range(len(a1)):
-            a1[i]['a_e'] = a_e
-        a = np.concatenate((a, a1), axis=0)
-
-    b = copy.deepcopy(a)
-    a = []
-    for drc in [0.97, 0.98]: # 2
-        a1 = copy.deepcopy(b)
-        for i in range(len(a1)):
-            a1[i]['drc'] = drc
-        a = np.concatenate((a, a1), axis=0)
-
+    a = mux_param(a, 'da', [90, 89, 85, 80, 45, 12, 5])
+    a = mux_param(a, 'a_e', [90, 60, 45, 35, 10, 5])
+    a = mux_param(a, 'drc', [0.97, 0.98])
     #7*6*2*(5+4+4*3) = 1764
 
     n = 48
@@ -989,7 +924,7 @@ def predef_mazy22(w, h):
     ]
 
     a = np.concatenate((a, c), axis=0)
-    a = c #test rnd
+    a = c #test rnd only
     return append_dflts(a, 'SMEARS#22', mazy22, w, h)
 
 def predef_mazy23(w, h):
@@ -1004,24 +939,34 @@ def predef_mazy23(w, h):
         {'Background': bg_white, 'color1': bg_black, 'color2': (255,0,0), 'n': n, 'margin': mar},
         {'Background': bg_white, 'color1': (0,0,240), 'color2': (255,128,0), 'n': n, 'margin': mar},
 
-        {'Background': bg_white, 'color1': bg_black, 'color2': None, 'colorer': 'wryb', 'colorer_mode': 0, 'n': n, 'margin': mar},
-        {'Background': bg_white, 'color1': bg_black, 'color2': None, 'colorer': 'ProgramCat', 'colorer_mode': 0, 'n': n, 'margin': mar},
-        {'Background': bg_white, 'color1': bg_black, 'color2': None, 'colorer': 'Number3', 'colorer_mode': 0, 'n': n, 'margin': mar},
-        {'Background': bg_white, 'color1': bg_black, 'color2': None, 'colorer': 'bw', 'colorer_mode': 0, 'n': n, 'margin': mar},
-        {'Background': bg_white, 'color1': bg_black, 'color2': None, 'colorer': 'red', 'colorer_mode': 0, 'n': n, 'margin': mar},
+        {'Background': bg_white, 'color1': bg_black, 'color2': bg_white, 'colorer': 'wryb', 'colorer_mode': 0, 'n': n, 'margin': mar},
+        {'Background': bg_white, 'color1': bg_black, 'color2': bg_white, 'colorer': 'ProgramCat', 'colorer_mode': 0, 'n': n, 'margin': mar},
+        {'Background': bg_white, 'color1': bg_black, 'color2': bg_white, 'colorer': 'Number3', 'colorer_mode': 0, 'n': n, 'margin': mar},
+        {'Background': bg_white, 'color1': bg_black, 'color2': bg_white, 'colorer': 'bw', 'colorer_mode': 0, 'n': n, 'margin': mar},
+        {'Background': bg_white, 'color1': bg_black, 'color2': bg_white, 'colorer': 'red', 'colorer_mode': 0, 'n': n, 'margin': mar},
 
-        {'Background': bg_white, 'color1': bg_black, 'color2': None, 'colorer': 'wryb', 'colorer_mode': 1, 'n': n, 'margin': mar},
-        {'Background': bg_white, 'color1': bg_black, 'color2': None, 'colorer': 'ProgramCat', 'colorer_mode': 1, 'n': n, 'margin': mar},
-        {'Background': bg_white, 'color1': bg_black, 'color2': None, 'colorer': 'Number3', 'colorer_mode': 1, 'n': n, 'margin': mar},
-        {'Background': bg_white, 'color1': bg_black, 'color2': None, 'colorer': 'bw', 'colorer_mode': 1, 'n': n, 'margin': mar},
-        {'Background': bg_white, 'color1': bg_black, 'color2': None, 'colorer': 'red', 'colorer_mode': 1, 'n': n, 'margin': mar},
+        {'Background': bg_white, 'color1': bg_black, 'color2': bg_white, 'colorer': 'wryb', 'colorer_mode': 1, 'n': n, 'margin': mar},
+        {'Background': bg_white, 'color1': bg_black, 'color2': bg_white, 'colorer': 'ProgramCat', 'colorer_mode': 1, 'n': n, 'margin': mar},
+        {'Background': bg_white, 'color1': bg_black, 'color2': bg_white, 'colorer': 'Number3', 'colorer_mode': 1, 'n': n, 'margin': mar},
+        {'Background': bg_white, 'color1': bg_black, 'color2': bg_white, 'colorer': 'bw', 'colorer_mode': 1, 'n': n, 'margin': mar},
+        {'Background': bg_white, 'color1': bg_black, 'color2': bg_white, 'colorer': 'red', 'colorer_mode': 1, 'n': n, 'margin': mar},
     ]
     return append_dflts(a, 'SMEARS#23', mazy23, w, h)
 
 def predef_mazy24(w, h):
     a = [
-        {'Background': bg_black, 'n': 1},
+        {'Background': bg_black, 'n': 0, 'ou': bg_black},
+        {'Background': bg_white, 'n': 0, 'ou': bg_black},
+        {'Background': bg_black, 'n': 0, 'ou': bg_black, 'addalpha': 150},
+        {'Background': bg_white, 'n': 0, 'ou': bg_black, 'addalpha': 150},
     ]
+    # todo: reduce count - some too similar / some lame
+    # todo: no bw on white bg - lame anyway
+    # todo: op art bw
+    a = mux_param(a, 'n', [40, 40+16, 72])
+    a = mux_param(a, 'a_base', [0.87, 1.0, 4.0])
+    a = mux_param(a, 'an_sc', [0.2, 0.75, 1.0, 2.0, 4.0])
+    a = mux_param(a, 'colorer', ['happy', 'wryb', 'Number3', 'ProgramCat', 'bw', 'red'])
     return append_dflts(a, 'SMEARS#24', mazy24, w, h)
 
 def predef_mazy25(w, h):
@@ -1029,6 +974,36 @@ def predef_mazy25(w, h):
         {'Background': bg_black, 'n': 1},
     ]
     return append_dflts(a, 'SMEARS#25', mazy25, w, h)
+
+def predef_mazy26(w, h):
+    a = [
+        {'Background': bg_black, 'n': 1},
+    ]
+    return append_dflts(a, 'SMEARS#26', mazy26, w, h)
+
+def predef_mazy27(w, h):
+    a = [
+        {'Background': bg_black, 'n': 1},
+    ]
+    return append_dflts(a, 'SMEARS#27', mazy27, w, h)
+
+def predef_mazy28(w, h):
+    a = [
+        {'Background': bg_black, 'n': 1},
+    ]
+    return append_dflts(a, 'SMEARS#28', mazy28, w, h)
+
+def predef_mazy29(w, h):
+    a = [
+        {'Background': bg_black, 'n': 1},
+    ]
+    return append_dflts(a, 'SMEARS#29', mazy29, w, h)
+
+def predef_mazy30(w, h):
+    a = [
+        {'Background': bg_black, 'n': 1},
+    ]
+    return append_dflts(a, 'SMEARS#30', mazy30, w, h)
 
 # ---
 
@@ -1051,17 +1026,18 @@ predefs = {'mazy01': predef_mazy1, 'mazy02': predef_mazy2, 'mazy03': predef_mazy
            'mazy13': predef_mazy13, 'mazy14': predef_mazy14, 'mazy15': predef_mazy15, 'mazy16': predef_mazy16,
            'mazy17': predef_mazy17, 'mazy18': predef_mazy18, 'mazy19': predef_mazy19, 'mazy20': predef_mazy20,
            'mazy21': predef_mazy21, 'mazy22': predef_mazy22, 'mazy23': predef_mazy23, 'mazy24': predef_mazy24,
-           'mazy25': predef_mazy25,
+           'mazy25': predef_mazy25, 'mazy26': predef_mazy26, 'mazy27': predef_mazy27, 'mazy28': predef_mazy28,
+           'mazy29': predef_mazy29, 'mazy30': predef_mazy30,
            'life': predef_life, 'lissajous': predef_lissajous, 'astro': predef_astro, 'mandelbrot': predef_mandelbrot,
            'waves01': predef_waves1,'waves02': predef_waves2, 'waves03': predef_waves3, 
            }
 
 # all names
 predef_names = [
-        'mazy01', 'mazy02', 'mazy03', 'mazy04',  'mazy05', 'mazy06', 'mazy07', 'mazy08',
+        'mazy01', 'mazy02', 'mazy03', 'mazy04', 'mazy05', 'mazy06', 'mazy07', 'mazy08',
         'mazy09', 'mazy10', 'mazy11', 'mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16',
-        'mazy17', 'mazy18', 'mazy19', 'mazy20',
-        'mazy21', 'mazy22', 'mazy23', 'mazy24', 'mazy25',
+        'mazy17', 'mazy18', 'mazy19', 'mazy20', 'mazy21', 'mazy22', 'mazy23', 'mazy24',
+        'mazy25', 'mazy26', 'mazy27', 'mazy28', 'mazy29', 'mazy30',
         'astro', 'life', 'lissajous', 'mandelbrot', 'waves01', 'waves02', 'waves03'
         ]
 
