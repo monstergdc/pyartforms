@@ -5,8 +5,9 @@
 # drawing life (2d) in Python, v1.0
 # (c)2018-2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20181021
-# upd; 20210301
-# upd; 20210515
+# upd: 20210301
+# upd: 20210515
+# upd: 20210612
 
 # note: slow, but interesting, do experiment more!
 
@@ -157,19 +158,19 @@ def life2d(draw, params):
 
 def art_painter2(params, png_file):
     start_time = dt.now()
-    print('drawing %s... %s iter=%d' % (params['name'], png_file, params['iter']))
+    print('drawing %s... %s iter=%d ' % (params['name'], png_file, params['iter']), end="", flush=True)
     if params['reuse'] == False:
         a = im2arr(params['src'])
         a = norm_a(a)
         params['a'] = a
     h, w = np.shape(params['a']) # y,x
-    print('shape:', np.shape(params['a']))
+    print('shape:', np.shape(params['a']), '', end="", flush=True)
     im = Image.new('RGB', (params['w'], params['h']), (0, 0, 0))    # RGB for video use
     draw = ImageDraw.Draw(im)
     f = params['call']
     a = f(draw, params)
     im = im.resize((320, 240), resample=0, box=None)
-    im.save(png_file, dpi=(300,300), pnginfo=append_myself())
+    im.save(png_file, dpi=(300,300), pnginfo=append_myself(params))
     show_benchmark(start_time)
     return a
 
@@ -215,7 +216,7 @@ def life2_video(src, f, video_name, frames):
 
 # ---
 
-src = 'test-src4-life2.png'
+src = './data/test-src4-life2.png'
 
 # img
 if True:

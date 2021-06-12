@@ -3,9 +3,9 @@
 
 # paint algorithms (artificial artist) - IFS, v1.0, Python version
 # based on my old Pascal/Delphi code from 1996-1999 and 2006
-# (c)2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2019-2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20190428
-# upd: 20190???
+# upd: 20210612
 
 # TODO:
 # - ?
@@ -113,10 +113,12 @@ sc = 70.0*3
 #sc = 70.0*5
 
 params1 = {'w': w, 'h': h, 'Background': (255, 255, 255), 'n': n, 'y0': y0, 'sc': sc, 'tran': tran_fern}
-
 params2 = {'w': w, 'h': h, 'Background': (255, 255, 255), 'n': n, 'y0': y0, 'sc': sc, 'tran': tran_leaf}
+params3 = {'w': w, 'h': h, 'Background': (255, 255, 255), 'n': n, 'y0': y0, 'sc': sc, 'tran': tran_tree}
 
 ifs(params1, odir+'ifs-%dx%d-01-001.png' % (w, h))
+ifs(params2, odir+'ifs-%dx%d-02-001.png' % (w, h))
+ifs(params3, odir+'ifs-%dx%d-03-001.png' % (w, h))
 
 time_elapsed = dt.now() - start_time
 print('ALL done. elapsed time: {}'.format(time_elapsed))

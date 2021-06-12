@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 # drawing life in Python
-# (c)2018 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
-# https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
+# (c)2018-2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20180503
-# upd; 20180504
-# upd; 20181019, 20
+# upd: 20180504
+# upd: 20181019, 20
+# upd: 20210612
 
 # TODO:
 # - ?
