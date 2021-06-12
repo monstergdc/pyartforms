@@ -34,7 +34,9 @@
 # #27
 # #28 
 # #29 
-# #30 
+# #30
+# #31
+# #32 
 
 # cre: 20180430
 # upd: 20180501, 02, 03
@@ -1197,8 +1199,8 @@ def mazy25(draw, params):
 def mazy26(draw, params):
     """ waves#2 """
     if 'par1' in params and 'par2' in params:
-        waves2(draw, params['par1'])
-        waves2(draw, params['par2'])
+        mazy26(draw, params['par1'])
+        mazy26(draw, params['par2'])
         return
 
     w, h, cnt = init_common(params)
