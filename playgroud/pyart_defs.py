@@ -219,61 +219,27 @@ def predef_mazy1(w, h):
 
 def predef_mazy2(w, h):
     a = [
-        {'Background': bg_black, 'n': 100, 'm': 40, 'color': 'bw0'},
-        {'Background': bg_black, 'n': 100, 'm': 200, 'color': 'bw0'},  # ?
-        {'Background': bg_black, 'n': 100, 'm': 40, 'color': 'bwx'},
-        {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'happy'},
-        {'Background': bg_black, 'n': 100+90, 'm': 30+30, 'color': 'happy', 'addalpha': 80}, # test
-        {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'wryb'},
-        {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'bgo'},
-        {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'BeachTowels'},
-        {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'MoonlightBytes6'},
-        {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'Number3'},
-        {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'RainbowDash'},
-        {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'MetroUI'},
-        {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'ProgramCat'},
+        {'Background': bg_black, 'n': 110},
     ]
+    a = mux_param(a, 'color', ['bw0', 'bwx', 'red_rnd', 'happy', 'wryb', 'BeachTowels', 'Number3', 'ProgramCat'])
+    a = mux_param(a, 'm', [12, 30, 200])
+    a = mux_param(a, 'addalpha', [0, 120])
     return append_dflts(a, 'SMEARS#2', mazy2, w, h)
 
 def predef_mazy3(w, h):
+    n = 80
     a = [
-        {'Background': bg_white, 'n': 30, 'color': 'happy'},
-        {'Background': bg_white, 'n': 30, 'color': 'wryb'},
-
-        {'Background': bg_white, 'n': 80, 'color': 'happy'},
-        {'Background': bg_white, 'n': 80, 'color': 'wryb'},
-        {'Background': bg_white, 'n': 80, 'color': 'BeachTowels'},
-        {'Background': bg_white, 'n': 80, 'color': 'SkinTones'},
-        {'Background': bg_white, 'n': 80, 'color': 'Rainbow'},
-
-        {'Background': bg_yellow, 'n': 30, 'color': 'red'},
-        {'Background': bg_yellow, 'n': 80, 'color': 'red'},
-        {'Background': bg_black, 'n': 30, 'color': 'red'},
-        {'Background': bg_black, 'n': 80, 'color': 'red'},
-        {'Background': bg_black, 'n': 30, 'color': 'bw'},
-
-        {'Background': bg_orange, 'n': 80, 'color': 'bwx'},
-
-        {'Background': bg_white, 'n': 90, 'color': 'happy', 'addalpha': 50},
-        {'Background': bg_white, 'n': 90, 'color': 'wryb', 'addalpha': 50},
-        {'Background': bg_white, 'n': 90, 'color': 'BeachTowels', 'addalpha': 50},
-        {'Background': bg_white, 'n': 90, 'color': 'SkinTones', 'addalpha': 50},
-        {'Background': bg_white, 'n': 90, 'color': 'Rainbow', 'addalpha': 50},
-
-        {'Background': bg_yellow, 'n': 90, 'color': 'red', 'addalpha': 50},
-        {'Background': bg_black, 'n': 90, 'color': 'red', 'addalpha': 50},
-        {'Background': bg_black, 'n': 90, 'color': 'bw', 'addalpha': 50},
-
-        {'Background': bg_orange, 'n': 80, 'color': 'bwx', 'addalpha': 50},
+        {'Background': bg_white, 'n': n, 'color': 'happy'},
+        {'Background': bg_white, 'n': n, 'color': 'wryb'},
+        {'Background': bg_white, 'n': n, 'color': 'BeachTowels'},
+        {'Background': bg_white, 'n': n, 'color': 'Number3'},
+        {'Background': bg_black, 'n': 40, 'color': 'red'},
+        {'Background': bg_black, 'n': n, 'color': 'red'},
+        {'Background': bg_black, 'n': 40, 'color': 'bw'},
+        {'Background': bg_orange, 'n': n, 'color': 'bwx'},
     ]
-    a1 = copy.deepcopy(a)
-    a2 = copy.deepcopy(a)
-    a3 = copy.deepcopy(a)
-    for i in range(len(a)):
-        a1[i]['mode'] = 'center'
-        a2[i]['mode'] = 'xcenter'
-        a3[i]['mode'] = 'rnd'
-    a = np.concatenate((a1, a2, a3), axis=0)
+    a = mux_param(a, 'mode', ['center', 'xcenter', 'rnd'])
+    a = mux_param(a, 'addalpha', [0, 70])
     return append_dflts(a, 'SMEARS#3', mazy3, w, h)
 
 def predef_mazy4(w, h):

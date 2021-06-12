@@ -6,8 +6,8 @@
 # (c)2017-2021 MoNsTeR/GDC, Noniewicz.com, Noniewicz.art.pl, Jakub Noniewicz
 
 # #01 'cruel red smears', not only red (...)
-# #02 circles (...)
-# #03 triangles (...)
+# #02 circle worms (tested, ok) --- finish: more par
+# #03 crazy trangles (tested, ok) --- finish: more par
 # #04 self-crossed filled polygons (tested, ok)
 # #05 star flowers (...)
 # #06 circle ripples - co-centered circle groups (...) --- finish: par + misc
@@ -30,7 +30,7 @@
 # #23 Sierpinski's triangle fractal (testd, ok)
 # #24 rotated traingles, predictable (no rnd parts) (tested, ok) --- finish: reduce total count, more par ver, mimosrod opt, a scale par
 # #25 waves#1 (...)
-# #26 waves#2 (...)
+# #26 waves#2 (tested, ok) --- finish: more par, simplify code
 # #27 (...)
 # #28 
 # #29 
@@ -138,14 +138,14 @@ def mazy1(draw, params):
             draw.line(points, fill=color, width=wx)
 
 def mazy2(draw, params):
-    """ ? """
+    """ circle worms """
     w, h, cnt = init_common(params)
     cntm = params['m']
+    if cntm <= 0:
+        cntm = 1
     v = int(h/50)
     #v = int(h/20) # test2
     #v = int(h/200) # test3
-    if cntm <= 0:
-        cntm = 1
 
     for n in range(cnt):
         r1 = random.randint(int(h*0.15), int(h*0.45))
@@ -161,51 +161,35 @@ def mazy2(draw, params):
             po[:] = [(xy[0]+random.randint(0, v)-random.randint(0, v), xy[1]+random.randint(0, v)-random.randint(0, v)) for xy in po]
             color = new_colorer(params['color'], m, cntm)
             if 'addalpha' in params:
-                color = add_alpha(color, params['addalpha'])
+                if params['addalpha'] > 0:
+                    color = add_alpha(color, params['addalpha'])
             circle(draw, po[0][0], po[0][1], int(r0*(1-m*de)), fill=color, outline=None)
 
 def mazy3(draw, params):
-    """ ? """
+    """ crazy trangles """
     w, h, cnt = init_common(params)
 
     def r(p, d):
         return int(p/2+random.randint(int(-p/d), int(p/d)))
-    def r3(p):
-        return r(p, 3)
-    def r2(p):
-        return r(p, 2)
 
-    # todo: what is/was cycle for???
-    pold = [(r2(w), r2(h)), (r2(w), r2(h)), (r2(w), r2(h))]
-    #d = 1.3 # par?
-    d = 0.5 # par?
+    d = 0.5 # par, 1.3, 2.2 ? # todo: ext par
+    da = 0.06 # dflt, how quickly they get smaller in center mode, 0.5 ok too
+    if 'da' in params:
+        da = params['da']
     for n in range(cnt):
         if params['mode'] == 'center':
             po = [(r(w, d), r(h, d)), (r(w, d), r(h, d)), (r(w, d), r(h, d))]
-            cycle = -1
-            d = d + 0.06 # par
+            d = d + da
         if params['mode'] == 'xcenter':
             d = 2.2 # par
             po = [(int(w/2), int(h/2)), (r(w, d), r(h, d)), (r(w, d), r(h, d))]
-            cycle = -1
         if params['mode'] == 'rnd':
             d = 2.2 # par
             po = [(r(w, d), r(h, d)), (r(w, d), r(h, d)), (r(w, d), r(h, d))]
-            cycle = -1
-        if cycle == 0:
-            po[0] = pold[0]
-            po[1] = pold[1]
-        if cycle == 1:
-            po[1] = pold[1]
-            po[2] = pold[2]
-        if cycle == 2:
-            po[2] = pold[2]
-            po[0] = pold[0]
-        pold = po
-
         color = new_colorer(params['color'], n, cnt)
         if 'addalpha' in params:
-            color = add_alpha(color, params['addalpha'])
+            if params['addalpha'] > 0:
+                color = add_alpha(color, params['addalpha'])
         triangle(draw, po, fill=color, outline=None)
 
 def mazy4(draw, params):
