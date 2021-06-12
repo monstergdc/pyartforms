@@ -4,10 +4,11 @@
 # ASCII ART v1.0 - image to text, Python version
 # based on Delphi component by Matthias Matting
 # which was based on PHP source code from Boosty's Ascii Artist,
-# (c)2018-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2018-2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20180504
 # upd: 20181020
 # upd: 20190601
+# upd: 20210612
 
 # todo:
 #- ascii back to image
@@ -50,8 +51,8 @@ def asciiart(params, fn):
 
 if __name__ == '__main__':
     params = {'CalcMedian': True, 'FixDistortion': False, 'Resolution': 1}
-    text = asciiart(params, 'test-src1.png')
+    text = asciiart(params, '.\\data\\test-src1.png')
     print(text)
     params = {'CalcMedian': True, 'FixDistortion': True, 'Resolution': 2}
-    text = asciiart(params, 'test-src2.jpg')
+    text = asciiart(params, '.\\data\\test-src2.jpg')
     print(text)
