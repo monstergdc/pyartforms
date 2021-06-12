@@ -9,7 +9,7 @@
 # upd: 20190414, 21
 # upd: 20210301
 # upd: 20210507, 15, 23, 26, 27
-# upd: 20210606, 07, 11
+# upd: 20210606, 07, 11, 12
 
 from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin, ImageFont, ImageOps
 from datetime import datetime as dt
@@ -114,8 +114,9 @@ def script_it(draw, xy, font, size, fill):
 def add_myself(draw, w, h, bg):
     """ Paint image authorship """
     # note: needs local font on server
+    SELF_FONT = './data/timesbi.ttf'
     txt = "Jakub.Noniewicz.art.pl"
-    fnt = ImageFont.truetype(font='./timesbi.ttf', size=14)
+    fnt = ImageFont.truetype(font=SELF_FONT, size=14)
     twh = fnt.getsize(txt)
     bgx = (bg[0]^255&0xF0, bg[1]^255&0xF0, bg[2]^255&0xF0)
     bgx1 = (bgx[0]^0x80, bgx[1]^0x80, bgx[2]^0x80)
