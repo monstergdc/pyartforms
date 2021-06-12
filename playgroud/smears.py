@@ -5,30 +5,30 @@
 # experimental 'smears' paint algorithms, v1.0
 # (c)2017-2021 MoNsTeR/GDC, Noniewicz.com, Noniewicz.art.pl, Jakub Noniewicz
 
-# #1 'cruel red smears', not only red
-# #2 circles
-# #3 triangles
-# #4 poly
-# #5 new smears aka star flowers
-# #6 circle ripples
-# #7 grayish rects mess
-# #8 just rectangles, may flux (tested, ok) --- finish: new colorer, new params, more variants in defs
-# #9 rays from center (...)
+# #01 'cruel red smears', not only red (...)
+# #02 circles (...)
+# #03 triangles (...)
+# #04 poly (...)
+# #05 star flowers (...)
+# #06 circle ripples - co-centered circle groups (...)
+# #07 random rectangles - grayish and colorish rects mess (tested, ok) --- finish: new colorer proper
+# #08 just rectangles, may flux (tested, ok) --- finish: new params, more variants in defs
+# #09 'Warp' effect - triangle rays from center, opt center point shifted rnd (tested, ok)
 # #10 long beziers (...)
-# #11 horizontal gradients with suprizes (tested, ok) --- finish new colorer
+# #11 horizontal gradients with suprizes (tested, ok)
 # #12 opart-like boxes/circles/triangles (tested, ok/so-so)
 # #13 opart-like single big poly (tested, ok)
 # #14 opart-like cicrles xor-cut by triangles (tested, ok)
-# #15 opart-like circle-interference patterns (...)
+# #15 opart-like or color circle-interference patterns, predictable (no rnd parts) (tested, ok)
 # #16 opart-like circles (tested, ok)
 # #17 scottish grid (tested, so-so)
 # #18 slim colorful circles (tested, ok)
 # #19 opart-like grid (tested, ok)
 # #20 opart-like / papercut-like / video feedback-like 'dragon' effect (tested, ok)
 # #21 opart-like scaled and pasted frames (testd, ok)
-# #22 pie slice effects (...)
+# #22 pie slice effects (...) --- finish: reduce total count, mimosrod opt?
 # #23 Sierpinski's triangle fractal (testd, ok)
-# #24 rotated traingles - predictable (no rnd parts) (tested, ok) --- finish: reduce total count
+# #24 rotated traingles, predictable (no rnd parts) (tested, ok) --- finish: reduce total count, more par ver, mimosrod opt, a scale par
 # #25
 # #26
 # #27
@@ -47,7 +47,7 @@
 # upd: 20200507, 10
 # upd: 20210106, 15, 16, 19, 20, 21, 22
 # upd: 20210515, 16, 22, 23, 24, 25, 26, 27
-# upd: 20210606, 07, 10, 11
+# upd: 20210606, 07, 10, 11, 12
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -267,7 +267,7 @@ def mazy4(draw, params):
         draw.polygon(po, fill=color, outline=None)
 
 def mazy5(draw, params):
-    """ ? """
+    """ star flowers """
     w, h, cnt = init_common(params) # cnt unused
     colors = params['colors']
     c = math.pi/180
@@ -308,22 +308,27 @@ def mazy5(draw, params):
             draw.polygon(points, fill=color, outline=params['outline'])
 
 def mazy6(draw, params):
-    """ Co-centered circle groups """
+    """ circle ripples - co-centered circle groups """
     w, h, cnt = init_common(params)
+    useblack = False
     if 'useblack' in params:
         useblack = params['useblack']
-    else:
-        useblack = False
+    n_r_max = 16 # par
+    r_min = int(h/25) # par
+    r_max = int(h/7) # par
+    #r_max = int(h/3) # par
+    #r_max = int(h/15) # par
+    # todo: start w big r_mx then go to lower? == start with big 1st
+    # todo: mix color modes maybe?
 
     for m in range(cnt):
         x = random.randint(int(w/2-w/3), int(w/2+w/3))
         y = random.randint(int(h/2-h/3), int(h/2+h/3))
-        #todo: start with big 1st?
-        r = random.randint(int(h/25), int(h/7)) # par
-        n_r = random.randint(3, 16) # par
+        r = random.randint(r_min, r_max)
+        n_r = random.randint(3, n_r_max)
         for n in range(n_r):
             nn = n_r - n
-            ro = int(r*(1+nn*nn*0.015)) # todo: par, and more other par
+            ro = int(r*(1+nn*nn*0.015)) # par
             if n & 1 and useblack == True:
                 color = (0, 0, 0)
             else:
@@ -333,12 +338,12 @@ def mazy6(draw, params):
                 except NameError:
                     print('ERROR: undefined color mode, using black', params['mode'])
                     color = (0,0,0)
+            #color = add_alpha(color, 100) # todo
             circle(draw, x, y, ro, fill=color, outline=None)
 
 def mazy7(draw, params):
-    """ Random rectangles """
+    """ random rectangles - grayish and colorish rects mess """
     w, h, cnt = init_common(params)
-    cnt = params['cnt'] # todo: cnt -> n, then common
     hdiv = int(h/30) # dflt
     if 'div' in params:
         d = int(params['div'])
@@ -375,6 +380,7 @@ def mazy7(draw, params):
             h1 = hdiv
 
         color = (0,0,0)
+        # todo: new colorer proper
         if params['cmode'] == 'std':
             color = gradient2((255,255,255), (0,0,0), m, cnt)
         if params['cmode'] == 'inv':    # or inverse
@@ -392,7 +398,6 @@ def mazy7(draw, params):
             color = colors_MoonlightBytes6[random.randint(0, len(colors_MoonlightBytes6)-1)]
         if params['cmode'] == 'RainbowDash':
             color = colors_RainbowDash[random.randint(0, len(colors_RainbowDash)-1)]
-        # todo: new colorer proper
 
         if 'addalpha' in params:
             color = add_alpha(color, params['addalpha'])
@@ -419,19 +424,21 @@ def mazy8(draw, params):
         flux_p = params['flux_p']
     if 'v' in params:
         v = params['v']
-
     border = 0
     if 'border' in params:
         border = params['border']
+    ou = None
+    if 'ou' in params:
+        ou = params['ou']
 
     w1 = int(w/xcnt)
     h1 = int(h/ycnt)
+    max_c = len(get_colors(params['color']))
     for y in range(ycnt-border*2):
         for x in range(xcnt-border*2):
             x1 = x*w1 + int(w1/2) + border*w1
             y1 = y*h1 + int(h1/2) + border*h1
-            ci = random.randint(0, 7)
-            # todo: new colorer FULLY proper (range)
+            ci = random.randint(0, max_c-1)
             color = new_colorer(params['color'], ci, -1)
             if alpha_flux_p != None and alpha_flux_p > 0: # rnd flux
                 if random.randint(0, 100) > alpha_flux_p:
@@ -444,67 +451,46 @@ def mazy8(draw, params):
                     vy = float(h1)*(random.randint(0, v)-random.randint(0, v))/100.0
                     vw = float(w1)*(random.randint(0, v)-random.randint(0, v))/100.0
                     vh = float(h1)*(random.randint(0, v)-random.randint(0, v))/100.0
-            rect(draw, x1+vx, y1+vy, w1+vw, h1+vh, fill=color, outline=None)
+            rect(draw, x1+vx, y1+vy, w1+vw, h1+vh, fill=color, outline=ou)
 
 def mazy9(draw, params):
-    """ 'Warp' effect - triangles around center, opt center point shifted """
+    """ 'Warp' effect - triangle rays from center, opt center point shifted rnd """
     w, h, cnt = init_common(params)
+    w2 = int(w/2)
+    h2 = int(h/2)
     c = math.pi/180
+    v = 0
     if 'v' in params: 
         v = params['v']
-    else:
-        v = 0
+    rndc = False
     if 'rndc' in params: 
         rndc = params['rndc']
-    else:
-        rndc = False
 
-    po = [(int(w/2), int(h/2)), (0, 0), (0, 0)]
-    da = float(360)/cnt
+    po = [(w2, h2), (0, 0), (0, 0)]
+    da = c * float(360)/cnt
     r = w
     for n in range(cnt):
         if v > 0:
-            v1 = random.randint(int(-v), int(v))
-            v2 = random.randint(int(-v), int(v))
-            po[0] = (int(w/2)+v1, int(h/2)+v2)
-        x = w/2 + r * math.cos(c*da*n)
-        y = h/2 + r * math.sin(c*da*n)
+            po[0] = (w2+random.randint(int(-v), int(v)), h2+random.randint(int(-v), int(v)))
+        x = w2 + r * math.cos(da*n)
+        y = h2 + r * math.sin(da*n)
         po[1] = (x, y)
-        x = w/2 + r * math.cos(c*da*(n+1))
-        y = h/2 + r * math.sin(c*da*(n+1))
+        x = w2 + r * math.cos(da*(n+1))
+        y = h2 + r * math.sin(da*(n+1))
         po[2] = (x, y)
 
-        ci = random.randint(0, 255)
-        if params['color'] == 'red':
-            color = gradient2((0,0,0), (255,0,0), ci, 255)
-        if params['color'] == 'rg':
-            color = gradient2((255,0,0), (255,255,0), ci, 255)
-        if params['color'] == 'bw':
-            color = gradient2((0,0,0), (255,255,255), ci, 255)
-        if params['color'] == 'happy':
+        if params['color'] == 'red' or params['color'] == 'bw': # todo: more? + both modes as one?
+            ci = random.randint(0, 255)
+            color = new_colorer(params['color'], ci, 255)
+        else:
+            cx = get_colors(params['color'])
+            if cx == None:
+                raise Exception('Undefined color: '+params['color']) # todo: err only, no raise/crash
+            cx_len = len(cx)
             if rndc == True:
-                color = colors_happy[random.randint(0, 7)]
+                color = cx[random.randint(0, cx_len-1)]
             else:
-                color = colors_happy[n%8]
-        if params['color'] == 'psych':
-            if rndc == True:
-                color = colors_p[random.randint(0, 7)]
-            else:
-                color = colors_p[n%8]
-        if params['color'] == 'BeachTowels':
-            if rndc == True:
-                color = colors_BeachTowels[random.randint(0, len(colors_BeachTowels)-1)]
-            else:
-                color = colors_BeachTowels[n%len(colors_BeachTowels)]
-        if params['color'] == 'gits':
-            if rndc == True:
-                color = colors_gits[random.randint(0, len(colors_gits)-1)]
-            else:
-                color = colors_gits[n%len(colors_gits)]
-        # todo: new colorer proper
-        #test
-        #color = (color[0], color[1], color[2], 100)
-        #
+                color = cx[n%cx_len]
         triangle(draw, po, fill=color, outline=None)
 
 def mazy10(draw, params):
@@ -560,6 +546,8 @@ def mazy10(draw, params):
 def mazy11(draw, params):
     """ Horizontal gradients with suprizes """
     w, h, cnt = init_common(params)
+    cx = get_colors(params['color'])
+    csize = len(cx)
 
     dy = float(h)/cnt
     if dy*cnt < h:  # lame fix for small images
@@ -569,30 +557,12 @@ def mazy11(draw, params):
         steps = w
     dx = float(w)/steps
     for n in range(cnt):
-        if params['color'] == 'happy':
-            cx = colors_happy
-        if params['color'] == 'BeachTowels':
-            cx = colors_BeachTowels
-        if params['color'] == 'Rainbow':
-            cx = colors_Rainbow
-        if params['color'] == 'MoonlightBytes6':
-            cx = colors_MoonlightBytes6
-        if params['color'] == 'MetroUI':
-            cx = colors_MetroUI
-        if params['color'] == 'ProgramCat':
-            cx = colors_ProgramCat
-        if params['color'] == 'wryb':
-            cx = colors_fwd
-        if params['color'] == 'yorb':
-            cx = colors_yorb
-        csize = len(cx)
         n1 = random.randint(0, csize-1)
         n2 = n%csize
         n3 = random.randint(0, csize-1)
         color1 = cx[n1]
         color2 = cx[n2]
         color3 = cx[n3]
-        # todo: new colorer proper
         for step in range(steps):
             color = gradient(color1, color2, color3, step, steps)
             x = step*dx
@@ -723,13 +693,14 @@ def mazy14(draw, params):
     imout = None
 
 def mazy15(draw, params):
-    """ ? """
+    """ opart-like or color circle-interference patterns, predictable (no rnd parts) """
     w, h, cnt = init_common(params)
     c = math.pi/180
+    scc = 1.5 # par
     if w > h:
-        sc = w/2*1.5/cnt  # note: off-screen to fill all
+        sc = w/2*scc/cnt  # note: off-screen to fill all
     else:
-        sc = h/2*1.5/cnt
+        sc = h/2*scc/cnt
     ys1 = 0
     xs1 = 0
     if 'xs1' in params:
@@ -743,24 +714,29 @@ def mazy15(draw, params):
     if 'ys2' in params:
         ys2 = params['ys2']
 
-    def draw_it(d, xs, ys):
+    colorer = None
+    if 'colorer' in params:
+        colorer = params['colorer']
+
+    def draw_it(draw, xs, ys, r):
         if n&1 == 0:
-            co = params['Background']
+            if colorer == None:
+                co = params['Background']
+            else:
+                co = new_colorer(colorer, n, cnt)
         else:
-            co = params['color']
-        if params['style'] == 'circle':
-            circle(d, int(w/2+xs), int(h/2+ys), r, fill=co, outline=None)
-        else:
-            xywh = [(int(w/2+xs-r/2), int(h/2+ys-r/2)), (int(w/2+xs+r/2), int(h/2+ys+r/2))]
-            d.rectangle(xywh, fill=co, outline=None)
+            if colorer == None:
+                co = params['color']
+            else:
+                co = new_colorer(colorer, n, cnt)
+        circle(draw, int(w/2+xs), int(h/2+ys), r, fill=co, outline=None)
 
     im1 = Image.new('RGB', (params['w'], params['h']), params['Background'])
     im2 = Image.new('RGB', (params['w'], params['h']), params['color']) # note: 2nd image is reversed in 'polarity' for better difference effect
     draw1 = ImageDraw.Draw(im1)
     draw2 = ImageDraw.Draw(im2)
 
-    # circles #1
-    for n in range(cnt):
+    for n in range(cnt): # circles #1
         r = int(sc*(cnt-n))
         if 'mode' in params:
             if params['mode'] == 'linear':
@@ -771,12 +747,11 @@ def mazy15(draw, params):
             if params['mode'] == 'circle':
                 a0 = c*n/cnt*360
                 if 'xs1v' in params:
-                    xs1 = params['ys1v']*math.cos(a0)
+                    xs1 = params['xs1v']*math.cos(a0)
                 if 'ys1v' in params:
                     ys1 = params['ys1v']*math.sin(a0)
-        draw_it(draw1, xs1, ys1)
-    # circles #2
-    for n in range(cnt):
+        draw_it(draw1, xs1, ys1, r)
+    for n in range(cnt): # circles #2
         r = int(sc*(cnt-n))
         if 'mode' in params:
             if params['mode'] == 'linear':
@@ -787,18 +762,20 @@ def mazy15(draw, params):
             if params['mode'] == 'circle':
                 a0 = c*n/cnt*360
                 if 'xs2v' in params:
-                    xs2 = params['ys2v']*math.cos(a0)
+                    xs2 = params['xs2v']*math.cos(a0)
                 if 'ys2v' in params:
                     ys2 = params['ys2v']*math.sin(a0)
-        draw_it(draw2, xs2, ys2)
+        draw_it(draw2, xs2, ys2, r)
 
-    imout = ImageChops.difference(im1, im2) # only this is cool
+    if colorer == None:
+        imout = ImageChops.difference(im1, im2) # only difference is cool for bw
+    else:
+        imout = ImageChops.blend(im1, im2, 0.5) # only blend for color now
+
     params['im'].paste(imout, (0, 0))
-    im1 = Image.new('RGB', (1, 1), (0,0,0)) # that is probably lame way to free memory
-    im2 = Image.new('RGB', (1, 1), (0,0,0))
-    imout = Image.new('RGB', (1, 1), (0,0,0))
-    draw1 = ImageDraw.Draw(im1) # does it free mem?
-    draw2 = ImageDraw.Draw(im2) # does it free mem?
+    im1 = None
+    im2 = None
+    imout = None
 
 def mazy16(draw, params):
     """ Opart-like circles """
@@ -1135,7 +1112,7 @@ def mazy23(draw, params):
     m23(draw, limit0-1, a, htr, 0, 0) # recurent inside
 
 def mazy24(draw, params):
-    """ rotated traingles - predictable (no rnd parts) """
+    """ rotated traingles, predictable (no rnd parts) """
     w, h, cnt = init_common(params)
     cx = w/2
     cy = h/2 + h/12 # 'y center' slightly moved down, nicer this way
@@ -1144,19 +1121,6 @@ def mazy24(draw, params):
     ou = None
     if 'ou' in params:
         ou = params['ou']
-
-    def rotate_point(p, cx, cy, angle):
-        x = p[0]
-        y = p[1]
-        si = math.sin(angle)
-        co = math.cos(angle)
-        x -= cx
-        y -= cy
-        xnew = x * co - y * si
-        ynew = x * si + y * co
-        x = xnew + cx
-        y = ynew + cy
-        return (x, y)
 
     a_sc = 0.93 # par
     a_base = 1.0

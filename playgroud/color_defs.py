@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 
 # experimental paint algorithms (artificial artist) in Python, v1.0
-# (c)2017-2020 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
-
+# (c)2017-2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # color definitions, and color mappers/functions
+
+# upd: 20210611
 
 import random
 from drawtools import *
@@ -77,6 +78,50 @@ def old_colorer(params):
             b = random.randint(params['b0'], params['b1'])
     return (r, g, b)
 
+def get_colors(mode):
+    ca = None
+    if mode == 'blueMap':
+        ca = colors_b
+    if mode == 'happy':
+        ca = colors_happy
+    if mode == 'wryb':
+        ca = colors_fwd
+    if mode == 'bgo':
+        ca = colors_bgo
+    if mode == 'yorb':
+        ca = colors_yorb
+    if mode == 'gits':
+        ca = colors_gits
+    if mode == 'avatar':
+        ca = colors_avatar
+    if mode == 'psych':
+        ca = colors_p
+    if mode == 'bw0':
+        ca = colors_bw0
+    if mode == 'bwx':
+        ca = colors_bwx
+    if mode == 'BeachTowels':
+        ca = colors_BeachTowels
+    if mode == 'MoonlightBytes6':
+        ca = colors_MoonlightBytes6
+    if mode == 'Number3':
+        ca = colors_Number3
+    if mode == 'RainbowDash':
+        ca = colors_RainbowDash
+    if mode == 'Google':
+        ca = colors_Google
+    if mode == 'MetroUI':
+        ca = colors_MetroUI
+    if mode == 'ProgramCat':
+        ca = colors_ProgramCat
+    if mode == 'SkinTones':
+        ca = colors_SkinTones
+    if mode == 'Rainbow':
+        ca = colors_Rainbow
+    if mode == 'colors_ZXC1':
+        ca = colors_ZXC1
+    return ca
+
 def new_colorer(mode, n, cnt):
     if mode == 'black_const':
         return (0,0,0)
@@ -127,46 +172,8 @@ def new_colorer(mode, n, cnt):
         g = random.randint(64, 256)
         b = random.randint(128, 256)
         return (r, g, b)
-    if mode == 'blueMap':
-        ca = colors_b
-    if mode == 'happy':
-        ca = colors_happy
-    if mode == 'wryb':
-        ca = colors_fwd
-    if mode == 'bgo':
-        ca = colors_bgo
-    if mode == 'yorb':
-        ca = colors_yorb
-    if mode == 'gits':
-        ca = colors_gits
-    if mode == 'avatar':
-        ca = colors_avatar
-    if mode == 'psych':
-        ca = colors_p
-    if mode == 'bw0':
-        ca = colors_bw0
-    if mode == 'bwx':
-        ca = colors_bwx
-    if mode == 'BeachTowels':
-        ca = colors_BeachTowels
-    if mode == 'MoonlightBytes6':
-        ca = colors_MoonlightBytes6
-    if mode == 'Number3':
-        ca = colors_Number3
-    if mode == 'RainbowDash':
-        ca = colors_RainbowDash
-    if mode == 'Google':
-        ca = colors_Google
-    if mode == 'MetroUI':
-        ca = colors_MetroUI
-    if mode == 'ProgramCat':
-        ca = colors_ProgramCat
-    if mode == 'SkinTones':
-        ca = colors_SkinTones
-    if mode == 'Rainbow':
-        ca = colors_Rainbow
-    if mode == 'colors_ZXC1':
-        ca = colors_ZXC1
+
+    ca = get_colors(mode)
     try:
         ca
     except NameError:

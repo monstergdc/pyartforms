@@ -393,24 +393,20 @@ def predef_mazy5(w, h):
     return append_dflts(a, 'SMEARS#5', mazy5, w, h)
 
 def predef_mazy6(w, h):
+    n = 18
     a = [
-        {'Background': bg_black, 'mode': 'red_const', 'n': 18, 'useblack': True},
-        {'Background': bg_black, 'mode': 'blue_const', 'n': 18, 'useblack': True},
-        {'Background': bg_black, 'mode': 'blue', 'n': 18, 'useblack': True},
-        {'Background': bg_black, 'mode': 'blueMap', 'n': 18, 'useblack': True},
-        {'Background': bg_black, 'mode': 'white_const', 'n': 18, 'useblack': True},
-        {'Background': bg_black, 'mode': 'rg', 'n': 18, 'useblack': True},
-        {'Background': bg_black, 'mode': 'gb', 'n': 18, 'useblack': True},
-        {'Background': bg_black, 'mode': 'happy', 'n': 18, 'useblack': True},
+        {'Background': bg_black, 'mode': 'red_const', 'n': n, 'useblack': True},
+        {'Background': bg_black, 'mode': 'blue_const', 'n': n, 'useblack': True},
+        {'Background': bg_black, 'mode': 'blue', 'n': n, 'useblack': True},
+        {'Background': bg_black, 'mode': 'blueMap', 'n': n, 'useblack': True},
+        {'Background': bg_black, 'mode': 'white_const', 'n': n, 'useblack': True},
+        {'Background': bg_black, 'mode': 'rg', 'n': n, 'useblack': True},
+        {'Background': bg_white, 'mode': 'gb', 'n': n, 'useblack': True},
 
-        {'Background': bg_black, 'mode': 'happy', 'n': 18+12, 'useblack': False},
         {'Background': bg_black, 'mode': 'bwx', 'n': 18+12, 'useblack': False},
-        {'Background': bg_black, 'mode': 'psych', 'n': 18+12, 'useblack': False},
+        {'Background': bg_white, 'mode': 'happy', 'n': 18+12, 'useblack': False},
         {'Background': bg_white, 'mode': 'BeachTowels', 'n': 18+12, 'useblack': False},
         {'Background': bg_white, 'mode': 'MoonlightBytes6', 'n': 18+12, 'useblack': False},
-        {'Background': bg_white, 'mode': 'RainbowDash', 'n': 18+12, 'useblack': False},
-        {'Background': bg_white, 'mode': 'Google', 'n': 18+12, 'useblack': False},
-        {'Background': bg_white, 'mode': 'MetroUI', 'n': 18+12, 'useblack': False},
         {'Background': bg_white, 'mode': 'ProgramCat', 'n': 18+12, 'useblack': False},
     ]
     return append_dflts(a, 'SMEARS#6', mazy6, w, h)
@@ -418,68 +414,68 @@ def predef_mazy6(w, h):
 def predef_mazy7(w, h):
     bk = (0x84, 0x8B, 0x9B)
     a = [
-        {'Background': bk, 'cnt': 500,  'cmode': 'rnd', 'mode': 'const'},
-        {'Background': bk, 'cnt': 2000, 'cmode': 'rnd', 'mode': 'const'},
+        {'Background': bk, 'n': 500,  'cmode': 'rnd', 'mode': 'const'},
+        {'Background': bk, 'n': 2000, 'cmode': 'rnd', 'mode': 'const'},
 
-        {'Background': bk, 'cnt': 200,  'cmode': 'std', 'mode': 'decp'},
-        {'Background': bk, 'cnt': 100,  'cmode': 'std', 'mode': 'decp'},
-        {'Background': bk, 'cnt': 50,   'cmode': 'std', 'mode': 'decp'},
-        {'Background': bk, 'cnt': 10,   'cmode': 'std', 'mode': 'decp'},
-        {'Background': bk, 'cnt': 200,  'cmode': 'std', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 100,  'cmode': 'std', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 50,   'cmode': 'std', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 10,   'cmode': 'std', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 200,  'cmode': 'inv', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 100,  'cmode': 'inv', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 50,   'cmode': 'inv', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 10,   'cmode': 'inv', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 200,  'cmode': 'rnd', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 100,  'cmode': 'rnd', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 50,   'cmode': 'rnd', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 10,   'cmode': 'rnd', 'mode': 'dec'},
+        {'Background': bk, 'n': 200,  'cmode': 'std', 'mode': 'decp'},
+        {'Background': bk, 'n': 100,  'cmode': 'std', 'mode': 'decp'},
+        {'Background': bk, 'n': 50,   'cmode': 'std', 'mode': 'decp'},
+        {'Background': bk, 'n': 10,   'cmode': 'std', 'mode': 'decp'},
+        {'Background': bk, 'n': 200,  'cmode': 'std', 'mode': 'dec'},
+        {'Background': bk, 'n': 100,  'cmode': 'std', 'mode': 'dec'},
+        {'Background': bk, 'n': 50,   'cmode': 'std', 'mode': 'dec'},
+        {'Background': bk, 'n': 10,   'cmode': 'std', 'mode': 'dec'},
+        {'Background': bk, 'n': 200,  'cmode': 'inv', 'mode': 'dec'},
+        {'Background': bk, 'n': 100,  'cmode': 'inv', 'mode': 'dec'},
+        {'Background': bk, 'n': 50,   'cmode': 'inv', 'mode': 'dec'},
+        {'Background': bk, 'n': 10,   'cmode': 'inv', 'mode': 'dec'},
+        {'Background': bk, 'n': 200,  'cmode': 'rnd', 'mode': 'dec'},
+        {'Background': bk, 'n': 100,  'cmode': 'rnd', 'mode': 'dec'},
+        {'Background': bk, 'n': 50,   'cmode': 'rnd', 'mode': 'dec'},
+        {'Background': bk, 'n': 10,   'cmode': 'rnd', 'mode': 'dec'},
 
-        {'Background': bk, 'cnt': 200,  'cmode': 'color', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 100,  'cmode': 'color', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 50,   'cmode': 'color', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 10,   'cmode': 'color', 'mode': 'dec'},
+        {'Background': bk, 'n': 200,  'cmode': 'color', 'mode': 'dec'},
+        {'Background': bk, 'n': 100,  'cmode': 'color', 'mode': 'dec'},
+        {'Background': bk, 'n': 50,   'cmode': 'color', 'mode': 'dec'},
+        {'Background': bk, 'n': 10,   'cmode': 'color', 'mode': 'dec'},
 
-        {'Background': bk, 'cnt': 200,  'cmode': 'color', 'mode': 'dec', 'addalpha': 99},
-        {'Background': bk, 'cnt': 100,  'cmode': 'color', 'mode': 'dec', 'addalpha': 99},
-        {'Background': bk, 'cnt': 50,   'cmode': 'color', 'mode': 'dec', 'addalpha': 99},
-        {'Background': bk, 'cnt': 10,   'cmode': 'color', 'mode': 'dec', 'addalpha': 99},
+        {'Background': bk, 'n': 200,  'cmode': 'color', 'mode': 'dec', 'addalpha': 99},
+        {'Background': bk, 'n': 100,  'cmode': 'color', 'mode': 'dec', 'addalpha': 99},
+        {'Background': bk, 'n': 50,   'cmode': 'color', 'mode': 'dec', 'addalpha': 99},
+        {'Background': bk, 'n': 10,   'cmode': 'color', 'mode': 'dec', 'addalpha': 99},
 
-        {'Background': bk, 'cnt': 200,  'cmode': 'wryb', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 100,  'cmode': 'wryb', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 50,   'cmode': 'wryb', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 10,   'cmode': 'wryb', 'mode': 'dec'},
+        {'Background': bk, 'n': 200,  'cmode': 'wryb', 'mode': 'dec'},
+        {'Background': bk, 'n': 100,  'cmode': 'wryb', 'mode': 'dec'},
+        {'Background': bk, 'n': 50,   'cmode': 'wryb', 'mode': 'dec'},
+        {'Background': bk, 'n': 10,   'cmode': 'wryb', 'mode': 'dec'},
 
-        {'Background': bk, 'cnt': 200,  'cmode': 'wryb', 'mode': 'dec', 'addalpha': 99},
-        {'Background': bk, 'cnt': 100,  'cmode': 'wryb', 'mode': 'dec', 'addalpha': 99},
-        {'Background': bk, 'cnt': 50,   'cmode': 'wryb', 'mode': 'dec', 'addalpha': 99},
-        {'Background': bk, 'cnt': 10,   'cmode': 'wryb', 'mode': 'dec', 'addalpha': 99},
+        {'Background': bk, 'n': 200,  'cmode': 'wryb', 'mode': 'dec', 'addalpha': 99},
+        {'Background': bk, 'n': 100,  'cmode': 'wryb', 'mode': 'dec', 'addalpha': 99},
+        {'Background': bk, 'n': 50,   'cmode': 'wryb', 'mode': 'dec', 'addalpha': 99},
+        {'Background': bk, 'n': 10,   'cmode': 'wryb', 'mode': 'dec', 'addalpha': 99},
 
         # new tmp
-        {'Background': bk, 'cnt': 200,  'cmode': 'BeachTowels', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 100,  'cmode': 'BeachTowels', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 50,   'cmode': 'BeachTowels', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 10,   'cmode': 'BeachTowels', 'mode': 'dec'},
+        {'Background': bk, 'n': 200,  'cmode': 'BeachTowels', 'mode': 'dec'},
+        {'Background': bk, 'n': 100,  'cmode': 'BeachTowels', 'mode': 'dec'},
+        {'Background': bk, 'n': 50,   'cmode': 'BeachTowels', 'mode': 'dec'},
+        {'Background': bk, 'n': 10,   'cmode': 'BeachTowels', 'mode': 'dec'},
 
-        {'Background': bk, 'cnt': 200,  'cmode': 'MoonlightBytes6', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 100,  'cmode': 'MoonlightBytes6', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 50,   'cmode': 'MoonlightBytes6', 'mode': 'dec'},
-        {'Background': bk, 'cnt': 10,   'cmode': 'MoonlightBytes6', 'mode': 'dec'},
+        {'Background': bk, 'n': 200,  'cmode': 'MoonlightBytes6', 'mode': 'dec'},
+        {'Background': bk, 'n': 100,  'cmode': 'MoonlightBytes6', 'mode': 'dec'},
+        {'Background': bk, 'n': 50,   'cmode': 'MoonlightBytes6', 'mode': 'dec'},
+        {'Background': bk, 'n': 10,   'cmode': 'MoonlightBytes6', 'mode': 'dec'},
 
         # new new 202105
-        {'Background': bk, 'cnt': 2000, 'cmode': 'BeachTowels', 'mode': 'const'},
-        {'Background': bk, 'cnt': 2000, 'cmode': 'MoonlightBytes6', 'mode': 'const'},
-        {'Background': bk, 'cnt': 2000, 'cmode': 'BeachTowels', 'mode': 'const', 'addalpha': 99},
-        {'Background': bk, 'cnt': 2000, 'cmode': 'MoonlightBytes6', 'mode': 'const', 'addalpha': 99},
-        {'Background': bk, 'cnt': 2000, 'cmode': 'BeachTowels', 'mode': 'const', 'addalpha': 99, 'div': 10},
-        {'Background': bk, 'cnt': 2000, 'cmode': 'MoonlightBytes6', 'mode': 'const', 'addalpha': 99, 'div': 10},
-        {'Background': bk, 'cnt': 2000, 'cmode': 'BeachTowels', 'mode': 'const', 'addalpha': 99, 'div': 5},
-        {'Background': bk, 'cnt': 2000, 'cmode': 'MoonlightBytes6', 'mode': 'const', 'addalpha': 99, 'div': 5},
-        {'Background': bk, 'cnt': 50, 'cmode': 'BeachTowels', 'mode': 'const', 'addalpha': 99, 'div': 5},
-        {'Background': bk, 'cnt': 50, 'cmode': 'MoonlightBytes6', 'mode': 'const', 'addalpha': 99, 'div': 5},
+        {'Background': bk, 'n': 2000, 'cmode': 'BeachTowels', 'mode': 'const'},
+        {'Background': bk, 'n': 2000, 'cmode': 'MoonlightBytes6', 'mode': 'const'},
+        {'Background': bk, 'n': 2000, 'cmode': 'BeachTowels', 'mode': 'const', 'addalpha': 99},
+        {'Background': bk, 'n': 2000, 'cmode': 'MoonlightBytes6', 'mode': 'const', 'addalpha': 99},
+        {'Background': bk, 'n': 2000, 'cmode': 'BeachTowels', 'mode': 'const', 'addalpha': 99, 'div': 10},
+        {'Background': bk, 'n': 2000, 'cmode': 'MoonlightBytes6', 'mode': 'const', 'addalpha': 99, 'div': 10},
+        {'Background': bk, 'n': 2000, 'cmode': 'BeachTowels', 'mode': 'const', 'addalpha': 99, 'div': 5},
+        {'Background': bk, 'n': 2000, 'cmode': 'MoonlightBytes6', 'mode': 'const', 'addalpha': 99, 'div': 5},
+        {'Background': bk, 'n': 50, 'cmode': 'BeachTowels', 'mode': 'const', 'addalpha': 99, 'div': 5},
+        {'Background': bk, 'n': 50, 'cmode': 'MoonlightBytes6', 'mode': 'const', 'addalpha': 99, 'div': 5},
     ]
     return append_dflts(a, 'SMEARS#7', mazy7, w, h)
 
@@ -499,91 +495,21 @@ def predef_mazy8(w, h):
         a2[i]['flux_p'] = 75
         a2[i]['v'] = 50
     a = np.concatenate((a1, a2), axis=0)
-    # todo: add flux alpha | add border
+    # todo: add flux alpha | add border | add ou opt
     return append_dflts(a, 'SMEARS#8', mazy8, w, h)
 
 def predef_mazy9(w, h):
-    v = float(h)/8
+    v1 = float(h)/8
     v2 = float(h)/2
     v3 = float(h)/32
     a = [
-        {'n': 16, 'Background': bg_black, 'color': 'happy', 'v': 0, 'rndc': True},
-        {'n': 20, 'Background': bg_black, 'color': 'happy', 'v': 0, 'rndc': True},
-        {'n': 60, 'Background': bg_black, 'color': 'happy', 'v': 0, 'rndc': True},
-        {'n': 128, 'Background': bg_black, 'color': 'happy', 'v': 0, 'rndc': True},
-        {'n': 16, 'Background': bg_black, 'color': 'psych', 'v': 0, 'rndc': True},
-        {'n': 20, 'Background': bg_black, 'color': 'psych', 'v': 0, 'rndc': True},
-        {'n': 60, 'Background': bg_black, 'color': 'psych', 'v': 0, 'rndc': True},
-        {'n': 128, 'Background': bg_black, 'color': 'psych', 'v': 0, 'rndc': True},
-
-        {'n': 16, 'Background': bg_black, 'color': 'happy', 'v': 0},
-        {'n': 20, 'Background': bg_black, 'color': 'happy', 'v': 0},
-        {'n': 64, 'Background': bg_black, 'color': 'happy', 'v': 0},
-        {'n': 128, 'Background': bg_black, 'color': 'happy', 'v': 0},
-        {'n': 16, 'Background': bg_black, 'color': 'psych', 'v': 0},
-        {'n': 20, 'Background': bg_black, 'color': 'psych', 'v': 0},
-        {'n': 64, 'Background': bg_black, 'color': 'psych', 'v': 0},
-        {'n': 128, 'Background': bg_black, 'color': 'psych', 'v': 0},
-           
-        {'n': 16, 'Background': bg_black, 'color': 'red', 'v': 0},
-        {'n': 64, 'Background': bg_black, 'color': 'red', 'v': 0},
-        {'n': 128, 'Background': bg_black, 'color': 'red', 'v': 0},
-        {'n': 16, 'Background': bg_black, 'color': 'rg', 'v': 0},
-        {'n': 64, 'Background': bg_black, 'color': 'rg', 'v': 0},
-        {'n': 128, 'Background': bg_black, 'color': 'rg', 'v': 0},
-        {'n': 16, 'Background': bg_black, 'color': 'bw', 'v': 0},
-        {'n': 64, 'Background': bg_black, 'color': 'bw', 'v': 0},
-        {'n': 128, 'Background': bg_black, 'color': 'bw', 'v': 0},
-
-        {'n': 20, 'Background': bg_black, 'color': 'happy', 'v': v, 'rndc': True},
-        {'n': 60, 'Background': bg_black, 'color': 'happy', 'v': v, 'rndc': True},
-        {'n': 120, 'Background': bg_black, 'color': 'happy', 'v': v, 'rndc': True},
-        {'n': 20, 'Background': bg_black, 'color': 'psych', 'v': v, 'rndc': True},
-        {'n': 60, 'Background': bg_black, 'color': 'psych', 'v': v, 'rndc': True},
-        {'n': 120, 'Background': bg_black, 'color': 'psych', 'v': v, 'rndc': True},
-
-        {'n': 20, 'Background': bg_black, 'color': 'happy', 'v': v},
-        {'n': 60, 'Background': bg_black, 'color': 'happy', 'v': v},
-        {'n': 120, 'Background': bg_black, 'color': 'happy', 'v': v},
-        {'n': 20, 'Background': bg_black, 'color': 'psych', 'v': v},
-        {'n': 60, 'Background': bg_black, 'color': 'psych', 'v': v},
-        {'n': 120, 'Background': bg_black, 'color': 'psych', 'v': v},
-
-        {'n': 20, 'Background': bg_black, 'color': 'red', 'v': v},
-        {'n': 60, 'Background': bg_black, 'color': 'red', 'v': v},
-        {'n': 120, 'Background': bg_black, 'color': 'red', 'v': v},
-        {'n': 20, 'Background': bg_black, 'color': 'rg', 'v': v},
-        {'n': 60, 'Background': bg_black, 'color': 'rg', 'v': v},
-        {'n': 120, 'Background': bg_black, 'color': 'rg', 'v': v},
-        {'n': 20, 'Background': bg_black, 'color': 'bw', 'v': v},
-        {'n': 60, 'Background': bg_black, 'color': 'bw', 'v': v},
-        {'n': 120, 'Background': bg_black, 'color': 'bw', 'v': v},
-
-        {'n': 20, 'Background': bg_black, 'color': 'happy', 'v': v2, 'rndc': True},
-        {'n': 60, 'Background': bg_black, 'color': 'happy', 'v': v2, 'rndc': True},
-        {'n': 120, 'Background': bg_black, 'color': 'happy', 'v': v2, 'rndc': True},
-        {'n': 20, 'Background': bg_black, 'color': 'psych', 'v': v2, 'rndc': True},
-        {'n': 60, 'Background': bg_black, 'color': 'psych', 'v': v2, 'rndc': True},
-        {'n': 120, 'Background': bg_black, 'color': 'psych', 'v': v2, 'rndc': True},
-        {'n': 20, 'Background': bg_black, 'color': 'BeachTowels', 'v': v2, 'rndc': True},
-        {'n': 60, 'Background': bg_black, 'color': 'BeachTowels', 'v': v2, 'rndc': True},
-        {'n': 120, 'Background': bg_black, 'color': 'BeachTowels', 'v': v2, 'rndc': True},
-
-        {'n': 20, 'Background': bg_black, 'color': 'happy', 'v': v3, 'rndc': True},
-        {'n': 60, 'Background': bg_black, 'color': 'happy', 'v': v3, 'rndc': True},
-        {'n': 120, 'Background': bg_black, 'color': 'happy', 'v': v3, 'rndc': True},
-        {'n': 20, 'Background': bg_black, 'color': 'psych', 'v': v3, 'rndc': True},
-        {'n': 60, 'Background': bg_black, 'color': 'psych', 'v': v3, 'rndc': True},
-        {'n': 120, 'Background': bg_black, 'color': 'psych', 'v': v3, 'rndc': True},
-        {'n': 20, 'Background': bg_black, 'color': 'BeachTowels', 'v': v3, 'rndc': True},
-        {'n': 60, 'Background': bg_black, 'color': 'BeachTowels', 'v': v3, 'rndc': True},
-        {'n': 120, 'Background': bg_black, 'color': 'BeachTowels', 'v': v3, 'rndc': True},
-
-        # todo: other like that too
-        {'n': 360, 'Background': bg_black, 'color': 'BeachTowels', 'v': v, 'rndc': True},
-        {'n': 360, 'Background': bg_black, 'color': 'BeachTowels', 'v': v2, 'rndc': True},
-        {'n': 360, 'Background': bg_black, 'color': 'BeachTowels', 'v': v3, 'rndc': True},
+        {'Background': bg_black},
     ]
+    # TODO: reduce count - rndc=False only good if v>0
+    a = mux_param(a, 'n', [60, 120, 360])
+    a = mux_param(a, 'v', [0, v1, v2, v3])
+    a = mux_param(a, 'rndc', [False, True])
+    a = mux_param(a, 'color', ['happy', 'BeachTowels', 'ProgramCat', 'Number3', 'red', 'bw'])
     return append_dflts(a, 'SMEARS#9', mazy9, w, h)
 
 def predef_mazy10(w, h):
@@ -627,31 +553,12 @@ def predef_mazy10(w, h):
 
 def predef_mazy11(w, h):
     a = [
-        {'Background': bg_black, 'n': 8, 'color': 'happy'},
-        {'Background': bg_black, 'n': 16, 'color': 'happy'},
-        {'Background': bg_black, 'n': 64, 'color': 'happy'},
-        {'Background': bg_black, 'n': 8, 'color': 'BeachTowels'},
-        {'Background': bg_black, 'n': 16, 'color': 'BeachTowels'},
-        {'Background': bg_black, 'n': 64, 'color': 'BeachTowels'},
-        {'Background': bg_black, 'n': 8, 'color': 'MoonlightBytes6'},
-        {'Background': bg_black, 'n': 16, 'color': 'MoonlightBytes6'},
-        {'Background': bg_black, 'n': 64, 'color': 'MoonlightBytes6'},
-        {'Background': bg_black, 'n': 8, 'color': 'Rainbow'},
-        {'Background': bg_black, 'n': 16, 'color': 'Rainbow'},
-        {'Background': bg_black, 'n': 64, 'color': 'Rainbow'},
-        {'Background': bg_black, 'n': 8, 'color': 'MetroUI'},
-        {'Background': bg_black, 'n': 16, 'color': 'MetroUI'},
-        {'Background': bg_black, 'n': 64, 'color': 'MetroUI'},
-        {'Background': bg_black, 'n': 8, 'color': 'ProgramCat'},
-        {'Background': bg_black, 'n': 16, 'color': 'ProgramCat'},
-        {'Background': bg_black, 'n': 64, 'color': 'ProgramCat'},
-        {'Background': bg_black, 'n': 8, 'color': 'wryb'},
-        {'Background': bg_black, 'n': 16, 'color': 'wryb'},
-        {'Background': bg_black, 'n': 64, 'color': 'wryb'},
-        {'Background': bg_black, 'n': 8, 'color': 'yorb'},
-        {'Background': bg_black, 'n': 16, 'color': 'yorb'},
-        {'Background': bg_black, 'n': 64, 'color': 'yorb'},
+        {'Background': bg_black, 'n': 8},
+        {'Background': bg_black, 'n': 16},
+        {'Background': bg_black, 'n': 64},
+        {'Background': bg_black, 'n': 128},
     ]
+    a = mux_param(a, 'color', ['happy', 'BeachTowels', 'MoonlightBytes6', 'Rainbow', 'MetroUI', 'ProgramCat', 'wryb', 'yorb'])
     return append_dflts(a, 'SMEARS#11', mazy11, w, h)
 
 def predef_mazy12(w, h):
@@ -697,12 +604,9 @@ def predef_mazy13(w, h):
 
 def predef_mazy14(w, h):
     a = [
-        {'Background': bg_white, 'n': 6, 'color': bg_black},
-        {'Background': bg_white, 'n': 12, 'color': bg_black},
-        {'Background': bg_white, 'n': 24, 'color': bg_black},
-        {'Background': bg_white, 'n': 36, 'color': bg_black},
-        {'Background': bg_white, 'n': 48, 'color': bg_black},
+        {'Background': bg_white, 'color': bg_black},
     ]
+    a = mux_param(a, 'n', [6, 12, 24, 36, 48])
     a = mux_param(a, 'm', [4, 8, 32, 100])
     a_ = [{'Background': bg_white, 'n': 24, 'm': 32, 'color': bg_black, 'div': 5}] # 'special' case (test)
     a = np.concatenate((a, a_), axis=0)
@@ -710,68 +614,25 @@ def predef_mazy14(w, h):
 
 def predef_mazy15(w, h):
     a = [
-        {'Background': bg_white, 'n': 8, 'color': bg_black, 'style': 'circle'},
-        {'Background': bg_white, 'n': 16, 'color': bg_black, 'style': 'circle'},
-        {'Background': bg_white, 'n': 32, 'color': bg_black, 'style': 'circle'},
-        {'Background': bg_white, 'n': 64, 'color': bg_black, 'style': 'circle'},
-        {'Background': bg_white, 'n': 128, 'color': bg_black, 'style': 'circle'},
-        # note: 'style': 'rect' - somehow not so cool
+        # const offsets, a1 cool for n=16
+        {'Background': bg_white, 'color': bg_black, 'xs1': int(-w/10), 'ys1': int(-w/100), 'xs2': int(w/10), 'ys2': int(w/100)},
+        {'Background': bg_white, 'color': bg_black, 'xs1': int(-w/50), 'ys1': int(-w/100), 'xs2': int(w/50), 'ys2': int(w/100)},
+        {'Background': bg_white, 'color': bg_black, 'xs1': int(-w/20), 'ys1': int(w/20),   'xs2': int(w/20), 'ys2': int(-w/20)},
+        # linear - tested for c2 only
+        {'Background': bg_white, 'color': bg_black, 'xs2v': int(w/25),  'ys2v': 0, 'mode': 'linear'},
+        {'Background': bg_white, 'color': bg_black, 'xs2v': int(w/50),  'ys2v': 0, 'mode': 'linear'},
+        {'Background': bg_white, 'color': bg_black, 'xs2v': int(w/100), 'ys2v': 0, 'mode': 'linear'},
+        {'Background': bg_white, 'color': bg_black, 'xs2v': int(w/200), 'ys2v': 0, 'mode': 'linear'},
+        # circle - tested for c2 only
+        {'Background': bg_white, 'color': bg_black, 'xs2v': int(w/50),  'ys2v': int(w/50), 'mode': 'circle'},
+        {'Background': bg_white, 'color': bg_black, 'xs2v': int(w/25),  'ys2v': int(w/25), 'mode': 'circle'},
+        {'Background': bg_white, 'color': bg_black, 'xs2v': int(w/10),  'ys2v': int(w/10), 'mode': 'circle'},
+        {'Background': bg_white, 'color': bg_black, 'xs2v': int(w/4),   'ys2v': int(w/4), 'mode': 'circle'},
+        #?
+        {'Background': bg_white, 'color': bg_black, 'xs1v': int(w/10), 'ys1v': int(w/10), 'xs2v': int(w/3), 'ys2v': int(w/3), 'mode': 'circle'},
     ]
-    a1 = copy.deepcopy(a)
-    a2 = copy.deepcopy(a)
-    a3 = copy.deepcopy(a)
-    a7 = copy.deepcopy(a)
-    a8 = copy.deepcopy(a)
-    a9 = copy.deepcopy(a)
-    a10 = copy.deepcopy(a)
-    a11 = copy.deepcopy(a)
-    a12 = copy.deepcopy(a)
-    a13 = copy.deepcopy(a)
-    a14 = copy.deepcopy(a)
-    for i in range(len(a)):
-        # a1 - a3 const offsets, a1 cool for n=16
-        a1[i]['xs1'] = int(-w/10)
-        a1[i]['ys1'] = int(-w/100)
-        a1[i]['xs2'] = int(w/10)
-        a1[i]['ys2'] = int(w/100)
-
-        a2[i]['xs1'] = int(-w/50)
-        a2[i]['ys1'] = int(-w/100)
-        a2[i]['xs2'] = int(w/50)
-        a2[i]['ys2'] = int(w/100)
-
-        a3[i]['xs1'] = int(-w/20)
-        a3[i]['ys1'] = int(w/20)
-        a3[i]['xs2'] = int(w/20)
-        a3[i]['ys2'] = int(-w/20)
-
-        # linear - tested x for c2 only
-        a7[i]['mode'] = 'linear'
-        a7[i]['xs2v'] = int(w/25)
-        a7[i]['ys2v'] = 0
-        a8[i]['mode'] = 'linear'
-        a8[i]['xs2v'] = int(w/50)
-        a8[i]['ys2v'] = 0
-        a9[i]['mode'] = 'linear'
-        a9[i]['xs2v'] = int(w/100)
-        a9[i]['ys2v'] = 0
-        a10[i]['mode'] = 'linear'
-        a10[i]['xs2v'] = int(w/200)
-        a10[i]['ys2v'] = 0
-
-        a11[i]['mode'] = 'circle'
-        a11[i]['xs2v'] = int(w/50)
-        a11[i]['ys2v'] = int(w/50)
-        a12[i]['mode'] = 'circle'
-        a12[i]['xs2v'] = int(w/25)
-        a12[i]['ys2v'] = int(w/25)
-        a13[i]['mode'] = 'circle'
-        a13[i]['xs2v'] = int(w/10)
-        a13[i]['ys2v'] = int(w/10)
-        a14[i]['mode'] = 'circle'
-        a14[i]['xs2v'] = int(w/5)
-        a14[i]['ys2v'] = int(w/5)
-    a = np.concatenate((a1, a2, a3, a7, a8, a9, a10, a11, a12, a13, a14), axis=0)
+    a = mux_param(a, 'n', [32, 64, 128])
+    a = mux_param(a, 'colorer', [None, 'happy', 'wryb', 'ProgramCat'])
     return append_dflts(a, 'SMEARS#15', mazy15, w, h)
 
 def predef_mazy16(w, h):
@@ -783,7 +644,7 @@ def predef_mazy16(w, h):
     ]
     a = mux_param(a, 'rcoef', [1.5, 3.0])
     a = mux_param(a, 'acoef', [1.0, 7.0, 19.0])
-    a = mux_param(a, 'rscale', [1.0, 0.33, 1.5, 2.0])
+    a = mux_param(a, 'rscale', [0.33, 1.0, 1.5, 2.0])
     return append_dflts(a, 'SMEARS#16', mazy16, w, h)
 
 def predef_mazy17(w, h):
@@ -879,38 +740,18 @@ def predef_mazy21(w, h):
     return append_dflts(a, 'SMEARS#21', mazy21, w, h)
 
 def predef_mazy22(w, h):
-    b = [
-        {'Background': bg_black, 'n': 36*1, 'color': 'bw'},
-        {'Background': bg_black, 'n': 36*2, 'color': 'bw'},
-        {'Background': bg_black, 'n': 36*3, 'color': 'bw'},
-        {'Background': bg_black, 'n': 36*4, 'color': 'bw'},
-        {'Background': bg_black, 'n': 36*8, 'color': 'bw'},
-
-        {'Background': bg_black, 'n': 36*1, 'color': 'red'},
-        {'Background': bg_black, 'n': 36*2, 'color': 'red'},
-        {'Background': bg_black, 'n': 36*3, 'color': 'red'},
-        {'Background': bg_black, 'n': 36*4, 'color': 'red'},
-
-        {'Background': bg_black, 'n': 36*1, 'color': 'happy'},
-        {'Background': bg_black, 'n': 36*3, 'color': 'happy'},
-        {'Background': bg_black, 'n': 36*4, 'color': 'happy'},
-        {'Background': bg_black, 'n': 36*1, 'color': 'Number3'},
-        {'Background': bg_black, 'n': 36*3, 'color': 'Number3'},
-        {'Background': bg_black, 'n': 36*4, 'color': 'Number3'},
-        {'Background': bg_black, 'n': 36*1, 'color': 'wryb'},
-        {'Background': bg_black, 'n': 36*3, 'color': 'wryb'},
-        {'Background': bg_black, 'n': 36*4, 'color': 'wryb'},
-        {'Background': bg_black, 'n': 36*1, 'color': 'ProgramCat'},
-        {'Background': bg_black, 'n': 36*3, 'color': 'ProgramCat'},
-        {'Background': bg_black, 'n': 36*4, 'color': 'ProgramCat'},
+    a = [
+        {'Background': bg_black, 'n': 36*1, 'color': None},
+        {'Background': bg_black, 'n': 36*2, 'color': None},
+        {'Background': bg_black, 'n': 36*3, 'color': None},
+        {'Background': bg_black, 'n': 36*4, 'color': None},
+        {'Background': bg_black, 'n': 36*8, 'color': None},
     ]
-
-    # TODO: color last?
-
+    # todo: not so excessive count?
     a = mux_param(a, 'da', [90, 89, 85, 80, 45, 12, 5])
     a = mux_param(a, 'a_e', [90, 60, 45, 35, 10, 5])
     a = mux_param(a, 'drc', [0.97, 0.98])
-    #7*6*2*(5+4+4*3) = 1764
+    a = mux_param(a, 'color', ['bw', 'red', 'happy', 'Number3', 'wryb', 'ProgramCat'])
 
     n = 48
     c = [
@@ -924,7 +765,7 @@ def predef_mazy22(w, h):
     ]
 
     a = np.concatenate((a, c), axis=0)
-    a = c #test rnd only
+    #a = c #test rnd only
     return append_dflts(a, 'SMEARS#22', mazy22, w, h)
 
 def predef_mazy23(w, h):
@@ -957,12 +798,13 @@ def predef_mazy24(w, h):
     a = [
         {'Background': bg_black, 'n': 0, 'ou': bg_black},
         {'Background': bg_white, 'n': 0, 'ou': bg_black},
-        {'Background': bg_black, 'n': 0, 'ou': bg_black, 'addalpha': 150},
-        {'Background': bg_white, 'n': 0, 'ou': bg_black, 'addalpha': 150},
+        {'Background': bg_black, 'n': 0, 'ou': bg_black, 'addalpha': 120},
+        {'Background': bg_white, 'n': 0, 'ou': bg_black, 'addalpha': 120},
     ]
     # todo: reduce count - some too similar / some lame
     # todo: no bw on white bg - lame anyway
     # todo: op art bw
+    # todo: no ou opt (some?)
     a = mux_param(a, 'n', [40, 40+16, 72])
     a = mux_param(a, 'a_base', [0.87, 1.0, 4.0])
     a = mux_param(a, 'an_sc', [0.2, 0.75, 1.0, 2.0, 4.0])

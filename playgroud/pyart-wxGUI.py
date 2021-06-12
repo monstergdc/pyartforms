@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 
 # wx GUI for pyartforms
-# (c)2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2019-2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20190420
 # upd: 20190421, 22, 26
+# upd: 20210612
 
 
 # TODO:
@@ -13,7 +14,6 @@
 # - allow save (diff sizes)
 # - defs - add desc names + even longer desc
 # - render - allow extra params to file names (from defs)
-# - render - allow storage of all rnd par/val for EXACT rerender
 
 
 import wx
@@ -75,9 +75,9 @@ class GUIFrame(wx.Frame):
         # preset selector
         self.sp = wx.SpinCtrl(pnl, id=wx.ID_ANY, value="0", pos=(x0, y0+30), size=(70, 20), style=wx.SP_ARROW_KEYS, min=0, max=1, initial=0)
         # go btn
-        bn = wx.Button(pnl, id=wx.ID_ANY, label="GO", pos=(x0, y0+60), size=wx.DefaultSize, style=0, validator=wx.DefaultValidator)
+        bn = wx.Button(pnl, id=wx.ID_ANY, label="Render", pos=(x0, y0+60), size=wx.DefaultSize, style=0, validator=wx.DefaultValidator)
         bn.Bind(wx.EVT_BUTTON, self.OnClicked) 
-        bn2 = wx.Button(pnl, id=wx.ID_ANY, label="GO2", pos=(x0+100, y0+60), size=wx.DefaultSize, style=0, validator=wx.DefaultValidator)
+        bn2 = wx.Button(pnl, id=wx.ID_ANY, label="Render2", pos=(x0+100, y0+60), size=wx.DefaultSize, style=0, validator=wx.DefaultValidator)
         bn2.Bind(wx.EVT_BUTTON, self.OnClicked) 
 
         #self.sl = wx.Slider(pnl, id=wx.ID_ANY, value=0, minValue=0, maxValue=100, pos=(x0, y0+90), size=wx.DefaultSize, style=wx.SL_HORIZONTAL, validator=wx.DefaultValidator)
@@ -141,9 +141,9 @@ class GUIFrame(wx.Frame):
         """Button clicks"""
         btn = event.GetEventObject().GetLabel() 
         #print("DEBUG: Label of pressed button = ", btn)
-        if btn == 'GO':
+        if btn == 'Render':
             self.doRender()
-        if btn == 'GO2':
+        if btn == 'Render2':
             self.doRender2()
 
     def OnSmearChanged(self, event):
@@ -158,14 +158,14 @@ class GUIFrame(wx.Frame):
         self.Close(True)
 
     def OnHello(self, event):
-        wx.MessageBox("Hello again")
+        wx.MessageBox("Hello again") # todo: sth usefull
 
     def OnRender(self, event):
         self.doRender()
 
     def OnAbout(self, event):
         """Display an About Dialog"""
-        wx.MessageBox("pyartforms GUI v1.0beta", "About", wx.OK|wx.ICON_INFORMATION)
+        wx.MessageBox("PyArtForms GUI v1.0beta", "About", wx.OK|wx.ICON_INFORMATION)
 
     def doRender(self):
         """Main render call"""
@@ -186,8 +186,7 @@ if __name__ == '__main__':
     # When this module is run (not imported) then create app/frame, show it, and start the event loop.
     app = wx.App()
     screenSize = wx.DisplaySize()
-    frm = GUIFrame(None, id=wx.ID_ANY, title='pyartforms GUI', pos=(0,0), size=screenSize, style=wx.DEFAULT_FRAME_STYLE, name='gui')
+    frm = GUIFrame(None, id=wx.ID_ANY, title='PyArtForms GUI', pos=(0,0), size=screenSize, style=wx.DEFAULT_FRAME_STYLE, name='gui')
     frm.Show()
     app.MainLoop()
-
 

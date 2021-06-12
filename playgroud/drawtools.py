@@ -9,7 +9,7 @@
 # upd: 20190414, 21
 # upd: 20210301
 # upd: 20210507, 15, 23, 26, 27
-# upd: 20210606, 07
+# upd: 20210606, 07, 11
 
 from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin, ImageFont, ImageOps
 from datetime import datetime as dt
@@ -78,7 +78,7 @@ def triangle(draw, points, fill, outline):
     draw.polygon(points, fill=fill, outline=outline)
 
 def gradient(colorStart, colorMid, colorEnd, i, n):
-    """Return gradient color i of n in colorStart..colorMid..colorEnd range."""
+    """ Return gradient color i of n in colorStart..colorMid..colorEnd range """
     # note: weird, py 2.7 needs these float conversions, on 3.6 it was ok
     n2 = float(n/2)
     if i < n/2:
@@ -98,7 +98,7 @@ def gradient(colorStart, colorMid, colorEnd, i, n):
         return (r2, g2, b2)
 
 def gradient2(colorStart, colorEnd, i, n):
-    """Return gradient color i of n in colorStart..colorEnd range."""
+    """ Return gradient color i of n in colorStart..colorEnd range """
     downc = float(n-i)/float(n)
     upc = float(i)/float(n)
     r1 = int( float(colorStart[0])*downc + float(colorEnd[0])*upc )
@@ -107,11 +107,12 @@ def gradient2(colorStart, colorEnd, i, n):
     return (r1, g1, b1)
 
 def script_it(draw, xy, font, size, fill):
+    """ ? """
     fnt = ImageFont.truetype(font, size)
     draw.text(xy, "Jakub.Noniewicz.art.pl", font=fnt, fill=fill)
 
 def add_myself(draw, w, h, bg):
-    """Mark image authorship."""
+    """ Paint image authorship """
     # note: needs local font on server
     txt = "Jakub.Noniewicz.art.pl"
     fnt = ImageFont.truetype(font='./timesbi.ttf', size=14)
@@ -123,21 +124,26 @@ def add_myself(draw, w, h, bg):
     draw.text((x+1, y+1), txt, font=fnt, fill=bgx1)
     draw.text((x, y), txt, font=fnt, fill=bgx)
 
-def append_myself(title=""):
-    """Append some tags to PNG image."""
+def append_myself(params):
+    """ Append some tags to PNG image """
+    title = 'PyArtForms '+params['name']
+    p1 = params
+    p1['im'] = None
+    p1['call'] = None
+    sp = str(p1)
     x = PngImagePlugin.PngInfo()
     today = dt.today()
     sdt = dt.now().strftime('%Y-%m-%d %H:%M:%S')
     y = today.year
     x.add_text(key='Title', value=title, zip=False)
-    x.add_text(key='Description', value='generated in PyArtForms @'+sdt, zip=False)
+    x.add_text(key='Description', value='generated in PyArtForms @'+sdt+'\r\n'+sp, zip=False)
     x.add_text(key='Author', value='Jakub Noniewicz', zip=False)
     x.add_text(key='Copyright', value='(c)'+str(y)+' Jakub Noniewicz | noniewicz.com | noniewicz.art.pl', zip=False)
     x.add_itxt(key='Concept', value='PyArtForms concept by: Jakub Noniewicz | noniewicz.com | noniewicz.art.pl', lang='', tkey='', zip=False)
     return x
 
 def im2cgi(im, format='PNG'):
-    """Output image in CGI mode as bytes to stdout."""
+    """ Output image in CGI mode as bytes to stdout """
     ct = ''
     if format == 'PNG':
         ct = 'image/png'
@@ -150,7 +156,7 @@ def im2cgi(im, format='PNG'):
         format = 'PNG'
     imgByteArr = io.BytesIO()
     if format == 'PNG':
-        im.save(imgByteArr, format=format, pnginfo=append_myself('PyArtForms '+params['name']))
+        im.save(imgByteArr, format=format, pnginfo=append_myself(params))
     else:
         im.save(imgByteArr, format=format)
     data = imgByteArr.getvalue()
@@ -162,7 +168,7 @@ def im2cgi(im, format='PNG'):
     sys.stdout.flush()
 
 def art_painter(params, png_file='example.png', output_mode='save', bw=False):
-    """Main/common 'painter' call."""
+    """ Main/common 'painter' call """
     if 'bw' in params:
         bw = params['bw']
     else:
@@ -193,7 +199,7 @@ def art_painter(params, png_file='example.png', output_mode='save', bw=False):
 
     if output_mode == 'save':
         #add_myself(draw, params['w'], params['h'], params['Background'])
-        im.save(png_file, dpi=(300,300), pnginfo=append_myself('PyArtForms '+params['name']))
+        im.save(png_file, dpi=(300,300), pnginfo=append_myself(params))
         show_benchmark(start_time)
         draw = None #?
         im = None #?
@@ -207,7 +213,7 @@ def art_painter(params, png_file='example.png', output_mode='save', bw=False):
         return im
 
 def get_cgi_par(default=None):
-    """Parse CGI parameters"""
+    """ Parse CGI parameters """
     form = cgi.FieldStorage()
     if default == None:
         par = {'w': 800, 'h': 600, 'f': '', 'n': 0}
@@ -224,14 +230,13 @@ def get_cgi_par(default=None):
     return par
 
 def show_benchmark(start_time):
-    """Show benchmark."""
+    """ Show benchmark """
     time_elapsed = dt.now() - start_time
     print('done. elapsed time: {}'.format(time_elapsed))
     return time_elapsed
 
 def im2arr(image_path):
-    """Image to array."""
-    #im = Image.load(image_path)
+    """ Image to array """
     im = Image.open(image_path)
     im = im.convert('L')
     a = np.fromiter(iter(im.getdata()), np.uint8) # BW?
@@ -239,7 +244,7 @@ def im2arr(image_path):
     return a
 
 def xsmooth(im):
-    """Smooth image - 2x blur then sharpen back"""
+    """ Smooth image - 2x blur then sharpen back """
     im = im.filter(ImageFilter.BLUR)
     im = im.filter(ImageFilter.BLUR)
     im = im.filter(ImageFilter.SHARPEN)
@@ -256,3 +261,17 @@ def invert_image(image):
         return Image.merge('RGBA', (r2, g2, b2, a))
     else:
         return ImageOps.invert(image)
+
+def rotate_point(p, cx, cy, angle):
+    """ Rotate p by angle around (cx,cy) """
+    x = p[0]
+    y = p[1]
+    si = math.sin(angle)
+    co = math.cos(angle)
+    x -= cx
+    y -= cy
+    xnew = x * co - y * si
+    ynew = x * si + y * co
+    x = xnew + cx
+    y = ynew + cy
+    return (x, y)
