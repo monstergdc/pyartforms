@@ -20,13 +20,9 @@ import wx
 import ast
 from PIL import Image, ImageDraw
 from drawtools import *
-from smears import *
 from pyart_defs import *
-from life1 import life
-from lissajous import lissajous, lissajous_loop
-from waves import *
-from astroart import *
-from mandelbrot import generate_mandelbrot
+#from astroart import *
+#from mandelbrot import generate_mandelbrot
 
 
 
@@ -70,7 +66,7 @@ class GUIFrame(wx.Frame):
         y0 = 20 # ctl y0
 
         # smear selector
-        self.cm = wx.ComboBox(pnl, id=wx.ID_ANY, value="", pos=(x0, y0), size=(70, 20), choices=mazy_all, style=0, validator=wx.DefaultValidator)
+        self.cm = wx.ComboBox(pnl, id=wx.ID_ANY, value="", pos=(x0, y0), size=(120, 20), choices=mazy_all, style=0, validator=wx.DefaultValidator)
         self.cm.Bind(wx.EVT_COMBOBOX, self.OnSmearChanged)
         # preset selector
         self.sp = wx.SpinCtrl(pnl, id=wx.ID_ANY, value="0", pos=(x0, y0+30), size=(70, 20), style=wx.SP_ARROW_KEYS, min=0, max=1, initial=0)

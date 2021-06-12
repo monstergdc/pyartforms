@@ -29,8 +29,8 @@
 # #22 pie slice effects (...) --- finish: reduce total count, mimosrod opt?
 # #23 Sierpinski's triangle fractal (testd, ok)
 # #24 rotated traingles, predictable (no rnd parts) (tested, ok) --- finish: reduce total count, more par ver, mimosrod opt, a scale par
-# #25
-# #26
+# #25 waves#1 (...)
+# #26 waves#2 (...)
 # #27
 # #28 
 # #29 
@@ -1143,19 +1143,136 @@ def mazy24(draw, params):
         triangle(draw, po_, fill=color, outline=ou)
         a = a * a_sc
 
-# future fun
-
 def mazy25(draw, params):
-    """ ? """
+    """ waves#1 """
+    # todo: par + more like it?
     w, h, cnt = init_common(params)
-    # ...
-    return 0
+    c = math.pi/180
+
+    fd = 100.0*params['f0']
+    div = float(cnt*2+4+(-4)) # par
+    if div == 0:
+        div = 1
+    if params['horizontal'] == True:
+        rn = w
+        dx = h/div
+    else:
+        rn = h
+        dx = w/div
+    mofs0 = 0 # par, was 2
+
+    rnd_color = True # par
+    rnd_color = False
+
+    for z in range(cnt):
+        if rnd_color:
+            ndx = random.randint(0, cnt)
+        else:
+            ndx = z
+        color = new_colorer(params['color'], ndx, cnt)
+        if 'addalpha' in params:
+            color = add_alpha(color, params['addalpha'])
+        aofs1 = random.randint(0, 360)
+        aofs2 = random.randint(0, 360)
+        aofs3 = random.randint(0, 360)
+        aofs4 = random.randint(0, 360)
+        fofs1 = random.randint(0, 100)/fd*1
+        fofs2 = random.randint(0, 100)/fd*1
+        fofs3 = random.randint(0, 100)/fd*2
+        fofs4 = random.randint(0, 100)/fd*2
+        mofs1 = (z+mofs0)*dx
+
+        y = 0
+        for n in range(rn):
+            nsc = float(n)/float(rn)*360*10 # par 10
+            x_in =  mofs1 + dx * (1 + (math.sin(c*(nsc*fofs1+aofs1))+2*math.sin(c*(nsc*fofs3+aofs3)))/3)
+            x_out = mofs1 + dx * (1 + (math.sin(c*(nsc*fofs2+aofs2))+2*math.sin(c*(nsc*fofs4+aofs4)))/3)
+            if params['horizontal'] == True:
+                xy = [(y, x_in), (y, h - x_out)]
+            else:
+                xy = [(x_in, y), (w - x_out, y)]
+            draw.rectangle(xy, fill=color, outline=None) # 1px rects?
+            y += 1
 
 def mazy26(draw, params):
-    """ ? """
+    """ waves#2 """
+    if 'par1' in params and 'par2' in params:
+        waves2(draw, params['par1'])
+        waves2(draw, params['par2'])
+        return
+
     w, h, cnt = init_common(params)
-    # ...
-    return 0
+
+    # todo: uproscic kod (czemu 2x?) | exp par
+    w = params['w']
+    h = params['h']
+    cnt = params['n']
+    random.seed()
+    c = math.pi/180
+
+    sc = 3.0  #par was 4
+    if params['horizontal'] == True:
+        rn = w
+        dx = h/float(cnt)*sc
+    else:
+        rn = h
+        dx = w/float(cnt)*sc
+
+    for z in range(cnt):
+        ndx = random.randint(0, cnt)
+        color = new_colorer(params['color'], ndx, cnt)
+        if 'addalpha' in params:
+            color = add_alpha(color, params['addalpha'])
+        aofs1 = random.randint(0, 360)
+        aofs2 = random.randint(0, 360)
+        aofs3 = random.randint(0, 360)
+        aofs4 = random.randint(0, 360)
+        fofs1 = random.randint(0, 100)/100.0*1 # par
+        fofs2 = random.randint(0, 100)/100.0*1 # par
+        fofs3 = random.randint(0, 100)/100.0*2 # par
+        fofs4 = random.randint(0, 100)/100.0*2 # par
+        mofs1 = float(z*dx)
+        am1 = 1.0 # par
+        am2 = 1.0 # par
+        am3 = 3.0 # par was 2
+        am4 = 3.0 # par was 2
+
+        y = 0
+        points1 = []
+        points2 = []
+        points1a = []
+        points2a = []
+        for n in range(rn):
+            nsc = float(n)/float(rn)*360*10 # par 10
+            x_in =  int(mofs1 + dx * (1 + (am1*math.sin(c*(nsc*fofs1+aofs1))+am3*math.sin(c*(nsc*fofs3+aofs3)))))
+            x_out = int(mofs1 + dx * (1 + (am2*math.sin(c*(nsc*fofs2+aofs2))+am4*math.sin(c*(nsc*fofs4+aofs4)))))
+            if params['horizontal'] == True:
+                points1.extend((y, x_in))
+                points2.extend((y, x_out))
+            else:
+                points1.extend((x_in, y))
+                points2.extend((x_out, y))
+            y += 1
+        lw = random.randint(1, int(w/30)) #par, opt big->small?
+
+        points1a[:] = [xy for xy in points1]
+        points2a[:] = [xy for xy in points2]
+        for a in range(int(len(points1a)/2)):
+            ndx = int(len(points1a)/2)-1-a
+            if params['horizontal'] == True:
+                points1.extend((points1a[ndx*2], lw+points1a[ndx*2+1]))
+            else:
+                points1.extend((lw+points1a[ndx*2], points1a[ndx*2+1]))
+        for a in range(int(len(points2a)/2)):
+            ndx = int(len(points2a)/2)-1-a
+            if params['horizontal'] == True:
+                points2.extend((points2a[ndx*2], lw+points2a[ndx*2+1]))
+            else:
+                points2.extend((lw+points2a[ndx*2], points2a[ndx*2+1]))
+        draw.polygon(points1, fill=color, outline=color)
+        draw.polygon(points2, fill=color, outline=color)
+
+# future fun
 
 def mazy27(draw, params):
     """ ? """
@@ -1176,6 +1293,18 @@ def mazy29(draw, params):
     return 0
 
 def mazy30(draw, params):
+    """ ? """
+    w, h, cnt = init_common(params)
+    # ...
+    return 0
+
+def mazy31(draw, params):
+    """ ? """
+    w, h, cnt = init_common(params)
+    # ...
+    return 0
+
+def mazy32(draw, params):
     """ ? """
     w, h, cnt = init_common(params)
     # ...

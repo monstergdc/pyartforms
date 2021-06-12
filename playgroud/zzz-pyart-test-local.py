@@ -2,13 +2,15 @@
 # -*- coding: utf-8 -*-
 
 # paint algorithms (artificial artist) in Python - demo
-# (c)2018-2020 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2018-2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20181020
 # upd: 20190105, 12, 13, 18, 19
 # upd: 20190311, 30
 # upd: 20190414, 21, 22, 24, 26
 # upd: 20190606
 # upd: 20200507, 10
+# upd: 20210106, 20
+# upd: 20210612
 
 # TODO:
 # - ?
@@ -17,12 +19,6 @@
 import os
 from datetime import datetime as dt
 from drawtools import get_canvas, art_painter
-from life1 import life
-from lissajous import lissajous, lissajous_loop
-from waves import *
-from astroart import *
-from mandelbrot import generate_mandelbrot
-from smears import *
 from pyart_defs import *
 #import tracemalloc
 
@@ -42,6 +38,7 @@ def do_mazy(cnt, w, h, odir, name):
         p = pr(w, h)
     else:
         print('name [%s] not in predefs?' % name)
+        return
         # more?
 
 #    snapshot1 = tracemalloc.take_snapshot()
@@ -67,27 +64,33 @@ def do_mazy(cnt, w, h, odir, name):
 # --- 
 
 #w, h = get_canvas('A0')
-#w, h = get_canvas('A1') # fin - this
+#w, h = get_canvas('A1') # fin - this or A0
 #w, h = get_canvas('A2')
 #w, h = get_canvas('A3')
-#w, h = get_canvas('A4') # test - this
-#w, h = get_canvas('A5')
-w, h = get_canvas('A6') # small - this
+w, h = get_canvas('A4') # test - this
+#w, h = get_canvas('A5') # test - also this 4 speed
+#w, h = get_canvas('A6') # small - this
 #w, h = get_canvas('A7')
 #w, h = get_canvas('1024')
-#w, h = get_canvas('800')
 
 cnt = 1
 #cnt = 2
 #cnt = 3
 #cnt = 4
+#cnt = 5
 
 enum_defs()
 
-#predef_names1 = predef_names
-#predef_names1 = ['mazy19']
-predef_names1 = ['mazy09', 'mazy18']
-#predef_names1 = ['mazy01']
+predef_names1 = predef_names
+
+predef_names1 = [
+        'mazy01', 'mazy02', 'mazy03', 'mazy04',  'mazy05', 'mazy06', 'mazy07', 'mazy08',
+        'mazy09', 'mazy10', 'mazy11', 'mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16',
+        'mazy17', 'mazy18', 'mazy19', 'mazy20', 'mazy21', 'mazy22', 'mazy23', 'mazy24',
+        'mazy25', 'mazy26'
+        ]
+
+predef_names1 = ['mazy26']
 for m in predef_names1:
     do_mazy(cnt, w, h, odir, m)
 

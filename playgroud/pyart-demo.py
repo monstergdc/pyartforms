@@ -2,11 +2,12 @@
 # -*- coding: utf-8 -*-
 
 # paint algorithms (artificial artist) in Python - demo
-# (c)2018-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2018-2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20181020
 # upd: 20190105, 06, 13, 18, 19, 22
 # upd: 20190302, 03, 30
 # upd: 20190414, 17, 18, 21, 22, 26
+# upd: 20210612
 
 # TODO:
 # - nice argparse (also per module?)
@@ -22,12 +23,6 @@
 import os
 from datetime import datetime as dt
 from drawtools import *
-#from life1 import life
-#from lissajous import lissajous, lissajous_loop
-#from waves import *
-#from astroart import *
-#from mandelbrot import generate_mandelbrot
-#from smears import *
 from pyart_defs import *
 
 
