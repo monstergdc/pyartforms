@@ -263,6 +263,18 @@ def invert_image(image):
     else:
         return ImageOps.invert(image)
 
+def init_common(params):
+    if not 'w' in params or not 'h' in params:
+        raise('w or h not set in params')
+    random.seed()
+    w = params['w']
+    h = params['h']
+    if 'n' in params:
+        cnt = params['n']
+    else:
+        cnt = None
+    return w, h, cnt
+
 def rotate_point(p, cx, cy, angle):
     """ Rotate p by angle around (cx,cy) """
     x = p[0]

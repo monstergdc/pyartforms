@@ -221,7 +221,7 @@ def life2_video(src, f, video_name, frames):
 
 src = './data/test-src4-life2.png'
 
-if False: # img
+if True: # img
     life2_image(src=src, f='f2a')
     life2_image(src=src, f='f2b')
     life2_image(src=src, f='f2c')

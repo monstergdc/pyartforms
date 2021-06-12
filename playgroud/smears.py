@@ -68,18 +68,6 @@ from color_defs import *
 
 # ---
 
-def init_common(params):
-    random.seed()
-    w = params['w']
-    h = params['h']
-    if 'n' in params:
-        cnt = params['n']
-    else:
-        cnt = None
-    return w, h, cnt
-
-# ---
-
 def mazy1(draw, params):
     """ ? """
     w, h, cnt = init_common(params)
