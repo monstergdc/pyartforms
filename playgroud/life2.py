@@ -20,6 +20,7 @@
 import cv2
 from PIL import Image, ImageDraw, ImageFilter
 import random, math, string, os, sys
+import copy
 from drawtools import *
 
 
@@ -170,20 +171,22 @@ def art_painter2(params, png_file):
     f = params['call']
     a = f(draw, params)
     im = im.resize((320, 240), resample=0, box=None)
-    im.save(png_file, dpi=(300,300), pnginfo=append_myself(params))
+    im.save(png_file, dpi=(300,300), pnginfo=append_myself(copy.deepcopy(params))) # note: deepcopy, coz append_myself messes with params
     show_benchmark(start_time)
     return a
 
 
 def life2_image(src, f):
     odir = ''
-    params1 = {'name': 'LIFE2', 'call': life2d, 'w': 320, 'h': 240, 'src': src, 'f': f, 'iter': 1, 'reuse': False}
+    w = 320
+    h = 240
+    params1 = {'name': 'LIFE2', 'call': life2d, 'w': w, 'h': h, 'src': src, 'f': f, 'iter': 1, 'reuse': False}
     art_painter2(params1, odir+'zz-life2d-001-'+f+'.png')
-    params1 = {'name': 'LIFE2', 'call': life2d, 'w': 320, 'h': 240, 'src': src, 'f': f, 'iter': 2, 'reuse': False}
+    params1 = {'name': 'LIFE2', 'call': life2d, 'w': w, 'h': h, 'src': src, 'f': f, 'iter': 2, 'reuse': False}
     art_painter2(params1, odir+'zz-life2d-002-'+f+'.png')
-    params1 = {'name': 'LIFE2', 'call': life2d, 'w': 320, 'h': 240, 'src': src, 'f': f, 'iter': 4, 'reuse': False}
+    params1 = {'name': 'LIFE2', 'call': life2d, 'w': w, 'h': h, 'src': src, 'f': f, 'iter': 4, 'reuse': False}
     art_painter2(params1, odir+'zz-life2d-003-'+f+'.png')
-    params1 = {'name': 'LIFE2', 'call': life2d, 'w': 320, 'h': 240, 'src': src, 'f': f, 'iter': 8, 'reuse': False}
+    params1 = {'name': 'LIFE2', 'call': life2d, 'w': w, 'h': h, 'src': src, 'f': f, 'iter': 8, 'reuse': False}
     art_painter2(params1, odir+'zz-life2d-004-'+f+'.png')
 
 def life2_video(src, f, video_name, frames):
@@ -194,38 +197,36 @@ def life2_video(src, f, video_name, frames):
 
     canvas = (320, 240)
     video = cv2.VideoWriter(video_name, fcc, 25, canvas)
-    params1 = {'name': 'LIFE2', 'call': life2d, 'w': 320, 'h': 240, 'src': src, 'f': f, 'iter': 1, 'reuse': True}
+    params1 = {'name': 'LIFE2', 'call': life2d, 'w': canvas[0], 'h': canvas[1], 'src': src, 'f': f, 'iter': 1, 'reuse': True}
     params1['a'] = norm_a(im2arr(params1['src']))
 
     im = Image.open(params1['src'])
     im = im.resize(canvas, resample=0, box=None)
     im.save(image_tmp, dpi=(300,300))
     ima = cv2.imread(image_tmp)
-    for f in range(10):
+    for frame in range(10): # par
         video.write(ima)
 
     for n in range(frames):
         print('frame', n)
         params1['a'] = art_painter2(params1, image_tmp)
         ima = cv2.imread(image_tmp)
-        for f in range(4):
+        for frame in range(4): # par
             video.write(ima)
     cv2.destroyAllWindows()
     video.release()
+    #todo: delete image_tmp
 
-
-# ---
+# --- test
 
 src = './data/test-src4-life2.png'
 
-# img
-if True:
+if False: # img
     life2_image(src=src, f='f2a')
     life2_image(src=src, f='f2b')
     life2_image(src=src, f='f2c')
 
-# video
-if True:
+if True: # video
     life2_video(src=src, f='f2a', video_name='life-video-f2a.avi', frames=80)
     life2_video(src=src, f='f2b', video_name='life-video-f2b.avi', frames=45)
     life2_video(src=src, f='f2c', video_name='life-video-f2c.avi', frames=40)
