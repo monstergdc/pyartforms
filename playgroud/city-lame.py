@@ -2,10 +2,11 @@
 # -*- coding: utf-8 -*-
 
 # paint algorithms (artificial artist) - CITY (yet lame), v1.0, Python version
-# (c)2018 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2018-2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20180505
 # upd: 20180506
 # upd: 20181020
+# upd: 20210612
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -89,7 +90,7 @@ def city1(params, fn, output_mode = 'save'):
     x0 = -w*0.05
     y0 = h*0.85
 
-    imc = Image.open('cloud001.png')
+    imc = Image.open('.\\data\\cloud001.png')
     cc = random.randint(0, 50)
     for c in range(cc):
         position = (random.randint(-200, w*2+200), random.randint(-200, int(h/2)))
