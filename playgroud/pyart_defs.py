@@ -16,7 +16,7 @@
 
 # TODO:
 # - add alpha ver for all
-# - ?
+# - cleanup/compact
 
 import copy
 from collections import OrderedDict
@@ -31,6 +31,7 @@ from color_defs import *
 
 
 # --- common color defs
+
 bg_black = (0, 0, 0)
 bg_gray = (192, 192, 192)
 bg_white = (255, 255, 255)
@@ -128,6 +129,7 @@ def predef_mandelbrot(w, h):
     a = append_dct_item(a, 'h', h)
     a = append_dct_item(a, 'call', generate_mandelbrot)
     return a
+    #return append_dflts(a, 'MANDELBROT', generate_mandelbrot, w, h)
 
 # --- smears
 

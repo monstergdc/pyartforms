@@ -29,7 +29,7 @@
 # #22 pie slice effects (...) --- finish: reduce total count, mimosrod opt?
 # #23 Sierpinski's triangle fractal (testd, ok)
 # #24 rotated traingles, predictable (no rnd parts) (tested, ok) --- finish: reduce total count, more par ver, mimosrod opt, a scale par
-# #25 waves#1 (...)
+# #25 waves#1 (tested, ok) --- finish: more par
 # #26 waves#2 (tested, ok) --- finish: more par, simplify code
 # #27 (...)
 # #28 
