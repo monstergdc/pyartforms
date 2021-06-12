@@ -66,12 +66,8 @@ script: **smears.py**
 ![example - mazy6](/examples/SMEARS6-1748x1240-09-001-20190422133450.png?raw=true "Smears#6 example")
 ![example - mazy7](/examples/SMEARS7-1748x1240-25-001-20190422133459.png?raw=true "Smears#7 example")
 ![example - mazy9](/examples/SMEARS9-1748x1240-33-001-20190422133516.png?raw=true "Smears#9 example")
-
-# WAVES:
-script: **waves.py**
-
-![example - waves1](/examples/WAVES1-1748x1240-01-001-20190422130753.png?raw=true "Waves#1 example")
-![example - waves1](/examples/WAVES1-4960x3507-02-001-20190422130757.png?raw=true "Waves#1 example")
+![example - waves1](/examples/WAVES1-1748x1240-01-001-20190422130753.png?raw=true "Smears#25 example")
+![example - waves1](/examples/WAVES1-4960x3507-02-001-20190422130757.png?raw=true "Smears#25 example")
 
 # LISSAJOUS:
 script: **lissajous.py**
