@@ -87,10 +87,10 @@ predef_names1 = [
         'mazy01', 'mazy02', 'mazy03', 'mazy04',  'mazy05', 'mazy06', 'mazy07', 'mazy08',
         'mazy09', 'mazy10', 'mazy11', 'mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16',
         'mazy17', 'mazy18', 'mazy19', 'mazy20', 'mazy21', 'mazy22', 'mazy23', 'mazy24',
-        'mazy25', 'mazy26'
+        'mazy25', 'mazy26', 'mazy27'
         ]
 
-predef_names1 = ['mazy26']
+predef_names1 = ['mazy25']
 for m in predef_names1:
     do_mazy(cnt, w, h, odir, m)
 

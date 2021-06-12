@@ -40,7 +40,8 @@ def build_minis():
     nn = 0
     for m in predef_names1:
         nn += len(m)
-    print('base len:', len(predef_names1))
+    total = enum_defs(doprint=False)
+    print('Base len:', len(predef_names1), 'Total:', total)
     for m in predef_names1:
         do_mazy(1, w, h, odir, m)
        

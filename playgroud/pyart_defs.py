@@ -11,7 +11,7 @@
 # upd: 20200507, 10
 # upd: 20210106
 # upd: 20210515, 16, 22, 23, 24, 26, 27
-# upd: 20210606, 07, 10, 11, 12
+# upd: 20210606, 07, 10, 11, 12, 13
 
 
 # TODO:
@@ -812,7 +812,7 @@ def predef_mazy32(w, h):
 
 # ---
 
-def enum_defs():
+def enum_defs(doprint=True):
     suma = 0
     dout = {}
     for k, v in predefs.items():    #note: py3
@@ -820,9 +820,11 @@ def enum_defs():
         suma += cnt
         dout[k] = cnt
     dout1 = OrderedDict(sorted(dout.items()))
-    for k, v in dout1.items():    #note: py3
-        print(k, ':', v)
-    print('total:', suma)
+    if doprint:
+        for k, v in dout1.items():    #note: py3
+            print(k, ':', v)
+        print('total:', suma)
+    return suma
 
 # all predefs
 predefs = {'mazy01': predef_mazy1, 'mazy02': predef_mazy2, 'mazy03': predef_mazy3, 'mazy04': predef_mazy4,

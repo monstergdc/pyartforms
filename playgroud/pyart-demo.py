@@ -7,12 +7,11 @@
 # upd: 20190105, 06, 13, 18, 19, 22
 # upd: 20190302, 03, 30
 # upd: 20190414, 17, 18, 21, 22, 26
-# upd: 20210612
+# upd: 20210612, 13
 
 # TODO:
 # - nice argparse (also per module?)
 # - anims: anims | grow (also img) | zxoids-anim (also img maybe?)
-# - smears5post
 # - asciiart | city-lame | faces (fin) | brush
 # - Fibbonaci x PI - ksztalt size z fibb. kolor z pi | spirals
 # - more
