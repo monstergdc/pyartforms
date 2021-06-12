@@ -11,7 +11,7 @@
 # upd: 20200507, 10
 # upd: 20210106
 # upd: 20210515, 16, 22, 23, 24, 26, 27
-# upd: 20210606, 07, 10, 11
+# upd: 20210606, 07, 10, 11, 12
 
 
 # TODO:
@@ -125,13 +125,7 @@ def predef_waves2(w, h):
     ]
     a = append_dflts(a, 'WAVES#2', waves2, w, h)
     return np.concatenate((a, a2), axis=0)
-
-def predef_waves3(w, h):
-    a = [
-        {'name': 'WAVES#3', 'call': waves3, 'w': w, 'h': h, 'Background': bg_black, 'z': 18*3, 'c1': (255,255,255), 'c2': (255,255,0), 'c3': (255,0,0)},
-    ]
-    return a
-        
+       
 # --- astro - 2x (cir, box) bluegalaxy ellipticgalaxy spiralgalaxy neutronstar blackhole supernova nebula star
 
 def predef_astro(w, h):
@@ -871,7 +865,7 @@ predefs = {'mazy01': predef_mazy1, 'mazy02': predef_mazy2, 'mazy03': predef_mazy
            'mazy25': predef_mazy25, 'mazy26': predef_mazy26, 'mazy27': predef_mazy27, 'mazy28': predef_mazy28,
            'mazy29': predef_mazy29, 'mazy30': predef_mazy30,
            'life': predef_life, 'lissajous': predef_lissajous, 'astro': predef_astro, 'mandelbrot': predef_mandelbrot,
-           'waves01': predef_waves1,'waves02': predef_waves2, 'waves03': predef_waves3, 
+           'waves01': predef_waves1,'waves02': predef_waves2 
            }
 
 # all names
@@ -880,7 +874,7 @@ predef_names = [
         'mazy09', 'mazy10', 'mazy11', 'mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16',
         'mazy17', 'mazy18', 'mazy19', 'mazy20', 'mazy21', 'mazy22', 'mazy23', 'mazy24',
         'mazy25', 'mazy26', 'mazy27', 'mazy28', 'mazy29', 'mazy30',
-        'astro', 'life', 'lissajous', 'mandelbrot', 'waves01', 'waves02', 'waves03'
+        'astro', 'life', 'lissajous', 'mandelbrot', 'waves01', 'waves02'
         ]
 
 # EOF
