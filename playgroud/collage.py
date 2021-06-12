@@ -4,7 +4,9 @@
 # PyArtForms - Python generative art forms paint algorithms (artificial artist)
 # collage builder, v1.0
 # (c)2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
-# cre: 20210508, 09, 10, 15
+# cre: 20210508
+# upd: 20210509, 10, 15
+# upd: 20210612
 
 # pip install colorthief
 
@@ -241,9 +243,9 @@ def test():
 
 # - #1
 
-    folder = '.\\map-in-1\\'
-    outmap = '.\\outmap.png'
-    infile = '.\\repixel-in\\38a.jpg'
+    folder = '.\\data\\map-in-1\\'
+    outmap = '.\\data\\outmap1.png'
+    infile = '.\\data\\38a.jpg'
     outfile = 'mosaic-1.png'
     one = 80
     w = one*160
@@ -260,11 +262,11 @@ def test():
 # - #2
 
     if True:
-        folder = '.\\map-in-2\\'
-        outmap = '.\\outmap2.png'
+        folder = '.\\data\\map-in-2\\'
+        outmap = '.\\data\\outmap2.png'
         outfile = 'mosaic-2.png'
         one = 56
-        infile = '.\\me-src1.png'
+        infile = '.\\data\\me-src1.png'
         w = one*238
         h = one*266
         params1 = {'folder': folder, 'outmap': outmap, 'one': one}
