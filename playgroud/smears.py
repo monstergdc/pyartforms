@@ -8,9 +8,9 @@
 # #01 'cruel red smears', not only red (...)
 # #02 circles (...)
 # #03 triangles (...)
-# #04 poly (...)
+# #04 self-crossed filled polygons (tested, ok)
 # #05 star flowers (...)
-# #06 circle ripples - co-centered circle groups (...)
+# #06 circle ripples - co-centered circle groups (...) --- finish: par + misc
 # #07 random rectangles - grayish and colorish rects mess (tested, ok) --- finish: new colorer proper
 # #08 just rectangles, may flux (tested, ok) --- finish: new params, more variants in defs
 # #09 'Warp' effect - triangle rays from center, opt center point shifted rnd (tested, ok)
@@ -31,7 +31,7 @@
 # #24 rotated traingles, predictable (no rnd parts) (tested, ok) --- finish: reduce total count, more par ver, mimosrod opt, a scale par
 # #25 waves#1 (...)
 # #26 waves#2 (...)
-# #27
+# #27 (...)
 # #28 
 # #29 
 # #30
@@ -209,48 +209,32 @@ def mazy3(draw, params):
         triangle(draw, po, fill=color, outline=None)
 
 def mazy4(draw, params):
-    """ ? """
+    """ self-crossed filled polygons """
     w, h, cnt = init_common(params)
-    sc = 2.1 # base, ok (2.05 -> 2.1)
+    sc = 2.1 # dflt
     if 'sc' in params:
         sc = params['sc']
     if sc <= 0:
         sc = 1
-    #sc = 0.7 # so, so
-
-    if sc == 0:
-        sc = 1
     sx = int(w/sc)
     sy = int(h/sc)
+    p_cnt = 20 # dflt
+    if 'pc' in params:
+        p_cnt = params['pc']
+    mode = 'center'
+    if 'mode' in params:
+        mode = params['mode']
+
     for n in range(cnt):
-        if params['mode'] == 'center':
+        if mode == 'center':
             w0 = w/2
             h0 = h/2
         else:
             w0 = random.randint(0, w)
             h0 = random.randint(0, h)
-        po = [(w0+random.randint(-sx, sx), h0+random.randint(-sy, sy)),
-              (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy)),
-              (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy)),
-              (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy)),
-              (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy)),
-              (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy)),
-              (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy)),
-              (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy)),
-              (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy)),
-              (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy)),
-              (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy)),
-              (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy)),
-              (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy)),
-              (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy)),
-              (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy)),
-              (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy)),
-              (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy)),
-              (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy)),
-              (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy)),
-              (w0+random.randint(-sx, sx), h0+random.randint(-sy, sy))
-              ]
-
+        po = []
+        for p in range(p_cnt):
+            po.extend((w0+random.randint(-sx, sx), h0+random.randint(-sy, sy)))
         color = new_colorer(params['color'], n, cnt)
         if 'addalpha' in params:
             color = add_alpha(color, params['addalpha'])
@@ -1267,8 +1251,31 @@ def mazy26(draw, params):
 def mazy27(draw, params):
     """ ? """
     w, h, cnt = init_common(params)
-    # ...
-    return 0
+    c = math.pi/180
+    cnt = 400
+    sx = int(w/cnt)
+    color = (0xd4,0x8a,0x3e)
+    aofs1 = 0
+    fofs1 = 3
+    fofs3 = 1
+    am1 = 3
+    am3 = 1
+    dx = sx/3
+
+    po = [(w,0), (0, 0)]
+    x = 0
+    y = h
+    for n in range(cnt):
+        aofs2 = random.randint(0, 90)
+        aofs3 = random.randint(0, 180)
+        fofs2 = random.randint(1, 5)
+        am2 = random.randint(1, 15)
+        nsc = float(n)/float(cnt)*360*3 # par
+        f = int(dx * (2 + (am1*math.sin(c*(nsc*fofs1+aofs1))+am2*math.sin(c*(nsc*fofs2+aofs2))+am3*math.sin(c*(nsc*fofs3+aofs3)))))
+        po.extend((x, y))
+        y -= f
+        x += sx
+    draw.polygon(po, fill=color, outline=None)
 
 def mazy28(draw, params):
     """ ? """

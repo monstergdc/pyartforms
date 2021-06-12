@@ -226,7 +226,6 @@ def predef_mazy2(w, h):
         {'Background': bg_black, 'n': 100+90, 'm': 30+30, 'color': 'happy', 'addalpha': 80}, # test
         {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'wryb'},
         {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'bgo'},
-
         {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'BeachTowels'},
         {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'MoonlightBytes6'},
         {'Background': bg_black, 'n': 100, 'm': 30, 'color': 'Number3'},
@@ -279,11 +278,14 @@ def predef_mazy3(w, h):
 
 def predef_mazy4(w, h):
     a = [
-        {'Background': bg_white, 'n': 5, 'mode': 'center', 'color': 'happy'},
-        {'Background': bg_white, 'n': 5, 'mode': 'center', 'color': 'wryb'},
-        {'Background': bg_white, 'n': 4, 'mode': 'center', 'color': 'bgo'},
-        #{'Background': bg_white, 'n': 8, 'mode': 'center', 'color': 'avatar'}, # lame
-        #{'Background': bg_white, 'n': 8, 'mode': 'center', 'color': 'psych'}, # lame
+        {'Background': bg_white, 'n': 1, 'mode': 'center', 'color': 'black_const'},
+        {'Background': bg_black, 'n': 8, 'mode': 'center', 'color': 'bw'},
+        {'Background': bg_black, 'n': 8, 'mode': 'center', 'color': 'bw', 'sc': 0.4, 'addalpha': 90},
+        {'Background': bg_black, 'n': 8, 'mode': '', 'color': 'red'},
+        {'Background': bg_black, 'n': 5, 'mode': 'center', 'color': 'red'},
+
+        {'Background': bg_white, 'n': 8, 'mode': 'center', 'color': 'happy'},
+        {'Background': bg_white, 'n': 8, 'mode': 'center', 'color': 'wryb'},
         {'Background': bg_white, 'n': 8, 'mode': 'center', 'color': 'BeachTowels'},
         {'Background': bg_white, 'n': 8, 'mode': 'center', 'color': 'MetroUI'},
 
@@ -303,33 +305,28 @@ def predef_mazy4(w, h):
         {'Background': bg_white, 'n': 20, 'mode': '', 'color': 'BeachTowels', 'addalpha': 50},
         {'Background': bg_white, 'n': 20, 'mode': '', 'color': 'MetroUI', 'addalpha': 50},
 
-        {'Background': bg_yellow, 'n': 5, 'mode': 'center', 'color': 'red'},
-        {'Background': bg_yellow, 'n': 5, 'mode': 'center', 'color': 'rg'},
-        {'Background': bg_yellow, 'n': 5, 'mode': 'center', 'color': 'green'},
-        {'Background': bg_yellow, 'n': 4, 'mode': 'center', 'color': 'bg'},
-        {'Background': bg_black, 'n': 5, 'mode': '', 'color': 'red'},
-        {'Background': (128, 0, 0), 'n': 20, 'mode': '', 'color': 'red'}, # ?
-        {'Background': bg_black, 'n': 3, 'mode': 'center', 'color': 'red'},
-        {'Background': bg_black, 'n': 8, 'mode': 'center', 'color': 'bw'},
-
-        {'Background': bg_gray, 'n': 11, 'mode': 'center', 'color': 'happy'},
-        {'Background': bg_gray, 'n': 11, 'mode': 'center', 'color': 'wryb'},
-        {'Background': (96,96,80), 'n': 11, 'mode': 'center', 'color': 'bgo'},
-        {'Background': bg_gray, 'n': 11, 'mode': 'center', 'color': 'BeachTowels'},
-
-        {'Background': bg_gray, 'n': 11, 'mode': 'center', 'color': 'happy', 'sc': 2.6},
-        {'Background': bg_gray, 'n': 11, 'mode': 'center', 'color': 'wryb', 'sc': 2.6},
-        {'Background': (96,96,80), 'n': 11, 'mode': 'center', 'color': 'bgo', 'sc': 2.6},
-        {'Background': bg_gray, 'n': 11, 'mode': 'center', 'color': 'BeachTowels', 'sc': 2.6},
+        {'Background': bg_yellow, 'n': 4, 'mode': 'center', 'color': 'red', 'addalpha': 110}, # +a ok
+        {'Background': bg_yellow, 'n': 4, 'mode': 'center', 'color': 'green', 'addalpha': 110}, # +a ok
         
-        {'Background': bg_gray, 'n': 100, 'mode': 'center', 'color': 'wryb', 'addalpha': 80, 'sc': 0.3}, # test
-        {'Background': bg_gray, 'n': 100, 'mode': 'center', 'color': 'BeachTowels', 'addalpha': 80, 'sc': 0.3}, # test
-        {'Background': bg_gray, 'n': 100, 'mode': 'center', 'color': 'MetroUI', 'addalpha': 80, 'sc': 0.3}, # test
+        {'Background': bg_gray, 'n': 10, 'mode': 'center', 'color': 'happy'},
+        {'Background': bg_gray, 'n': 10, 'mode': 'center', 'color': 'wryb'},
+        {'Background': bg_gray, 'n': 10, 'mode': 'center', 'color': 'BeachTowels'},
 
-        {'Background': bg_gray, 'n': 100, 'mode': 'center', 'color': 'wryb', 'addalpha': 90, 'sc': 0.15}, # test
-        {'Background': bg_gray, 'n': 100, 'mode': 'center', 'color': 'BeachTowels', 'addalpha': 90, 'sc': 0.15}, # test
-        {'Background': bg_gray, 'n': 100, 'mode': 'center', 'color': 'MetroUI', 'addalpha': 90, 'sc': 0.15}, # test
+        {'Background': bg_gray, 'n': 10, 'mode': 'center', 'color': 'happy', 'sc': 2.5},
+        {'Background': bg_gray, 'n': 10, 'mode': 'center', 'color': 'wryb', 'sc': 2.5},
+        {'Background': bg_gray, 'n': 10, 'mode': 'center', 'color': 'BeachTowels', 'sc': 2.5},
+
+        {'Background': bg_gray, 'n': 100, 'mode': 'center', 'color': 'happy', 'addalpha': 80, 'sc': 0.3},
+        {'Background': bg_gray, 'n': 100, 'mode': 'center', 'color': 'wryb', 'addalpha': 80, 'sc': 0.3},
+        {'Background': bg_gray, 'n': 100, 'mode': 'center', 'color': 'BeachTowels', 'addalpha': 80, 'sc': 0.3},
+        {'Background': bg_gray, 'n': 100, 'mode': 'center', 'color': 'MetroUI', 'addalpha': 80, 'sc': 0.3},
+
+        {'Background': bg_gray, 'n': 20, 'mode': 'center', 'color': 'happy', 'addalpha': 130, 'sc': 0.3},
+        {'Background': bg_gray, 'n': 20, 'mode': 'center', 'color': 'wryb', 'addalpha': 130, 'sc': 0.3},
+        {'Background': bg_gray, 'n': 20, 'mode': 'center', 'color': 'BeachTowels', 'addalpha': 130, 'sc': 0.3},
+        {'Background': bg_gray, 'n': 20, 'mode': 'center', 'color': 'MetroUI', 'addalpha': 130, 'sc': 0.3},
     ]
+    a = mux_param(a, 'pc', [20, 40, 100])
     return append_dflts(a, 'SMEARS#4', mazy4, w, h)
 
 def predef_mazy5(w, h):
@@ -811,7 +808,7 @@ def predef_mazy26(w, h):
 
 def predef_mazy27(w, h):
     a = [
-        {'Background': bg_black, 'n': 1},
+        {'Background': bg_white, 'n': 1},
     ]
     return append_dflts(a, 'SMEARS#27', mazy27, w, h)
 
