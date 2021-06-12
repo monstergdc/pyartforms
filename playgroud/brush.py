@@ -59,8 +59,8 @@ def brush1(params, fn):
 # ---
 
 def do_brush(cnt, w, h, odir):
-    params1 = {'w': w, 'h': h, 'bg': (255, 255, 255), 'brush': '.\\brush-flowers-01.png'} # 3x red, 3x yellow, 3x white
-    params2 = {'w': w, 'h': h, 'bg': (255, 255, 255), 'brush': '.\\brush-weggies-01.png'}
+    params1 = {'w': w, 'h': h, 'bg': (255, 255, 255), 'brush': '.\\data\\brush-flowers-01.png'} # 3x red, 3x yellow, 3x white
+    params2 = {'w': w, 'h': h, 'bg': (255, 255, 255), 'brush': '.\\data\\brush-weggies-01.png'}
 
     for n in range(cnt):
         brush1(params1, odir+'flowers1-%dx%d-01-%03d.png' % (w, h, n+1))

@@ -102,7 +102,7 @@ def demo_private():
 
 #    demo_looper(params, files=['20201014_130833x.jpg'], modes=['brush', 'lines', 'poly'])
 
-    params = {'w': w, 'h': h, 'bk': (255, 255, 255), 'coef': 0.9, 'scale': 1.0, 'rnd': True, 'rmin': 78, 'rmax': 98, 'brush': '.\\brush-flowers-01.png', 'bxn': 3, 'byn': 3}
+    params = {'w': w, 'h': h, 'bk': (255, 255, 255), 'coef': 0.9, 'scale': 1.0, 'rnd': True, 'rmin': 78, 'rmax': 98, 'brush': '.\\data\\brush-flowers-01.png', 'bxn': 3, 'byn': 3}
     #demo_looper(params, files=['zjawa2.jpg'], modes=['image'])
     demo_looper(params, files=['xor1-256.png'], modes=['image'])
 
