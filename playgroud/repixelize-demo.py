@@ -98,7 +98,13 @@ def demo_private():
     """
 
     params = {'w': w, 'h': h, 'bk': (0, 0, 0), 'coef': 0.9, 'scale': 1.0, 'rnd': True, 'rmin': 78, 'rmax': 98}
-    demo_looper(params, files=['jolka-x.png'], modes=['brush', 'lines', 'poly'])
+#    demo_looper(params, files=['jolka-x.png'], modes=['brush', 'lines', 'poly'])
+
+#    demo_looper(params, files=['20201014_130833x.jpg'], modes=['brush', 'lines', 'poly'])
+
+    params = {'w': w, 'h': h, 'bk': (255, 255, 255), 'coef': 0.9, 'scale': 1.0, 'rnd': True, 'rmin': 78, 'rmax': 98, 'brush': '.\\brush-flowers-01.png', 'bxn': 3, 'byn': 3}
+    #demo_looper(params, files=['zjawa2.jpg'], modes=['image'])
+    demo_looper(params, files=['xor1-256.png'], modes=['image'])
 
 # ---
 
@@ -109,11 +115,14 @@ indir = 'repixel-in/'
 if not os.path.exists(root):
     os.makedirs(root)
 
-w, h = get_canvas('A4') # test4
+#w, h = get_canvas('A4') # test4
 #w, h = get_canvas('A3') # test3
 #w, h = get_canvas('A2') # test2
-#w, h = get_canvas('A1') # final
+w, h = get_canvas('A1') # final
 #w, h = get_canvas('800') # for web examples
+
+#w = 600
+#h = 800
 
 # select here which demos to run
 ##demo_poly_test()

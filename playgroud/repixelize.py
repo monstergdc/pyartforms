@@ -3,12 +3,13 @@
 
 # PyArtForms - Repixelize algorithm (artificial artist), v1.0, Python version
 # IDEA: src pixels as big filled circles/boxes/rnd-shapes, possible rnd size variation, src img rescale
-# (c)2018-2020 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2018-2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # tested with Python 3.5.2
 # cre: 20190330
 # upd: 20190401, 02, 03, 15, 22, 23
 # upd: 20200724, 25, 30
 # upd: 20201208, 10, 11, 12, 13
+# upd: 20210507, 08
 
 # note: input must be 24-bit RGB
 
@@ -103,6 +104,18 @@ def repix(params):
                       x*dx+addx2+random.randint(0+1, int(dx)-1), y*dy+addy2+random.randint(0+1, int(dy)-1)]
             bs = random.randint(1, maxlinewidth)
             d.line(points, fill=cin, width=bs)
+    def image_():
+        if cin[0] <= 2 and cin[1] <= 2 and cin[2] <= 2: # bk, with some margin
+            return
+        rgb = int((cin[0] + cin[1] + cin[2]) / 3) / (256/(bxn*byn)) # by lightness?
+        xb = int(rgb % bxn)
+        yb = int(rgb / byn)
+        if xb >= bxn or yb >= byn:
+            print('WTF?', xb, yb, bxn, byn, 'rgb', rgb)
+        # https://stackoverflow.com/questions/43111029/how-to-find-the-average-colour-of-an-image-in-python-with-opencv
+        position = (int(x*dx), int(y*dy)) # todo: proper! chk
+        bimc_rot = bimg[yb][xb].rotate(random.randint(-30, 30)) # todo: rot proper?
+        img.paste(bimc_rot, position, bimc_rot)
 
     if not 'mode' in params:
         print("Mode not given")
@@ -153,7 +166,29 @@ def repix(params):
     d = ImageDraw.Draw(img)
     dx = w/srcw
     dy = h/srch # todo: opt fix for aspect ratio here?
+
+    if params['mode'] == 'image':
+        imc = Image.open(params['brush'])
+        bxn = params['bxn']
+        byn = params['byn']
+        bw = int(imc.size[0] / bxn)
+        bh = int(imc.size[1] / byn)
+        cut2 = 12 #frame cut - or more in test case - remove blank brush margin
+        scale_coeff = 1.5 # slightly bigger
+        print('imc.size:', imc.size, 'b:xcnt/ycnt:', bxn, byn, 'b:width/height:', bw, bh)
+        bimg = [[None for x in range(bxn)] for y in range(byn)]
+        for x in range(bxn):
+            for y in range(byn):
+                x0 = x * bw
+                y0 = y * bh
+                box = (x0+cut2, y0+cut2, x0+bw-1-cut2, y0+bh-1-cut2)
+                bimg[y][x] = imc.crop(box)
+                scalex = dx/bimg[y][x].width*scale_coeff
+                scaley = dy/bimg[y][x].height*scale_coeff
+                bimg[y][x] = bimg[y][x].resize((int(bimg[y][x].width*scalex), int(bimg[y][x].height*scaley)), resample=Image.BICUBIC, box=None)
+
     for x in range(srcw):
+        #print(x, srcw)
         for y in range(srch):
             cin = src.getpixel((x, y))
             if 'rnd' in params: # random coef variation in range rmin..rmax
@@ -169,6 +204,8 @@ def repix(params):
                 brush_()
             if params['mode'] == 'lines':
                 lines_()
+            if params['mode'] == 'image':
+                image_()
 
     if outfile != '':
         img.save(outfile)

@@ -1,16 +1,18 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# paint algorithms (artificial artist) - RGB generated, v1.0, Python version
+# PyArtForms - Python generative art forms paint algorithms (artificial artist)
+# RGB generated
 # based a bit on my old FilterMeister plugins
-# (c)2018-2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2018-2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20181020
 # upd: 20181021, 22
 # upd: 20181110
 # upd: 20190422
+# upd: 20210526
 
 # TODO:
-# - ?
+# - mazy20 - proper
 
 from PIL import Image, ImageDraw, ImageFilter, ImageOps, ImageMath
 import random, math, os, sys
@@ -29,13 +31,18 @@ ZXCX = [ZXC0[0], ZXC1[0], ZXC0[1], ZXC1[1], ZXC0[2], ZXC1[2], ZXC0[3], ZXC1[3],
 
 # ---
 
-def rgbgen1(params, fn):
-    start_time = dt.now()
+def init_common(params):
     random.seed()
     w = params['w']
     h = params['h']
+    return w, h
+
+# ---
+
+def rgbgen1(params, fn):
+    start_time = dt.now()
+    w, h = init_common(params)
     print('rgbgen1...', fn)
-    random.seed()
     im = Image.new('RGB', (w, h), params['Background'])
     draw = ImageDraw.Draw(im)
 
@@ -65,12 +72,9 @@ def rgbgen1(params, fn):
 
 def rgbgen2(params, fn):
     start_time = dt.now()
-    random.seed()
-    w = params['w']
-    h = params['h']
-    s = params['s']
+    w, h = init_common(params)
     print('rgbgen2...', fn)
-    random.seed()
+    s = params['s']
     im = Image.new('RGB', (w, h), params['Background'])
     draw = ImageDraw.Draw(im)
 
@@ -94,13 +98,10 @@ def rgbgen2(params, fn):
 
 def rgbgen3(params, fn):
     start_time = dt.now()
-    random.seed()
-    w = params['w']
-    h = params['h']
+    w, h = init_common(params)
+    print('rgbgen3...', fn)
     s = params['s']
     green = params['green']
-    print('rgbgen3...', fn)
-    random.seed()
     im = Image.new('RGB', (w, h), params['Background'])
     draw = ImageDraw.Draw(im)
 
@@ -130,11 +131,8 @@ def rgbgen3(params, fn):
 # GDC #7 - Stupid modern art generator
 def rgbsam(params, fn):
     start_time = dt.now()
-    random.seed()
-    w = params['w']
-    h = params['h']
+    w, h = init_common(params)
     print('rgbsam...', fn)
-    random.seed()
     im = Image.new('RGB', (w, h), params['Background'])
     draw = ImageDraw.Draw(im)
 
@@ -157,11 +155,8 @@ def rgbsam(params, fn):
 # GDC #8 - grid
 def rgbgdc8(params, fn):
     start_time = dt.now()
-    random.seed()
-    w = params['w']
-    h = params['h']
+    w, h = init_common(params)
     print('rgbgdc8...', fn)
-    random.seed()
     im = Image.new('RGB', (w, h), params['Background'])
     draw = ImageDraw.Draw(im)
 
@@ -182,11 +177,8 @@ def rgbgdc8(params, fn):
 # GDC #9 - grid2
 def rgbgdc9(params, fn):
     start_time = dt.now()
-    random.seed()
-    w = params['w']
-    h = params['h']
+    w, h = init_common(params)
     print('rgbgdc8...', fn)
-    random.seed()
     im = Image.new('RGB', (w, h), params['Background'])
     draw = ImageDraw.Draw(im)
 
@@ -215,11 +207,8 @@ def rgbgdc9(params, fn):
 # GDC #11 - Bar/grid genenrator
 def rgbgdc11(params, fn):
     start_time = dt.now()
-    random.seed()
-    w = params['w']
-    h = params['h']
+    w, h = init_common(params)
     print('rgbgdc11...', fn)
-    random.seed()
     im = Image.new('RGB', (w, h), params['Background'])
     draw = ImageDraw.Draw(im)
     w1 = params['w1']
@@ -254,11 +243,8 @@ def rgbgdc11(params, fn):
 # GDC #12 - ambient
 def rgbgdc12(params, fn):
     start_time = dt.now()
-    random.seed()
-    w = params['w']
-    h = params['h']
+    w, h = init_common(params)
     print('rgbgdc12...', fn)
-    random.seed()
     im = Image.new('RGB', (w, h), params['Background'])
     draw = ImageDraw.Draw(im)
 
@@ -274,12 +260,9 @@ def rgbgdc12(params, fn):
 
 def rgbxxx(params, fn):
     start_time = dt.now()
-    random.seed()
+    w, h = init_common(params)
     c = math.pi/180
-    w = params['w']
-    h = params['h']
     print('rgbxxx...', fn)
-    random.seed()
     im = Image.new('RGB', (w, h), params['Background'])
     draw = ImageDraw.Draw(im)
 
@@ -340,12 +323,9 @@ def rgbxxx(params, fn):
 
 def rgbzx(params, fn):
     start_time = dt.now()
-    random.seed()
+    w, h = init_common(params)
     c = math.pi/180
-    w = params['w']
-    h = params['h']
     print('rgbzx...', fn)
-    random.seed()
     im = Image.new('RGB', (w, h), (0,0,0))
     draw = ImageDraw.Draw(im)
 
@@ -370,6 +350,145 @@ def rgbzx(params, fn):
 
     im.save(fn)
     show_benchmark(start_time)
+
+# ---
+
+def rgb_2021_1(params, fn):
+    return 0
+
+def rgb_2021_2(params, fn):
+    return 0
+
+def rgb_2021_3(params, fn):
+    return 0
+
+def rgb_2021_4(params, fn):
+    return 0
+
+# ---
+
+def mazy20(draw, params):
+    w, h = init_common(params)
+    m = params['mode']
+    c = math.pi/180
+    d = 2 # pixel
+    #d = 8 # pixel
+    xs = int(w/d/2)
+    ys = int(h/d/2)
+
+    for y in range(int(h/d)):
+        for x in range(int(w/d)):
+
+            if False:
+                vr = 32+128+128*math.sin(x*c)*math.cos(y*c)
+                vg = 32+128+128*math.cos(4*x*c)*math.cos(y*c)
+                vb = 32+128+64*(math.cos(3*x*c)+math.sin(2*y*c))
+                if m == '1':
+                    cx = (int(vr), int(vr), int(vr))
+                if m == '2':
+                    cx = (int(vg), int(vg), int(vg))
+                #if m == '3':
+                cx = (int(vb), int(vb), int(vb))
+
+            """
+            a = 0
+            b = 0
+#            if m == '1':
+#                b = 0
+#            if m == '2':
+#                b = 10
+#            if m == '3':
+#                b = 100
+            vr = (x+a)*1*math.sin((x+b)*c*2)+y*1*math.cos(y*c*2)
+            a = 10
+            b = 50
+            vg = (x+a)*1*math.sin((x+b)*c*2)+y*1*math.cos(y*c*2)
+            b = 20
+            b = 100
+            vb = (x+a)*1*math.sin((x+b)*c*2)+y*1*math.cos(y*c*2)
+            vr = int(vr) % 255
+            vg = int(vg) % 255
+            vb = int(vb) % 255
+            cx = (int(vr), int(vg), int(vb))
+
+            hue = int(vr) % 255
+            saturation = 244
+            vb = 2000*math.exp(-x/50)
+            luminance = int(vb) % 255
+            #luminance = 192 # int(vb * 0.7)
+            cx = 'hsl(%d, %d%%, %d%%)' % (hue, saturation, luminance)
+            """
+
+            if True:
+                # ?
+                vr = 2000*math.exp(-x/100)
+                vg = 2000*math.exp(-y/100)
+                hue = int(vr) % 255
+                luminance = int(vg) % 255
+                cx = 'hsl(%d, %d%%, %d%%)' % (hue, 244, luminance)
+
+            if False:
+                # black hole in red bg
+                v = (1*math.sqrt((x-xs)*(x-xs)+(y-ys)*(y-ys)))
+                cx = (int(abs(v)), int(0), int(0))
+
+            if False:
+                # black stripes on red (cool)
+                v = (1*math.sqrt((x-xs)*(x-xs)+(y-ys)*(y-ys))) * (math.sin(3.5*c*x)*math.cos(c*x)+math.sin(4*c*y)*math.cos(4*c*x))
+                cx = (int(abs(v)), int(0), int(0))
+
+            if False:
+                # RGB interpolations - lame but maybe sth?
+                vr = (20/6*math.sqrt((x-xs)*(x-xs)+(y-ys)*(y-ys)))
+                vg = (20/6*math.sqrt((x-xs*0.9)*(x-xs*0.9)+(y-ys)*(y-ys)))
+                vb = (20/6*math.sqrt((x-xs)*(x-xs)+(y-ys*0.9)*(y-ys*0.9)))
+                cx = (int(vr)%255, int(vg)%255, int(vb)%255)
+
+            if False:
+                # lame?
+                vr = 64*(math.cos(2*x*c)+math.sin(2*y*c))
+                vg = 64*(math.cos(3*y*c)+math.sin(3*x*c))
+                vb = 64*(math.cos(3*x*c)+math.sin(2*y*c))
+                def sca(x):
+                    if x < 0:
+                        if x < 32:
+                            return 0
+                        else:
+                            return 64
+                    if x > 32:
+                        return 192
+                    else:
+                        return 128
+                vr1 = sca(vr)
+                vg1 = sca(vg)
+                vb1 = sca(vb)
+                cx = (vr1, vg1, vb1)
+
+            if False:
+                # lame?
+                f0 = 1 + math.cos(x*c*2)
+                f1 = 1 + math.cos(y*c*4)
+                f0 = int(f0*255)
+                f1 = int(5+f1*25)
+                cx = 'hsl(%d, %d%%, %d%%)' % (f0, 80+5, f1)
+
+            if False:
+                # ?
+                #v = (8*math.sqrt((x-xs)*(x-xs)+(y-ys)*(y-ys))) / 4 # opt w/o /4
+                v0 = math.sqrt((x-xs)*(x-xs)+(y-ys)*(y-ys))
+                v = 3 + math.cos(x*c*1) + math.sin(y*c*1) - math.sin(v0*c*1) # to ok
+                v = v * 254
+                f0 = int(v) % 255
+                #v = (2*math.sqrt((x-xs)*(x-xs)+(y-ys)*(y-ys)))
+                #f1 = int(v*100) % 100
+                #f1 = random.randint(20, 80) #ok1
+                f1 = random.randint(45, 70)
+                cx = 'hsl(%d, %d%%, %d%%)' % (f0, 80, f1)
+            
+            xy = [(x*d, y*d), (x*d+d, y*d+d)]
+            draw.rectangle(xy, fill=cx, outline=None)
+    # ... todo: fin
+    return 0
 
 # ---
 
