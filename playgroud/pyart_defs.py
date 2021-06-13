@@ -177,10 +177,10 @@ def predef_mazy1(w, h):
         #?
         {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'happy', 'keep': False},
         {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'wryb', 'keep': False},
-        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'psych', 'keep': False},
+
         {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'happy', 'keep': False, 'addblack': True},
         {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'wryb', 'keep': False, 'addblack': True},
-        {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'psych', 'keep': False, 'addblack': True},
+
         {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'BeachTowels', 'keep': False},
         {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'MoonlightBytes6', 'keep': False},
         {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'Number3', 'keep': False},
@@ -188,8 +188,6 @@ def predef_mazy1(w, h):
         {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'Google', 'keep': False},
         {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'MetroUI', 'keep': False},
         {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'ProgramCat', 'keep': False},
-
-        {'Background': bg_yellow, 'penw': 5, 'v': 200, 'n': 50, 'm': 25, 'prefill': False, 'mode': 'red', 'keep': True, 'mar': int(w/20)},
     ]
 
     # * addalpha
@@ -787,7 +785,7 @@ def predef_mazy27(w, h):
 
 def predef_mazy28(w, h):
     a = [
-        {'Background': bg_black, 'n': 1},
+        {'Background': bg_white, 'n': 1},
     ]
     return append_dflts(a, 'SMEARS#28', mazy28, w, h)
 
@@ -839,7 +837,7 @@ predefs = {'mazy01': predef_mazy1, 'mazy02': predef_mazy2, 'mazy03': predef_mazy
            'mazy17': predef_mazy17, 'mazy18': predef_mazy18, 'mazy19': predef_mazy19, 'mazy20': predef_mazy20,
            'mazy21': predef_mazy21, 'mazy22': predef_mazy22, 'mazy23': predef_mazy23, 'mazy24': predef_mazy24,
            'mazy25': predef_mazy25, 'mazy26': predef_mazy26, 'mazy27': predef_mazy27, 'mazy28': predef_mazy28,
-           'mazy29': predef_mazy29, 'mazy30': predef_mazy30, 'mazy31': predef_mazy31, 'mazy32': predef_mazy32,
+           #'mazy29': predef_mazy29, 'mazy30': predef_mazy30, 'mazy31': predef_mazy31, 'mazy32': predef_mazy32,
            'life': predef_life, 'lissajous': predef_lissajous, 'astro': predef_astro, 'mandelbrot': predef_mandelbrot,
            }
 
@@ -848,7 +846,8 @@ predef_names = [
         'mazy01', 'mazy02', 'mazy03', 'mazy04', 'mazy05', 'mazy06', 'mazy07', 'mazy08',
         'mazy09', 'mazy10', 'mazy11', 'mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16',
         'mazy17', 'mazy18', 'mazy19', 'mazy20', 'mazy21', 'mazy22', 'mazy23', 'mazy24',
-        'mazy25', 'mazy26', 'mazy27', 'mazy28', 'mazy29', 'mazy30', 'mazy31', 'mazy32',
+        'mazy25', 'mazy26', 'mazy27', 'mazy28',
+        #'mazy29', 'mazy30', 'mazy31', 'mazy32',
         'astro', 'life', 'lissajous', 'mandelbrot'
         ]
 

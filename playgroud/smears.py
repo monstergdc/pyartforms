@@ -32,7 +32,7 @@
 # #25 waves#1 (tested, ok) --- finish: more par
 # #26 waves#2 (tested, ok) --- finish: more par, simplify code
 # #27 (...)
-# #28 
+# #28 (...)
 # #29 
 # #30
 # #31
@@ -1236,6 +1236,50 @@ def mazy26(draw, params):
 def mazy27(draw, params):
     """ ? """
     w, h, cnt = init_common(params)
+    w2 = int(w/2)
+    h2 = int(h/2)
+
+    po = []
+    cnt = 100*2 # par
+    r0 = h*0.3 # par
+    v = 200+100 # par
+    sc = 1.0 # par
+    rv = 200 # par
+    asc = 10 # par 6 50
+    for n in range(cnt):
+        a = math.pi/180 * 360 * float(n/cnt) # par
+        rv = random.randint(100,500) # test
+        r = r0 + sc * (rv * math.sin(asc*a))
+        #r = r0
+        po.append((int(w2+r*math.cos(a)), int(h2+r*math.sin(a))))
+
+    def fr0(p):
+        # par x2
+        if random.randint(0, 100) > 80:
+            return (p[0]+random.randint(-v,v), p[1]+random.randint(-v,v))
+            #return (p[0]+random.randint(-v,v), p[1])
+        else:
+            return p
+
+    def fr(p):
+        return p
+        #return (p[0]+random.randint(-v,v), p[1]+random.randint(-v,v))
+
+    po[:] = (fr(xy) for xy in po)
+    draw.polygon(po, fill=(255, 255, 0), outline=None) # par
+    po.append((po[0][0], po[0][1]))
+    draw.line(po, fill=(255,0,0), width=3) # par
+
+    # opt
+    #ts = [t/2000.0 for t in range(2001)]
+    #ts = [t/20.0 for t in range(21)]
+    #bezier = make_bezier(po)
+    #points = bezier(ts)
+    #draw.polygon(points, fill=(255, 0, 0), outline=(255,255,255))
+
+def mazy28(draw, params):
+    """ ? """
+    w, h, cnt = init_common(params)
     c = math.pi/180
     cnt = 400
     sx = int(w/cnt)
@@ -1261,12 +1305,6 @@ def mazy27(draw, params):
         y -= f
         x += sx
     draw.polygon(po, fill=color, outline=None)
-
-def mazy28(draw, params):
-    """ ? """
-    w, h, cnt = init_common(params)
-    # ...
-    return 0
 
 def mazy29(draw, params):
     """ ? """
