@@ -9,8 +9,7 @@
 
 
 # TODO:
-# - [!] remap paramsets to ctl and back / also get values
-# .- [!] render from memo txt (fix call issue)
+# - remap paramsets to ctl and back / also get values
 # - allow save (diff sizes)
 # - defs - add desc names + even longer desc
 # - render - allow extra params to file names (from defs)
@@ -22,7 +21,6 @@ import copy
 from PIL import Image, ImageDraw
 from drawtools import *
 from pyart_defs import *
-#from mandelbrot import generate_mandelbrot
 
 
 
@@ -127,15 +125,11 @@ class GUIFrame(wx.Frame):
         return im
 
     def do_mazy_p2(self, w, h, n, name):
-        print('-------------')
-        print(self.tx.Value)
-        print('-------------')
         px = ast.literal_eval(self.tx.Value)
         px['alpha'] = True #test
         pr = predefs[name]
         p = pr(w, h)
-        px['call'] = p[0]['call'] # todo: make proper
-        print(px)
+        px['call'] = p[0]['call']
         im = art_painter(params=px, png_file='preview.png', output_mode='preview', bw=False)
         return im
 
