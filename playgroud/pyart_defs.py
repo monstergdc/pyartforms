@@ -162,17 +162,17 @@ def predef_mazy1(w, h):
 #        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 20, 'm': 40, 'prefill': True, 'mode': 'black', 'keep': False, 'color': 'happy', 'addalpha': 75, 'mar': int(-w/2)},
     ]
 
-    # unfilled
+    # unfilled (aka open)
     b = [
         #6 red (fix? mar?)
         {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'red', 'keep': False, 'color': 'red_rnd'},
 
         # 6 red tests new, ok, use
-#        {'Background': bg_white, 'penw': 8, 'v': 25, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'red', 'keep': False, 'color': 'red_rnd', 'mar': int(w/15)},
-#        {'Background': bg_white, 'penw': 2, 'v': 120, 'n': 40, 'm': 120, 'prefill': False, 'mode': 'red', 'keep': False, 'color': 'red_rnd', 'mar': int(w/15)},
-#        {'Background': bg_white, 'penw': 8, 'v': 120, 'n': 40, 'm': 120, 'prefill': False, 'mode': 'red', 'keep': False, 'color': 'red_rnd', 'mar': int(w/15)},
-#        {'Background': bg_white, 'penw': 24, 'v': 120, 'n': 40, 'm': 60, 'prefill': False, 'mode': 'red', 'keep': False, 'color': 'red_rnd', 'mar': int(w/15)},
-#        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 500, 'm': 5, 'prefill': False, 'mode': 'red', 'keep': False, 'color': 'red_rnd', 'mar': int(w/15)},
+        {'Background': bg_white, 'penw': 8, 'v': 25, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'red', 'keep': False, 'color': 'red_rnd', 'mar': int(w/15)},
+        {'Background': bg_white, 'penw': 2, 'v': 120, 'n': 40, 'm': 120, 'prefill': False, 'mode': 'red', 'keep': False, 'color': 'red_rnd', 'mar': int(w/15)},
+        {'Background': bg_white, 'penw': 8, 'v': 120, 'n': 40, 'm': 120, 'prefill': False, 'mode': 'red', 'keep': False, 'color': 'red_rnd', 'mar': int(w/15)},
+        {'Background': bg_white, 'penw': 24, 'v': 120, 'n': 40, 'm': 60, 'prefill': False, 'mode': 'red', 'keep': False, 'color': 'red_rnd', 'mar': int(w/15)},
+        {'Background': bg_white, 'penw': 8, 'v': 20, 'n': 500, 'm': 5, 'prefill': False, 'mode': 'red', 'keep': False, 'color': 'red_rnd', 'mar': int(w/15)},
 
         #?
         {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'happy', 'keep': False},
@@ -189,7 +189,7 @@ def predef_mazy1(w, h):
         {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'MetroUI', 'keep': False},
         {'Background': bg_white, 'penw': 8, 'v': 75, 'n': 100, 'm': 40, 'prefill': False, 'mode': 'ProgramCat', 'keep': False},
 
-        {'Background': bg_yellow, 'penw': 5, 'v': 200, 'n': 50, 'm': 25, 'prefill': False, 'mode': 'red', 'keep': True, 'color': 'any_rnd', 'mar': int(w/20)},
+        {'Background': bg_yellow, 'penw': 5, 'v': 200, 'n': 50, 'm': 25, 'prefill': False, 'mode': 'red', 'keep': True, 'mar': int(w/20)},
     ]
 
     # * addalpha
@@ -201,6 +201,8 @@ def predef_mazy1(w, h):
         a2[i]['addalpha'] = 75
         a3[i]['addalpha'] = 50
     a = np.concatenate((a1, a2, a3), axis=0)
+    # todo: ?
+    #a = mux_param(a, 'addalpha', [0, 50, 75]) # todo: 75++ ?
 
     # * variation
     a1 = copy.deepcopy(a)

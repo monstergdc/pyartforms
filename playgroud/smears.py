@@ -71,14 +71,12 @@ from color_defs import *
 def mazy1(draw, params):
     """ ? """
     w, h, cnt = init_common(params)
+    mar = 0
     if 'mar' in params:
         mar = params['mar']
-    else:
-        mar = 0
+    v = 0
     if 'v' in params:
         v = params['v']
-    else:
-        v = 0
     ts = [t/100.0 for t in range(101)] # par?
     sc = float(h) / 3507 # lame par!
     wx = int(float(params['penw']) * sc)
