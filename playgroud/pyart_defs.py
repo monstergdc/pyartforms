@@ -3,7 +3,7 @@
 
 # PyArtForms - Python generative art forms paint algorithms (artificial artist)
 # predefined forms
-# (c)2018-2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2018-2021 MoNsTeR/GDC, Noniewicz.com, Noniewicz.art.pl, Jakub Noniewicz
 # cre: 20181020
 # upd: 20190105, 06, 13, 18, 21, 22
 # upd: 20190311, 30
@@ -221,10 +221,11 @@ def predef_mazy1(w, h):
 
 def predef_mazy2(w, h):
     a = [
-        {'Background': bg_black, 'n': 110},
+        {'Background': bg_black, 'n': 100},
     ]
-    a = mux_param(a, 'color', ['bw0', 'bwx', 'red_rnd', 'happy', 'wryb', 'BeachTowels', 'Number3', 'ProgramCat'])
-    a = mux_param(a, 'm', [12, 30, 200])
+    a = mux_param(a, 'color', ['bw0', 'bwx', 'red_rnd', 'any_rnd', 'happy', 'wryb', 'Number3', 'BeachTowels', 'ProgramCat'])
+    a = mux_param(a, 'm', [12, 30, 180])
+    a = mux_param(a, 'sc', [20, 50]) # todo: also 0 ?
     a = mux_param(a, 'addalpha', [0, 120])
     return append_dflts(a, 'SMEARS#2', mazy2, w, h)
 

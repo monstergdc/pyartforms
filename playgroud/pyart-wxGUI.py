@@ -54,7 +54,7 @@ class GUIFrame(wx.Frame):
 
         self.makeMenuBar()
         self.CreateStatusBar()
-        self.SetStatusText(self.app+" GUI")
+        self.SetStatusText(self.app+" GUI - total art forms: "+str(enum_defs(doprint=False)))
 
         screenSize = wx.DisplaySize()
         mazy_all = predef_names
@@ -63,11 +63,11 @@ class GUIFrame(wx.Frame):
 
         # smear selector
         self.st_v = wx.StaticText(pnl, label="Effect", pos=(x0, y0))
-        self.cm = wx.ComboBox(pnl, id=wx.ID_ANY, value="", pos=(x0+70, y0), size=(120, 20), choices=mazy_all, style=0, validator=wx.DefaultValidator)
+        self.cm = wx.ComboBox(pnl, id=wx.ID_ANY, value="", pos=(x0+80, y0), size=(120, 20), choices=mazy_all, style=0, validator=wx.DefaultValidator)
         self.cm.Bind(wx.EVT_COMBOBOX, self.OnSmearChanged)
         # preset selector
         self.st_v = wx.StaticText(pnl, label="Variant 0-?", pos=(x0, y0+30))
-        self.sp = wx.SpinCtrl(pnl, id=wx.ID_ANY, value="0", pos=(x0+70, y0+30), size=(70, 20), style=wx.SP_ARROW_KEYS, min=0, max=1, initial=0)
+        self.sp = wx.SpinCtrl(pnl, id=wx.ID_ANY, value="0", pos=(x0+80, y0+30), size=(70, 20), style=wx.SP_ARROW_KEYS, min=0, max=1, initial=0)
         # go btns
         bn = wx.Button(pnl, id=wx.ID_ANY, label="Render", pos=(x0, y0+60), size=wx.DefaultSize, style=0, validator=wx.DefaultValidator)
         bn.Bind(wx.EVT_BUTTON, self.OnClicked) 
@@ -116,6 +116,8 @@ class GUIFrame(wx.Frame):
         if name in predefs:
             pr = predefs[name]
             p = pr(w, h)
+        else:
+            print('name: %s not defined???' % name)
         px = p[n]
         px['alpha'] = True #test
         px_ = copy.deepcopy(px)
@@ -127,8 +129,11 @@ class GUIFrame(wx.Frame):
     def do_mazy_p2(self, w, h, n, name):
         px = ast.literal_eval(self.tx.Value)
         px['alpha'] = True #test
-        pr = predefs[name]
-        p = pr(w, h)
+        if name in predefs:
+            pr = predefs[name]
+            p = pr(w, h)
+        else:
+            print('name: %s not defined???' % name)
         px['call'] = p[0]['call']
         im = art_painter(params=px, png_file='preview.png', output_mode='preview', bw=False)
         return im
@@ -165,7 +170,7 @@ class GUIFrame(wx.Frame):
 
     def OnAbout(self, event):
         """Display an About Dialog"""
-        wx.MessageBox(self.app+" GUI v1.0beta", "About", wx.OK|wx.ICON_INFORMATION)
+        wx.MessageBox(self.app+" GUI v1.0beta\n(c) Noniewicz.com", "About", wx.OK|wx.ICON_INFORMATION)
 
     def doRender(self):
         """Main render call"""

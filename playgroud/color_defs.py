@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 # experimental paint algorithms (artificial artist) in Python, v1.0
-# (c)2017-2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2017-2021 MoNsTeR/GDC, Noniewicz.com, Noniewicz.art.pl, Jakub Noniewicz
 # color definitions, and color mappers/functions
 
-# upd: 20210611
+# upd: 20210611, 13
 
 import random
 from drawtools import *

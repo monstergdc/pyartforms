@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 # PyArtForms - Python generative art forms paint algorithms (artificial artist)
-# experimental 'smears' paint algorithms, v1.0
+# experimental 'smears' paint algorithms, v1.0 - core algorithm definitions
 # (c)2017-2021 MoNsTeR/GDC, Noniewicz.com, Noniewicz.art.pl, Jakub Noniewicz
 
 # #01 'cruel red smears', not only red (...)
-# #02 circle worms (tested, ok) --- finish: more par
+# #02 circle worms (tested, ok)
 # #03 crazy trangles (tested, ok) --- finish: more par
 # #04 self-crossed filled polygons (tested, ok)
 # #05 star flowers (...)
@@ -49,7 +49,7 @@
 # upd: 20200507, 10
 # upd: 20210106, 15, 16, 19, 20, 21, 22
 # upd: 20210515, 16, 22, 23, 24, 25, 26, 27
-# upd: 20210606, 07, 10, 11, 12
+# upd: 20210606, 07, 10, 11, 12, 13
 
 # see:
 # https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
@@ -143,9 +143,13 @@ def mazy2(draw, params):
     cntm = params['m']
     if cntm <= 0:
         cntm = 1
-    v = int(h/50)
-    #v = int(h/20) # test2
-    #v = int(h/200) # test3
+    sc = 50 # dflt
+    if 'sc' in params:
+        sc = params['sc']
+    if sc > 0:
+        v = int(h/sc)
+    else:
+        v = 0
 
     for n in range(cnt):
         r1 = random.randint(int(h*0.15), int(h*0.45))
@@ -157,7 +161,6 @@ def mazy2(draw, params):
         de = 1/cntm
         for m in range(cntm):
             #v = int((cntm-m)/cntm * h/20) # test4
-            # w/ v=0 interesting too?
             po[:] = [(xy[0]+random.randint(0, v)-random.randint(0, v), xy[1]+random.randint(0, v)-random.randint(0, v)) for xy in po]
             color = new_colorer(params['color'], m, cntm)
             if 'addalpha' in params:
