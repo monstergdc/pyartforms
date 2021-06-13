@@ -740,6 +740,8 @@ def predef_mazy25(w, h):
         {'Background': bg_white, 'n': 12, 'f0': 3, 'horizontal': False, 'color': 'happy'},
         {'Background': bg_white, 'n': 32, 'f0': 1, 'horizontal': False, 'color': 'happy'},
 
+        {'Background': bg_white, 'n': 4, 'f0': 5, 'horizontal': False, 'color': 'wryb'},
+
         {'Background': bg_white, 'n': 12, 'f0': 1, 'horizontal': True, 'color': 'happy'},
         {'Background': bg_white, 'n': 12, 'f0': 1, 'horizontal': True, 'color': 'happy', 'addalpha': 150},
 
