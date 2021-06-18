@@ -5,14 +5,12 @@
 # loosely based on article in "ENTER" 2/93
 # (c)1993 Noniewicz.com (orig Turbo Pascal v1.6)
 # (c)2011 Noniewicz.com (unf. Delphi ver start)
-# (c)2014-2015, 2017, 2018, 2019 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2014-2015, 2017-2021 MoNsTeR/GDC, Noniewicz.com, Noniewicz.art.pl, Jakub Noniewicz
 # cre: 20180430
 # upd: 20180501, 02, 03
 # upd: 20181020
 # upd: 20190427
-
-# see: https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
-# http://pillow.readthedocs.io/en/5.1.x/reference/ImageFilter.html
+# upd: 20210618
 
 # TODO:
 # appendable/restartable == anim per grow step | esp randoms
@@ -155,6 +153,7 @@ def gen(g, canvas, params, dt, image, video):
 def main():
     g = Grow()
     canvas = (1024, 768)
+    print('grow...')
 
     params = {
         'p0': (canvas[0]/2, canvas[1]-80),

@@ -1,14 +1,17 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# ANIMS v1.0, Python version
-# (c)2018-2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# PyArtForms - Python generative art forms paint algorithms (artificial artist)
+# experimental 'ANIMS' algorithms, v1.0
 # anim#1/anim#2 - recreated from seeing as in some GIFs I've once seen (so concept isn't mine)
+# (c)2017-2021 MoNsTeR/GDC, Noniewicz.com, Noniewicz.art.pl, Jakub Noniewicz
+
 # cre: 20180505
 # upd: 20180506, 12
 # upd: 20180928, 30
 # upd: 20181020
 # upd: 20210507
+# upd: 20210618
 
 # orig GIFs md5:
 # #1: ad2bde22541ac1b05b2c08fd805ebafe *001.gif
@@ -16,7 +19,6 @@
 # #3: ?
 # #4: 7dafd915911faf3e14678fefe163d7f1 *DSC58.gif
 
-# see: https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
 
 # TODO:
 # - fin anim #3 proper

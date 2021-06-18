@@ -3,15 +3,14 @@
 
 # PyArtForms - Python generative art forms paint algorithms (artificial artist)
 # FLOWERS (brush paint test), v1.0
-# (c)2018-2021 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2017-2021 MoNsTeR/GDC, Noniewicz.com, Noniewicz.art.pl, Jakub Noniewicz
 # cre: 20180505
 # upd: 20180929
 # upd: 20181020
 # upd: 20210507, 15
+# upd: 20210618
 
 # see:
-# https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
-# http://pillow.readthedocs.io/en/5.1.x/reference/ImageFilter.html
 # https://auth0.com/blog/image-processing-in-python-with-pillow/
 
 # TODO:
