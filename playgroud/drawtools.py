@@ -9,7 +9,7 @@
 # upd: 20190414, 21
 # upd: 20210301
 # upd: 20210507, 15, 23, 26, 27
-# upd: 20210606, 07, 11, 12
+# upd: 20210606, 07, 11, 12, 18
 
 from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin, ImageFont, ImageOps
 from datetime import datetime as dt
@@ -65,6 +65,10 @@ def get_canvas(name):
 def circle(draw, x, y, r, fill, outline):
     xy = [(x-r, y-r), (x+r, y+r)]
     draw.ellipse(xy, fill=fill, outline=outline)
+
+def circle(draw, x, y, r, fill, outline, width):
+    xy = [(x-r, y-r), (x+r, y+r)]
+    draw.ellipse(xy, fill=fill, outline=outline, width=width) # v 5.3.0+
 
 def box(draw, x, y, r, fill, outline):
     xy = [(x-r, y-r), (x+r, y+r)]
