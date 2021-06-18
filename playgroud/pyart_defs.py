@@ -11,7 +11,7 @@
 # upd: 20200507, 10
 # upd: 20210106
 # upd: 20210515, 16, 22, 23, 24, 26, 27
-# upd: 20210606, 07, 10, 11, 12, 13
+# upd: 20210606, 07, 10, 11, 12, 13, 18
 
 
 # TODO:
@@ -67,14 +67,9 @@ def mux_param(a, name, values):
 
 def predef_life(w, h):
     a = [
-        {'Background': bg_black, 'Color': (255,255,255), 'f': 'f2a'},
-        {'Background': bg_black, 'Color': (255,255,255), 'f': 'f2b'},
-        {'Background': bg_black, 'Color': (255,255,255), 'f': 'f2c'},
-        {'Background': bg_black, 'Color': (255,255,255), 'f': 'f2d'},
-        {'Background': bg_black, 'Color': (255,255,255), 'f': 'f2e'},
-        {'Background': bg_black, 'Color': (255,255,255), 'f': 'f2f'},
-        {'Background': bg_black, 'Color': (255,255,255), 'f': 'f2g'},
+        {'Background': bg_black, 'Color': bg_white},
     ]
+    a = mux_param(a, 'f', ['f2a', 'f2b', 'f2c', 'f2d', 'f2e', 'f2f', 'f2g'])
     return append_dflts(a, 'LIFE', life, w, h)
 
 # --- lissajous
@@ -95,22 +90,22 @@ def predef_lissajous(w, h):
 
 def predef_astro(w, h):
     a = [
-        {'call': paint0, 'Background': bg_black, 'ou': (0,0,0), 'box_or_cir': False},
-        {'call': paint0, 'Background': bg_black, 'ou': (0,0,0), 'box_or_cir': True},
-        {'call': paint1, 'Background': bg_black, 'ou': (0,0,0), 'box_or_cir': False},
-        {'call': paint1, 'Background': bg_black, 'ou': (0,0,0), 'box_or_cir': True},
-        {'call': paint2, 'Background': bg_black, 'ou': (0,0,0), 'box_or_cir': False},
-        {'call': paint2, 'Background': bg_black, 'ou': (0,0,0), 'box_or_cir': True},
-        {'call': paint3, 'Background': bg_black, 'ou': (0,0,0), 'box_or_cir': False},
-        {'call': paint3, 'Background': bg_black, 'ou': (0,0,0), 'box_or_cir': True},
-        {'call': paint4, 'Background': bg_black, 'ou': (0,0,0), 'box_or_cir': False},
-        {'call': paint4, 'Background': bg_black, 'ou': (0,0,0), 'box_or_cir': True},
-        {'call': paint5, 'Background': bg_black, 'ou': (0,0,0), 'box_or_cir': False},
-        {'call': paint5, 'Background': bg_black, 'ou': (0,0,0), 'box_or_cir': True},
-        {'call': paint6, 'Background': bg_black, 'ou': (0,0,0), 'box_or_cir': False},
-        {'call': paint6, 'Background': bg_black, 'ou': (0,0,0), 'box_or_cir': True},
-        {'call': paint7, 'Background': bg_black, 'ou': (0,0,0), 'box_or_cir': False},
-        {'call': paint7, 'Background': bg_black, 'ou': (0,0,0), 'box_or_cir': True},
+        {'call': paint0, 'Background': bg_black, 'ou': bg_black, 'box_or_cir': False},
+        {'call': paint0, 'Background': bg_black, 'ou': bg_black, 'box_or_cir': True},
+        {'call': paint1, 'Background': bg_black, 'ou': bg_black, 'box_or_cir': False},
+        {'call': paint1, 'Background': bg_black, 'ou': bg_black, 'box_or_cir': True},
+        {'call': paint2, 'Background': bg_black, 'ou': bg_black, 'box_or_cir': False},
+        {'call': paint2, 'Background': bg_black, 'ou': bg_black, 'box_or_cir': True},
+        {'call': paint3, 'Background': bg_black, 'ou': bg_black, 'box_or_cir': False},
+        {'call': paint3, 'Background': bg_black, 'ou': bg_black, 'box_or_cir': True},
+        {'call': paint4, 'Background': bg_black, 'ou': bg_black, 'box_or_cir': False},
+        {'call': paint4, 'Background': bg_black, 'ou': bg_black, 'box_or_cir': True},
+        {'call': paint5, 'Background': bg_black, 'ou': bg_black, 'box_or_cir': False},
+        {'call': paint5, 'Background': bg_black, 'ou': bg_black, 'box_or_cir': True},
+        {'call': paint6, 'Background': bg_black, 'ou': bg_black, 'box_or_cir': False},
+        {'call': paint6, 'Background': bg_black, 'ou': bg_black, 'box_or_cir': True},
+        {'call': paint7, 'Background': bg_black, 'ou': bg_black, 'box_or_cir': False},
+        {'call': paint7, 'Background': bg_black, 'ou': bg_black, 'box_or_cir': True},
     ]
     a = append_dct_item(a, 'name', 'ASTROART')
     a = append_dct_item(a, 'w', w)
@@ -121,15 +116,10 @@ def predef_astro(w, h):
 
 def predef_mandelbrot(w, h):
     a = [
-        {'x0': -2.5, 'x1': 1.0, 'y0': -1.0, 'y1': 1.0, 'maxiter': 200, 'negative': False, 'Background': bg_black, 'bw': True},
         {'x0': -2.5, 'x1': 1.0, 'y0': -1.0, 'y1': 1.0, 'maxiter': 20, 'negative': False, 'Background': bg_black, 'bw': True},
+        {'x0': -2.5, 'x1': 1.0, 'y0': -1.0, 'y1': 1.0, 'maxiter': 200, 'negative': False, 'Background': bg_black, 'bw': True},
     ]
-    a = append_dct_item(a, 'name', 'MANDELBROT')
-    a = append_dct_item(a, 'w', w)
-    a = append_dct_item(a, 'h', h)
-    a = append_dct_item(a, 'call', generate_mandelbrot)
-    return a
-    #return append_dflts(a, 'MANDELBROT', generate_mandelbrot, w, h)
+    return append_dflts(a, 'MANDELBROT', generate_mandelbrot, w, h)
 
 # --- smears
 
@@ -572,18 +562,18 @@ def predef_mazy16(w, h):
     return append_dflts(a, 'SMEARS#16', mazy16, w, h)
 
 def predef_mazy17(w, h):
+    n = 150
     a = [
-        {'Background': bg_white, 'n': 90, 'v': int(w/30), 'color': 'happy'},
-        {'Background': bg_white, 'n': 90, 'v': int(w/30), 'color': 'happy', 'addalpha': 60},
-        {'Background': bg_white, 'n': 90, 'v': int(w/30), 'color': 'happy', 'addalpha': 30},
-        {'Background': bg_white, 'n': 90, 'v': int(w/30), 'color': 'BeachTowels'},
-        {'Background': bg_white, 'n': 90, 'v': int(w/30), 'color': 'BeachTowels', 'addalpha': 90},
-        {'Background': bg_white, 'n': 150, 'v': int(w/200), 'color': 'BeachTowels'},
-        {'Background': bg_white, 'n': 150, 'v': int(w/200), 'color': 'BeachTowels', 'addalpha': 50},
-        {'Background': bg_black, 'n': 90, 'v': int(w/30), 'color': 'bw'},
-        {'Background': bg_black, 'n': 90, 'v': int(w/30), 'color': 'wryb'},
-        {'Background': bg_black, 'n': 90, 'v': int(w/30), 'color': 'Number3'},
+        {'Background': bg_white, 'n': n, 'v': 1/30, 'addalpha': 0},
+        {'Background': bg_white, 'n': n, 'v': 1/30, 'addalpha': 90},
+        {'Background': bg_white, 'n': n, 'v': 1/30, 'addalpha': 60},
+        {'Background': bg_white, 'n': n, 'v': 1/200, 'addalpha': 0},
+        {'Background': bg_white, 'n': n, 'v': 1/200, 'addalpha': 90},
+        {'Background': bg_white, 'n': n, 'v': 1/200, 'addalpha': 60},
+        {'Background': bg_white, 'n': n, 'v': 1/4, 'addalpha': 90}, # w/o addalpha lame
+        {'Background': bg_white, 'n': n, 'v': 1/4, 'addalpha': 60}, # w/o addalpha lame
     ]
+    a = mux_param(a, 'color', ['happy', 'yorb', 'wryb', 'BeachTowels', 'Number3' , 'bw', 'bgo', 'MoonlightBytes6', 'MetroUI', 'ProgramCat'])
     return append_dflts(a, 'SMEARS#17', mazy17, w, h)
 
 def predef_mazy18(w, h):
@@ -591,11 +581,16 @@ def predef_mazy18(w, h):
         {'Background': bg_white, 'n': 40, 'm': 120, 'v': 50},
         {'Background': bg_white, 'n': 60, 'm': 16, 'v': 80},
         {'Background': bg_white, 'n': 90, 'm': 30, 'v': 20},
-        {'Background': bg_white, 'n': 90, 'm': 400, 'v': 100},
+        {'Background': bg_white, 'n': 90, 'm': 300, 'v': 100},
         {'Background': bg_white, 'n': 120, 'm': 40, 'v': 20},
         {'Background': bg_white, 'n': 160, 'm': 40, 'v': 20, 'r0v': 250},
+
+        {'Background': bg_white, 'multi': [
+            {'n': 30, 'm': 20, 'v': 200},
+            {'n': 30, 'm': 20, 'v': 10},
+         ]}, # new concept - interesting, work it more
     ]
-    a = mux_param(a, 'color', ['happy', 'yorb', 'BeachTowels'])
+    a = mux_param(a, 'color', ['happy', 'yorb', 'wryb', 'BeachTowels', 'Number3'])
     return append_dflts(a, 'SMEARS#18', mazy18, w, h)
 
 def predef_mazy19(w, h):
@@ -837,7 +832,7 @@ predefs = {'mazy01': predef_mazy1, 'mazy02': predef_mazy2, 'mazy03': predef_mazy
            'mazy17': predef_mazy17, 'mazy18': predef_mazy18, 'mazy19': predef_mazy19, 'mazy20': predef_mazy20,
            'mazy21': predef_mazy21, 'mazy22': predef_mazy22, 'mazy23': predef_mazy23, 'mazy24': predef_mazy24,
            'mazy25': predef_mazy25, 'mazy26': predef_mazy26, 'mazy27': predef_mazy27, 'mazy28': predef_mazy28,
-           #'mazy29': predef_mazy29, 'mazy30': predef_mazy30, 'mazy31': predef_mazy31, 'mazy32': predef_mazy32,
+           'mazy29': predef_mazy29, #'mazy30': predef_mazy30, 'mazy31': predef_mazy31, 'mazy32': predef_mazy32,
            'life': predef_life, 'lissajous': predef_lissajous, 'astro': predef_astro, 'mandelbrot': predef_mandelbrot,
            }
 
@@ -847,7 +842,7 @@ predef_names = [
         'mazy09', 'mazy10', 'mazy11', 'mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16',
         'mazy17', 'mazy18', 'mazy19', 'mazy20', 'mazy21', 'mazy22', 'mazy23', 'mazy24',
         'mazy25', 'mazy26', 'mazy27', 'mazy28',
-        #'mazy29', 'mazy30', 'mazy31', 'mazy32',
+        'mazy29', #'mazy30', 'mazy31', 'mazy32',
         'astro', 'life', 'lissajous', 'mandelbrot'
         ]
 

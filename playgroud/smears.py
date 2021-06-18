@@ -5,35 +5,36 @@
 # experimental 'smears' paint algorithms, v1.0 - core algorithm definitions
 # (c)2017-2021 MoNsTeR/GDC, Noniewicz.com, Noniewicz.art.pl, Jakub Noniewicz
 
-# #01 'cruel red smears', not only red (...)
-# #02 circle worms (tested, ok)
-# #03 crazy trangles (tested, ok) --- finish: more par
-# #04 self-crossed filled polygons (tested, ok)
-# #05 star flowers (...)
-# #06 circle ripples - co-centered circle groups (...) --- finish: par + misc
-# #07 random rectangles - grayish and colorish rects mess (tested, ok) --- finish: new colorer proper
-# #08 just rectangles, may flux (tested, ok) --- finish: new params, more variants in defs
-# #09 'Warp' effect - triangle rays from center, opt center point shifted rnd (tested, ok)
-# #10 long beziers (...)
-# #11 horizontal gradients with suprizes (tested, ok)
-# #12 opart-like boxes/circles/triangles (tested, ok/so-so)
-# #13 opart-like single big poly (tested, ok)
-# #14 opart-like cicrles xor-cut by triangles (tested, ok)
-# #15 opart-like or color circle-interference patterns, predictable (no rnd parts) (tested, ok)
-# #16 opart-like circles (tested, ok)
-# #17 scottish grid (tested, so-so)
-# #18 slim colorful circles (tested, ok)
-# #19 opart-like grid (tested, ok)
-# #20 opart-like / papercut-like / video feedback-like 'dragon' effect (tested, ok)
-# #21 opart-like scaled and pasted frames (testd, ok)
-# #22 pie slice effects (...) --- finish: reduce total count, mimosrod opt?
-# #23 Sierpinski's triangle fractal (testd, ok)
-# #24 rotated traingles, predictable (no rnd parts) (tested, ok) --- finish: reduce total count, more par ver, mimosrod opt, a scale par
-# #25 waves#1 (tested, ok) --- finish: more par
-# #26 waves#2 (tested, ok) --- finish: more par, simplify code
-# #27 (...)
-# #28 (...)
-# #29 
+# #01 [...] 'cruel red smears', not only red
+# #02 [tested, ok] circle worms
+# #03 [tested, ok] crazy trangles --- finish: more par, opt less random?
+# #04 [tested, ok] self-crossed filled polygons
+# #05 [...] star flowers
+# #06 [...] circle ripples - co-centered circle groups --- finish: par + misc
+# #07 [tested, ok] random rectangles - grayish and colorish rects mess --- finish: new colorer proper
+# #08 [tested, ok] just rectangles, may flux --- finish: new params, more variants in defs
+# #09 [tested, ok] 'Warp' effect - triangle rays from center, opt center point shifted rnd
+# #10 [...] long beziers
+# #11 [tested, ok] horizontal gradients with suprizes
+# #12 [tested, ok/so-so] opart-like boxes/circles/triangles
+# #13 [tested, ok] opart-like single big poly (like #04?)
+# #14 [tested, ok] opart-like cicrles xor-cut by triangles
+# #15 [tested, ok, predictable] opart-like or color circle-interference patterns
+# #16 [tested, ok] opart-like circles
+# #17 [tested, ok] scottish-like grid --- finish: postproc satur 75 up + light 10 up? | 0,0 missing in rnd issue
+# #18 [tested, ok] slim colorful circles --- finish: more par or var th*, more with self-call
+# #19 [tested, ok, predictable] opart-like grid
+# #20 [tested, ok, predictable] opart-like / papercut-like / video feedback-like 'dragon' effect
+# #21 [tested, ok, predictable] opart-like scaled and pasted frames
+# #22 [...] pie slice effects --- finish: reduce total count, mimosrod opt?
+# #23 [tested, ok] Sierpinski's triangle fractal
+# #24 [tested, ok, predictable] rotated traingles --- finish: reduce total count, more par ver, mimosrod opt, a scale par
+# #25 [tested, ok] waves#1 --- finish: more par
+# #26 [tested, ok] waves#2 --- finish: more par, simplify code
+# future fun:
+# #27 [...]
+# #28 [...]
+# #29 [...]
 # #30
 # #31
 # #32 
@@ -49,22 +50,28 @@
 # upd: 20200507, 10
 # upd: 20210106, 15, 16, 19, 20, 21, 22
 # upd: 20210515, 16, 22, 23, 24, 25, 26, 27
-# upd: 20210606, 07, 10, 11, 12, 13
+# upd: 20210606, 07, 10, 11, 12, 13, 14, 17, 18
 
 # see:
-# https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
-# http://pillow.readthedocs.io/en/5.1.x/reference/ImageFilter.html
+# https://pillow.readthedocs.io/en/stable/
+
+# note: now required at least pillow version 5.3.0, tested on 7.2.0, my prev was 5.0.0
 
 # TODO:
 # - ?
 
 
-from PIL import Image, ImageDraw, ImageChops, ImageOps
-#from PIL import ImageMorph, ImageMath # test
-import random, math, string, os, sys
+from PIL import Image, ImageDraw, ImageChops, ImageOps #, ImageMorph, ImageMath # test
+import random, math, string, os, sys, copy
 from bezier import make_bezier
 from drawtools import *
 from color_defs import *
+
+
+"""
+import PIL
+print('PIL',PIL.__version__)
+"""
 
 # ---
 
@@ -763,17 +770,17 @@ def mazy16(draw, params):
         circle(draw, int(w/2+xs2), int(h/2+ys2), r, fill=co, outline=ou)
 
 def mazy17(draw, params):
-    """ Scottish grid """
+    """ Scottish-like grid """
     w, h, cnt = init_common(params)
-    v = params['v']
-    if v < 1:
-        v = 1
+    vv = params['v']
+    v = int(w*vv)
 
     for z in range(cnt):
         ndx = random.randint(0, cnt)
         color = new_colorer(params['color'], ndx, cnt)
         if 'addalpha' in params:
-            color = add_alpha(color, params['addalpha'])
+            if params['addalpha'] > 0:
+                color = add_alpha(color, params['addalpha'])
         x = random.randint(0, w)
         y = random.randint(0, h)
         lw = random.randint(1, v)
@@ -785,6 +792,18 @@ def mazy17(draw, params):
 def mazy18(draw, params):
     """ Random circle bundles """
     w, h, cnt = init_common(params)
+
+    if 'multi' in params:
+        multi = params['multi']
+        for p in multi:
+            p['w'] = params['w']
+            p['h'] = params['h']
+            p['call'] = params['call']
+            p['color'] = params['color']
+            p['name'] = params['name']
+            mazy18(draw, p)
+        return
+
     v = params['v']
     r0v = w
     if 'r0v' in params:
@@ -797,11 +816,17 @@ def mazy18(draw, params):
         for m in range(params['m']):
             r = r0 + random.randint(-v, v)
             color = new_colorer(params['color'], n, cnt) # note: alpha for outline does not seem to work
-            for th in range(5): # test/par
-                circle(draw, x, y, r+th*0.15, fill=None, outline=color)
+            thn = 3 # par
+            thd = 0.2 # par
+            thw = 2 # par
+            for th in range(thn):
+                circle(draw, x, y, r+th*thd, fill=None, outline=color, width=thw) # note width, v 5.3.0+
+# was
+#            for th in range(5):
+#                circle(draw, x, y, r+th*0.15, fill=None, outline=color)
 
 def mazy19(draw, params):
-    """ Chequered opart grids with x variations """
+    """ Chequered opart grids with x variations, predictable (no rnd parts) """
     w, h, cnt = init_common(params)
     c = math.pi/180
     nx = cnt
@@ -867,7 +892,7 @@ def mazy19(draw, params):
             draw.rectangle(xy, fill=cx, outline=None)
 
 def mazy20(draw, params):
-    """ opart-like / papercut-like / video feedback-like 'dragon' effect """
+    """ opart-like / papercut-like / video feedback-like 'dragon' effect, predictable (no rnd parts) """
     w, h, cnt = init_common(params)
     da = params['da']
     dd = 10 # dflt
@@ -900,7 +925,7 @@ def mazy20(draw, params):
             params['im'] = invert_image(params['im'])
 
 def mazy21(draw, params):
-    """ opart-like scaled and pasted frames """
+    """ opart-like scaled and pasted frames, predictable (no rnd parts) """
     w, h, cnt = init_common(params)
     dx = int(w/10)
     dy = int(h/10)
@@ -1308,9 +1333,97 @@ def mazy28(draw, params):
 
 def mazy29(draw, params):
     """ ? """
+    # note: hrad one, probably will fail
     w, h, cnt = init_common(params)
-    # ...
-    return 0
+    c = math.pi/180
+
+    color = (255,255,255)
+    hb = int(h/10)
+    y0 = (hb/2)
+    cnt = 300
+    dx = int(w/cnt)
+    bcnt = 5
+
+    def f1(p):
+        x = p[0]
+        y = p[1] + hb*2
+        return (x, y)
+
+    po = [] # build one model block
+    po.append((0,y0))
+    for n in range(cnt):
+        pn = (dx*n, y0)
+        po.append(pn)
+    po.append((w, y0))
+    po.append((w, y0+hb))
+    for n in range(cnt):
+        po.append((w-dx*n, y0+hb))
+    po.append((0, y0+hb))
+
+    poall = [None] * bcnt # copy block bcnt times
+    for n in range(bcnt):
+        if n == 0:
+            poall[n] = copy.deepcopy(po)
+        else:
+            po[:] = (f1(p) for p in po)
+            poall[n] = copy.deepcopy(po)
+
+    s1 = 1
+    s2 = 1 + cnt + 2
+
+    # test sin wave - remove later?
+    for n in range(bcnt):
+        for x in range(cnt):
+            #fn = 30*math.sin(c*x/cnt*360*4
+            fn = 0
+            for f in range(10):
+                fn += (20+f*2)*math.sin(c*x/cnt*360*(1+f*2))
+            tup = poall[n][s1+x]
+            tup = (tup[0], tup[1]+fn) # change y-s
+            poall[n][s1+x] = tup
+            tup = poall[n][s2+cnt-x]
+            tup = (tup[0], tup[1]+fn) # change y-s
+            poall[n][s2+cnt-x] = tup
+
+    """
+    def dist(p, sm):
+        start = sm['start']
+        ds = math.sqrt((start[0]-p[0])*(start[0]-p[0])+(start[1]-p[1])*(start[1]-p[1]))
+        is_affecting = ds < sm['radius']
+        inte = sm['intensity']*math.exp(-ds*0.05)*1000
+        intex = inte*math.cos(c*sm['angle'])
+        intey = inte*math.sin(c*sm['angle'])
+        return ds, inte, intex, intey, is_affecting
+
+    def apply_smear(sm):
+        for m in range(cnt):
+            for n in range(bcnt):
+                tup = poall[n][s1+m]
+                ds, inte, intex, intey, is_affecting = dist(tup, sm)
+                if is_affecting:
+                    tup = (tup[0]+intex, tup[1]+intey) # change
+                    poall[n][s1+m] = tup
+                tup = poall[n][s2+cnt-m]
+                ds, inte, intex, intey, is_affecting = dist(tup, sm)
+                if is_affecting:
+                    tup = (tup[0]+intex, tup[1]+intey) # change
+                    poall[n][s2+cnt-m] = tup
+
+    # todo: smear with intensity ~ 1/range and params: angle + radius + strength + len
+    sme1 = {'start': (w/2, h/2), 'angle': 45, 'radius': 400, 'intensity': 100, 'length': 300}
+    apply_smear(sme1)
+    sme2 = {'start': (w/4, h/4), 'angle': 15, 'radius': 400, 'intensity': 100, 'length': 300}
+    apply_smear(sme2)
+    """
+
+    for n in range(bcnt):
+        #po = poall[n]
+        po = poall[bcnt-1-n] # rev order for test
+        color = (255,255, int(255*n/bcnt))
+        draw.polygon(po, fill=color, outline=None)
+    #circle(draw, sme1['start'][0], sme1['start'][1], sme1['radius'], fill=None, outline=(0,0,255))
+    #circle(draw, sme2['start'][0], sme2['start'][1], sme2['radius'], fill=None, outline=(0,0,255))
+
 
 def mazy30(draw, params):
     """ ? """
