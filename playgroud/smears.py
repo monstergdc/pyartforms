@@ -820,7 +820,7 @@ def mazy18(draw, params):
             thd = 0.2 # par
             thw = 2 # par
             for th in range(thn):
-                circle(draw, x, y, r+th*thd, fill=None, outline=color, width=thw) # note width, v 5.3.0+
+                circle_w(draw, x, y, r+th*thd, fill=None, outline=color, width=thw) # note width, v 5.3.0+
 # was
 #            for th in range(5):
 #                circle(draw, x, y, r+th*0.15, fill=None, outline=color)
@@ -1086,7 +1086,7 @@ def mazy23(draw, params):
         triangle(draw, po, fill=c2, outline=None)
         m23(draw, limit-1, a, htr, fix_x, fix_y)
 
-    a = h-dd-dd # start side len
+    a = h-dd-dd # start side len, todo: try par >> w?
     wo = (w-a)/2
     htr = 0.5 * math.sqrt(3) * a # start triangle h
     po = [(wo, h-dd), (wo+a/2, h-dd-htr), (wo+a, h-dd)]

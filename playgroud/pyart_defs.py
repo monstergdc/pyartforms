@@ -581,9 +581,16 @@ def predef_mazy18(w, h):
         {'Background': bg_white, 'n': 40, 'm': 120, 'v': 50},
         {'Background': bg_white, 'n': 60, 'm': 16, 'v': 80},
         {'Background': bg_white, 'n': 90, 'm': 30, 'v': 20},
-        {'Background': bg_white, 'n': 90, 'm': 300, 'v': 100},
+        {'Background': bg_white, 'n': 90, 'm': 120, 'v': 100},
         {'Background': bg_white, 'n': 120, 'm': 40, 'v': 20},
-        {'Background': bg_white, 'n': 160, 'm': 40, 'v': 20, 'r0v': 250},
+        {'Background': bg_white, 'n': 180, 'm': 40, 'v': 20, 'r0v': 300},
+
+        {'Background': bg_white, 'multi': [
+            {'n': 60, 'm': 16, 'v': 80},
+            {'n': 90, 'm': 30, 'v': 20},
+            {'n': 120, 'm': 40, 'v': 20, 'r0v': 250},
+            {'n': 60, 'm': 40, 'v': 20, 'r0v': 500},
+         ]}, # new concept - interesting, work it more
 
         {'Background': bg_white, 'multi': [
             {'n': 30, 'm': 20, 'v': 200},
