@@ -81,6 +81,14 @@ def rect(draw, x, y, w, h, fill, outline):
 def triangle(draw, points, fill, outline):
     draw.polygon(points, fill=fill, outline=outline)
 
+def nsided(draw, n, x, y, r, a0, fill, outline):
+    c = math.pi/180
+    points = []
+    for i in range(n):
+        a = c*(float(360)*(i/n)+a0)
+        points.append((x + r * math.cos(a), y + r * math.sin(a)))
+    draw.polygon(points, fill=fill, outline=outline)
+
 def gradient(colorStart, colorMid, colorEnd, i, n):
     """ Return gradient color i of n in colorStart..colorMid..colorEnd range """
     # note: weird, py 2.7 needs these float conversions, on 3.6 it was ok

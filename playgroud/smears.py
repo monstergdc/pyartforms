@@ -9,7 +9,7 @@
 # #02 [tested, ok] circle worms
 # #03 [tested, ok] crazy trangles --- finish: more par, opt less random?
 # #04 [tested, ok] self-crossed filled polygons
-# #05 [...] star flowers
+# #05 [...] star flowers --- finish: a lot here
 # #06 [...] circle ripples - co-centered circle groups --- finish: par + misc
 # #07 [tested, ok] random rectangles - grayish and colorish rects mess --- finish: new colorer proper
 # #08 [tested, ok] just rectangles, may flux --- finish: new params, more variants in defs
@@ -18,16 +18,16 @@
 # #11 [tested, ok] horizontal gradients with suprizes
 # #12 [tested, ok/so-so] opart-like boxes/circles/triangles
 # #13 [tested, ok] opart-like single big poly (like #04?)
-# #14 [tested, ok] opart-like cicrles xor-cut by triangles
+# #14 [tested, ok/so-so] opart-like cicrles xor-cut by triangles
 # #15 [tested, ok, predictable] opart-like or color circle-interference patterns
-# #16 [tested, ok] opart-like circles
+# #16 [tested, ok, predictable] opart-like circles
 # #17 [tested, ok] scottish-like grid --- finish: postproc satur 75 up + light 10 up? | 0,0 missing in rnd issue
 # #18 [tested, ok] slim colorful circles --- finish: more par or var th*, more with self-call
 # #19 [tested, ok, predictable] opart-like grid
 # #20 [tested, ok, predictable] opart-like / papercut-like / video feedback-like 'dragon' effect
 # #21 [tested, ok, predictable] opart-like scaled and pasted frames
 # #22 [...] pie slice effects --- finish: reduce total count, mimosrod opt?
-# #23 [tested, ok] Sierpinski's triangle fractal
+# #23 [tested, ok, predictable] Sierpinski's triangle fractal
 # #24 [tested, ok, predictable] rotated traingles --- finish: reduce total count, more par ver, mimosrod opt, a scale par
 # #25 [tested, ok] waves#1 --- finish: more par
 # #26 [tested, ok] waves#2 --- finish: more par, simplify code
@@ -50,7 +50,7 @@
 # upd: 20200507, 10
 # upd: 20210106, 15, 16, 19, 20, 21, 22
 # upd: 20210515, 16, 22, 23, 24, 25, 26, 27
-# upd: 20210606, 07, 10, 11, 12, 13, 14, 17, 18
+# upd: 20210606, 07, 10, 11, 12, 13, 14, 17, 18, 19
 
 # see:
 # https://pillow.readthedocs.io/en/stable/
@@ -744,7 +744,7 @@ def mazy15(draw, params):
     imout = None
 
 def mazy16(draw, params):
-    """ Opart-like circles """
+    """ Opart-like circles, predictable (no rnd parts) """
     w, h, cnt = init_common(params)
     c = math.pi/180
     if w > h:
@@ -1025,7 +1025,7 @@ def mazy22(draw, params):
             a_e = a_e + da
 
 def mazy23(draw, params):
-    """ Sierpinski's triangle fractal """
+    """ Sierpinski's triangle fractal, predictable (no rnd parts) """
     # https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle
     w, h, cnt = init_common(params)
     limit0 = cnt
@@ -1428,8 +1428,32 @@ def mazy29(draw, params):
 def mazy30(draw, params):
     """ ? """
     w, h, cnt = init_common(params)
-    # ...
-    return 0
+    colorer = params['colorer']
+    # todo: multi par
+    minsides = 3
+    maxsides = 8
+    maxangle = 90
+    rmin = int(h/60)
+    rmax = h # h/2 # h/4
+    rsc = 0.996
+
+    ofs = int(h/4)
+    for n in range(cnt):
+        color = new_colorer(colorer, n, cnt)
+        if 'addalpha' in params:
+            color = add_alpha(color, params['addalpha'])
+        r = random.randint(rmin, int(rmax))
+        cx = random.randint(-ofs, w+ofs)
+        cy = random.randint(-ofs, h+ofs)
+        a = 0
+        if maxangle > 0:
+            a = random.randint(0, maxangle)
+        sides = random.randint(minsides, maxsides)
+        nsided(draw, sides, cx, cy, r, a, color, None)
+        if rsc > 0:
+            rmax = rmax * rsc
+            if rmax < rmin:
+                rmax = rmin
 
 def mazy31(draw, params):
     """ ? """
