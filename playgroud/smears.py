@@ -31,11 +31,11 @@
 # #24 [tested, ok, predictable] rotated traingles --- finish: reduce total count, more par ver, mimosrod opt, a scale par
 # #25 [tested, ok] waves#1 --- finish: more par
 # #26 [tested, ok] waves#2 --- finish: more par, simplify code
+# #27 [tested, ok] multishaped polygon mess --- finish: more par
 # future fun:
-# #27 [...]
 # #28 [...]
 # #29 [...]
-# #30
+# #30 [...]
 # #31
 # #32 
 
@@ -50,7 +50,7 @@
 # upd: 20200507, 10
 # upd: 20210106, 15, 16, 19, 20, 21, 22
 # upd: 20210515, 16, 22, 23, 24, 25, 26, 27
-# upd: 20210606, 07, 10, 11, 12, 13, 14, 17, 18, 19
+# upd: 20210606, 07, 10, 11, 12, 13, 14, 17, 18, 19, 20
 
 # see:
 # https://pillow.readthedocs.io/en/stable/
@@ -1256,56 +1256,69 @@ def mazy26(draw, params):
         draw.polygon(points1, fill=color, outline=color)
         draw.polygon(points2, fill=color, outline=color)
 
-# future fun
-
 def mazy27(draw, params):
-    """ ? """
+    """ multishaped polygon mess """
     w, h, cnt = init_common(params)
-    w2 = int(w/2)
-    h2 = int(h/2)
+    colorer = params['colorer']
+    addalpha = 0
+    if 'addalpha' in params:
+        addalpha = params['addalpha']
+    saturation_factor = 1.5 # dflt
+    if 'saturation' in params:
+        saturation_factor = params['saturation']
+    minsides = 3
+    maxsides = 8
+    if 'minsides' in params:
+        minsides = params['minsides']
+    if 'maxsides' in params:
+        maxsides = params['maxsides']
+    if minsides < 3:
+        minsides = 3
+    if maxsides < 3:
+        maxsides = 3
+    maxangle = 90
+    if 'maxangle' in params:
+        maxangle = params['maxangle']
 
-    po = []
-    cnt = 100*2 # par
-    r0 = h*0.3 # par
-    v = 200+100 # par
-    sc = 1.0 # par
-    rv = 200 # par
-    asc = 10 # par 6 50
+    rmin = int(h/30)
+    if 'rmin' in params:
+        rmin = params['rmin']
+    rmax = h/4 # h h/2 # h/4
+    if 'rmax' in params:
+        rmax = params['rmax']
+    rsc = 0.997 # 0
+    if 'rsc' in params:
+        rsc = params['rsc']
+
+    ofs = int(h/4) # centers this much off-screen
     for n in range(cnt):
-        a = math.pi/180 * 360 * float(n/cnt) # par
-        rv = random.randint(100,500) # test
-        r = r0 + sc * (rv * math.sin(asc*a))
-        #r = r0
-        po.append((int(w2+r*math.cos(a)), int(h2+r*math.sin(a))))
-
-    def fr0(p):
-        # par x2
-        if random.randint(0, 100) > 80:
-            return (p[0]+random.randint(-v,v), p[1]+random.randint(-v,v))
-            #return (p[0]+random.randint(-v,v), p[1])
+        color = new_colorer(colorer, n, cnt)
+        if addalpha > 0:
+            color = add_alpha(color, addalpha)
+        r = random.randint(rmin, int(rmax))
+        cx = random.randint(-ofs, w+ofs)
+        cy = random.randint(-ofs, h+ofs)
+        if maxangle > 0:
+            a = random.randint(0, maxangle)
         else:
-            return p
+            a = 0
+        sides = random.randint(minsides, maxsides)
+        nsided(draw, sides, cx, cy, r, a, color, None)
+        if rsc > 0:
+            rmax = rmax * rsc
+            if rmax < rmin:
+                rmax = rmin
+    if addalpha > 0 and saturation_factor > 0:
+        params['im'] = enhace(params['im'], saturation_factor)
 
-    def fr(p):
-        return p
-        #return (p[0]+random.randint(-v,v), p[1]+random.randint(-v,v))
-
-    po[:] = (fr(xy) for xy in po)
-    draw.polygon(po, fill=(255, 255, 0), outline=None) # par
-    po.append((po[0][0], po[0][1]))
-    draw.line(po, fill=(255,0,0), width=3) # par
-
-    # opt
-    #ts = [t/2000.0 for t in range(2001)]
-    #ts = [t/20.0 for t in range(21)]
-    #bezier = make_bezier(po)
-    #points = bezier(ts)
-    #draw.polygon(points, fill=(255, 0, 0), outline=(255,255,255))
+# future fun
 
 def mazy28(draw, params):
     """ ? """
+    # fin or remove
     w, h, cnt = init_common(params)
     c = math.pi/180
+
     cnt = 400
     sx = int(w/cnt)
     color = (0xd4,0x8a,0x3e)
@@ -1333,7 +1346,7 @@ def mazy28(draw, params):
 
 def mazy29(draw, params):
     """ ? """
-    # note: hrad one, probably will fail
+    # note: hard one, probably will fail
     w, h, cnt = init_common(params)
     c = math.pi/180
 
@@ -1424,36 +1437,51 @@ def mazy29(draw, params):
     #circle(draw, sme1['start'][0], sme1['start'][1], sme1['radius'], fill=None, outline=(0,0,255))
     #circle(draw, sme2['start'][0], sme2['start'][1], sme2['radius'], fill=None, outline=(0,0,255))
 
-
 def mazy30(draw, params):
     """ ? """
     w, h, cnt = init_common(params)
-    colorer = params['colorer']
-    # todo: multi par
-    minsides = 3
-    maxsides = 8
-    maxangle = 90
-    rmin = int(h/60)
-    rmax = h # h/2 # h/4
-    rsc = 0.996
+    w2 = int(w/2)
+    h2 = int(h/2)
 
-    ofs = int(h/4)
+    cnt = 100*2 # par
+    r0 = h*0.3 # par
+    v = 200+100 # par
+    sc = 1.0 # par
+    rv = 200 # par
+    asc = 10 # par 6 50
+
+    po = []
     for n in range(cnt):
-        color = new_colorer(colorer, n, cnt)
-        if 'addalpha' in params:
-            color = add_alpha(color, params['addalpha'])
-        r = random.randint(rmin, int(rmax))
-        cx = random.randint(-ofs, w+ofs)
-        cy = random.randint(-ofs, h+ofs)
-        a = 0
-        if maxangle > 0:
-            a = random.randint(0, maxangle)
-        sides = random.randint(minsides, maxsides)
-        nsided(draw, sides, cx, cy, r, a, color, None)
-        if rsc > 0:
-            rmax = rmax * rsc
-            if rmax < rmin:
-                rmax = rmin
+        a = math.pi/180 * 360 * float(n/cnt) # par
+        rv = random.randint(100,500) # test
+        r = r0 + sc * (rv * math.sin(asc*a))
+        #r = r0
+        po.append((int(w2+r*math.cos(a)), int(h2+r*math.sin(a))))
+
+    def fr0(p):
+        # par x2
+        if random.randint(0, 100) > 80:
+            return (p[0]+random.randint(-v,v), p[1]+random.randint(-v,v))
+            #return (p[0]+random.randint(-v,v), p[1])
+        else:
+            return p
+
+    def fr(p):
+        return p
+        #return (p[0]+random.randint(-v,v), p[1]+random.randint(-v,v))
+
+    po[:] = (fr(xy) for xy in po)
+    draw.polygon(po, fill=(255, 255, 0), outline=None) # par
+    po.append((po[0][0], po[0][1]))
+    draw.line(po, fill=(255,0,0), width=3) # par
+
+    # opt
+    if False:
+        ts = [t/2000.0 for t in range(2001)]
+        #ts = [t/20.0 for t in range(21)]
+        bezier = make_bezier(po)
+        points = bezier(ts)
+        draw.polygon(points, fill=(255, 0, 0), outline=(255,255,255))
 
 def mazy31(draw, params):
     """ ? """

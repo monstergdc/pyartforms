@@ -11,7 +11,7 @@
 # upd: 20200507, 10
 # upd: 20210106
 # upd: 20210515, 16, 22, 23, 24, 26, 27
-# upd: 20210606, 07, 10, 11, 12, 13, 18, 19
+# upd: 20210606, 07, 10, 11, 12, 13, 18, 19, 20
 
 
 # TODO:
@@ -781,9 +781,17 @@ def predef_mazy26(w, h):
     return append_dflts(a, 'SMEARS#26', mazy26, w, h)
 
 def predef_mazy27(w, h):
+    n = 300*3
+# TODO:
+# rmin = int(h/30)
+# rmax = h/4 # h h/2 # h/4
     a = [
-        {'Background': bg_white, 'n': 1},
+        {'Background': bg_white, 'n': n},
+        {'Background': bg_white, 'n': n, 'minsides': 6, 'maxsides': 6, 'maxangle': 0},
     ]
+    a = mux_param(a, 'rsc', [0.997, 0.99, 0])
+    a = mux_param(a, 'addalpha', [0, 140, 90])
+    a = mux_param(a, 'colorer', ['happy', 'wryb', 'yorb', 'Number3', 'ProgramCat'])
     return append_dflts(a, 'SMEARS#27', mazy27, w, h)
 
 def predef_mazy28(w, h):
@@ -800,12 +808,8 @@ def predef_mazy29(w, h):
 
 def predef_mazy30(w, h):
     a = [
-        {'Background': bg_white, 'n': 300*3},
-        {'Background': bg_white, 'n': 300*3, 'addalpha': 140},
-        {'Background': bg_white, 'n': 300*3, 'addalpha': 90},
-        {'Background': bg_white, 'n': 300*20, 'addalpha': 50},
+        {'Background': bg_white, 'n': 1},
     ]
-    a = mux_param(a, 'colorer', ['happy', 'wryb', 'yorb', 'Number3', 'ProgramCat'])
     return append_dflts(a, 'SMEARS#30', mazy30, w, h)
 
 def predef_mazy31(w, h):

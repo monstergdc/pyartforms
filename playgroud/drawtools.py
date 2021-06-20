@@ -9,9 +9,9 @@
 # upd: 20190414, 21
 # upd: 20210301
 # upd: 20210507, 15, 23, 26, 27
-# upd: 20210606, 07, 11, 12, 18, 19
+# upd: 20210606, 07, 11, 12, 18, 19, 20
 
-from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin, ImageFont, ImageOps
+from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin, ImageFont, ImageOps, ImageEnhance
 from datetime import datetime as dt
 import random, math, string, os, sys, io
 from array import array
@@ -263,6 +263,13 @@ def xsmooth(im):
     im = im.filter(ImageFilter.SHARPEN)
     im = im.filter(ImageFilter.SHARPEN)
     return im
+
+def enhace(image, saturation_factor):
+    """ Enhance image color saturation """
+    if saturation_factor <= 0:
+        return image
+    enhancer = ImageEnhance.Color(image)
+    return enhancer.enhance(saturation_factor)
 
 def invert_image(image):
     """ Inverse image """
