@@ -9,11 +9,11 @@
 # upd: 20190414, 21
 # upd: 20210301
 # upd: 20210507, 15, 23, 26, 27
-# upd: 20210606, 07, 11, 12, 18, 19, 20
+# upd: 20210606, 07, 11, 12, 18, 19, 20, 21
 
 from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin, ImageFont, ImageOps, ImageEnhance
 from datetime import datetime as dt
-import random, math, string, os, sys, io
+import random, math, string, os, sys, io, copy
 from array import array
 import numpy as np
 import cgi
@@ -140,9 +140,12 @@ def add_myself(draw, w, h, bg):
 def append_myself(params):
     """ Append some tags to PNG image """
     title = 'PyArtForms '+params['name']
-    p1 = params
-    p1['im'] = None
-    p1['call'] = None
+    #p1 = params
+    #p1['im'] = None
+    #p1['call'] = None
+    p1 = copy.deepcopy(params)
+    del p1['im']
+    del p1['call']
     sp = str(p1)
     x = PngImagePlugin.PngInfo()
     today = dt.today()
@@ -150,7 +153,7 @@ def append_myself(params):
     y = today.year
     x.add_text(key='Title', value=title, zip=False)
     x.add_text(key='Description', value='generated in PyArtForms @'+sdt+'\r\n'+sp, zip=False)
-    x.add_text(key='Author', value='Jakub Noniewicz', zip=False)
+    x.add_text(key='Author', value='Jakub Noniewicz aka MoNsTeR/GDC', zip=False)
     x.add_text(key='Copyright', value='(c)'+str(y)+' Jakub Noniewicz | noniewicz.com | noniewicz.art.pl', zip=False)
     x.add_itxt(key='Concept', value='PyArtForms concept by: Jakub Noniewicz | noniewicz.com | noniewicz.art.pl', lang='', tkey='', zip=False)
     return x
