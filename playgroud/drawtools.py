@@ -9,7 +9,7 @@
 # upd: 20190414, 21
 # upd: 20210301
 # upd: 20210507, 15, 23, 26, 27
-# upd: 20210606, 07, 11, 12, 18, 19, 20, 21
+# upd: 20210606, 07, 11, 12, 18, 19, 20, 21, 22
 
 from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin, ImageFont, ImageOps, ImageEnhance
 from datetime import datetime as dt
@@ -41,6 +41,13 @@ CANVASES = {
     'B2': (8350, 5905),
     'B1': (11811, 8350),
     'B0': (16700, 11811),
+
+    'HD': (1280, 720),
+    '720p': (1280, 720),
+    'FullHD': (1920, 1080),
+    '1080p': (1920, 1080),
+    '2K': (2048, 1152),
+    'UHD': (3840, 2160),
 
     '128': (128, 96),
     '256': (256, 192),
