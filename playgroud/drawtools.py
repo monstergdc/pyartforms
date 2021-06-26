@@ -9,7 +9,7 @@
 # upd: 20190414, 21
 # upd: 20210301
 # upd: 20210507, 15, 23, 26, 27
-# upd: 20210606, 07, 11, 12, 18, 19, 20, 21, 22
+# upd: 20210606, 07, 11, 12, 18, 19, 20, 21, 22, 23, 26
 
 from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin, ImageFont, ImageOps, ImageEnhance
 from datetime import datetime as dt
@@ -147,9 +147,6 @@ def add_myself(draw, w, h, bg):
 def append_myself(params):
     """ Append some tags to PNG image """
     title = 'PyArtForms '+params['name']
-    #p1 = params
-    #p1['im'] = None
-    #p1['call'] = None
     p1 = copy.deepcopy(params)
     del p1['im']
     del p1['call']
@@ -163,6 +160,7 @@ def append_myself(params):
     x.add_text(key='Author', value='Jakub Noniewicz aka MoNsTeR/GDC', zip=False)
     x.add_text(key='Copyright', value='(c)'+str(y)+' Jakub Noniewicz | noniewicz.com | noniewicz.art.pl', zip=False)
     x.add_itxt(key='Concept', value='PyArtForms concept by: Jakub Noniewicz | noniewicz.com | noniewicz.art.pl', lang='', tkey='', zip=False)
+    x.add_text(key='Software', value='PyArtForms', zip=False)
     return x
 
 def im2cgi(im, format='PNG'):
