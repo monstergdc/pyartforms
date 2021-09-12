@@ -63,12 +63,14 @@ def do_mazy(cnt, w, h, odir, name):
 
 # --- 
 
-#w, h = get_canvas('A0')
+#w, h = get_canvas('4A0') # can't even open locally
+#w, h = get_canvas('2A0') # ?
+#w, h = get_canvas('A0') # this?
 #w, h = get_canvas('A1') # fin - this or A0
 #w, h = get_canvas('A2')
 #w, h = get_canvas('A3')
-w, h = get_canvas('A4') # test - this
-#w, h = get_canvas('A5') # test - also this 4 speed
+#w, h = get_canvas('A4') # test - this
+w, h = get_canvas('A5') # test - also this 4 speed
 #w, h = get_canvas('A6') # small - this
 #w, h = get_canvas('A7')
 #w, h = get_canvas('1024')
@@ -90,7 +92,7 @@ predef_names1 = [
         'mazy25', 'mazy26', 'mazy27'
         ]
 
-predef_names1 = ['mazy25']
+predef_names1 = ['mazy27']
 for m in predef_names1:
     do_mazy(cnt, w, h, odir, m)
 
