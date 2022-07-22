@@ -104,21 +104,37 @@ def demo_private():
 
     params = {'w': w, 'h': h, 'bk': (255, 255, 255), 'coef': 0.9, 'scale': 1.0, 'rnd': True, 'rmin': 78, 'rmax': 98, 'brush': '.\\data\\brush-flowers-01.png', 'bxn': 3, 'byn': 3}
     #demo_looper(params, files=['zjawa2.jpg'], modes=['image'])
-    demo_looper(params, files=['xor1-256.png'], modes=['image'])
+    #demo_looper(params, files=['xor1-256.png'], modes=['image'])
+    #demo_looper(params, files=['cosik1-waveOfAnxiety-mix-800.png'], modes=['poly', 'brush'])
 
+    params = {'w': w, 'h': h, 'bk': (255, 255, 255), 'coef': 0.9, 'scale': 1.0, 'rnd': True, 'rmin': 90, 'rmax': 110}
+
+    # todo: set bk black?
+    #demo_looper(params, files=['3d-cut-from-old2.png', '3d-cut-from-old4.png', 'notitleyet-revisited.png', 'god-revisited.png', 'galaxian-revisited.png'], modes=['brush'])
+#    demo_looper(params, files=['chlebway-revisited.png', 'infinity-revisited.png', 'jellyfish2k6big-revisited.png',
+#                               'mdream-revisited.png', 'me2cfi-revisited.png', 'mgckcat-revisited.png', 'tvdzis.jpg', 'welcttgrn02-revisited.png',
+#                               'namelessfaces-revisited.png', 'newenter-gb1-revisited.png'], modes=['brush'])
+    # TODO: 'curl5-revisited.png'
+
+    #demo_looper(params, files=['20100828 strange difference 02-640.png'], modes=['brush'])
+    demo_looper(params, files=['monster_1755++.png'], modes=['brush'])
+
+#
 # ---
 
 start_time = dt.now()
 root = '!output-repixel-test'
 odir = root+'/'
 indir = 'repixel-in/'
+#indir = 'repixel-in/GFX-MyWorks/'
 if not os.path.exists(root):
     os.makedirs(root)
 
 #w, h = get_canvas('A4') # test4
 #w, h = get_canvas('A3') # test3
 #w, h = get_canvas('A2') # test2
-w, h = get_canvas('A1') # final
+w, h = get_canvas('A1') # final 1
+w, h = get_canvas('A0') # final
 #w, h = get_canvas('800') # for web examples
 
 #w = 600

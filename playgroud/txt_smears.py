@@ -3,6 +3,7 @@
 
 # 20190328, 29
 # 20190401, 02, 14
+# 20210626
 
 # this one needs also ?
 
@@ -238,10 +239,10 @@ def txt_circle(params):
 
 # --- go
 
-
 #w, h = get_canvas('1024')
+w, h = get_canvas('A5')
 #w, h = get_canvas('A4')
-w, h = get_canvas('A3')
+#w, h = get_canvas('A3')
 #w, h = get_canvas('A2')
 #w, h = get_canvas('A1')
 
@@ -259,11 +260,25 @@ txt_grych = "GRYCH"
 txt_non = "Noniewicz.art.pl"
 txt_cn = '屁股' # dupa in CN, use NSimSun font
 txt_kon = "KONSTYTUCJA"
+txt_gen = 'Generative art'
 
 a1 = sentence1.split()
 a2 = sentence2.split()
 
 cnt = 1
+
+p = [
+    {'name': 'ga-mailbomb', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (255,255,255), 'txt': txt_gen, 'font': 'MAILBOMB.TTF', 'cnt': 40, 'mode': 1, 'cmode': 0},
+    {'name': 'ga-mailbomb', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (255,255,255), 'txt': txt_gen, 'font': 'MAILBOMB.TTF', 'cnt': 16, 'mode': 1, 'cmode': 0},
+    {'name': 'ga-mailbomb', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (255,255,255), 'txt': txt_gen, 'font': 'MAILBOMB.TTF', 'cnt': 16, 'mode': 1, 'cmode': 0, 'size': 600, 'dsize': 32},
+    ]
+
+for n in range(cnt):
+    tx = dt.now().strftime('%Y%m%d%H%M%S')
+    for i in range(len(p)):
+        art_painter(p[i], odir+'%s-%dx%d-%02d-%03d-%s.png' % (p[i]['name'], w, h, i+1, n+1, tx))
+
+quit()
 
 p = [
     {'name': 'txt-non-mailbomb', 'call': txt_rnd, 'w': w, 'h': h, 'Background': (255,255,255), 'txt': txt_non, 'font': 'MAILBOMB.TTF', 'cnt': 240, 'mode': 1, 'cmode': 0},
