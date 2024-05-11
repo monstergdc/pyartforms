@@ -1,15 +1,18 @@
 
-# PyArtForms - Python generative art forms paint algorithms (artificial artist)
+# PyArtForms - Python generative art forms paint algorithms (artificial artist), v1.0
+# (c)2017-2024 Noniewicz.com, Jakub Noniewicz aka MoNsTeR/GDC
 # some common code/tools
-# (c)2018-2021 Noniewicz.com
-# upd: 20180503, 08
-# upd: 20181020, 21
-# upd: 20190112, 19, 21, 22
-# upd: 20190311, 29
-# upd: 20190414, 21
-# upd: 20210301
-# upd: 20210507, 15, 23, 26, 27
-# upd: 20210606, 07, 11, 12, 18, 19, 20, 21, 22, 23, 26
+"""
+upd: 20180503, 08
+upd: 20181020, 21
+upd: 20190112, 19, 21, 22
+upd: 20190311, 29
+upd: 20190414, 21
+upd: 20210301
+upd: 20210507, 15, 23, 26, 27
+upd: 20210606, 07, 11, 12, 18, 19, 20, 21, 22, 23, 26
+upd: 20240511
+"""
 
 from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin, ImageFont, ImageOps, ImageEnhance
 from datetime import datetime as dt
@@ -19,9 +22,11 @@ import numpy as np
 import cgi
 
 
-# https://en.wikipedia.org/wiki/Paper_size
-
 CANVASES = {
+    """
+    Typical canvas/page/image sizes,
+    see also https://en.wikipedia.org/wiki/Paper_size
+    """
     'A7': (1240, 874),
     'A6': (1748, 1240), # note: almost like 10x15 cm photo
     'A5': (2480, 1748),
@@ -63,9 +68,11 @@ CANVASES = {
 }
 
 def get_canvas(name):
+    """ Get preefined canvas size by name """
     return CANVASES.get(name, (0,0))
 
 def get_canvas(name):
+    """ Get preefined canvas size by name """
     wh = CANVASES.get(name, (0,0))
     return wh[0], wh[1]
 
@@ -126,15 +133,14 @@ def gradient2(colorStart, colorEnd, i, n):
     return (r1, g1, b1)
 
 def script_it(draw, xy, font, size, fill):
-    """ ? """
+    """ Draw (my) signature """
     fnt = ImageFont.truetype(font, size)
-    draw.text(xy, "Jakub.Noniewicz.art.pl", font=fnt, fill=fill)
+    draw.text(xy, "By Jakub@Noniewicz.com", font=fnt, fill=fill)
 
 def add_myself(draw, w, h, bg):
-    """ Paint image authorship """
-    # note: needs local font on server
-    SELF_FONT = './data/timesbi.ttf'
-    txt = "Jakub.Noniewicz.art.pl"
+    """ Paint (my) image authorship """
+    SELF_FONT = './data/timesbi.ttf' # note: needs local font on server
+    txt = "art.noniewicz.com"
     fnt = ImageFont.truetype(font=SELF_FONT, size=14)
     twh = fnt.getsize(txt)
     bgx = (bg[0]^255&0xF0, bg[1]^255&0xF0, bg[2]^255&0xF0)
@@ -158,8 +164,8 @@ def append_myself(params):
     x.add_text(key='Title', value=title, zip=False)
     x.add_text(key='Description', value='generated in PyArtForms @'+sdt+'\r\n'+sp, zip=False)
     x.add_text(key='Author', value='Jakub Noniewicz aka MoNsTeR/GDC', zip=False)
-    x.add_text(key='Copyright', value='(c)'+str(y)+' Jakub Noniewicz | noniewicz.com | noniewicz.art.pl', zip=False)
-    x.add_itxt(key='Concept', value='PyArtForms concept by: Jakub Noniewicz | noniewicz.com | noniewicz.art.pl', lang='', tkey='', zip=False)
+    x.add_text(key='Copyright', value='(c)'+str(y)+' Jakub Noniewicz | art.noniewicz.com', zip=False)
+    x.add_itxt(key='Concept', value='PyArtForms concept by: Jakub Noniewicz | art.noniewicz.com', lang='', tkey='', zip=False)
     x.add_text(key='Software', value='PyArtForms', zip=False)
     return x
 
@@ -189,7 +195,7 @@ def im2cgi(im, format='PNG'):
     sys.stdout.flush()
 
 def art_painter(params, png_file='example.png', output_mode='save', bw=False):
-    """ Main/common 'painter' call """
+    """ Main/common 'painter' call, params['call'] is the actuall callback function to draw """
     if 'bw' in params:
         bw = params['bw']
     else:
@@ -291,6 +297,7 @@ def invert_image(image):
         return ImageOps.invert(image)
 
 def init_common(params):
+    """ Extract common parameters from params """
     if not 'w' in params or not 'h' in params:
         raise('w or h not set in params')
     random.seed()

@@ -1,11 +1,13 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# experimental paint algorithms (artificial artist) in Python, v1.0
-# (c)2017-2021 MoNsTeR/GDC, Noniewicz.com, Noniewicz.art.pl, Jakub Noniewicz
+# PyArtForms - Python generative art forms paint algorithms (artificial artist), v1.0
+# (c)2017-2024 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz aka MoNsTeR/GDC
 # color definitions, and color mappers/functions
-
-# upd: 20210611, 13
+"""
+upd: 20210611, 13
+upd: 20240511
+"""
 
 import random
 from drawtools import *

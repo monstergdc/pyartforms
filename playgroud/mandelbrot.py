@@ -1,10 +1,15 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Mandelbrot fractal example (z'=z^2+c), v1.0, Python
-# (c)2017, 2018 Noniewicz.com, Jakub Noniewicz aka MoNsTeR/GDC
-# cre: 20180505
-# upd: 20181019, 20
+# Mandelbrot fractal example (z'=z^2+c), v1.0, Python + Pillow
+# part of
+# PyArtForms - Python generative art forms paint algorithms (artificial artist), v1.0
+# (c)2017, 2018, 2024 Noniewicz.com, Jakub Noniewicz aka MoNsTeR/GDC
+"""
+cre: 20180505
+upd: 20181019, 20
+upd: 20240511
+"""
 
 from PIL import Image, ImageDraw
 import math
@@ -12,6 +17,7 @@ from drawtools import *
 
 
 def generate_mandelbrot(draw, params):
+    """ """
     x0 = params['x0']
     x1 = params['x1']
     y0 = params['y0']

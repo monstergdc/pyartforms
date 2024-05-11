@@ -1,10 +1,10 @@
 ﻿<!DOCTYPE HTML>
 <html>
 <head>
-<title>pyartforms (c) Jakub.Noniewicz.art.pl</title>
+<title>pyartforms (c) Jakub.Noniewicz.com</title>
 </head>
 <body style="background-color: black; color: white;">
-<h2>pyartforms (c)2019-2020 Jakub.Noniewicz.art.pl</h2>
+<h2>pyartforms (c)2019-2024 Jakub.Noniewicz.com</h2>
 <p>Algorithm-generated art forms in Python.</p>
 <p>Click on thumbnail to see bigger image, then refresh to see new variation.</p>
 <p>Source code: <a target=_new href="https://github.com/monstergdc/pyartforms">https://github.com/monstergdc/pyartforms</a></p>
