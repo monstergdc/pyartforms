@@ -1,0 +1,7 @@
+nupmy
+opencv-python
+pillow
+colorthief
+pillow
+wxpython
+Wand

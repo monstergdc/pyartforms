@@ -3,7 +3,7 @@
 
 # PyArtForms - Python generative art forms paint algorithms (artificial artist)
 # predefined forms
-# (c)2018-2021 MoNsTeR/GDC, Noniewicz.com, Noniewicz.art.pl, Jakub Noniewicz
+# (c)2018-2024 MoNsTeR/GDC, Noniewicz.com, Noniewicz.art.pl, Jakub Noniewicz
 # cre: 20181020
 # upd: 20190105, 06, 13, 18, 21, 22
 # upd: 20190311, 30
@@ -12,6 +12,8 @@
 # upd: 20210106
 # upd: 20210515, 16, 22, 23, 24, 26, 27
 # upd: 20210606, 07, 10, 11, 12, 13, 18, 19, 20
+# upd: 20240224, 25
+# upd: 20240304
 
 
 # TODO:
@@ -813,16 +815,80 @@ def predef_mazy30(w, h):
     return append_dflts(a, 'SMEARS#30', mazy30, w, h)
 
 def predef_mazy31(w, h):
+    steps = 20+10 # not too much!
     a = [
-        {'Background': bg_black, 'n': 1},
+        {'Background': bg_white, 'n': 1, 'mode': 0, 'steps': steps},
+        {'Background': bg_white, 'n': 1, 'mode': 0, 'steps': 60},
+        {'Background': bg_white, 'n': 1, 'mode': 0, 'steps': steps, 'color': 'any_rnd'},
+        {'Background': bg_white, 'n': 1, 'mode': 0, 'steps': steps, 'color': 'happy'},
+        {'Background': bg_white, 'n': 1, 'mode': 0, 'steps': steps, 'color': 'wryb'},
+        {'Background': bg_white, 'n': 1, 'mode': 0, 'steps': steps, 'color': 'psych'},
+        {'Background': bg_white, 'n': 1, 'mode': 0, 'steps': steps, 'color': 'MoonlightBytes6'},
+
+        {'Background': bg_white, 'n': 1, 'mode': 1, 'steps': steps},
+        {'Background': bg_white, 'n': 1, 'mode': 2, 'steps': steps},
+
+        {'Background': bg_white, 'n': 1, 'mode': 3, 'steps': steps+12},
+        {'Background': bg_white, 'n': 1, 'mode': 3, 'steps': steps+70},
+
+        {'Background': bg_white, 'n': 1, 'mode': 3, 'steps': steps+12, 'color': 'any_rnd'},
+        {'Background': bg_white, 'n': 1, 'mode': 3, 'steps': steps+12, 'color': 'happy'},
+        {'Background': bg_white, 'n': 1, 'mode': 3, 'steps': steps+12, 'color': 'wryb'},
+        {'Background': bg_white, 'n': 1, 'mode': 3, 'steps': steps+12, 'color': 'psych'},
+        {'Background': bg_white, 'n': 1, 'mode': 3, 'steps': steps+12, 'color': 'MoonlightBytes6'},
+
+        {'Background': bg_white, 'n': 1, 'mode': 4, 'steps': steps+12},
+        {'Background': bg_white, 'n': 1, 'mode': 4, 'steps': steps+70},
+
+        {'Background': bg_white, 'n': 1, 'mode': 5, 'steps': steps},
+        {'Background': bg_white, 'n': 1, 'mode': 5, 'steps': steps+20},
+        {'Background': bg_white, 'n': 1, 'mode': 5, 'steps': steps+220},
+        {'Background': bg_white, 'n': 1, 'mode': 5, 'steps': steps+670},
+
+        {'Background': bg_white, 'n': 1, 'mode': 5, 'steps': steps+670, 'color': 'any_rnd'},
+        {'Background': bg_white, 'n': 1, 'mode': 5, 'steps': steps+670, 'color': 'happy'},
+        {'Background': bg_white, 'n': 1, 'mode': 5, 'steps': steps+670, 'color': 'wryb'},
+        {'Background': bg_white, 'n': 1, 'mode': 5, 'steps': steps+670, 'color': 'psych'},
+        {'Background': bg_white, 'n': 1, 'mode': 5, 'steps': steps+670, 'color': 'MoonlightBytes6'},
+
+        {'Background': bg_white, 'n': 1, 'mode': 6, 'steps': steps},
+        {'Background': bg_white, 'n': 1, 'mode': 7, 'steps': steps},
+        {'Background': bg_white, 'n': 1, 'mode': 8, 'steps': steps},
+        {'Background': bg_white, 'n': 1, 'mode': 9, 'steps': steps},
+        {'Background': bg_white, 'n': 1, 'mode': 10, 'steps': steps},
+        {'Background': bg_white, 'n': 1, 'mode': 11, 'steps': steps},
+        {'Background': bg_white, 'n': 1, 'mode': 12, 'steps': steps},
+        {'Background': bg_white, 'n': 1, 'mode': 13, 'steps': steps},
+
+        {'Background': bg_white, 'n': 1, 'mode': 6, 'steps': steps+20, 'color': 'wryb'},
+        {'Background': bg_white, 'n': 1, 'mode': 7, 'steps': steps+20, 'color': 'wryb'},
+        {'Background': bg_white, 'n': 1, 'mode': 8, 'steps': steps+30, 'color': 'wryb'},
+        {'Background': bg_white, 'n': 1, 'mode': 9, 'steps': steps+20, 'color': 'wryb'},
+        {'Background': bg_white, 'n': 1, 'mode': 10, 'steps': steps+30, 'color': 'wryb'},
+        {'Background': bg_white, 'n': 1, 'mode': 11, 'steps': steps+20, 'color': 'wryb'},
+        {'Background': bg_white, 'n': 1, 'mode': 12, 'steps': steps+30, 'color': 'wryb'},
+        {'Background': bg_white, 'n': 1, 'mode': 13, 'steps': steps+20, 'color': 'wryb'},
+
     ]
     return append_dflts(a, 'SMEARS#31', mazy31, w, h)
 
 def predef_mazy32(w, h):
     a = [
-        {'Background': bg_black, 'n': 1},
+        {'Background': bg_white, 'n': 360},
     ]
     return append_dflts(a, 'SMEARS#32', mazy32, w, h)
+
+def predef_mazy33(w, h):
+    a = [
+        {'Background': bg_black, 'n': 1},
+    ]
+    return append_dflts(a, 'SMEARS#33', mazy32, w, h)
+
+def predef_mazy34(w, h):
+    a = [
+        {'Background': bg_black, 'n': 1},
+    ]
+    return append_dflts(a, 'SMEARS#34', mazy32, w, h)
 
 # ---
 
@@ -848,7 +914,7 @@ predefs = {'mazy01': predef_mazy1, 'mazy02': predef_mazy2, 'mazy03': predef_mazy
            'mazy17': predef_mazy17, 'mazy18': predef_mazy18, 'mazy19': predef_mazy19, 'mazy20': predef_mazy20,
            'mazy21': predef_mazy21, 'mazy22': predef_mazy22, 'mazy23': predef_mazy23, 'mazy24': predef_mazy24,
            'mazy25': predef_mazy25, 'mazy26': predef_mazy26, 'mazy27': predef_mazy27, 'mazy28': predef_mazy28,
-           'mazy29': predef_mazy29, 'mazy30': predef_mazy30, #'mazy31': predef_mazy31, 'mazy32': predef_mazy32,
+           'mazy29': predef_mazy29, 'mazy30': predef_mazy30, 'mazy31': predef_mazy31, 'mazy32': predef_mazy32,
            'life': predef_life, 'lissajous': predef_lissajous, 'astro': predef_astro, 'mandelbrot': predef_mandelbrot,
            }
 
@@ -857,8 +923,7 @@ predef_names = [
         'mazy01', 'mazy02', 'mazy03', 'mazy04', 'mazy05', 'mazy06', 'mazy07', 'mazy08',
         'mazy09', 'mazy10', 'mazy11', 'mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16',
         'mazy17', 'mazy18', 'mazy19', 'mazy20', 'mazy21', 'mazy22', 'mazy23', 'mazy24',
-        'mazy25', 'mazy26', 'mazy27', 'mazy28',
-        'mazy29', 'mazy30', #'mazy31', 'mazy32',
+        'mazy25', 'mazy26', 'mazy27', 'mazy28', 'mazy29', 'mazy30', 'mazy31', 'mazy32',
         'astro', 'life', 'lissajous', 'mandelbrot'
         ]
 

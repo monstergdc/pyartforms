@@ -3,7 +3,7 @@
 
 # PyArtForms - Python generative art forms paint algorithms (artificial artist)
 # experimental 'smears' paint algorithms, v1.0 - core algorithm definitions
-# (c)2017-2021 MoNsTeR/GDC, Noniewicz.com, Noniewicz.art.pl, Jakub Noniewicz
+# (c)2017-2024 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 
 # #01 [...] 'cruel red smears', not only red
 # #02 [tested, ok] circle worms
@@ -36,8 +36,11 @@
 # #28 [...]
 # #29 [...]
 # #30 [...]
-# #31
-# #32 
+# #31 [...] filled triangles
+# #32 [...]
+# #33
+# #34
+# #35 
 
 # cre: 20180430
 # upd: 20180501, 02, 03
@@ -51,6 +54,8 @@
 # upd: 20210106, 15, 16, 19, 20, 21, 22
 # upd: 20210515, 16, 22, 23, 24, 25, 26, 27
 # upd: 20210606, 07, 10, 11, 12, 13, 14, 17, 18, 19, 20
+# upd: 20240224, 25
+# upd: 20240304
 
 # see:
 # https://pillow.readthedocs.io/en/stable/
@@ -1484,12 +1489,132 @@ def mazy30(draw, params):
         draw.polygon(points, fill=(255, 0, 0), outline=(255,255,255))
 
 def mazy31(draw, params):
+    """ cool filled triangles (with outline) """
+    # note: may not be scale invariant, check & fix for it?
+    # todo: also outlined variants
+    # todo: also all par proper
+    w, h, cnt = init_common(params)
+    c = math.pi/180
+    random.seed()
+    y0 = h/2
+    x0 = w/2
+    steps = params['steps']
+    amp = h/2*0.97 # par!
+    mode = params['mode'] #0..5
+
+    i = 0
+    for a in range(steps):
+        r = amp*(1-a/steps) # todo opt par scalling factor eg. non-linear
+        ra = amp * ((1 - a / steps) ** 2)  # Changed to exponential decrease for more drama
+        aa = a/steps # full 360 - takie sobie
+    
+        if mode == 0:
+            aa = a/steps/3 # not full 360
+        elif mode == 1:
+            aa = a/steps/2 # not full 360
+        elif mode == 2:
+            aa = a/steps/6 # not full 360
+        elif mode == 3:
+            aa = a/steps/0.5 # ok!
+        elif mode == 4:
+            r = amp*math.exp(-a/8) # scale down exp
+        elif mode == 5:
+            ar = random.randint(-steps, steps)
+            aa = (a+ar)/steps/6 # not full 360
+            r += random.randint(-15, 4) # +flux # par!
+
+        # by ChatCPT 4.0
+        elif mode == 6:
+            aa = math.sin(a / steps * math.pi) / 3  # Sine wave adjustment
+        elif mode == 7:
+            aa = a / steps / 2 + 0.1 * math.sin(a * 10)  # Adding sinusoidal fluctuation
+        elif mode == 8:
+            aa = a / steps / 6 + 0.1 * math.cos(a * 5)  # Cosine wave adjustment
+        elif mode == 9:
+            aa = a / steps / 0.5  # Larger angular spread
+        elif mode == 10:
+            r = amp * math.exp(-a / 20)  # Slower exponential decrease
+        elif mode == 11:
+            ar = random.randint(-steps, steps)
+            aa = (a + ar) / steps / 6  # Random angular adjustment
+            ra += random.randint(-15, 15)  # Random radius fluctuation
+        elif mode == 12:
+            r = amp * math.exp(-a / 10) + random.randint(-10, 10)
+            aa = a / steps + 0.05 * math.sin(a * 5)  # Sinusoidal adjustment
+        elif mode == 13:
+            r = ra
+
+        aa1 = (aa+0)*360*c
+        aa2 = (aa+0.3333)*360*c
+        aa3 = (aa+0.6666)*360*c
+
+        x1 = x0 + r * math.cos(aa1)
+        y1 = y0 + r * math.sin(aa1)
+        x2 = x0 + r * math.cos(aa2)
+        y2 = y0 + r * math.sin(aa2)
+        x3 = x0 + r * math.cos(aa3)
+        y3 = y0 + r * math.sin(aa3)
+        points = [(x1, y1), (x2, y2), (x3, y3)]
+
+        f = (0, 0, 0)
+        #o = None
+        o = (255, 255, 255) # par!
+        if a & 1 == 1:
+            f = (255, 255, 255)
+            o = (0, 0, 0) # par!
+        if 'color' in params:
+            f = new_colorer(params['color'], a, steps)
+        triangle(draw, points, fill=f, outline=o)
+
+def mazy32(draw, params):
+    """ cykloidy ? """
+    # todo: more par / thick + opt multiline / more stuff
+    w, h, cnt = init_common(params)
+    c = math.pi/180
+    y0 = h/2
+    x0 = w/2
+    steps = params['n']
+
+    total = 16 #?
+    for n in range(total):
+        po = []
+        rn = 1 - n/total #?
+        r1 = 120 + 220 * rn #?
+        r2 = 30 + 30 * rn #?
+        for f in range(steps):
+            a = f/steps*c*360 # full circle?
+            b = a*(4+n*3)
+            x = x0+r1*math.cos(a)+r2*math.cos(b)
+            y = y0+r1*math.sin(a)+r2*math.sin(b)
+            po.append((int(x), int(y)))
+        #draw.polygon(po, fill=(0, 0, 0), outline=(255,0,0)) #1
+        #draw.polygon(po, fill=None, outline=(0,0,0)) #2
+        cn = 'happy'
+        cn = 'wryb'
+        cn = 'any_rnd'
+        cn = 'psych'
+        cn = 'MoonlightBytes6'
+        f = new_colorer(cn, n, total)
+        #if 'addalpha' in params:
+        #f = add_alpha(f, params['addalpha'])
+        f = add_alpha(f, 128+16)
+        #draw.polygon(po, fill=f, outline=(0,0,0))
+        #draw.polygon(po, fill=f, outline=None)
+        draw.polygon(po, fill=f, outline=(255-f[0], 255-f[1], 255-f[2]))
+
+def mazy33(draw, params):
     """ ? """
     w, h, cnt = init_common(params)
     # ...
     return 0
 
-def mazy32(draw, params):
+def mazy34(draw, params):
+    """ ? """
+    w, h, cnt = init_common(params)
+    # ...
+    return 0
+
+def mazy35(draw, params):
     """ ? """
     w, h, cnt = init_common(params)
     # ...
