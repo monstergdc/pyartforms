@@ -1,20 +1,22 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# PyArtForms - Python generative art forms paint algorithms (artificial artist)
+# PyArtForms - Python generative art forms paint algorithms (artificial artist), v1.0
+# (c)2017-2024 Noniewicz.com, Jakub Noniewicz aka MoNsTeR/GDC
 # predefined forms
-# (c)2018-2024 MoNsTeR/GDC, Noniewicz.com, Noniewicz.art.pl, Jakub Noniewicz
-# cre: 20181020
-# upd: 20190105, 06, 13, 18, 21, 22
-# upd: 20190311, 30
-# upd: 20190414, 15, 17, 18, 21, 22, 24, 26, 27
-# upd: 20200507, 10
-# upd: 20210106
-# upd: 20210515, 16, 22, 23, 24, 26, 27
-# upd: 20210606, 07, 10, 11, 12, 13, 18, 19, 20
-# upd: 20240224, 25
-# upd: 20240304
-
+"""
+cre: 20181020
+upd: 20190105, 06, 13, 18, 21, 22
+upd: 20190311, 30
+upd: 20190414, 15, 17, 18, 21, 22, 24, 26, 27
+upd: 20200507, 10
+upd: 20210106
+upd: 20210515, 16, 22, 23, 24, 26, 27
+upd: 20210606, 07, 10, 11, 12, 13, 18, 19, 20
+upd: 20240224, 25
+upd: 20240304
+upd: 20240512
+"""
 
 # TODO:
 # - add alpha ver for all
@@ -215,26 +217,31 @@ def predef_mazy2(w, h):
     a = [
         {'Background': bg_black, 'n': 100},
     ]
-    a = mux_param(a, 'color', ['bw0', 'bwx', 'red_rnd', 'any_rnd', 'happy', 'wryb', 'Number3', 'BeachTowels', 'ProgramCat'])
+    a = mux_param(a, 'color', [ 'bwx', 'red_rnd', 'any_rnd', 'happy', 'wryb', 'Number3', 'BeachTowels', 'ProgramCat', 'BrGrRd'])
     a = mux_param(a, 'm', [12, 30, 180])
-    a = mux_param(a, 'sc', [20, 50]) # todo: also 0 ?
+    a = mux_param(a, 'sc', [20, 50, 100]) # todo: also 0 ?
     a = mux_param(a, 'addalpha', [0, 120])
     return append_dflts(a, 'SMEARS#2', mazy2, w, h)
 
 def predef_mazy3(w, h):
-    n = 80
     a = [
-        {'Background': bg_white, 'n': n, 'color': 'happy'},
-        {'Background': bg_white, 'n': n, 'color': 'wryb'},
-        {'Background': bg_white, 'n': n, 'color': 'BeachTowels'},
-        {'Background': bg_white, 'n': n, 'color': 'Number3'},
-        {'Background': bg_black, 'n': 40, 'color': 'red'},
-        {'Background': bg_black, 'n': n, 'color': 'red'},
-        {'Background': bg_black, 'n': 40, 'color': 'bw'},
-        {'Background': bg_orange, 'n': n, 'color': 'bwx'},
+        {'Background': bg_white, 'color': 'happy'},
+        {'Background': bg_white, 'color': 'wryb'},
+        {'Background': bg_white, 'color': 'BeachTowels'},
+        {'Background': bg_white, 'color': 'Number3'},
+        {'Background': bg_black, 'color': 'red'},
+        {'Background': bg_black, 'color': 'bw'},
+        {'Background': bg_black, 'color': 'BrGrRd'},
     ]
+    a = mux_param(a, 'n', [90, 12])
     a = mux_param(a, 'mode', ['center', 'xcenter', 'rnd'])
     a = mux_param(a, 'addalpha', [0, 70])
+
+    b = [{'Background': bg_orange, 'color': 'bwx', 'addalpha': 70}]
+    b = mux_param(b, 'mode', ['center', 'xcenter', 'rnd'])
+    b = mux_param(b, 'n', [90, 12])
+    a = np.append(a, b)
+
     return append_dflts(a, 'SMEARS#3', mazy3, w, h)
 
 def predef_mazy4(w, h):
@@ -426,7 +433,7 @@ def predef_mazy9(w, h):
     a = mux_param(a, 'n', [60, 120, 360])
     a = mux_param(a, 'v', [0, v1, v2, v3])
     a = mux_param(a, 'rndc', [False, True])
-    a = mux_param(a, 'color', ['happy', 'BeachTowels', 'ProgramCat', 'Number3', 'red', 'bw'])
+    a = mux_param(a, 'color', ['happy', 'BeachTowels', 'ProgramCat', 'Number3', 'red', 'bw', 'BrGrRd'])
     return append_dflts(a, 'SMEARS#9', mazy9, w, h)
 
 def predef_mazy10(w, h):
@@ -439,19 +446,19 @@ def predef_mazy10(w, h):
             #{'Background': bk, 'n': 15, 'penw': 32, 'color': 'happy', 'mode': 'line', 'complexity': 70+130, 'open': False},
 
             {'Background': bk, 'n': 30, 'penw': 8, 'color': 'happy', 'mode': 'line', 'complexity': 70, 'open': False},
-            {'Background': bk, 'n': 40, 'penw': 8, 'color': 'rg', 'mode': 'line', 'complexity': 70, 'open': False},
-            {'Background': bk, 'n': 40, 'penw': 8, 'color': 'red', 'mode': 'line', 'complexity': 70, 'open': False},
-            {'Background': bk, 'n': 40, 'penw': 8, 'color': 'wryb', 'mode': 'line', 'complexity': 70, 'open': False},
+            {'Background': bk, 'n': 40, 'penw': 8, 'color': 'rg',    'mode': 'line', 'complexity': 70, 'open': False},
+            {'Background': bk, 'n': 40, 'penw': 8, 'color': 'red',   'mode': 'line', 'complexity': 70, 'open': False},
+            {'Background': bk, 'n': 40, 'penw': 8, 'color': 'wryb',  'mode': 'line', 'complexity': 70, 'open': False},
 
             {'Background': bk, 'n': 30, 'penw': 8, 'color': 'happy', 'mode': 'line', 'complexity': 70, 'open': True},
-            {'Background': bk, 'n': 40, 'penw': 8, 'color': 'rg', 'mode': 'line', 'complexity': 70, 'open': True},
-            {'Background': bk, 'n': 40, 'penw': 8, 'color': 'red', 'mode': 'line', 'complexity': 70, 'open': True},
-            {'Background': bk, 'n': 40, 'penw': 8, 'color': 'wryb', 'mode': 'line', 'complexity': 70, 'open': True},
+            {'Background': bk, 'n': 40, 'penw': 8, 'color': 'rg',    'mode': 'line', 'complexity': 70, 'open': True},
+            {'Background': bk, 'n': 40, 'penw': 8, 'color': 'red',   'mode': 'line', 'complexity': 70, 'open': True},
+            {'Background': bk, 'n': 40, 'penw': 8, 'color': 'wryb',  'mode': 'line', 'complexity': 70, 'open': True},
 
             {'Background': bk, 'n': 30, 'penw': 8, 'color': 'happy', 'mode': 'line', 'complexity': 70, 'open': True, 'addalpha': 90},
-            {'Background': bk, 'n': 40, 'penw': 8, 'color': 'rg', 'mode': 'line', 'complexity': 70, 'open': True, 'addalpha': 90},
-            {'Background': bk, 'n': 40, 'penw': 8, 'color': 'red', 'mode': 'line', 'complexity': 70, 'open': True, 'addalpha': 90},
-            {'Background': bk, 'n': 40, 'penw': 8, 'color': 'wryb', 'mode': 'line', 'complexity': 70, 'open': True, 'addalpha': 90},
+            {'Background': bk, 'n': 40, 'penw': 8, 'color': 'rg',    'mode': 'line', 'complexity': 70, 'open': True, 'addalpha': 90},
+            {'Background': bk, 'n': 40, 'penw': 8, 'color': 'red',   'mode': 'line', 'complexity': 70, 'open': True, 'addalpha': 90},
+            {'Background': bk, 'n': 40, 'penw': 8, 'color': 'wryb',  'mode': 'line', 'complexity': 70, 'open': True, 'addalpha': 90},
 
 # TODO: more wryb
             {'Background': bg_white, 'n': 6, 'penw': 1, 'color': 'happy', 'mode': 'fill', 'complexity': 40, 'open': False},
@@ -475,7 +482,7 @@ def predef_mazy11(w, h):
         {'Background': bg_black, 'n': 64},
         {'Background': bg_black, 'n': 128},
     ]
-    a = mux_param(a, 'color', ['happy', 'BeachTowels', 'MoonlightBytes6', 'Rainbow', 'MetroUI', 'ProgramCat', 'wryb', 'yorb'])
+    a = mux_param(a, 'color', ['happy', 'BeachTowels', 'MoonlightBytes6', 'Rainbow', 'MetroUI', 'ProgramCat', 'wryb', 'yorb', 'BrGrRd'])
     return append_dflts(a, 'SMEARS#11', mazy11, w, h)
 
 def predef_mazy12(w, h):

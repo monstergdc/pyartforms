@@ -1,9 +1,26 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# PyArtForms - Python generative art forms paint algorithms (artificial artist)
-# experimental 'smears' paint algorithms, v1.0 - core algorithm definitions
-# (c)2017-2024 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# PyArtForms - Python generative art forms paint algorithms (artificial artist), v1.0
+# (c)2017-2024 Noniewicz.com, Jakub Noniewicz aka MoNsTeR/GDC
+# experimental 'smears' paint algorithms - core algorithm definitions
+"""
+cre: 20180430
+upd: 20180501, 02, 03
+upd: 20180805, 07, 08
+upd: 20180928, 29
+upd: 20181019, 20
+upd: 20190105, 06, 12, 13, 18, 19, 21, 22
+upd: 20190306, 11, 29, 30
+upd: 20190414, 15, 17, 18, 22, 24, 26, 27
+upd: 20200507, 10
+upd: 20210106, 15, 16, 19, 20, 21, 22
+upd: 20210515, 16, 22, 23, 24, 25, 26, 27
+upd: 20210606, 07, 10, 11, 12, 13, 14, 17, 18, 19, 20
+upd: 20240224, 25
+upd: 20240304
+upd: 20240512
+"""
 
 # #01 [...] 'cruel red smears', not only red
 # #02 [tested, ok] circle worms
@@ -40,22 +57,8 @@
 # #32 [...]
 # #33
 # #34
-# #35 
-
-# cre: 20180430
-# upd: 20180501, 02, 03
-# cre: 20180805, 07, 08
-# upd: 20180928, 29
-# upd: 20181019, 20
-# upd: 20190105, 06, 12, 13, 18, 19, 21, 22
-# upd: 20190306, 11, 29, 30
-# upd: 20190414, 15, 17, 18, 22, 24, 26, 27
-# upd: 20200507, 10
-# upd: 20210106, 15, 16, 19, 20, 21, 22
-# upd: 20210515, 16, 22, 23, 24, 25, 26, 27
-# upd: 20210606, 07, 10, 11, 12, 13, 14, 17, 18, 19, 20
-# upd: 20240224, 25
-# upd: 20240304
+# #35
+# #36
 
 # see:
 # https://pillow.readthedocs.io/en/stable/
@@ -515,13 +518,13 @@ def mazy10(draw, params):
             draw.polygon(points, fill=color, outline=None)
 
 def mazy11(draw, params):
-    """ Horizontal gradients with suprizes """
+    """ Horizontal gradients with surprizes """
     w, h, cnt = init_common(params)
     cx = get_colors(params['color'])
     csize = len(cx)
 
     dy = float(h)/cnt
-    if dy*cnt < h:  # lame fix for small images
+    if dy*cnt < h: # lame fix for small images
         cnt += 3
     steps = 256 # const, max rational limit for RGB24 gradient
     if steps > w:
@@ -1615,6 +1618,12 @@ def mazy34(draw, params):
     return 0
 
 def mazy35(draw, params):
+    """ ? """
+    w, h, cnt = init_common(params)
+    # ...
+    return 0
+
+def mazy36(draw, params):
     """ ? """
     w, h, cnt = init_common(params)
     # ...

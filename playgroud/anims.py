@@ -4,14 +4,16 @@
 # PyArtForms - Python generative art forms paint algorithms (artificial artist)
 # experimental 'ANIMS' algorithms, v1.0
 # anim#1/anim#2 - recreated from seeing as in some GIFs I've once seen (so concept isn't mine)
-# (c)2017-2021 MoNsTeR/GDC, Noniewicz.com, Noniewicz.art.pl, Jakub Noniewicz
-
-# cre: 20180505
-# upd: 20180506, 12
-# upd: 20180928, 30
-# upd: 20181020
-# upd: 20210507
-# upd: 20210618
+# (c)2017-2021, 2024 MoNsTeR/GDC, Noniewicz.com, Noniewicz.art.pl, Jakub Noniewicz
+"""
+cre: 20180505
+upd: 20180506, 12
+upd: 20180928, 30
+upd: 20181020
+upd: 20210507
+upd: 20210618
+upd: 20240512
+"""
 
 # orig GIFs md5:
 # #1: ad2bde22541ac1b05b2c08fd805ebafe *001.gif
@@ -598,15 +600,14 @@ def main():
     #fcc = cv2.VideoWriter_fourcc(*"XVID")
     fcc = cv2.VideoWriter_fourcc(*"MJPG")
 
-    if False:
-        do_anim1(fcc, video_name = 'anim-01-video.avi')
-        do_anim2(fcc, video_name = 'anim-02-video.avi')
-        do_anim3(fcc, video_name = 'anim-03-video.avi', steps = 25)
-        do_anim4(fcc, video_name = 'anim-04-video.avi', steps = 300)
+    if True:
+        #do_anim1(fcc, video_name = 'anim-01-video.avi')
+        #do_anim2(fcc, video_name = 'anim-02-video.avi')
+        #do_anim3(fcc, video_name = 'anim-03-video.avi', steps = 25) # unfinished
+        #do_anim4(fcc, video_name = 'anim-04-video.avi', steps = 300)
         do_anim5(fcc, video_name = 'anim-05-video.avi', steps = 300)
-#        do_anim6(fcc, video_name = 'anim-06-video.avi', steps = 300)    # slow one!
-
-    do_anim7(fcc, video_name = 'anim-07-video.avi', steps = 200)
+        do_anim6(fcc, video_name = 'anim-06-video.avi', steps = 300)    # slow one!
+        #do_anim7(fcc, video_name = 'anim-07-video.avi', steps = 200)
 
 if __name__ == '__main__':
     main()

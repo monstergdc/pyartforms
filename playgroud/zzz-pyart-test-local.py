@@ -12,6 +12,7 @@
 # upd: 20210106, 20
 # upd: 20210612
 # upd: 20240224, 25
+# upd: 20240512
 
 # TODO:
 # - ?
@@ -74,7 +75,7 @@ def do_mazy(cnt, w, h, odir, name):
 w, h = get_canvas('A5') # test - also this 4 speed
 #w, h = get_canvas('A6') # small - this
 w, h = get_canvas('A7')
-#w, h = get_canvas('1024')
+w, h = get_canvas('1024')
 
 cnt = 1
 #cnt = 2
@@ -92,17 +93,12 @@ predef_names1 = [
         'mazy17', 'mazy18', 'mazy19', 'mazy20', 'mazy21', 'mazy22', 'mazy23', 'mazy24',
         'mazy25', 'mazy26', 'mazy27'
         ]
-
 predef_names1 = ['mazy27']
-
-predef_names1 = [
-        'mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16',
-        'mazy19', 'mazy20', 'mazy21', 'mazy23', 'mazy24',
-        ]
-
+predef_names1 = ['mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16', 'mazy19', 'mazy20', 'mazy21', 'mazy23', 'mazy24']
 predef_names1 = ['mazy31', 'mazy32']
 #predef_names1 = ['mazy31']
 predef_names1 = ['mazy32']
+predef_names1 = ['mazy03']
 
 
 for m in predef_names1:

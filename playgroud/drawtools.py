@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 
 # PyArtForms - Python generative art forms paint algorithms (artificial artist), v1.0
 # (c)2017-2024 Noniewicz.com, Jakub Noniewicz aka MoNsTeR/GDC
@@ -11,7 +13,7 @@ upd: 20190414, 21
 upd: 20210301
 upd: 20210507, 15, 23, 26, 27
 upd: 20210606, 07, 11, 12, 18, 19, 20, 21, 22, 23, 26
-upd: 20240511
+upd: 20240511, 12
 """
 
 from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin, ImageFont, ImageOps, ImageEnhance
