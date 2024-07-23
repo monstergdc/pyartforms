@@ -13,6 +13,7 @@
 # upd: 20210612
 # upd: 20240224, 25
 # upd: 20240512
+# upd: 20240723
 
 # TODO:
 # - ?
@@ -98,7 +99,7 @@ predef_names1 = ['mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16', 'mazy19', 'ma
 predef_names1 = ['mazy31', 'mazy32']
 #predef_names1 = ['mazy31']
 predef_names1 = ['mazy32']
-predef_names1 = ['mazy03']
+#predef_names1 = ['mazy03']
 
 
 for m in predef_names1:

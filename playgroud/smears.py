@@ -20,6 +20,7 @@ upd: 20210606, 07, 10, 11, 12, 13, 14, 17, 18, 19, 20
 upd: 20240224, 25
 upd: 20240304
 upd: 20240512
+upd: 20240723
 """
 
 # #01 [...] 'cruel red smears', not only red
@@ -1571,36 +1572,49 @@ def mazy31(draw, params):
 
 def mazy32(draw, params):
     """ cykloidy ? """
-    # todo: more par / thick + opt multiline / more stuff
+    # todo: more par / opt multiline / more stuff
     w, h, cnt = init_common(params)
     c = math.pi/180
+    random.seed()
     y0 = h/2
     x0 = w/2
-    steps = params['n']
 
-    total = 16 #?
+    if cnt != None:
+        steps = cnt
+    else:
+        steps = 360
+
+    if 'total' in params:
+        total = int(params['total'])
+        if total < 1:
+            total = 16
+    else:
+        total = 16
+
     for n in range(total):
         po = []
-        rn = 1 - n/total #?
+        rn = 1 - n/total
         r1 = 120 + 220 * rn #?
         r2 = 30 + 30 * rn #?
+        #r1 = 20+random.randint(30, 240)*rn # test - refine
+        #r2 = 20+random.randint(30, 60)*rn # test - refine
         for f in range(steps):
-            a = f/steps*c*360 # full circle?
-            b = a*(4+n*3)
+            a = f/steps*c*360 # full circle
+            #b = a*(4+n*3) #?
+            b = a*(4+n*1) #? better?
+            b = a*12 #? test - might be in right direction
             x = x0+r1*math.cos(a)+r2*math.cos(b)
             y = y0+r1*math.sin(a)+r2*math.sin(b)
             po.append((int(x), int(y)))
+        if 'color' in params:
+            f = new_colorer(params['color'], n, total)
+        else:
+            f = (0, 0, 0)
         #draw.polygon(po, fill=(0, 0, 0), outline=(255,0,0)) #1
         #draw.polygon(po, fill=None, outline=(0,0,0)) #2
-        cn = 'happy'
-        cn = 'wryb'
-        cn = 'any_rnd'
-        cn = 'psych'
-        cn = 'MoonlightBytes6'
-        f = new_colorer(cn, n, total)
         #if 'addalpha' in params:
         #f = add_alpha(f, params['addalpha'])
-        f = add_alpha(f, 128+16)
+        f = add_alpha(f, 128+16) # was
         #draw.polygon(po, fill=f, outline=(0,0,0))
         #draw.polygon(po, fill=f, outline=None)
         draw.polygon(po, fill=f, outline=(255-f[0], 255-f[1], 255-f[2]))

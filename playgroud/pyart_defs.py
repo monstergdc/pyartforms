@@ -16,6 +16,7 @@ upd: 20210606, 07, 10, 11, 12, 13, 18, 19, 20
 upd: 20240224, 25
 upd: 20240304
 upd: 20240512
+upd: 20240723
 """
 
 # TODO:
@@ -881,7 +882,14 @@ def predef_mazy31(w, h):
 
 def predef_mazy32(w, h):
     a = [
-        {'Background': bg_white, 'n': 360},
+        {'Background': bg_white, 'n': 360, 'total': 16},
+        {'Background': bg_white, 'n': 360, 'total': 8},
+        {'Background': bg_white, 'n': 360, 'total': 4},
+        {'Background': bg_white, 'n': 360, 'total': 8, 'color': 'happy'}, #
+        {'Background': bg_white, 'n': 360, 'total': 8, 'color': 'wryb'}, #
+        {'Background': bg_white, 'n': 360, 'total': 8, 'color': 'yorb'}, #
+        {'Background': bg_white, 'n': 360, 'total': 8, 'color': 'BeachTowels'}, #
+        {'Background': bg_white, 'n': 360, 'total': 32, 'color': 'BeachTowels'}, #
     ]
     return append_dflts(a, 'SMEARS#32', mazy32, w, h)
 
@@ -889,13 +897,19 @@ def predef_mazy33(w, h):
     a = [
         {'Background': bg_black, 'n': 1},
     ]
-    return append_dflts(a, 'SMEARS#33', mazy32, w, h)
+    return append_dflts(a, 'SMEARS#33', mazy33, w, h)
 
 def predef_mazy34(w, h):
     a = [
         {'Background': bg_black, 'n': 1},
     ]
-    return append_dflts(a, 'SMEARS#34', mazy32, w, h)
+    return append_dflts(a, 'SMEARS#34', mazy34, w, h)
+
+def predef_mazy35(w, h):
+    a = [
+        {'Background': bg_black, 'n': 1},
+    ]
+    return append_dflts(a, 'SMEARS#35', mazy35, w, h)
 
 # ---
 
