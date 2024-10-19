@@ -16,7 +16,7 @@ upd: 20210606, 07, 10, 11, 12, 13, 18, 19, 20
 upd: 20240224, 25
 upd: 20240304
 upd: 20240512
-upd: 20240723
+upd: 20240723, 25
 """
 
 # TODO:
@@ -827,10 +827,10 @@ def predef_mazy31(w, h):
     a = [
         {'Background': bg_white, 'n': 1, 'mode': 0, 'steps': steps},
         {'Background': bg_white, 'n': 1, 'mode': 0, 'steps': 60},
-        {'Background': bg_white, 'n': 1, 'mode': 0, 'steps': steps, 'color': 'any_rnd'},
+        #{'Background': bg_white, 'n': 1, 'mode': 0, 'steps': steps, 'color': 'any_rnd'},
         {'Background': bg_white, 'n': 1, 'mode': 0, 'steps': steps, 'color': 'happy'},
         {'Background': bg_white, 'n': 1, 'mode': 0, 'steps': steps, 'color': 'wryb'},
-        {'Background': bg_white, 'n': 1, 'mode': 0, 'steps': steps, 'color': 'psych'},
+        #{'Background': bg_white, 'n': 1, 'mode': 0, 'steps': steps, 'color': 'psych'},
         {'Background': bg_white, 'n': 1, 'mode': 0, 'steps': steps, 'color': 'MoonlightBytes6'},
 
         {'Background': bg_white, 'n': 1, 'mode': 1, 'steps': steps},
@@ -877,7 +877,33 @@ def predef_mazy31(w, h):
         {'Background': bg_white, 'n': 1, 'mode': 12, 'steps': steps+30, 'color': 'wryb'},
         {'Background': bg_white, 'n': 1, 'mode': 13, 'steps': steps+20, 'color': 'wryb'},
 
+        {'Background': bg_black, 'n': 1, 'mode': 0, 'steps': steps+20, 'color': 'red'},
+        {'Background': bg_black, 'n': 1, 'mode': 1, 'steps': steps+20, 'color': 'red'},
+        {'Background': bg_black, 'n': 1, 'mode': 2, 'steps': steps+20, 'color': 'red'},
+        {'Background': bg_black, 'n': 1, 'mode': 3, 'steps': steps+20, 'color': 'red'},
+        {'Background': bg_black, 'n': 1, 'mode': 4, 'steps': steps+20, 'color': 'red'},
+        {'Background': bg_black, 'n': 1, 'mode': 5, 'steps': steps+20, 'color': 'red'},
+        {'Background': bg_black, 'n': 1, 'mode': 6, 'steps': steps+20, 'color': 'red'},
+        {'Background': bg_black, 'n': 1, 'mode': 7, 'steps': steps+20, 'color': 'red'},
+        {'Background': bg_black, 'n': 1, 'mode': 8, 'steps': steps+30, 'color': 'red'},
+        {'Background': bg_black, 'n': 1, 'mode': 9, 'steps': steps+20, 'color': 'red'},
+        {'Background': bg_black, 'n': 1, 'mode': 10, 'steps': steps+30, 'color': 'red'},
+        {'Background': bg_black, 'n': 1, 'mode': 11, 'steps': steps+20, 'color': 'red'},
+        {'Background': bg_black, 'n': 1, 'mode': 12, 'steps': steps+30, 'color': 'red'},
+        {'Background': bg_black, 'n': 1, 'mode': 13, 'steps': steps+20, 'color': 'red'},
+
+        {'Background': bg_black, 'n': 1, 'mode': 0, 'steps': 120*h/1024, 'color': 'blue'},
+        {'Background': bg_black, 'n': 1, 'mode': 2, 'steps': 120*h/1024, 'color': 'blue'},
+        {'Background': bg_black, 'n': 1, 'mode': 6, 'steps': 120*h/1024, 'color': 'blue'},
     ]
+    # quick test
+    """
+    a = [
+        {'Background': bg_white, 'n': 1, 'mode': 0, 'steps': int(180*h/1024), 'color': 'blue'},
+        {'Background': bg_white, 'n': 1, 'mode': 2, 'steps': int(180*h/1024), 'color': 'blue'},
+        {'Background': bg_white, 'n': 1, 'mode': 6, 'steps': int(180*h/1024), 'color': 'blue'},
+    ]
+    """
     return append_dflts(a, 'SMEARS#31', mazy31, w, h)
 
 def predef_mazy32(w, h):

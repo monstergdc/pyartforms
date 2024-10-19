@@ -70,12 +70,13 @@ def do_mazy(cnt, w, h, odir, name):
 #w, h = get_canvas('2A0') # ?
 #w, h = get_canvas('A0') # this?
 #w, h = get_canvas('A1') # fin - this or A0
-#w, h = get_canvas('A2')
+w, h = get_canvas('A2')
 #w, h = get_canvas('A3')
 #w, h = get_canvas('A4') # test - this
-w, h = get_canvas('A5') # test - also this 4 speed
+
+##w, h = get_canvas('A5') # test - also this 4 speed
 #w, h = get_canvas('A6') # small - this
-w, h = get_canvas('A7')
+##w, h = get_canvas('A7')
 w, h = get_canvas('1024')
 
 cnt = 1
@@ -97,9 +98,8 @@ predef_names1 = [
 predef_names1 = ['mazy27']
 predef_names1 = ['mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16', 'mazy19', 'mazy20', 'mazy21', 'mazy23', 'mazy24']
 predef_names1 = ['mazy31', 'mazy32']
-#predef_names1 = ['mazy31']
-predef_names1 = ['mazy32']
-#predef_names1 = ['mazy03']
+predef_names1 = ['mazy31']
+#predef_names1 = ['mazy32']
 
 
 for m in predef_names1:

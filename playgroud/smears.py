@@ -20,7 +20,7 @@ upd: 20210606, 07, 10, 11, 12, 13, 14, 17, 18, 19, 20
 upd: 20240224, 25
 upd: 20240304
 upd: 20240512
-upd: 20240723
+upd: 20240723, 25
 """
 
 # #01 [...] 'cruel red smears', not only red
@@ -55,7 +55,7 @@ upd: 20240723
 # #29 [...]
 # #30 [...]
 # #31 [...] filled triangles
-# #32 [...]
+# #32 [...] cycloids
 # #33
 # #34
 # #35
@@ -1494,16 +1494,16 @@ def mazy30(draw, params):
 
 def mazy31(draw, params):
     """ cool filled triangles (with outline) """
-    # note: may not be scale invariant, check & fix for it?
-    # todo: also outlined variants
-    # todo: also all par proper
+    # todo: also outlined-only variants?
+    # todo: all par proper
     w, h, cnt = init_common(params)
     c = math.pi/180
     random.seed()
     y0 = h/2
     x0 = w/2
     steps = params['steps']
-    amp = h/2*0.97 # par!
+    #amp = h/2*0.97 # par!
+    amp = h/2*0.999 # par!
     mode = params['mode'] #0..5
 
     i = 0
@@ -1549,8 +1549,8 @@ def mazy31(draw, params):
             r = ra
 
         aa1 = (aa+0)*360*c
-        aa2 = (aa+0.3333)*360*c
-        aa3 = (aa+0.6666)*360*c
+        aa2 = (aa+1/3)*360*c
+        aa3 = (aa+2/3)*360*c
 
         x1 = x0 + r * math.cos(aa1)
         y1 = y0 + r * math.sin(aa1)
@@ -1561,18 +1561,19 @@ def mazy31(draw, params):
         points = [(x1, y1), (x2, y2), (x3, y3)]
 
         f = (0, 0, 0)
-        #o = None
         o = (255, 255, 255) # par!
+        #o = None
         if a & 1 == 1:
             f = (255, 255, 255)
             o = (0, 0, 0) # par!
         if 'color' in params:
             f = new_colorer(params['color'], a, steps)
+            o = (255-f[0], 255-f[1], 255-f[2])
         triangle(draw, points, fill=f, outline=o)
 
 def mazy32(draw, params):
     """ cykloidy ? """
-    # todo: more par / opt multiline / more stuff
+    # todo: more par / opt multiline / more stuff / multiple times
     w, h, cnt = init_common(params)
     c = math.pi/180
     random.seed()
@@ -1594,15 +1595,16 @@ def mazy32(draw, params):
     for n in range(total):
         po = []
         rn = 1 - n/total
-        r1 = 120 + 220 * rn #?
+        r1 = 120-10 + 220 * rn #?
         r2 = 30 + 30 * rn #?
-        #r1 = 20+random.randint(30, 240)*rn # test - refine
+        #r1 = 20+random.randint(30, 220)*rn # test - refine
         #r2 = 20+random.randint(30, 60)*rn # test - refine
         for f in range(steps):
             a = f/steps*c*360 # full circle
             #b = a*(4+n*3) #?
             b = a*(4+n*1) #? better?
             b = a*12 #? test - might be in right direction
+            b = (a+n*n)*8 #? test - interesting
             x = x0+r1*math.cos(a)+r2*math.cos(b)
             y = y0+r1*math.sin(a)+r2*math.sin(b)
             po.append((int(x), int(y)))
