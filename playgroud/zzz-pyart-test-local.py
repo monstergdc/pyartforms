@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # paint algorithms (artificial artist) in Python - demo
-# (c)2018-2024 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2018-2025 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20181020
 # upd: 20190105, 12, 13, 18, 19
 # upd: 20190311, 30
@@ -14,6 +14,7 @@
 # upd: 20240224, 25
 # upd: 20240512
 # upd: 20240723
+# upd: 20250205
 
 # TODO:
 # - ?
@@ -77,7 +78,7 @@ w, h = get_canvas('A2')
 ##w, h = get_canvas('A5') # test - also this 4 speed
 #w, h = get_canvas('A6') # small - this
 ##w, h = get_canvas('A7')
-w, h = get_canvas('1024')
+#w, h = get_canvas('1024')
 
 cnt = 1
 #cnt = 2
@@ -100,6 +101,8 @@ predef_names1 = ['mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16', 'mazy19', 'ma
 predef_names1 = ['mazy31', 'mazy32']
 predef_names1 = ['mazy31']
 #predef_names1 = ['mazy32']
+predef_names1 = ['mazy33']
+#predef_names1 = ['mazy06']
 
 
 for m in predef_names1:

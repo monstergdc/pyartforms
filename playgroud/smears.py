@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # PyArtForms - Python generative art forms paint algorithms (artificial artist), v1.0
-# (c)2017-2024 Noniewicz.com, Jakub Noniewicz aka MoNsTeR/GDC
+# (c)2017-2025 Noniewicz.com, Jakub Noniewicz aka MoNsTeR/GDC
 # experimental 'smears' paint algorithms - core algorithm definitions
 """
 cre: 20180430
@@ -21,6 +21,7 @@ upd: 20240224, 25
 upd: 20240304
 upd: 20240512
 upd: 20240723, 25
+upd: 20250205, 06
 """
 
 # #01 [...] 'cruel red smears', not only red
@@ -56,7 +57,7 @@ upd: 20240723, 25
 # #30 [...]
 # #31 [...] filled triangles
 # #32 [...] cycloids
-# #33
+# #33 [...] shredder of squares
 # #34
 # #35
 # #36
@@ -1622,9 +1623,54 @@ def mazy32(draw, params):
         draw.polygon(po, fill=f, outline=(255-f[0], 255-f[1], 255-f[2]))
 
 def mazy33(draw, params):
-    """ ? """
+    """ shredder of squares """
     w, h, cnt = init_common(params)
-    # ...
+    scf = w/1024 # scalling factor
+    mode = "flow" # sphere/flow
+    if 'mode' in params:
+        mode = params['mode']
+
+    # todo: toplefl->bottolright is unstable - maybe from center up->bottom left/right like a fountain?
+
+    # todo par out?
+    initial_size = 300*scf  # Initial rectangle size
+    initial_offset = 200*scf  # Initial offset
+    size_decay = 0.7  # Rate at which rectangle size shrinks
+    offset_growth = 1.12  # Rate at which offset increases
+    min_rectangles = 3  # Min/base number of rectangles per iteration
+    rect_growth = 60  # Growth factor for rectangles per iteration
+    # ^^^ ok: 15, 15+15, 5? not really, 60?
+    #prev_offset_factor = 0.75  # Factor for previous offset calculation
+    prev_offset_factor = 0.3 # or this???
+
+    color_variation = params['color']
+    max_colors = len(get_colors(color_variation))
+    
+    size = initial_size
+    offset = initial_offset
+    prev_offset = 0
+    center_x, center_y = w // 2, h // 2
+    ou = (0, 0, 0) # ok?
+    #ou = None
+
+    for step in range(cnt):
+        num_rectangles = min_rectangles + step * rect_growth
+        for _ in range(num_rectangles):
+            color_index = random.randint(0, max_colors - 1)
+            color = new_colorer(color_variation, color_index, -1)
+            if mode == "sphere":
+                x1 = center_x + random.randint(-int(offset), int(offset))
+                y1 = center_y + random.randint(-int(offset), int(offset))
+            else:  # Default "flow" mode
+                x1 = random.randint(int(prev_offset), int(offset))
+                y1 = random.randint(int(prev_offset), int(offset))
+                # or this?
+                #x1 = random.randint(0, int(offset))
+                #y1 = random.randint(0, int(offset))
+            rect(draw, x1, y1, size, size, fill=color, outline=ou)
+        offset *= offset_growth
+        prev_offset = offset * prev_offset_factor
+        size *= size_decay
     return 0
 
 def mazy34(draw, params):
@@ -1640,6 +1686,12 @@ def mazy35(draw, params):
     return 0
 
 def mazy36(draw, params):
+    """ ? """
+    w, h, cnt = init_common(params)
+    # ...
+    return 0
+
+def mazy37(draw, params):
     """ ? """
     w, h, cnt = init_common(params)
     # ...
