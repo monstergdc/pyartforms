@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # paint algorithms (artificial artist) in Python - demo
-# (c)2018-2025 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
+# (c)2018-2026 MoNsTeR/GDC, Noniewicz.com, Jakub Noniewicz
 # cre: 20181020
 # upd: 20190105, 12, 13, 18, 19
 # upd: 20190311, 30
@@ -15,6 +15,7 @@
 # upd: 20240512
 # upd: 20240723
 # upd: 20250205
+# upd: 20260104
 
 # TODO:
 # - ?
@@ -101,8 +102,9 @@ predef_names1 = ['mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16', 'mazy19', 'ma
 predef_names1 = ['mazy31', 'mazy32']
 predef_names1 = ['mazy31']
 #predef_names1 = ['mazy32']
-predef_names1 = ['mazy33']
+#predef_names1 = ['mazy33']
 #predef_names1 = ['mazy06']
+predef_names1 = ['mazy34']
 
 
 for m in predef_names1:

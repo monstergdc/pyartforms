@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # PyArtForms - Python generative art forms paint algorithms (artificial artist), v1.0
-# (c)2017-2025 Noniewicz.com, Jakub Noniewicz aka MoNsTeR/GDC
+# (c)2017-2026 Noniewicz.com, Jakub Noniewicz aka MoNsTeR/GDC
 # experimental 'smears' paint algorithms - core algorithm definitions
 """
 cre: 20180430
@@ -22,6 +22,7 @@ upd: 20240304
 upd: 20240512
 upd: 20240723, 25
 upd: 20250205, 06
+upd: 20260104
 """
 
 # #01 [...] 'cruel red smears', not only red
@@ -1675,8 +1676,34 @@ def mazy33(draw, params):
 
 def mazy34(draw, params):
     """ ? """
+    # todo: fin
     w, h, cnt = init_common(params)
-    # ...
+    c = math.pi/180
+    x0 = w/2
+    y0 = h/2
+    # par:
+    r1 = min(x0, y0)*0.5
+    r2 = r1 * 0.75
+    r3 = r2 * 0.4 #0.7
+    rc = 20
+    step1 = 1
+    ra1 = range(int(360/step1))
+    po = []
+    for c1 in ra1:
+        angle1 = c*float(c1)*float(step1)
+        angle2 = angle1*3
+        angle3 = angle2*5 #2, 3
+        x1 = x0 + r1 * math.cos(angle1)
+        y1 = y0 + r1 * math.sin(angle1)
+        x2 = x1 + r2 * math.cos(angle2)
+        y2 = y1 + r2 * math.sin(angle2)
+        x3 = x2 + r3 * math.cos(angle3)
+        y3 = y2 + r3 * math.sin(angle3)
+        po.append((int(x3), int(y3)))
+        #circle(draw, x1, y1, 4, fill=(255,0,0), outline=None) # debug
+        #circle(draw, x2, y2, 8, fill=(255,128,0), outline=None) # debug
+        #circle(draw, x3, y3, rc, fill=(0,0,0), outline=None)
+    draw.polygon(po, fill=None, outline=(0, 0, 255), width=8) # par
     return 0
 
 def mazy35(draw, params):

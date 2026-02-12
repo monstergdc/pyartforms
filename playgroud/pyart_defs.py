@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # PyArtForms - Python generative art forms paint algorithms (artificial artist), v1.0
-# (c)2017-2025 Noniewicz.com, Jakub Noniewicz aka MoNsTeR/GDC
+# (c)2017-2026 Noniewicz.com, Jakub Noniewicz aka MoNsTeR/GDC
 # predefined forms
 """
 cre: 20181020
@@ -18,6 +18,7 @@ upd: 20240304
 upd: 20240512
 upd: 20240723, 25
 upd: 20250205, 06
+upd: 20260104
 """
 
 # TODO:
@@ -951,6 +952,12 @@ def predef_mazy35(w, h):
     ]
     return append_dflts(a, 'SMEARS#35', mazy35, w, h)
 
+def predef_mazy34(w, h):
+    a = [
+        {'Background': bg_white, 'n': 1},
+    ]
+    return append_dflts(a, 'SMEARS#34', mazy34, w, h)
+
 # ---
 
 def enum_defs(doprint=True):
@@ -977,6 +984,7 @@ predefs = {'mazy01': predef_mazy1, 'mazy02': predef_mazy2, 'mazy03': predef_mazy
            'mazy25': predef_mazy25, 'mazy26': predef_mazy26, 'mazy27': predef_mazy27, 'mazy28': predef_mazy28,
            'mazy29': predef_mazy29, 'mazy30': predef_mazy30, 'mazy31': predef_mazy31, 'mazy32': predef_mazy32,
            'mazy33': predef_mazy33,
+           'mazy34': predef_mazy34,
            'life': predef_life, 'lissajous': predef_lissajous, 'astro': predef_astro, 'mandelbrot': predef_mandelbrot,
            }
 
@@ -986,7 +994,7 @@ predef_names = [
         'mazy09', 'mazy10', 'mazy11', 'mazy12', 'mazy13', 'mazy14', 'mazy15', 'mazy16',
         'mazy17', 'mazy18', 'mazy19', 'mazy20', 'mazy21', 'mazy22', 'mazy23', 'mazy24',
         'mazy25', 'mazy26', 'mazy27', 'mazy28', 'mazy29', 'mazy30', 'mazy31', 'mazy32',
-        'mazy33',
+        'mazy33', 'mazy34',
         'astro', 'life', 'lissajous', 'mandelbrot'
         ]
 
